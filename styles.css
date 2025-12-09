@@ -1,7 +1,7 @@
-/* 全局設定 */
-* {
-    box-sizing: border-box;
-}
+/* ===================== */
+/* 全局字型與顏色設定 */
+/* ===================== */
+* { box-sizing: border-box; }
 
 body, html {
     margin: 0;
@@ -12,7 +12,14 @@ body, html {
     line-height: 1.6;
 }
 
+h1, h2, h3 {
+    font-family: 'Merriweather', serif;
+    color: #0b6;
+}
+
+/* ===================== */
 /* Header / 導覽列 */
+/* ===================== */
 header {
     background: linear-gradient(90deg, #0b6, #049);
     color: white;
@@ -56,7 +63,8 @@ header {
 .dropdown-menu li a, .sub-menu li a { color:black; padding:5px 10px; display:block; text-decoration:none; }
 .dropdown-menu li a:hover, .sub-menu li a:hover { background:#eee; }
 
-/* Hero 區 */
+/* ===================== */
+/* 首頁 Hero 區 */
 .hero {
     padding: 60px 20px;
     text-align: center;
@@ -64,27 +72,15 @@ header {
     border-radius: 10px;
     margin: 20px auto;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    max-width: 900px; /* 限制寬度 */
+    max-width: 900px;
 }
-
 .hero h2 { margin-bottom: 10px; }
 .hero p { font-size: 1.2em; color: #555; }
 
+/* ===================== */
 /* Map 頁面 */
-#map-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    margin: 20px;
-}
-
-#map {
-    height: 600px;
-    z-index: 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
+#map-container { display: flex; flex-direction: column; position: relative; margin: 20px; }
+#map { height: 600px; z-index: 0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 #info-box {
     position: absolute;
     top: 10px;
@@ -97,14 +93,9 @@ header {
     padding: 15px;
     z-index: 1001;
 }
+#info-box img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
 
-#info-box img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
+/* ===================== */
 /* 遊記卡片化設計 */
 article {
     background: white;
@@ -114,16 +105,17 @@ article {
     margin-bottom: 20px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
-
 article:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
+/* ===================== */
 /* 全域過渡效果 */
 a { transition: color 0.3s; }
 a:hover { color: #049; }
 
+/* ===================== */
 /* 響應式調整 */
 @media (min-width: 900px) {
     #map-container { flex-direction: row; }
