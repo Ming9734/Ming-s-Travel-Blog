@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Map - My Travel Blog</title>
-<link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/map.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
@@ -18,9 +17,24 @@
       <li class="dropdown">
         <a href="#">Posts</a>
         <ul class="dropdown-menu">
-          <li class="dropdown-sub"><a href="#">UK</a><ul class="sub-menu"><li><a href="uk-london.html">London</a></ul></li>
-          <li class="dropdown-sub"><a href="#">France</a><ul class="sub-menu"><li><a href="fr-paris.html">Paris</a></ul></li>
-          <li class="dropdown-sub"><a href="#">Italy</a><ul class="sub-menu"><li><a href="it-rome.html">Rome</a></ul></li>
+          <li class="dropdown-sub">
+            <a href="#">UK</a>
+            <ul class="sub-menu">
+              <li><a href="uk-london.html">London</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-sub">
+            <a href="#">France</a>
+            <ul class="sub-menu">
+              <li><a href="fr-paris.html">Paris</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-sub">
+            <a href="#">Italy</a>
+            <ul class="sub-menu">
+              <li><a href="it-rome.html">Rome</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
       <li><a href="#">About</a></li>
@@ -31,7 +45,7 @@
 <main>
   <div id="map-container">
     <div id="map"></div>
-    <div id="info-box">Click a marker to read the post</div>
+    <div id="info-box">Hover over a marker to see info</div>
   </div>
 </main>
 
