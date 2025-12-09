@@ -2,14 +2,14 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>地圖 - 旅遊部落格</title>
+<title>地圖 - 我的旅遊部落格</title>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 <body>
+
 <header>
-  <h1>我的旅遊部落格 - 地圖</h1>
+  <h1>我的旅遊部落格</h1>
   <nav>
     <ul class="nav">
       <li><a href="index.html">首頁</a></li>
@@ -21,14 +21,6 @@
             <a href="#">英國</a>
             <ul class="sub-menu">
               <li><a href="uk-london.html">倫敦</a></li>
-              <li><a href="uk-scotland.html">蘇格蘭</a></li>
-            </ul>
-          </li>
-          <li class="dropdown-sub">
-            <a href="#">法國</a>
-            <ul class="sub-menu">
-              <li><a href="fr-paris.html">巴黎</a></li>
-              <li><a href="fr-nice.html">尼斯</a></li>
             </ul>
           </li>
         </ul>
@@ -39,8 +31,10 @@
 </header>
 
 <main>
-  <div id="map" style="height:600px;"></div>
-  <div id="info-box"><p>點擊地圖標記查看遊記</p></div>
+  <div id="map-container">
+    <div id="map"></div>
+    <div id="info-box">點擊地圖標記查看遊記</div>
+  </div>
 </main>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
