@@ -1,25 +1,147 @@
-body, html {margin:0;padding:0;font-family: 'Roboto', sans-serif;}
-header { 
-  background:#0b6; 
-  color:white; 
-  padding:10px; 
-  position: relative; 
-  z-index: 1000; 
+/* 全局設定 */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 
-#map { 
-  height:600px; 
-  z-index: 0; 
+/* Header 導覽列 */
+header {
+    background: #0b6;
+    color: white;
+    padding: 10px;
+    position: relative;
+    z-index: 1000; /* 確保在地圖上方 */
 }
 
-header h1 {margin:0;}
-.nav {list-style:none;margin:0;padding:0;display:flex;}
-.nav li {position:relative; margin-right:20px;}
-.nav a {color:white;text-decoration:none;padding:5px 10px;display:block;}
-.nav li:hover > a {background: rgba(255,255,255,0.2);}
-.dropdown-menu, .sub-menu {display:none; position:absolute; top:100%; left:0; background:white; color:black; list-style:none; padding:0; margin:0; min-width:150px; box-shadow:0 2px 5px rgba(0,0,0,0.2);}
-.dropdown-sub:hover > .sub-menu {display:block;}
-.dropdown:hover > .dropdown-menu {display:block;}
-.sub-menu li a {color:black;}
-.hero {padding:50px; text-align:center; background:#f0f0f0;}
-#info-box {padding:10px; border-top:1px solid #ccc; background:#f9f9f9;}
+header h1 {
+    margin: 0;
+}
+
+/* 導覽列 */
+.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav li {
+    position: relative;
+    margin-right: 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: block;
+}
+
+.nav li:hover > a {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 母選單與子選單 */
+.dropdown-menu, .sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    color: black;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 150px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-sub:hover > .sub-menu {
+    display: block;
+    left: 100%; /* 子選單靠右顯示 */
+    top: 0;
+}
+
+.dropdown-menu li a, .sub-menu li a {
+    color: black;
+    padding: 5px 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover, .sub-menu li a:hover {
+    background: #eee;
+}
+
+/* 主內容區 */
+main {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 50px);
+}
+
+/* 地圖區域 */
+#map {
+    flex: 1;
+    z-index: 0;
+}
+
+/* Info box */
+#info-box {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background: #f9f9f9;
+}
+
+/* 遊記文章區 */
+#posts {
+    padding: 10px;
+}
+
+article {
+    margin-bottom: 20px;
+}
+
+article h2 {
+    margin: 0 0 5px 0;
+}
+
+/* 首頁 hero */
+.hero {
+    padding: 50px;
+    text-align: center;
+    background: #f0f0f0;
+}
+
+/* 響應式設計 */
+@media (min-width: 900px) {
+    main {
+        flex-direction: row;
+    }
+
+    #map {
+        flex: 2;
+        height: 600px; /* 固定高度方便排版 */
+    }
+
+    #info-box {
+        flex: 1;
+        max-width: 300px;
+        border-left: 1px solid #ccc;
+        border-top: none;
+        position: relative;
+    }
+
+    #posts {
+        flex: 1;
+        max-width: 400px;
+        overflow: auto;
+    }
+}
