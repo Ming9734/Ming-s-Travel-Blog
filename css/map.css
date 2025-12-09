@@ -1,5 +1,40 @@
-#map-container { position:relative; height:600px; width:100%; max-width:1200px; margin:20px auto; }
-#map { height:100%; width:100%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); z-index:0; position:relative; }
-#info-box { position:absolute; top:10px; right:10px; width:250px; background:rgba(255,255,255,0.95); border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.25); padding:15px; z-index:1001; text-align:center; }
-#info-box img { width:100%; height:auto; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
-@media(max-width:900px){ #map-container{height:400px;} #info-box{width:200px; top:5px; right:5px;} }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Map - My Travel Blog</title>
+<link rel="stylesheet" href="css/map.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
+<body>
+
+<header>
+  <h1>My Travel Blog</h1>
+  <nav>
+    <ul class="nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li class="dropdown">
+        <a href="#">Posts</a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-sub"><a href="#">UK</a><ul class="sub-menu"><li><a href="uk-london.html">London</a></ul></li>
+          <li class="dropdown-sub"><a href="#">France</a><ul class="sub-menu"><li><a href="fr-paris.html">Paris</a></ul></li>
+          <li class="dropdown-sub"><a href="#">Italy</a><ul class="sub-menu"><li><a href="it-rome.html">Rome</a></ul></li>
+        </ul>
+      </li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div id="map-container">
+    <div id="map"></div>
+    <div id="info-box">Hover over a marker to see info</div>
+  </div>
+</main>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="js/map.js"></script>
+</body>
+</html>
