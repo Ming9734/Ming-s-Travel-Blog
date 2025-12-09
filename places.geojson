@@ -1,0 +1,69 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1276,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "london",
+        "title": "倫敦",
+        "summary": "倫敦遊記簡短描述",
+        "url": "uk-london.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.1883,
+          55.9533
+        ]
+      },
+      "properties": {
+        "id": "scotland",
+        "title": "蘇格蘭",
+        "summary": "蘇格蘭遊記簡短描述",
+        "url": "uk-scotland.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3522,
+          48.8566
+        ]
+      },
+      "properties": {
+        "id": "paris",
+        "title": "巴黎",
+        "summary": "巴黎遊記簡短描述",
+        "url": "fr-paris.html"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.2654,
+          43.7102
+        ]
+      },
+      "properties": {
+        "id": "nice",
+        "title": "尼斯",
+        "summary": "尼斯遊記簡短描述",
+        "url": "fr-nice.html"
+      }
+    }
+  ]
+}
