@@ -1,6 +1,8 @@
-/* ===================== */
-/* 全局字型與顏色設定 */
-/* ===================== */
+/* 全局設定 */
+* {
+    box-sizing: border-box;
+}
+
 body, html {
     margin: 0;
     padding: 0;
@@ -10,14 +12,7 @@ body, html {
     line-height: 1.6;
 }
 
-h1, h2, h3 {
-    font-family: 'Merriweather', serif;
-    color: #0b6;
-}
-
-/* ===================== */
 /* Header / 導覽列 */
-/* ===================== */
 header {
     background: linear-gradient(90deg, #0b6, #049);
     color: white;
@@ -27,11 +22,6 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-header h1 {
-    margin: 0 0 10px 0;
-}
-
-/* 導覽列 */
 .nav {
     list-style: none;
     margin: 0;
@@ -39,11 +29,7 @@ header h1 {
     display: flex;
 }
 
-.nav li {
-    position: relative;
-    margin-right: 20px;
-}
-
+.nav li { position: relative; margin-right: 20px; }
 .nav a {
     color: white;
     text-decoration: none;
@@ -52,12 +38,9 @@ header h1 {
     transition: background 0.3s, color 0.3s;
     border-radius: 5px;
 }
+.nav li a:hover { background: rgba(255,255,255,0.2); }
 
-.nav li a:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-/* 母選單 & 子選單 */
+/* Dropdown 母選單 / 子選單 */
 .dropdown-menu, .sub-menu {
     display: none;
     position: absolute;
@@ -68,25 +51,26 @@ header h1 {
     z-index: 1000;
     border-radius: 5px;
 }
+.dropdown:hover > .dropdown-menu { display:block; }
+.dropdown-sub:hover > .sub-menu { display:block; left:100%; top:0; }
+.dropdown-menu li a, .sub-menu li a { color:black; padding:5px 10px; display:block; text-decoration:none; }
+.dropdown-menu li a:hover, .sub-menu li a:hover { background:#eee; }
 
-.dropdown:hover > .dropdown-menu { display: block; }
-.dropdown-sub:hover > .sub-menu { display: block; left: 100%; top: 0; }
-
-.dropdown-menu li a, .sub-menu li a {
-    color: black;
-    padding: 5px 10px;
-    display: block;
-    text-decoration: none;
-    transition: background 0.3s;
+/* Hero 區 */
+.hero {
+    padding: 60px 20px;
+    text-align: center;
+    background: #f0f0f0;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 900px; /* 限制寬度 */
 }
 
-.dropdown-menu li a:hover, .sub-menu li a:hover {
-    background: #eee;
-}
+.hero h2 { margin-bottom: 10px; }
+.hero p { font-size: 1.2em; color: #555; }
 
-/* ===================== */
-/* Map & Info-box */
-/* ===================== */
+/* Map 頁面 */
 #map-container {
     display: flex;
     flex-direction: column;
@@ -121,9 +105,7 @@ header h1 {
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* ===================== */
 /* 遊記卡片化設計 */
-/* ===================== */
 article {
     background: white;
     border-radius: 10px;
@@ -138,55 +120,13 @@ article:hover {
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-/* ===================== */
-/* 首頁 hero 區 */
-/* ===================== */
-.hero {
-    padding: 60px 20px;
-    text-align: center;
-    background: #f0f0f0;
-    border-radius: 10px;
-    margin: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.hero h2 {
-    margin-bottom: 10px;
-}
-
-.hero p {
-    font-size: 1.2em;
-    color: #555;
-}
-
-/* ===================== */
 /* 全域過渡效果 */
-/* ===================== */
-a {
-    transition: color 0.3s;
-}
+a { transition: color 0.3s; }
+a:hover { color: #049; }
 
-a:hover {
-    color: #049;
-}
-
-/* ===================== */
 /* 響應式調整 */
-/* ===================== */
 @media (min-width: 900px) {
-    #map-container {
-        flex-direction: row;
-    }
-
-    #map {
-        flex: 2;
-    }
-
-    #info-box {
-        flex: 1;
-        max-width: 300px;
-        border-left: 1px solid #ccc;
-        border-top: none;
-        margin-left: 20px;
-    }
+    #map-container { flex-direction: row; }
+    #map { flex: 2; }
+    #info-box { flex: 1; max-width: 300px; border-left: 1px solid #ccc; border-top: none; margin-left: 20px; }
 }
