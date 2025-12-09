@@ -1,31 +1,32 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>地圖 - 我的旅遊部落格</title>
-<link rel="stylesheet" href="styles.css">
+<title>Map - My Travel Blog</title>
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/map.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 <body>
 
 <header>
-  <h1>我的旅遊部落格</h1>
+  <h1>My Travel Blog</h1>
   <nav>
     <ul class="nav">
-      <li><a href="index.html">首頁</a></li>
-      <li><a href="map.html">地圖</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="map.html">Map</a></li>
       <li class="dropdown">
-        <a href="#">遊記</a>
+        <a href="#">Posts</a>
         <ul class="dropdown-menu">
           <li class="dropdown-sub">
-            <a href="#">英國</a>
+            <a href="#">UK</a>
             <ul class="sub-menu">
-              <li><a href="uk-london.html">倫敦</a></li>
+              <li><a href="uk-london.html">London</a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="about.html">關於</a></li>
+      <li><a href="about.html">About</a></li>
     </ul>
   </nav>
 </header>
@@ -33,11 +34,11 @@
 <main>
   <div id="map-container">
     <div id="map"></div>
-    <div id="info-box">點擊地圖標記查看遊記</div>
+    <div id="info-box">Click a marker to read the post</div>
   </div>
 </main>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="map.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>
