@@ -1,124 +1,77 @@
-/* ===================== */
-/* 全局字型與顏色設定 */
-/* ===================== */
-* { box-sizing: border-box; }
-
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background: #f7f7f7;
-    color: #333;
-    line-height: 1.6;
-}
-
-h1, h2, h3 {
-    font-family: 'Merriweather', serif;
-    color: #0b6;
-}
-
-/* ===================== */
-/* Header / 導覽列 */
-/* ===================== */
-header {
-    background: linear-gradient(90deg, #0b6, #049);
-    color: white;
-    padding: 15px 20px;
-    position: relative;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.nav li { position: relative; margin-right: 20px; }
-.nav a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    display: block;
-    transition: background 0.3s, color 0.3s;
-    border-radius: 5px;
-}
-.nav li a:hover { background: rgba(255,255,255,0.2); }
-
-/* Dropdown 母選單 / 子選單 */
-.dropdown-menu, .sub-menu {
-    display: none;
-    position: absolute;
-    background: white;
-    color: black;
-    min-width: 150px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1000;
-    border-radius: 5px;
-}
-.dropdown:hover > .dropdown-menu { display:block; }
-.dropdown-sub:hover > .sub-menu { display:block; left:100%; top:0; }
-.dropdown-menu li a, .sub-menu li a { color:black; padding:5px 10px; display:block; text-decoration:none; }
-.dropdown-menu li a:hover, .sub-menu li a:hover { background:#eee; }
-
-/* ===================== */
-/* 首頁 Hero 區 */
+/* Hero 區 */
 .hero {
-    padding: 60px 20px;
-    text-align: center;
-    background: #f0f0f0;
-    border-radius: 10px;
-    margin: 20px auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    max-width: 900px;
-}
-.hero h2 { margin-bottom: 10px; }
-.hero p { font-size: 1.2em; color: #555; }
-
-/* ===================== */
-/* Map 頁面 */
-#map-container { display: flex; flex-direction: column; position: relative; margin: 20px; }
-#map { height: 600px; z-index: 0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-#info-box {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 250px;
-    background: rgba(255,255,255,0.95);
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    padding: 15px;
-    z-index: 1001;
-}
-#info-box img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
-
-/* ===================== */
-/* 遊記卡片化設計 */
-article {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-article:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  position: relative;
+  background: url('images/hero-bg.jpg') center/cover no-repeat;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ===================== */
-/* 全域過渡效果 */
-a { transition: color 0.3s; }
-a:hover { color: #049; }
+.hero-overlay {
+  background: rgba(0,0,0,0.4);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  color: #fff;
+}
 
-/* ===================== */
-/* 響應式調整 */
-@media (min-width: 900px) {
-    #map-container { flex-direction: row; }
-    #map { flex: 2; }
-    #info-box { flex: 1; max-width: 300px; border-left: 1px solid #ccc; border-top: none; margin-left: 20px; }
+.hero-overlay h2 {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.hero-overlay p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: #0b6;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #049;
+}
+
+/* 遊記 grid */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.posts-grid article {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.posts-grid article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.posts-grid article img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.posts-grid article h3 {
+  margin: 15px;
+}
+
+.posts-grid article p {
+  margin: 0 15px 15px 15px;
 }
