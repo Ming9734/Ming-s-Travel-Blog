@@ -1,38 +1,48 @@
-<div id="header-container">
-  <header>
-    <h1>我的旅遊部落格</h1>
-    <nav>
-      <ul class="nav">
-        <li><a href="index.html">首頁</a></li>
-        <li><a href="map.html">地圖</a></li>
-        <li class="dropdown">
-          <a href="#">遊記</a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-sub">
-              <a href="#">英國</a>
-              <ul class="sub-menu">
-                <li><a href="uk-london.html">倫敦</a></li>
-                <li><a href="uk-scotland.html">蘇格蘭</a></li>
-              </ul>
-            </li>
-            <li class="dropdown-sub">
-              <a href="#">法國</a>
-              <ul class="sub-menu">
-                <li><a href="fr-paris.html">巴黎</a></li>
-                <li><a href="fr-nice.html">尼斯</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li><a href="about.html">關於</a></li>
-      </ul>
-    </nav>
-  </header>
-</div>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<title>我的旅遊部落格</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>我的旅遊部落格</h1>
+  <nav>
+    <ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="map.html">地圖</a></li>
+      <li class="dropdown">
+        <a href="#">遊記</a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-sub">
+            <a href="#">英國</a>
+            <ul class="sub-menu">
+              <li><a href="uk-london.html">倫敦</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="about.html">關於</a></li>
+    </ul>
+  </nav>
+</header>
 
 <main>
-  <div id="map-container">
-    <div id="map"></div>
-    <div id="info-box">點擊地圖標記查看遊記</div>
+  <div class="hero">
+    <h2>歡迎來到我的旅遊部落格</h2>
+    <p>在這裡分享我的歐洲旅行故事與照片</p>
   </div>
+
+  <section id="posts">
+    <article>
+      <h3>倫敦遊記</h3>
+      <p>簡短描述倫敦之旅的內容...</p>
+      <a href="uk-london.html">閱讀更多</a>
+    </article>
+  </section>
 </main>
+
+</body>
+</html>
