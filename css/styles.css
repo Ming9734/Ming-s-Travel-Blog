@@ -16,7 +16,7 @@ header {
 .nav a:hover { background:rgba(255,255,255,0.2); }
 
 /* dropdown */
-.dropdown-menu,.sub-menu { display:none; position:absolute; background:white; color:black; min-width:150px; box-shadow:0 2px 5px rgba(0,0,0,0.2); border-radius:5px; }
+.dropdown-menu,.sub-menu { display:none; position:absolute; background:white; color:black; min-width:150px; box-shadow:0 2px 5px rgba(0,0,0,0.2); border-radius:5px;  z-index: 2000; }
 .dropdown:hover>.dropdown-menu { display:block; }
 .dropdown-sub:hover>.sub-menu { display:block; left:100%; top:0; }
 .dropdown-menu li a,.sub-menu li a { color:black; padding:5px 10px; display:block; text-decoration:none; }
