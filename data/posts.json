@@ -2,23 +2,19 @@
   {
     "id": "london",
     "title": "London Wanderings",
-    "country": "UK",
-    "city": "London",
     "lat": 51.5074,
     "lng": -0.1278,
-    "summary": "A slow walk through London’s historic streets.",
+    "summary": "A slow walk through historic London.",
     "image": "images/posts/london.jpg",
-    "content": "<p>Full content of London post.</p>"
+    "content": "<p>This is my full London travel story.</p>"
   },
   {
     "id": "paris",
     "title": "Paris in Spring",
-    "country": "France",
-    "city": "Paris",
     "lat": 48.8566,
     "lng": 2.3522,
-    "summary": "Springtime cafés and museums.",
+    "summary": "Cafés, museums and spring light.",
     "image": "images/posts/paris.jpg",
-    "content": "<p>Full content of Paris post.</p>"
+    "content": "<p>This is my Paris story.</p>"
   }
 ]
