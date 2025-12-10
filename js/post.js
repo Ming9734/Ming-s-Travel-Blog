@@ -6,7 +6,7 @@ fetch('data/posts.json')
     const post = posts.find(p => p.id === id);
     document.getElementById('postContent').innerHTML = `
       <h1>${post.title}</h1>
-      <img src="${post.image}">
+      <img src="${post.image}" style="width:100%; border-radius:12px;">
       ${post.content}
     `;
   });
