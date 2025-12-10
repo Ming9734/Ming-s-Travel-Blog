@@ -2,25 +2,55 @@ body {
   margin: 0;
   font-family: system-ui, sans-serif;
   background: linear-gradient(120deg, #4f46e5, #9333ea);
-  color: #111;
 }
 
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
   display: flex;
   justify-content: center;
   gap: 2rem;
   padding: 1rem;
-  background: rgba(255,255,255,0.9);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+}
+
+nav a {
+  text-decoration: none;
+  color: #222;
+  font-weight: 500;
+}
+
+nav a.active {
+  border-bottom: 2px solid #6366f1;
+}
+
+.hero {
+  text-align: center;
+  color: white;
+  padding: 6rem 1rem;
+}
+
+.btn {
+  display: inline-block;
+  background: white;
+  color: #333;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  margin: 0.5rem;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
 }
 
 .posts-grid {
+  padding: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
   gap: 1.5rem;
-  padding: 2rem;
 }
 
 .post-card {
@@ -39,7 +69,7 @@ nav {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,.6);
-  color: #fff;
+  color: white;
   opacity: 0;
   padding: 1rem;
   transition: .3s;
@@ -49,10 +79,27 @@ nav {
   opacity: 1;
 }
 
+.post {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
 #map {
   height: 80vh;
+  width: 100%;
+  z-index: 1;
 }
 
 #info-box {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
   padding: 1rem;
+  max-width: 280px;
+  border-radius: 8px;
+  z-index: 500;
 }
