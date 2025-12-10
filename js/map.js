@@ -12,7 +12,6 @@ fetch('data/posts.json')
       marker.on('mouseover', () => {
         document.getElementById('info-box').innerHTML = `
           <h3>${p.title}</h3>
-          <img src="${p.image}">
           <p>${p.summary}</p>
           <a href="post.html?id=${p.id}">Read more</a>
         `;
