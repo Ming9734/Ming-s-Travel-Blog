@@ -1,12 +1,13 @@
-/* ---------------- Body ---------------- */
+
+/* ---------------- Body & 全局 ---------------- */
 body {
   margin: 0;
-  font-family: 'Poppins', system-ui, sans-serif;
-  background: #f7f7f7;
+  font-family: 'Poppins', system-ui, sans-serif; /* 改用 Google Font Poppins */
+  background: linear-gradient(120deg, #4f46e5, #9333ea);
   color: #222;
 }
 
-/* ---------------- Navbar ---------------- */
+/* ---------------- 導覽列 ---------------- */
 .navbar {
   position: fixed;
   top: 0;
@@ -28,32 +29,44 @@ body {
 }
 
 .nav > li {
-  margin: 0 20px;
   position: relative;
+  margin: 0 20px;
 }
 
 .nav a {
   text-decoration: none;
   color: #222;
-  font-weight: 600;
+  font-weight: 600;           /* 稍微加粗 */
+  font-size: 1rem;
+  letter-spacing: 0.5px;      /* 微調字距 */
   padding: 8px 12px;
-  transition: color 0.3s;
+  display: block;
+  transition: color 0.3s, transform 0.2s;
+  position: relative;
 }
 
-/* Hover 下劃線 */
+/* 底線動畫 */
 .nav a::after {
   content: '';
   position: absolute;
-  left: 0; bottom: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
   height: 2px;
-  width: 0;
   background: #4f46e5;
   transition: width 0.3s;
 }
-.nav a:hover::after { width: 100%; }
-.nav a:hover { color: #4f46e5; }
 
-/* ---------------- Dropdown ---------------- */
+.nav a:hover::after {
+  width: 100%;
+}
+
+.nav a:hover {
+  color: #4f46e5;
+  transform: scale(1.05); /* 微放大 */
+}
+
+/* ---------------- 下拉選單 ---------------- */
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -69,186 +82,161 @@ body {
   display: block;
 }
 
-.dropdown-menu a {
-  padding: 10px;
-  display: block;
-  color: #222;
-}
-
-.dropdown-menu a:hover {
-  background: #f3f3f3;
-}
-
-/* ---------------- Home Map ---------------- */
-.home-map-container {
-  margin-top: 70px; /* 避免被 navbar 遮住 */
-  width: 100%;
-  height: 85vh;
+.dropdown-sub {
   position: relative;
 }
 
-#home-map {
-  width: 100%;
-  height: 100%;
-  border-radius: 0 0 20px 20px;
-  overflow: hidden;
-}
-
-/* ---------------- Hero Floating Box ---------------- */
-.hero-float {
+.sub-menu {
   position: absolute;
-  top: 22%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 500px;
-  padding: 2.5rem;
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  text-align: center;
-  z-index: 10;
+  top: 0;
+  left: 100%;
+  display: none;
+  background: white;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-.hero-float h1 {
-  font-size: 2.4rem;
-  margin-bottom: 0.6rem;
+.dropdown-sub:hover > .sub-menu {
+  display: block;
 }
 
-.hero-float p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+.dropdown-menu a, .sub-menu a {
+  padding: 8px 12px;
+  color: #222;
+  display: block;
+  transition: background 0.3s, color 0.3s;
 }
 
-/* Hero Buttons */
-.hero-float .btn {
-  display: inline-block;
-  padding: 0.9rem 1.8rem;
-  margin: 0.3rem;
-  background: #4f46e5;
-  color: white;
-  text-decoration: none;
-  border-radius: 999px;
-  font-weight: 600;
-  transition: background 0.25s, transform 0.2s;
-}
-
-.hero-float .btn:hover {
-  background: #6d28d9;
-  transform: scale(1.05);
-}
-
-.hero-float .btn.secondary {
-  background: transparent;
-  border: 2px solid #4f46e5;
+.dropdown-menu a:hover, .sub-menu a:hover {
+  background: #f3f3f3;
   color: #4f46e5;
 }
 
-.hero-float .btn.secondary:hover {
+/* ---------------- Hero 區域 ---------------- */
+.hero {
+  text-align: center;
+  color: white;
+  padding: 8rem 1rem 4rem 1rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.buttons .btn {
+  display: inline-block;
+  background: white;
+  color: #333;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  margin: 0.5rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.buttons .btn:hover {
   background: #4f46e5;
   color: white;
 }
 
-/* ---------------- Map Page Map ---------------- */
-#map {
-  height: 80vh;
-  width: 100%;
+.buttons .btn.secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid white;
 }
 
-/* ---------------- Posts Grid ---------------- */
-.posts-grid {
-  padding: 9rem 2rem 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
-
-/* ---------------- Post Page ---------------- */
-.post {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 2rem;
+.buttons .btn.secondary:hover {
   background: white;
-  border-radius: 12px;
+  color: #4f46e5;
 }
 
-/* =======================
-   INDEX ONLY（不影響其他頁）
-   ======================= */
-
-body.home-page {
-  background: none !important; /* 讓原本漸層背景不出現在 index */
+/* Map 專用 Hero 縮小版 */
+.hero.hero-map {
+  padding: 4rem 1rem 2rem 1rem;
 }
 
-/* 地圖背景容器 */
-.home-map-container {
-  position: relative;
-  width: 100%;
-  height: 85vh;
-  margin-top: 70px;            /* 和導覽列保持距離 */
-}
-
-#home-map {
-  width: 100%;
-  height: 100%;
-  border-radius: 0 0 20px 20px;
-  overflow: hidden;
-}
-
-/* 浮動 Hero 卡片 */
-.hero-float {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 500px;
-  padding: 2.5rem;
-  background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  text-align: center;
-  z-index: 1000;
-}
-
-.hero-float h1 {
-  font-size: 2.4rem;
-  margin-bottom: 0.6rem;
-  color: #2c2c2c;
+.hero.hero-map h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
-.hero-float p {
-  font-size: 1.2rem;
-  margin-bottom: 1.2rem;
-  color: #444;
+.hero.hero-map p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
 }
 
-.hero-float .btn {
-  display: inline-block;
-  padding: 0.9rem 1.8rem;
-  margin: 0.3rem;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  background: #4f46e5;
+/* ---------------- Posts 總覽頁 ---------------- */
+.posts-grid {
+  padding: 10rem 2rem 2rem 2rem; /* 上方 padding 避免被導覽列擋住 */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 1.5rem;
+}
+
+.post-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+.post-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.6);
   color: white;
-  transition: background 0.25s, transform 0.2s;
+  opacity: 0;
+  padding: 1rem;
+  transition: opacity 0.3s;
 }
 
-.hero-float .btn:hover {
-  background: #6d28d9;
-  transform: scale(1.05);
+.post-card:hover .overlay {
+  opacity: 1;
 }
 
-.hero-float .btn.secondary {
-  background: transparent;
-  border: 2px solid #4f46e5;
-  color: #4f46e5;
+/* ---------------- 單篇文章頁 ---------------- */
+.post {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
 }
 
-.hero-float .btn.secondary:hover {
-  background: #4f46e5;
-  color: white;
+/* ---------------- Map ---------------- */
+#map {
+  height: 80vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
+#info-box {
+  position: absolute;
+  max-width: 280px;
+  pointer-events: none;
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 500;
+  transition: transform 0.2s, opacity 0.2s;
+}
