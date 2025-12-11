@@ -136,6 +136,12 @@ nav a.active {
 #map {
   height: 80vh;
   width: 100%;
-  z-index: 1; /* map stays behind everything */
   position: relative;
+  z-index: 1;
+}
+
+#info-box {
+  position: absolute;
+  max-width: 280px;
+  pointer-events: none;
 }
