@@ -8,7 +8,7 @@ body {
 
 /* ---------------- 導覽列 ---------------- */
 .navbar {
-  position: fixed;
+  position: fixed;           /* 固定在頂部 */
   top: 0;
   left: 0;
   width: 100%;
@@ -68,7 +68,7 @@ body {
 .sub-menu {
   position: absolute;
   top: 0;
-  left: 100%;
+  left: 100%;         /* 子選單右側展開 */
   display: none;
   background: white;
   min-width: 180px;
@@ -79,7 +79,6 @@ body {
   display: block;
 }
 
-/* 下拉選單文字 */
 .dropdown-menu a, .sub-menu a {
   padding: 8px 12px;
   color: #222;
@@ -174,7 +173,7 @@ body {
   opacity: 1;
 }
 
-/* 單篇文章頁 */
+/* ---------------- 單篇文章頁 ---------------- */
 .post {
   max-width: 800px;
   margin: 3rem auto;
@@ -188,7 +187,7 @@ body {
   height: 80vh;
   width: 100%;
   position: relative;
-  z-index: 1;
+  z-index: 1;   /* 低於導覽列 */
 }
 
 #info-box {
