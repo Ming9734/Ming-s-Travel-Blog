@@ -120,20 +120,6 @@ body {
   z-index: 10;
 }
 
-/* 浮在漸層背景上的透明玻璃卡片 */
-.hero .hero-box {
-  display: inline-block;
-  padding: 2.7rem 3rem;
-  border-radius: 24px;
-
-  /* 使用相同主題的藍紫漸層 + 高透明度 */
-  background: linear-gradient(120deg, rgba(79, 70, 229, 0.25), rgba(147, 51, 234, 0.25));
-
-  backdrop-filter: blur(10px);       /* 玻璃模糊 */
-  -webkit-backdrop-filter: blur(10px);
-
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-}
 
 .hero h1 {
   font-size: 3rem;
@@ -286,7 +272,7 @@ body {
   text-align: center;
 
   /* 藍紫漸層 + 玻璃透明 */
-  background: linear-gradient(120deg, #4f46e5cc, #9333eacc); 
+  background: linear-gradient(120deg, #4f46e555, #9333ea55); 
   /* 上面結尾的 cc = 約 80% 不透明，可自行改 66、55、44 更透明 */
 
   color: white;
@@ -307,7 +293,7 @@ body {
   font-size: 1.2rem;
   margin-bottom: 1.2rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.9);
 }
 
 .hero-floating .btn {
