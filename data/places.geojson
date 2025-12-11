@@ -2,15 +2,15 @@
   {
     "type":"Feature",
     "properties":{
-      "title":"London",
+      "title":"st-alexander-nevsky-cathedral",
       "summary":"Short description of Sofia trip",
       "img":"images/st-alexander-nevsky-cathedral.jpg",
-      "url":"uk-london.html",
+      "url":"BG-st-alexander-nevsky-cathedral.html",
       "icon":"images/markers/BG.png"
     },
     "geometry":{
       "type":"Point",
-      "coordinates":[42.696029827626234,23.332531500138508]
+      "coordinates":[23.332531500138508,42.696029827626234]
     }
   },
   {
