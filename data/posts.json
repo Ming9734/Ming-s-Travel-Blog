@@ -2,6 +2,8 @@
   {
     "id": "st-alexander-nevsky-cathedral",
     "title": "St. Alexander Nevsky Cathedral",
+    "country": "Bulgaria",
+    "city": "Sofia",
     "lat": 42.696029827626234,
     "lng": 23.332531500138508,
     "summary": "A slow walk through historic Sofia.",
@@ -11,6 +13,8 @@
   {
     "id": "paris",
     "title": "Paris in Spring",
+    "country": "France",
+    "city": "Paris",
     "lat": 48.8566,
     "lng": 2.3522,
     "summary": "Cafés, museums and spring light.",
