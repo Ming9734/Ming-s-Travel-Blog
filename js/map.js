@@ -8,7 +8,7 @@ if (mapContainer) {
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  // ====== 新增 Marker Cluster 群組 ======
+  // ====== Marker Cluster 群組 ======
   const clusterGroup = L.markerClusterGroup({
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
@@ -27,7 +27,7 @@ if (mapContainer) {
   infoBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
   mapContainer.appendChild(infoBox);
 
-  // ====== 載入 GeoJSON ======
+  // ====== Load GeoJSON ======
   fetch('data/places.geojson')
     .then(r => r.json())
     .then(data => {
@@ -36,14 +36,12 @@ if (mapContainer) {
         const props = feature.properties;
         const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
 
-        // 小圖示
         const baseIcon = L.icon({
           iconUrl: props.icon || 'images/default-marker.png',
           iconSize: [30, 30],
           iconAnchor: [15, 30]
         });
 
-        // 大圖示（hover 用）
         const bigIcon = L.icon({
           iconUrl: props.icon || 'images/default-marker.png',
           iconSize: [50, 50],
@@ -52,7 +50,7 @@ if (mapContainer) {
 
         const marker = L.marker(coords, { icon: baseIcon });
 
-        // ====== Hover 放大 + InfoBox ======
+        // ====== Hover 放大 + info ======
         marker.on('mouseover', (e) => {
           marker.setIcon(bigIcon);
 
@@ -62,8 +60,8 @@ if (mapContainer) {
             <img src="${props.img}" style="width:100px;border-radius:6px;margin-bottom:6px;">
             <p style="margin:0;color:#4f46e5;font-weight:600;">Click to read more →</p>
           `;
-          infoBox.style.display = 'block';
 
+          infoBox.style.display = 'block';
           infoBox.style.left = (e.originalEvent.offsetX + 20) + 'px';
           infoBox.style.top = (e.originalEvent.offsetY + 20) + 'px';
         });
@@ -73,16 +71,13 @@ if (mapContainer) {
           infoBox.style.display = 'none';
         });
 
-        // 點擊跳轉
         marker.on('click', () => {
           if (props.url) window.location.href = props.url;
         });
 
-        // ====== 把 marker 加入群組（取代 addTo(map） ======
         clusterGroup.addLayer(marker);
       });
 
-      // 最後把 cluster 加入地圖
       map.addLayer(clusterGroup);
     });
 }
