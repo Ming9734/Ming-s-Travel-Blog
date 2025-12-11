@@ -7,10 +7,32 @@
 </head>
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="posts.html">Posts</a>
-  <a href="map.html">Map</a>
+<nav class="navbar">
+  <ul class="nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="map.html">Map</a></li>
+    <li class="dropdown">
+      <a href="posts.html">Posts</a>
+      <ul class="dropdown-menu">
+        <li class="dropdown-sub"><a href="#">UK</a>
+          <ul class="sub-menu">
+            <li><a href="uk-london.html">London</a></li>
+          </ul>
+        </li>
+        <li class="dropdown-sub"><a href="#">France</a>
+          <ul class="sub-menu">
+            <li><a href="fr-paris.html">Paris</a></li>
+          </ul>
+        </li>
+        <li class="dropdown-sub"><a href="#">Italy</a>
+          <ul class="sub-menu">
+            <li><a href="it-rome.html">Rome</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">About</a></li>
+  </ul>
 </nav>
 
 <article class="post" id="postContent"></article>
