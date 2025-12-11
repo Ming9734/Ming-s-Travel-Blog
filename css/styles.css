@@ -1,36 +1,111 @@
+/* -------------------------- */
+/* Global & Layout            */
+/* -------------------------- */
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
   background: linear-gradient(120deg, #4f46e5, #9333ea);
 }
 
+/* -------------------------- */
+/* NAVIGATION BAR             */
+/* -------------------------- */
+
 nav {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  background: rgba(255,255,255,0.95);
+  z-index: 2000; /* 讓導航永遠在最上面 */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem 0;
   display: flex;
   justify-content: center;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
   gap: 2rem;
-  padding: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav > li {
+  position: relative;
 }
 
 nav a {
   text-decoration: none;
   color: #222;
   font-weight: 500;
+  padding: 8px 4px;
+  display: inline-block;
 }
 
 nav a.active {
   border-bottom: 2px solid #6366f1;
 }
 
-.nav ul { list-style: none; margin: 0; padding: 0; display: flex; }
-.nav li { position: relative; margin: 0 10px; }
-.dropdown-menu, .sub-menu { display: none; position: absolute; background: white; z-index: 1000; }
-.dropdown:hover > .dropdown-menu { display: block; }
-.dropdown-sub:hover > .sub-menu { display: block; }
+/* -------------------------- */
+/* DROPDOWN MENU (LEVEL 1)    */
+/* -------------------------- */
 
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  background: white;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 3000;
+}
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* -------------------------- */
+/* DROPDOWN MENU (LEVEL 2)    */
+/* -------------------------- */
+
+.dropdown-sub {
+  position: relative;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 160px;
+  background: white;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 3100;
+}
+
+.dropdown-sub:hover > .sub-menu {
+  display: block;
+}
+
+.dropdown-menu li,
+.sub-menu li {
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.dropdown-menu li:hover,
+.sub-menu li:hover {
+  background: #f3f4f6;
+}
+
+/* -------------------------- */
+/* HERO SECTION               */
+/* -------------------------- */
 
 .hero {
   text-align: center;
@@ -53,10 +128,14 @@ nav a.active {
   border: 1px solid white;
 }
 
+/* -------------------------- */
+/* POSTS GRID                 */
+/* -------------------------- */
+
 .posts-grid {
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
@@ -75,16 +154,20 @@ nav a.active {
 .post-card .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,.6);
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   opacity: 0;
   padding: 1rem;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .post-card:hover .overlay {
   opacity: 1;
 }
+
+/* -------------------------- */
+/* SINGLE POST PAGE           */
+/* -------------------------- */
 
 .post {
   max-width: 800px;
@@ -93,6 +176,10 @@ nav a.active {
   padding: 2rem;
   border-radius: 12px;
 }
+
+/* -------------------------- */
+/* MAP + INFO BOX             */
+/* -------------------------- */
 
 #map {
   height: 80vh;
@@ -108,5 +195,5 @@ nav a.active {
   padding: 1rem;
   max-width: 280px;
   border-radius: 8px;
-  z-index: 500;
+  z-index: 1500;
 }
