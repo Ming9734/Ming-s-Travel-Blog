@@ -10,7 +10,6 @@
 <!-- MarkerCluster CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-
 </head>
 <body>
 
@@ -91,14 +90,12 @@ if (mapContainer) {
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  // Marker Cluster
   const clusterGroup = L.markerClusterGroup({
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
     maxClusterRadius: 40
   });
 
-  // InfoBox
   const infoBox = document.createElement('div');
   infoBox.id = 'info-box';
   infoBox.style.position = 'absolute';
@@ -130,6 +127,7 @@ if (mapContainer) {
 
         const marker = L.marker(coords, { icon: baseIcon });
 
+        // Hover InfoBox
         marker.on('mouseover', (e) => {
           marker.setIcon(bigIcon);
           infoBox.innerHTML = `
@@ -148,6 +146,7 @@ if (mapContainer) {
           infoBox.style.display = 'none';
         });
 
+        // Click 跳轉
         marker.on('click', () => {
           window.location.href = `posts/${p.id}.html`;
         });
