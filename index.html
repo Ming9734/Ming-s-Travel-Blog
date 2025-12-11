@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Ming’s Travel Blog</title>
+  <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- 使用你的 style.css -->
-  <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
+
 <body>
 
 <!-- 導覽列 -->
@@ -26,50 +26,44 @@
   </ul>
 </nav>
 
-<!-- 首頁地圖區塊 -->
+<!-- 首頁大地圖 -->
 <div class="home-map-container">
   <div id="home-map"></div>
 
-  <!-- 浮動 Hero 方塊 -->
+  <!-- Hero 浮動方塊 -->
   <div class="hero-float">
     <h1>Ming’s Travel Blog</h1>
-    <p>Slow Travel Across Europe.</p>
-
+    <p>Slow travel across Europe, one step at a time.</p>
     <a href="posts.html" class="btn">View Posts</a>
-    <a href="map.html" class="btn secondary">Interactive Map</a>
+    <a href="map.html" class="btn secondary">Explore Map</a>
   </div>
 </div>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- JS -->
+<script src="js/nav.js"></script>
 
-<!-- 首頁專用地圖（簡化版，不影響 map.html） -->
+<!-- 讓首頁地圖顯示（但不互動） -->
 <script>
-  const map = L.map('home-map', {
-    zoomControl: false,          // 不要互動按鈕
-    dragging: false,             // 禁止拖曳
-    scrollWheelZoom: false,      // 禁止滑輪
-    doubleClickZoom: false,
-    touchZoom: false
-  }).setView([48.8566, 2.3522], 4); // 歐洲視角
+  document.addEventListener("DOMContentLoaded", function () {
+    const map = L.map("home-map", {
+      zoomControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      keyboard: false,
+      tap: false,
+      touchZoom: false
+    }).setView([48.137154, 11.576124], 5); // 歐洲視角
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    minZoom: 3,
-    maxZoom: 6
-  }).addTo(map);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+    }).addTo(map);
 
-  // 讓地圖標示某些點（示意用）
-  const sampleMarkers = [
-    [41.9028, 12.4964], // Rome
-    [48.8566, 2.3522],  // Paris
-    [52.5200, 13.4050], // Berlin
-  ];
-
-  sampleMarkers.forEach(coord => L.circleMarker(coord, {
-    radius: 6
-  }).addTo(map));
+    // 若你要顯示標點，自行加入：
+    // L.marker([48.137154, 11.576124]).addTo(map).bindPopup("Munich");
+  });
 </script>
 
-<script src="js/nav.js"></script>
 </body>
 </html>
