@@ -20,22 +20,8 @@
     <li><a href="map.html">Map</a></li>
     <li class="dropdown">
       <a href="posts.html">Posts</a>
-      <ul class="dropdown-menu">
-        <li class="dropdown-sub"><a href="#">UK</a>
-          <ul class="sub-menu">
-            <li><a href="uk-london.html">London</a></li>
-          </ul>
-        </li>
-        <li class="dropdown-sub"><a href="#">France</a>
-          <ul class="sub-menu">
-            <li><a href="fr-paris.html">Paris</a></li>
-          </ul>
-        </li>
-        <li class="dropdown-sub"><a href="#">Italy</a>
-          <ul class="sub-menu">
-            <li><a href="it-rome.html">Rome</a></li>
-          </ul>
-        </li>
+      <ul class="dropdown-menu" id="posts-dropdown">
+        <!-- Posts 導覽列將由 nav.js 自動生成 -->
       </ul>
     </li>
     <li><a href="about.html">About</a></li>
@@ -49,11 +35,130 @@
 
 <div id="map" style="height:80vh;"></div>
 
+<!-- Leaflet -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-<!-- MarkerCluster JS -->
+<!-- MarkerCluster -->
 <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
-<script src="js/map.js"></script>
+<!-- 自動生成導覽列 -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menu = document.getElementById('posts-dropdown');
+  fetch('data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      const hierarchy = {};
+      posts.forEach(p => {
+        if (!hierarchy[p.country]) hierarchy[p.country] = {};
+        if (!hierarchy[p.country][p.city]) hierarchy[p.country][p.city] = [];
+        hierarchy[p.country][p.city].push(p);
+      });
+
+      Object.keys(hierarchy).forEach(country => {
+        const countryLi = document.createElement('li');
+        countryLi.className = 'dropdown-sub';
+        countryLi.innerHTML = `<a href="#">${country}</a><ul class="sub-menu"></ul>`;
+        menu.appendChild(countryLi);
+
+        const countrySub = countryLi.querySelector('.sub-menu');
+        Object.keys(hierarchy[country]).forEach(city => {
+          const cityLi = document.createElement('li');
+          cityLi.className = 'dropdown-sub';
+          cityLi.innerHTML = `<a href="#">${city}</a><ul class="sub-menu"></ul>`;
+          countrySub.appendChild(cityLi);
+
+          const citySub = cityLi.querySelector('.sub-menu');
+          hierarchy[country][city].forEach(post => {
+            const postLi = document.createElement('li');
+            postLi.innerHTML = `<a href="posts/${post.id}.html">${post.title}</a>`;
+            citySub.appendChild(postLi);
+          });
+        });
+      });
+    })
+    .catch(e => console.error('Failed to load posts.json:', e));
+});
+</script>
+
+<!-- Map.js -->
+<script>
+const mapContainer = document.getElementById('map');
+if (mapContainer) {
+  const map = L.map('map').setView([50, 10], 4);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Marker Cluster
+  const clusterGroup = L.markerClusterGroup({
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    maxClusterRadius: 40
+  });
+
+  // InfoBox
+  const infoBox = document.createElement('div');
+  infoBox.id = 'info-box';
+  infoBox.style.position = 'absolute';
+  infoBox.style.display = 'none';
+  infoBox.style.background = 'white';
+  infoBox.style.padding = '1rem';
+  infoBox.style.borderRadius = '8px';
+  infoBox.style.zIndex = '500';
+  infoBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+  mapContainer.appendChild(infoBox);
+
+  fetch('data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      posts.forEach(p => {
+        const coords = [p.lat, p.lng];
+
+        const baseIcon = L.icon({
+          iconUrl: p.icon || 'images/default-marker.png',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30]
+        });
+
+        const bigIcon = L.icon({
+          iconUrl: p.icon || 'images/default-marker.png',
+          iconSize: [50, 50],
+          iconAnchor: [25, 50]
+        });
+
+        const marker = L.marker(coords, { icon: baseIcon });
+
+        marker.on('mouseover', (e) => {
+          marker.setIcon(bigIcon);
+          infoBox.innerHTML = `
+            <h3 style="margin:0 0 5px;font-size:1.1rem;">${p.title}</h3>
+            <p style="margin:0 0 5px;">${p.summary}</p>
+            <img src="${p.image}" style="width:100px;border-radius:6px;margin-bottom:6px;">
+            <p style="margin:0;color:#4f46e5;font-weight:600;">Click to read more →</p>
+          `;
+          infoBox.style.display = 'block';
+          infoBox.style.left = (e.originalEvent.offsetX + 20) + 'px';
+          infoBox.style.top = (e.originalEvent.offsetY + 20) + 'px';
+        });
+
+        marker.on('mouseout', () => {
+          marker.setIcon(baseIcon);
+          infoBox.style.display = 'none';
+        });
+
+        marker.on('click', () => {
+          window.location.href = `posts/${p.id}.html`;
+        });
+
+        clusterGroup.addLayer(marker);
+      });
+
+      map.addLayer(clusterGroup);
+      map.fitBounds(clusterGroup.getBounds().pad(0.1));
+    });
+}
+</script>
 </body>
 </html>
