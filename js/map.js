@@ -1,3 +1,18 @@
+// --- Home Page Map (index.html) ---
+if (document.getElementById('home-map')) {
+    const map = L.map('home-map').setView([48.8566, 2.3522], 5);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    postsData.forEach(p => {
+        L.marker([p.lat, p.lng]).addTo(map)
+          .bindPopup(`<b>${p.title}</b>`);
+    });
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.getElementById('map');
   if (!mapContainer) return;
