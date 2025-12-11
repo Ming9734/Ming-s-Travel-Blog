@@ -1,74 +1,62 @@
-// Initialize the map
-const map = L.map('map').setView([51.505, -0.09], 5);
+const mapContainer = document.getElementById('map');
+if (mapContainer) {
+  const map = L.map('map').setView([50, 10], 4);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19
-}).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-// Create a floating info box
-const infoBox = document.createElement("div");
-infoBox.id = "hover-info-box";
-infoBox.style.position = "absolute";
-infoBox.style.display = "none";
-infoBox.style.padding = "12px";
-infoBox.style.background = "white";
-infoBox.style.borderRadius = "8px";
-infoBox.style.boxShadow = "0 2px 8px rgba(0,0,0,0.25)";
-infoBox.style.zIndex = 9999;
-infoBox.style.pointerEvents = "none"; 
-document.body.appendChild(infoBox);
+  const infoBox = document.createElement('div');
+  infoBox.id = 'info-box';
+  infoBox.style.position = 'absolute';
+  infoBox.style.display = 'none';
+  infoBox.style.background = 'white';
+  infoBox.style.padding = '1rem';
+  infoBox.style.borderRadius = '8px';
+  infoBox.style.zIndex = '500';
+  mapContainer.appendChild(infoBox);
 
+  fetch('data/places.geojson')
+    .then(r => r.json())
+    .then(data => {
+      data.forEach(feature => {
+        const props = feature.properties;
+        const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
 
-// Load GeoJSON data
-fetch("data/places.geojson")
-  .then(r => r.json())
-  .then(data => {
-    L.geoJSON(data, {
-     pointToLayer: (feature, latlng) => {
-  return L.marker(latlng, {
-    icon: L.icon({
-      iconUrl: feature.properties.icon || "images/default-icon.png",
-      iconSize: [40, 40],
-      iconAnchor: [20, 40]
-    })
-  });
+        // 使用自訂 icon
+        const icon = L.icon({
+          iconUrl: props.icon || 'images/default-marker.png',
+          iconSize: [30, 30],
+          iconAnchor: [15, 30]
+        });
+
+        const marker = L.marker(coords, {icon: icon}).addTo(map);
+
+        // hover 放大 + 顯示 infoBox
+        marker.on('mouseover', (e) => {
+          marker.setIcon(L.icon({
+            iconUrl: props.icon || 'images/default-marker.png',
+            iconSize: [50, 50],
+            iconAnchor: [25, 50]
+          }));
+          infoBox.innerHTML = `<h3>${props.title}</h3>
+                               <p>${props.summary}</p>
+                               <img src="${props.img}" style="width:100px;height:auto">
+                               <p>Click to read more</p>`;
+          infoBox.style.display = 'block';
+          infoBox.style.left = (e.originalEvent.offsetX + 20) + 'px';
+          infoBox.style.top = (e.originalEvent.offsetY + 20) + 'px';
+        });
+
+        marker.on('mouseout', () => {
+          marker.setIcon(icon);
+          infoBox.style.display = 'none';
+        });
+
+        marker.on('click', () => {
+          if (props.url) window.location.href = props.url;
+        });
+      });
+    });
 }
-
-
-        // Hover (mouseenter)
-        marker.on("mouseenter", () => {
-          marker.setIcon(hoverIcon);
-
-          infoBox.innerHTML = `
-            <strong>${props.title}</strong><br>
-            <em>${props.summary}</em><br>
-            <a href="${props.url}" style="color:#4f46e5;font-weight:bold">
-              Click to read more →
-            </a>
-          `;
-          infoBox.style.left = (event.pageX + 15) + "px";
-          infoBox.style.top = (event.pageY - 20) + "px";
-          infoBox.style.display = "block";
-        });
-
-        // Move info box with mouse
-        marker.on("mousemove", () => {
-          infoBox.style.left = (event.pageX + 15) + "px";
-          infoBox.style.top = (event.pageY - 20) + "px";
-        });
-
-        // Mouse leave
-        marker.on("mouseleave", () => {
-          marker.setIcon(normalIcon);
-          infoBox.style.display = "none";
-        });
-
-        // Click → go to post page
-        marker.on("click", () => {
-          window.location.href = props.url;
-        });
-
-        return marker;
-      }
-    }).addTo(map);
-  });
