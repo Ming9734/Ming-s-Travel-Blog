@@ -111,6 +111,8 @@ body {
   color: #4f46e5;
 }
 
+
+
 /* ---------------- Hero 區域 ---------------- */
 .hero {
   text-align: center;
@@ -155,49 +157,58 @@ body {
 }
 
 
-/* ---------------- Home Hero Float ---------------- */
+/* ---------------- Home Hero Float (Improved) ---------------- */
 .hero-float {
   position: absolute;
-  top: 22%;
+  top: 18%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.85);
-  padding: 2rem;
-  border-radius: 14px;
-  max-width: 420px;
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+
+  /* 美感提升 */
+  background: rgba(255, 255, 255, 0.30);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 15px 32px rgba(0,0,0,0.25);
+
   text-align: center;
   z-index: 1000;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
 
 .hero-float h1 {
-  font-size: 2rem;
-  margin: 0 0 0.5rem;
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: #1e1e1e;
 }
 
 .hero-float p {
-  margin: 0 0 1rem;
-  color: #444;
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  color: #333;
 }
 
 .hero-float .btn {
   display: inline-block;
-  padding: 0.6rem 1.4rem;
-  margin: 0.3rem;
+  padding: 0.8rem 1.8rem;
   border-radius: 999px;
   background: #4f46e5;
   color: white;
   text-decoration: none;
   font-weight: 600;
-  transition: background 0.25s;
+  transition: background 0.25s, transform 0.2s;
 }
 
 .hero-float .btn:hover {
   background: #6d28d9;
+  transform: translateY(-2px);
 }
 
 .hero-float .btn.secondary {
-  background: transparent;
+  background: rgba(255,255,255,0.3);
   border: 2px solid #4f46e5;
   color: #4f46e5;
 }
@@ -206,6 +217,7 @@ body {
   background: #4f46e5;
   color: white;
 }
+
 
 /* Map 專用 Hero 縮小版 */
 .hero.hero-map {
@@ -273,13 +285,16 @@ body {
   border-radius: 12px;
 }
 
-/* ---------------- Map ---------------- */
+/* Map Preview on Home */
 #map {
-  height: 80vh;
+  height: 85vh;
   width: 100%;
-  position: relative;
+  margin-top: 80px;  /* ⭐ 加了距離不靠到 navbar */
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
   z-index: 1;
 }
+
 
 #info-box {
   position: absolute;
