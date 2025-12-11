@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,19 +21,43 @@
   </ul>
 </nav>
 
-<header class="hero">
+
+<!-- 🌍 地圖背景容器 -->
+<div class="home-map-bg">
+  <div id="home-map"></div>
+</div>
+
+
+<!-- 🟦 浮動 Hero 方塊 -->
+<div class="hero-float">
   <h1>Ming’s Travel Blog</h1>
   <p>Slow travel across Europe.</p>
+
   <div class="buttons">
     <a href="posts.html" class="btn">View Posts</a>
     <a href="map.html" class="btn secondary">Map View</a>
   </div>
-</header>
+</div>
 
-<div id="map" style="height:400px;"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="js/map.js"></script>
+<script>
+  /* 地圖：首頁用靜態不可拖曳版本 */
+  const map = L.map('home-map', {
+    zoomControl: false,
+    dragging: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    tap: false,
+  }).setView([48.2082, 16.3738], 5); // 預設：歐洲中間
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: ''
+  }).addTo(map);
+</script>
+
 <script src="js/nav.js"></script>
 </body>
 </html>
