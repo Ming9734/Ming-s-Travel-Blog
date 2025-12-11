@@ -240,3 +240,48 @@ body {
   z-index: 500;
   transition: transform 0.2s, opacity 0.2s;
 }
+
+/* ---------------- 首頁背景地圖 ---------------- */
+.home-map-bg {
+  width: 100%;
+  height: 85vh;
+  margin-top: 70px; /* 與導覽列保持距離 */
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+}
+
+#home-map {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.85); /* 略暗一點讓文字更清楚 */
+}
+
+/* ---------------- 浮動 Hero 方塊 ---------------- */
+.hero-float {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  padding: 2.2rem;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  text-align: center;
+  z-index: 500;
+}
+
+.hero-float h1 {
+  font-size: 2.3rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.hero-float p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+}
+
