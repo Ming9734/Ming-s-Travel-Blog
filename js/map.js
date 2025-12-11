@@ -1,6 +1,7 @@
-const mapContainer = document.getElementById('map');
+document.addEventListener('DOMContentLoaded', () => {
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) return;
 
-if (mapContainer) {
   const map = L.map('map').setView([50, 10], 4);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -8,14 +9,13 @@ if (mapContainer) {
     attribution: '© OpenStreetMap contributors'
   }).addTo(map);
 
-  // ====== Marker Cluster 群組 ======
   const clusterGroup = L.markerClusterGroup({
     spiderfyOnMaxZoom: true,
     showCoverageOnHover: false,
     maxClusterRadius: 40
   });
 
-  // ====== Info Box ======
+  // InfoBox
   const infoBox = document.createElement('div');
   infoBox.id = 'info-box';
   infoBox.style.position = 'absolute';
@@ -27,40 +27,35 @@ if (mapContainer) {
   infoBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
   mapContainer.appendChild(infoBox);
 
-  // ====== Load GeoJSON ======
-  fetch('data/places.geojson')
+  // 載入 posts.json
+  fetch('data/posts.json')
     .then(r => r.json())
-    .then(data => {
-
-      data.forEach(feature => {
-        const props = feature.properties;
-        const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+    .then(posts => {
+      posts.forEach(p => {
+        const coords = [p.lat, p.lng];
 
         const baseIcon = L.icon({
-          iconUrl: props.icon || 'images/markers/default.png',
+          iconUrl: p.icon || 'images/markers/default.png',
           iconSize: [30, 30],
           iconAnchor: [15, 30]
         });
 
         const bigIcon = L.icon({
-          iconUrl: props.icon || 'images/markers/default.png',
+          iconUrl: p.icon || 'images/markers/default.png',
           iconSize: [50, 50],
           iconAnchor: [25, 50]
         });
 
         const marker = L.marker(coords, { icon: baseIcon });
 
-        // ====== Hover 放大 + info ======
         marker.on('mouseover', (e) => {
           marker.setIcon(bigIcon);
-
           infoBox.innerHTML = `
-            <h3 style="margin:0 0 5px;font-size:1.1rem;">${props.title}</h3>
-            <p style="margin:0 0 5px;">${props.summary}</p>
-            <img src="${props.img}" style="width:100px;border-radius:6px;margin-bottom:6px;">
+            <h3 style="margin:0 0 5px;font-size:1.1rem;">${p.title}</h3>
+            <p style="margin:0 0 5px;">${p.summary}</p>
+            <img src="${p.image}" style="width:100px;border-radius:6px;margin-bottom:6px;">
             <p style="margin:0;color:#4f46e5;font-weight:600;">Click to read more →</p>
           `;
-
           infoBox.style.display = 'block';
           infoBox.style.left = (e.originalEvent.offsetX + 20) + 'px';
           infoBox.style.top = (e.originalEvent.offsetY + 20) + 'px';
@@ -71,14 +66,15 @@ if (mapContainer) {
           infoBox.style.display = 'none';
         });
 
+        // 統一導向 post.html?id=…
         marker.on('click', () => {
-  window.location.href = `post.html?id=${p.id}`;
-});
-
+          window.location.href = `post.html?id=${p.id}`;
+        });
 
         clusterGroup.addLayer(marker);
       });
 
       map.addLayer(clusterGroup);
+      map.fitBounds(clusterGroup.getBounds().pad(0.1));
     });
-}
+});
