@@ -8,7 +8,7 @@
     "lng": 23.332531500138508,
     "summary": "A slow walk through historic Sofia.",
     "image": "images/posts/st-alexander-nevsky-cathedral.jpg",
-    "content": "<p>This is my full Sofia travel story.</p>"
+    "content": "<p>This is my full Sofia travel story.</p>",
     "icon":"images/markers/BG.png"
   },
   {
@@ -20,7 +20,7 @@
     "lng": 2.3522,
     "summary": "Cafés, museums and spring light.",
     "image": "images/posts/paris.jpg",
-    "content": "<p>This is my Paris story.</p>"
+    "content": "<p>This is my Paris story.</p>",
     "icon":"images/markers/FR.png"
   }
 ]
