@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Ming’s Travel Blog</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
 <body>
 
-<nav>
+<nav class="navbar">
   <ul class="nav">
     <li><a href="index.html">Home</a></li>
     <li><a href="map.html">Map View</a></li>
@@ -35,7 +36,6 @@
   </ul>
 </nav>
 
-
 <header class="hero">
   <h1>Ming’s Travel Blog</h1>
   <p>Slow travel across Europe.</p>
@@ -45,5 +45,9 @@
   </div>
 </header>
 
+<div id="map" style="height:400px;"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>
