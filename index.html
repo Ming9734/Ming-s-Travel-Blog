@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
-<body class="home-page">
+<body>
 
 <!-- 導覽列 -->
 <nav class="navbar">
@@ -21,41 +22,19 @@
   </ul>
 </nav>
 
-<!-- 地圖背景 -->
-<div class="home-map-container">
-  <div id="home-map"></div>
-</div>
-
-<!-- Hero 漂浮卡片 -->
-<div class="hero-float">
+<header class="hero">
   <h1>Ming’s Travel Blog</h1>
-  <p>Slow travel across Europe</p>
-  <a href="posts.html" class="btn">View Posts</a>
-  <a href="map.html" class="btn secondary">Map View</a>
-</div>
+  <p>Slow travel across Europe.</p>
+  <div class="buttons">
+    <a href="posts.html" class="btn">View Posts</a>
+    <a href="map.html" class="btn secondary">Map View</a>
+  </div>
+</header>
+
+<div id="map" style="height:400px;"></div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-  // 精簡版地圖（不互動、不縮放）
-  const map = L.map('home-map', {
-    zoomControl: false,
-    dragging: false,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    keyboard: false,
-    touchZoom: false
-  }).setView([48.8566, 2.3522], 5); // 歐洲視角
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: ''
-  }).addTo(map);
-
-  // 加基本標示（你可以自己加更多）
-  L.marker([48.8566, 2.3522]).addTo(map); // Paris
-</script>
-
+<script src="js/map.js"></script>
 <script src="js/nav.js"></script>
-
 </body>
 </html>
