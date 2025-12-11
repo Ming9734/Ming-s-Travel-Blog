@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ming's Travel Blog</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Ming’s Travel Blog</title>
 
-  <!-- Leaflet 地圖 -->
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 </head>
 <body>
 
@@ -23,21 +23,23 @@
   </ul>
 </nav>
 
-<!-- 大地圖背景 -->
-<div id="home-map"></div>
+<!-- 頭版區：大地圖背景 -->
+<div class="home-map-container">
+  <div id="home-map"></div>
 
-<!-- 漂浮主視覺卡片 -->
-<div class="hero-float">
-  <h1>Ming’s Travel Blog</h1>
-  <p>Slow travel across Europe.</p>
+  <!-- 漂浮 Hero 卡片 -->
+  <div class="hero-float">
+    <h1>Ming’s Travel Blog</h1>
+    <p>Slow travel across Europe. Stories, maps, and hidden heritage.</p>
 
-  <a href="posts.html" class="btn">View Posts</a>
-  <a href="map.html" class="btn secondary">Map View</a>
+    <a href="posts.html" class="btn">View Posts</a>
+    <a href="map.html" class="btn secondary">Full Map</a>
+  </div>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<!-- 首頁地圖（簡化、無互動） -->
+<!-- 小地圖腳本：地圖可以是靜態不互動 -->
 <script>
   const map = L.map('home-map', {
     zoomControl: false,
@@ -47,15 +49,19 @@
     boxZoom: false,
     keyboard: false,
     tap: false,
-  }).setView([48.0, 11.0], 5);
+  }).setView([48.85, 2.35], 5); // 歐洲置中
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: ''
+  L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 13
   }).addTo(map);
 
-  // 你的 marker（示例，之後你可加自己的）
-  L.marker([48.8566, 2.3522]).addTo(map);  // Paris
-  L.marker([41.9028, 12.4964]).addTo(map); // Rome
+  // ★ 在首頁地圖上加上一個美觀的 marker（你可改成任何位置）
+  L.circleMarker([48.85, 2.35], {
+    radius: 10,
+    color: "#4f46e5",
+    fillColor: "#4f46e5",
+    fillOpacity: 0.6
+  }).addTo(map);
 </script>
 
 <script src="js/nav.js"></script>
