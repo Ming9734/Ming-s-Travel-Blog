@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ming's Travel Blog</title>
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Leaflet 地圖 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+</head>
 <body>
 
 <!-- 導覽列 -->
@@ -13,24 +23,22 @@
   </ul>
 </nav>
 
+<!-- 大地圖背景 -->
+<div id="home-map"></div>
 
-<!-- 內頁大地圖背景 -->
-<div class="home-map-container">
-  <div id="home-map"></div>
+<!-- 漂浮主視覺卡片 -->
+<div class="hero-float">
+  <h1>Ming’s Travel Blog</h1>
+  <p>Slow travel across Europe.</p>
 
-  <!-- 浮動 Hero -->
-  <div class="hero-float">
-    <h1>Ming’s Travel Blog</h1>
-    <p>Slow travel across Europe. Walk deeper, see farther.</p>
-    <a href="posts.html" class="btn">View Posts</a>
-    <a href="map.html" class="btn secondary">Map View</a>
-  </div>
+  <a href="posts.html" class="btn">View Posts</a>
+  <a href="map.html" class="btn secondary">Map View</a>
 </div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+<!-- 首頁地圖（簡化、無互動） -->
 <script>
-  /* 建立簡化地圖（不互動） */
   const map = L.map('home-map', {
     zoomControl: false,
     dragging: false,
@@ -38,29 +46,18 @@
     doubleClickZoom: false,
     boxZoom: false,
     keyboard: false,
-  }).setView([48.8, 2.3], 4);
+    tap: false,
+  }).setView([48.0, 11.0], 5);
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: ''
   }).addTo(map);
 
-  /* 顯示所有城市標記（僅視覺用，不可點擊） */
-  const previewMarkers = [
-    { name: "Paris",  lat: 48.8566, lng: 2.3522 },
-    { name: "Vienna", lat: 48.2082, lng: 16.3738 },
-    { name: "Budapest", lat: 47.4979, lng: 19.0402 },
-  ];
-
-  previewMarkers.forEach(p => {
-    L.circleMarker([p.lat, p.lng], {
-      radius: 6,
-      fillColor: "#4f46e5",
-      fillOpacity: 0.9,
-      stroke: false
-    }).addTo(map);
-  });
+  // 你的 marker（示例，之後你可加自己的）
+  L.marker([48.8566, 2.3522]).addTo(map);  // Paris
+  L.marker([41.9028, 12.4964]).addTo(map); // Rome
 </script>
 
 <script src="js/nav.js"></script>
-
 </body>
+</html>
