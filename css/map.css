@@ -1,7 +1,70 @@
+/* map.css - 地圖專用樣式 */
+#map-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 24px auto;
+  height: 70vh; /* or 固定 600px */
+  min-height: 480px;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  z-index: 0; /* 保持地圖在下 */
+}
+
+/* 浮動在地圖上的 info box (會由 JS 控制顯示/隱藏與位置) */
+.marker-info {
+  position: absolute;
+  transform: translate(-50%, -110%); /* 預設讓它在標記上方 */
+  pointer-events: auto;
+  display: none; /* 隱藏，hover 時顯示 */
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  width: 260px;
+  z-index: 2100; /* 高於下拉選單和 map popups */
+  transition: opacity 0.12s ease;
+}
 #hover-info-box {
   transition: opacity .15s ease;
   opacity: 0;
 }
 #hover-info-box[style*="display: block"] {
   opacity: 1;
+}
+
+.marker-info.visible {
+  display: block;
+  opacity: 1;
+}
+
+/* 內部樣式 */
+.marker-info h3 { margin: 0 0 6px 0; font-size: 1rem; }
+.marker-info p { margin: 0 0 8px 0; font-size: 0.9rem; color: #444; }
+.marker-info img { width: 100%; height: auto; border-radius: 6px; margin-bottom:8px; object-fit:cover; }
+
+/* 連結按鈕樣式 */
+.marker-info .btn {
+  display:inline-block;
+  padding:6px 10px;
+  background:#4f46e5;
+  color:white;
+  border-radius:6px;
+  text-decoration:none;
+  font-size:0.9rem;
+}
+
+/* 確保下拉選單 (navigation) 在地圖上方顯示 */
+header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
+.dropdown-menu, .sub-menu { z-index: 2200; }
+
+/* Responsive */
+@media (max-width:900px) {
+  .marker-info { width: 200px; transform: translate(-50%,-120%); }
+  #map-container { height: 55vh; min-height: 360px; }
 }
