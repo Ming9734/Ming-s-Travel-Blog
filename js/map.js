@@ -1,21 +1,42 @@
-// --- Home Page Map (index.html) ---
+/* ────────────────────────────────
+   1) Index首頁的簡易地圖 #home-map
+──────────────────────────────── */
 if (document.getElementById('home-map')) {
-    const map = L.map('home-map').setView([48.8566, 2.3522], 5);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
-    }).addTo(map);
+    // 讀取 posts.json
+    fetch('data/posts.json')
+      .then(r => r.json())
+      .then(posts => {
 
-    postsData.forEach(p => {
-        L.marker([p.lat, p.lng]).addTo(map)
-          .bindPopup(`<b>${p.title}</b>`);
-    });
+        const map = L.map('home-map', {
+            zoomControl: false, // 首頁地圖更乾淨
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false,
+            boxZoom: false,
+            keyboard: false,
+            tap: false,
+        }).setView([48.8566, 2.3522], 5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        // 加 marker（無 popup，比較乾淨）
+        posts.forEach(p => {
+            L.marker([p.lat, p.lng]).addTo(map);
+        });
+
+      });
 }
 
 
+/* ────────────────────────────────
+   2) Map.html 的完整互動地圖 #map
+──────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.getElementById('map');
-  if (!mapContainer) return;
+  if (!mapContainer) return;   // 若不是 map.html，直接跳出
 
   const map = L.map('map').setView([50, 10], 4);
 
@@ -33,13 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // InfoBox
   const infoBox = document.createElement('div');
   infoBox.id = 'info-box';
-  infoBox.style.position = 'absolute';
   infoBox.style.display = 'none';
-  infoBox.style.background = 'white';
-  infoBox.style.padding = '1rem';
-  infoBox.style.borderRadius = '8px';
-  infoBox.style.zIndex = '500';
-  infoBox.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
   mapContainer.appendChild(infoBox);
 
   // 載入 posts.json
@@ -81,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
           infoBox.style.display = 'none';
         });
 
-        // 統一導向 post.html?id=…
         marker.on('click', () => {
           window.location.href = `post.html?id=${p.id}`;
         });
