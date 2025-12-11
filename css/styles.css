@@ -1,25 +1,15 @@
-/* ------------------------------
-   BASIC RESET
------------------------------- */
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
   background: linear-gradient(120deg, #4f46e5, #9333ea);
 }
 
-/* ------------------------------
-   NAVIGATION BAR
------------------------------- */
 .navbar {
-  position: absolute; /* 固定在頁面上方 */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10000; /* 高於地圖 */
+  z-index: 10000;
   background: rgba(255,255,255,0.95);
   display: flex;
   justify-content: center;
@@ -47,7 +37,7 @@ body {
 .dropdown-menu, .sub-menu {
   display: none;
   position: absolute;
-  top: 100%; /* 母選單下方 */
+  top: 100%;
   left: 0;
   background: white;
   min-width: 150px;
@@ -61,22 +51,10 @@ body {
 
 .dropdown-sub:hover > .sub-menu {
   display: block;
-  left: 100%; /* 子選單顯示在母選單右側 */
+  left: 100%;
   top: 0;
 }
 
-
-/* ------------------------------
-   HOVER STYLES
------------------------------- */
-.dropdown-menu a:hover,
-.sub-menu a:hover {
-  background: #f1f1f1;
-}
-
-/* ------------------------------
-   HERO SECTION
------------------------------- */
 .hero {
   text-align: center;
   color: white;
@@ -90,7 +68,6 @@ body {
   padding: 0.75rem 1.5rem;
   border-radius: 999px;
   margin: 0.5rem;
-  text-decoration: none;
 }
 
 .btn.secondary {
@@ -99,16 +76,53 @@ body {
   border: 1px solid white;
 }
 
-/* ------------------------------
-   MAP – ENSURE IT STAYS BEHIND DROPDOWN
------------------------------- */
+.posts-grid {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 1.5rem;
+}
+
+.post-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.post-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  color: white;
+  opacity: 0;
+  padding: 1rem;
+  transition: .3s;
+}
+
+.post-card:hover .overlay {
+  opacity: 1;
+}
+
+.post {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
 #map {
   height: 80vh;
   width: 100%;
   position: relative;
-  z-index: 1; /* 低於導覽列 */
+  z-index: 1;
 }
-
 
 #info-box {
   position: absolute;
