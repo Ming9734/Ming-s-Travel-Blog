@@ -40,24 +40,9 @@
 
 
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-  /* 地圖：首頁用靜態不可拖曳版本 */
-  const map = L.map('home-map', {
-    zoomControl: false,
-    dragging: false,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    keyboard: false,
-    tap: false,
-  }).setView([48.2082, 16.3738], 5); // 預設：歐洲中間
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: ''
-  }).addTo(map);
-</script>
 
 <script src="js/nav.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>
