@@ -1,56 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Map View – Ming’s Travel Blog</title>
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Map - Ming's Travel Blog</title>
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/styles.css">   <!-- 你的主樣式 -->
+<link rel="stylesheet" href="css/map.css">      <!-- 地圖專用樣式下面有 -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
 </head>
 <body>
 
-<nav>
-  <ul class="nav">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="map.html" class="active">Map View</a></li>
-    <li class="dropdown">
-      <a href="posts.html">Posts</a>
-      <ul class="dropdown-menu">
-        <li class="dropdown-sub"><a href="#">UK</a>
-          <ul class="sub-menu">
-            <li><a href="uk-london.html">London</a></li>
-          </ul>
-        </li>
-        <li class="dropdown-sub"><a href="#">France</a>
-          <ul class="sub-menu">
-            <li><a href="fr-paris.html">Paris</a></li>
-          </ul>
-        </li>
-        <li class="dropdown-sub"><a href="#">Italy</a>
-          <ul class="sub-menu">
-            <li><a href="it-rome.html">Rome</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-</nav>
+<header>
+  <h1>Ming’s Travel Blog</h1>
+  <nav>
+    <ul class="nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li class="dropdown">
+        <a href="posts.html">Posts</a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-sub"><a href="#">UK</a>
+            <ul class="sub-menu"><li><a href="uk-london.html">London</a></li></ul>
+          </li>
+          <li class="dropdown-sub"><a href="#">France</a>
+            <ul class="sub-menu"><li><a href="fr-paris.html">Paris</a></li></ul>
+          </li>
+          <li class="dropdown-sub"><a href="#">Italy</a>
+            <ul class="sub-menu"><li><a href="it-rome.html">Rome</a></li></ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</header>
 
-<!-- 地圖資訊框 -->
-<div id="info-box">
-  <p>Hover a marker to see details.</p>
-</div>
+<main>
+  <div id="map-container">
+    <div id="map"></div>
 
-<!-- 地圖 -->
-<div id="map"></div>
+    <!-- 這個 info box 會在標記 hover 時顯示，position: absolute 會根據 map container 定位 -->
+    <div id="marker-info" class="marker-info" aria-hidden="true">
+      <!-- js 會填入內容 -->
+    </div>
+  </div>
+</main>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<!-- 你的互動地圖 -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="js/map.js"></script>
-
 </body>
 </html>
