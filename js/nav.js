@@ -1,19 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const nav = document.querySelector('.nav');
-
-  if (!nav) return;
+  const menu = document.getElementById('posts-dropdown'); // 直接選擇已存在的 ul
+  if (!menu) return;
 
   fetch('data/posts.json')
     .then(r => r.json())
     .then(posts => {
-      // 創建 Posts Dropdown
-      const postsDropdown = document.createElement('li');
-      postsDropdown.className = 'dropdown';
-      postsDropdown.innerHTML = `<a href="posts.html">Posts</a><ul class="dropdown-menu"></ul>`;
-      nav.appendChild(postsDropdown);
-      const menu = postsDropdown.querySelector('.dropdown-menu');
-
-      // 依 Country -> City -> Attraction 分組
+      // 建立 country -> city -> posts 的層級
       const hierarchy = {};
       posts.forEach(p => {
         if (!hierarchy[p.country]) hierarchy[p.country] = {};
@@ -21,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hierarchy[p.country][p.city].push(p);
       });
 
-      // 生成下拉選單 HTML
+      // 生成子選單
       Object.keys(hierarchy).forEach(country => {
         const countryLi = document.createElement('li');
         countryLi.className = 'dropdown-sub';
@@ -38,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const citySub = cityLi.querySelector('.sub-menu');
           hierarchy[country][city].forEach(post => {
             const postLi = document.createElement('li');
-            postLi.innerHTML = `<a href="posts/${post.id}.html">${post.title}</a>`;
+            postLi.innerHTML = `<a href="post.html?id=${post.id}">${post.title}</a>`;
             citySub.appendChild(postLi);
           });
         });
