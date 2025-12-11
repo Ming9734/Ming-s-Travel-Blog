@@ -2,22 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Map View</title>
+  <title>Map View - Travel Blog</title>
+
+  <!-- Leaflet 地圖樣式 -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+  <!-- 主站的 CSS -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <style>
+    /* 確保地圖不擋住下拉選單 */
+    nav { z-index: 2000; }
+    #map { z-index: 1; }
+  </style>
 </head>
 <body>
 
+<!-- NAVIGATION -->
 <nav>
-  <a href="index.html">Home</a>
-  <a href="posts.html">Posts</a>
-  <a href="map.html" class="active">Map</a>
+  <ul class="nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a class="active" href="map.html">Map View</a></li>
+
+    <li class="dropdown">
+      <a href="posts.html">Posts</a>
+      <ul class="dropdown-menu">
+        <li class="dropdown-sub"><a href="#">UK</a>
+          <ul class="sub-menu">
+            <li><a href="uk-london.html">London</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown-sub"><a href="#">France</a>
+          <ul class="sub-menu">
+            <li><a href="fr-paris.html">Paris</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown-sub"><a href="#">Italy</a>
+          <ul class="sub-menu">
+            <li><a href="it-rome.html">Rome</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><a href="about.html">About</a></li>
+  </ul>
 </nav>
 
-<div id="map"></div>
-<div id="info-box">Hover a marker</div>
+<!-- INFO BOX -->
+<div id="info-box">
+  <p>Hover a marker to preview</p>
+</div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- MAP -->
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- 自己的地圖程式碼 -->
 <script src="js/map.js"></script>
+
 </body>
 </html>
