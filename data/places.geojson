@@ -1,33 +1,30 @@
-{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "London",
-        "summary": "My first Europe trip.",
-        "url": "uk-london.html",
-        "img": "images/london-thumb.jpg",
-        "icon": "images/icon-london.png"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [-0.1276, 51.5074]
-      }
+[
+  {
+    "type":"Feature",
+    "properties":{
+      "title":"London",
+      "summary":"Short description of London trip",
+      "img":"images/london.jpg",
+      "url":"uk-london.html",
+      "icon":"images/marker-london.png"
     },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Paris",
-        "summary": "City of lights.",
-        "url": "fr-paris.html",
-        "img": "images/paris-thumb.jpg",
-        "icon": "images/icon-paris.png"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [2.3522, 48.8566]
-      }
+    "geometry":{
+      "type":"Point",
+      "coordinates":[-0.1276,51.5074]
     }
-  ]
-}
+  },
+  {
+    "type":"Feature",
+    "properties":{
+      "title":"Paris",
+      "summary":"Short description of Paris trip",
+      "img":"images/paris.jpg",
+      "url":"fr-paris.html",
+      "icon":"images/marker-paris.png"
+    },
+    "geometry":{
+      "type":"Point",
+      "coordinates":[2.3522,48.8566]
+    }
+  }
+]
