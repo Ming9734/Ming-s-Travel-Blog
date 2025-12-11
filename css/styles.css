@@ -153,7 +153,7 @@ body {
 
 /* ---------------- Posts 總覽頁 ---------------- */
 .posts-grid {
-  padding: 6rem 2rem 2rem 2rem; /* 上方 padding 6rem 避免被導覽列擋住 */
+  padding: 10rem 2rem 2rem 2rem; /* 上方 padding 6rem 避免被導覽列擋住 */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
   gap: 1.5rem;
