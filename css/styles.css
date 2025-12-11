@@ -1,14 +1,14 @@
 /* ---------------- Body & 全局 ---------------- */
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif; /* 改用 Google Font Poppins */
   background: linear-gradient(120deg, #4f46e5, #9333ea);
   color: #222;
 }
 
 /* ---------------- 導覽列 ---------------- */
 .navbar {
-  position: fixed;           /* 固定在頂部 */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -35,14 +35,34 @@ body {
 .nav a {
   text-decoration: none;
   color: #222;
-  font-weight: 500;
+  font-weight: 600;           /* 稍微加粗 */
+  font-size: 1rem;
+  letter-spacing: 0.5px;      /* 微調字距 */
   padding: 8px 12px;
   display: block;
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.2s;
+  position: relative;
+}
+
+/* 底線動畫 */
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  background: #4f46e5;
+  transition: width 0.3s;
+}
+
+.nav a:hover::after {
+  width: 100%;
 }
 
 .nav a:hover {
   color: #4f46e5;
+  transform: scale(1.05); /* 微放大 */
 }
 
 /* ---------------- 下拉選單 ---------------- */
@@ -54,7 +74,7 @@ body {
   background: white;
   min-width: 180px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  z-index: 10000;
+  z-index: 10001;
 }
 
 .dropdown:hover > .dropdown-menu {
@@ -68,7 +88,7 @@ body {
 .sub-menu {
   position: absolute;
   top: 0;
-  left: 100%;         /* 子選單右側展開 */
+  left: 100%;
   display: none;
   background: white;
   min-width: 180px;
@@ -83,6 +103,7 @@ body {
   padding: 8px 12px;
   color: #222;
   display: block;
+  transition: background 0.3s, color 0.3s;
 }
 
 .dropdown-menu a:hover, .sub-menu a:hover {
@@ -150,10 +171,9 @@ body {
   font-weight: 400;
 }
 
-
 /* ---------------- Posts 總覽頁 ---------------- */
 .posts-grid {
-  padding: 10rem 2rem 2rem 2rem; /* 上方 padding 6rem 避免被導覽列擋住 */
+  padding: 10rem 2rem 2rem 2rem; /* 上方 padding 避免被導覽列擋住 */
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
   gap: 1.5rem;
@@ -205,7 +225,7 @@ body {
   height: 80vh;
   width: 100%;
   position: relative;
-  z-index: 1;   /* 低於導覽列 */
+  z-index: 1;
 }
 
 #info-box {
