@@ -1,12 +1,12 @@
-/* ---------------- Body & 全局 ---------------- */
+/* ---------------- Body ---------------- */
 body {
   margin: 0;
   font-family: 'Poppins', system-ui, sans-serif;
-  background: #f4f4f9;
+  background: #f7f7f7;
   color: #222;
 }
 
-/* ---------------- 導覽列 ---------------- */
+/* ---------------- Navbar ---------------- */
 .navbar {
   position: fixed;
   top: 0;
@@ -28,25 +28,32 @@ body {
 }
 
 .nav > li {
-  position: relative;
   margin: 0 20px;
+  position: relative;
 }
 
 .nav a {
   text-decoration: none;
   color: #222;
   font-weight: 600;
-  font-size: 1rem;
   padding: 8px 12px;
-  display: block;
-  transition: 0.25s;
+  transition: color 0.3s;
 }
 
-.nav a:hover {
-  color: #4f46e5;
+/* Hover 下劃線 */
+.nav a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 2px;
+  width: 0;
+  background: #4f46e5;
+  transition: width 0.3s;
 }
+.nav a:hover::after { width: 100%; }
+.nav a:hover { color: #4f46e5; }
 
-/* ---------------- 下拉選單 ---------------- */
+/* ---------------- Dropdown ---------------- */
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -63,22 +70,21 @@ body {
 }
 
 .dropdown-menu a {
-  padding: 10px 12px;
-  color: #222;
+  padding: 10px;
   display: block;
+  color: #222;
 }
 
 .dropdown-menu a:hover {
-  background: #efefef;
-  color: #4f46e5;
+  background: #f3f3f3;
 }
 
-/* ---------------- 首页 Map 背景 ---------------- */
+/* ---------------- Home Map ---------------- */
 .home-map-container {
-  position: relative;
+  margin-top: 70px; /* 避免被 navbar 遮住 */
   width: 100%;
   height: 85vh;
-  margin-top: 70px; /* 與導覽列保持距離 */
+  position: relative;
 }
 
 #home-map {
@@ -88,7 +94,7 @@ body {
   overflow: hidden;
 }
 
-/* ---------------- 首页 Floating Hero ---------------- */
+/* ---------------- Hero Floating Box ---------------- */
 .hero-float {
   position: absolute;
   top: 22%;
@@ -101,30 +107,35 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   text-align: center;
+  z-index: 10;
 }
 
 .hero-float h1 {
   font-size: 2.4rem;
   margin-bottom: 0.6rem;
-  font-weight: 700;
 }
 
 .hero-float p {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
-  color: #444;
 }
 
+/* Hero Buttons */
 .hero-float .btn {
   display: inline-block;
   padding: 0.9rem 1.8rem;
   margin: 0.3rem;
   background: #4f46e5;
   color: white;
-  border-radius: 999px;
   text-decoration: none;
+  border-radius: 999px;
   font-weight: 600;
-  transition: 0.25s;
+  transition: background 0.25s, transform 0.2s;
+}
+
+.hero-float .btn:hover {
+  background: #6d28d9;
+  transform: scale(1.05);
 }
 
 .hero-float .btn.secondary {
@@ -133,11 +144,12 @@ body {
   color: #4f46e5;
 }
 
-.hero-float .btn:hover {
-  background: #6d28d9;
+.hero-float .btn.secondary:hover {
+  background: #4f46e5;
+  color: white;
 }
 
-/* ---------------- Map.html 的地圖 ---------------- */
+/* ---------------- Map Page Map ---------------- */
 #map {
   height: 80vh;
   width: 100%;
@@ -145,34 +157,17 @@ body {
 
 /* ---------------- Posts Grid ---------------- */
 .posts-grid {
-  padding: 10rem 2rem 2rem 2rem;
+  padding: 9rem 2rem 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
-.post-card {
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-  cursor: pointer;
-}
-
-.post-card:hover {
-  transform: translateY(-5px);
-}
-
-.post-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ---------------- 單篇文章 ---------------- */
+/* ---------------- Post Page ---------------- */
 .post {
   max-width: 800px;
   margin: 3rem auto;
-  background: white;
   padding: 2rem;
+  background: white;
   border-radius: 12px;
 }
