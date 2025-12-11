@@ -72,8 +72,9 @@ if (mapContainer) {
         });
 
         marker.on('click', () => {
-          if (props.url) window.location.href = props.url;
-        });
+  window.location.href = `post.html?id=${p.id}`;
+});
+
 
         clusterGroup.addLayer(marker);
       });
