@@ -1,9 +1,63 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head><meta charset="UTF-8"><title>關於</title><link rel="stylesheet" href="styles.css"></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About - Travel Blog</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
 <body>
-<h1>關於我</h1>
-<p>這裡放個人介紹或部落格說明</p>
-<a href="index.html">返回首頁</a>
+
+<nav>
+  <ul class="nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="map.html">Map View</a></li>
+
+    <li class="dropdown">
+      <a href="posts.html">Posts</a>
+      <ul class="dropdown-menu">
+        <li class="dropdown-sub"><a href="#">UK</a>
+          <ul class="sub-menu">
+            <li><a href="uk-london.html">London</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown-sub"><a href="#">France</a>
+          <ul class="sub-menu">
+            <li><a href="fr-paris.html">Paris</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown-sub"><a href="#">Italy</a>
+          <ul class="sub-menu">
+            <li><a href="it-rome.html">Rome</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><a class="active" href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>About Me</h1>
+  <p>A traveler who loves exploring Europe slowly, one city at a time.</p>
+</header>
+
+<main class="post">
+  <h2>Hello, I’m Ming!</h2>
+  <p>
+    Welcome to my travel blog.  
+    This website is a collection of memories from my slow travels across Europe.
+    I enjoy walking through old streets, visiting museums, and discovering stories 
+    hidden in cities and towns.
+  </p>
+
+  <p>
+    Every trip teaches me something new — about history, culture, and myself.
+    I hope my notes, photos, and maps can inspire you to start your own journey.
+  </p>
+</main>
+
 </body>
 </html>
