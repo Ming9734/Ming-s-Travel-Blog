@@ -1,7 +1,7 @@
 /* ---------------- Body & 全局 ---------------- */
 body {
   margin: 0;
-  font-family: 'Poppins', system-ui, sans-serif; /* 改用 Google Font Poppins */
+  font-family: 'Poppins', system-ui, sans-serif;
   background: linear-gradient(120deg, #4f46e5, #9333ea);
   color: #222;
 }
@@ -35,13 +35,16 @@ body {
 .nav a {
   text-decoration: none;
   color: #222;
-  font-weight: 600;           /* 稍微加粗 */
+  font-weight: 600;
   font-size: 1rem;
-  letter-spacing: 0.5px;      /* 微調字距 */
   padding: 8px 12px;
   display: block;
   transition: color 0.3s, transform 0.2s;
-  position: relative;
+}
+
+.nav a:hover {
+  color: #4f46e5;
+  transform: scale(1.05);
 }
 
 /* 底線動畫 */
@@ -50,7 +53,7 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 0%;
+  width: 0;
   height: 2px;
   background: #4f46e5;
   transition: width 0.3s;
@@ -58,11 +61,6 @@ body {
 
 .nav a:hover::after {
   width: 100%;
-}
-
-.nav a:hover {
-  color: #4f46e5;
-  transform: scale(1.05); /* 微放大 */
 }
 
 /* ---------------- 下拉選單 ---------------- */
@@ -81,73 +79,40 @@ body {
   display: block;
 }
 
-.dropdown-sub {
-  position: relative;
-}
-
-.sub-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  display: none;
-  background: white;
-  min-width: 180px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.dropdown-sub:hover > .sub-menu {
-  display: block;
-}
-
-.dropdown-menu a, .sub-menu a {
-  padding: 8px 12px;
-  color: #222;
-  display: block;
-  transition: background 0.3s, color 0.3s;
-}
-
-.dropdown-menu a:hover, .sub-menu a:hover {
-  background: #f3f3f3;
-  color: #4f46e5;
-}
-
-/* ---------------- Home Map 背景 ---------------- */
+/* ---------------- 首頁地圖背景 ---------------- */
 .home-map-container {
   position: relative;
   width: 100%;
-  height: 85vh;               /* 頭版大地圖高度 */
-  margin-top: 70px;           /* 與導覽列保持距離 */
+  height: 85vh;
+  margin-top: 70px; /* 與導覽列保持距離 */
 }
 
 #home-map {
   width: 100%;
   height: 100%;
-  border-radius: 0 0 20px 20px; /* 下方圓角，讓地圖更美 */
+  border-radius: 0 0 20px 20px;
   overflow: hidden;
 }
 
-/* ---------------- 浮動 Hero 方塊 ---------------- */
+/* ---------------- 浮動 Hero ---------------- */
 .hero-float {
   position: absolute;
   top: 22%;
   left: 50%;
   transform: translateX(-50%);
-  width: 500px;                     /* 更大 */
+  width: 500px;
   padding: 2.5rem;
   background: rgba(255,255,255,0.78);
-  backdrop-filter: blur(8px);       /* 美美的玻璃霧面效果 */
+  backdrop-filter: blur(8px);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   text-align: center;
   z-index: 10;
 }
 
-/* 文字與按鈕更精緻 */
 .hero-float h1 {
   font-size: 2.4rem;
   margin-bottom: 0.6rem;
-  font-weight: 700;
-  color: #2c2c2c;
 }
 
 .hero-float p {
@@ -184,17 +149,9 @@ body {
   color: white;
 }
 
-/* 保留原本 map 使用的 Leaflet 設定，但 index 不要 80vh */
-.map-page-map {
-  height: 80vh;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-/* ---------------- Posts 總覽頁 ---------------- */
+/* ---------------- Posts ---------------- */
 .posts-grid {
-  padding: 10rem 2rem 2rem 2rem; /* 上方 padding 避免被導覽列擋住 */
+  padding: 10rem 2rem 2rem 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
   gap: 1.5rem;
@@ -210,12 +167,6 @@ body {
 
 .post-card:hover {
   transform: translateY(-5px);
-}
-
-.post-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .post-card .overlay {
@@ -239,17 +190,4 @@ body {
   background: white;
   padding: 2rem;
   border-radius: 12px;
-}
-
-
-#info-box {
-  position: absolute;
-  max-width: 280px;
-  pointer-events: none;
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 500;
-  transition: transform 0.2s, opacity 0.2s;
 }
