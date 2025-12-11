@@ -133,6 +133,24 @@ body {
   color: #4f46e5;
 }
 
+/* Map 專用 Hero 縮小版 */
+.hero.hero-map {
+  padding: 4rem 1rem 2rem 1rem;
+}
+
+.hero.hero-map h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.hero.hero-map p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+
 /* ---------------- Posts 總覽頁 ---------------- */
 .posts-grid {
   padding: 2rem;
