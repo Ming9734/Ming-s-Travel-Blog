@@ -24,7 +24,6 @@ if (mapContainer) {
         const props = feature.properties;
         const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
 
-        // 使用自訂 icon
         const icon = L.icon({
           iconUrl: props.icon || 'images/default-marker.png',
           iconSize: [30, 30],
@@ -33,7 +32,6 @@ if (mapContainer) {
 
         const marker = L.marker(coords, {icon: icon}).addTo(map);
 
-        // hover 放大 + 顯示 infoBox
         marker.on('mouseover', (e) => {
           marker.setIcon(L.icon({
             iconUrl: props.icon || 'images/default-marker.png',
