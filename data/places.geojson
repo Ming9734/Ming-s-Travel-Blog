@@ -6,7 +6,7 @@
       "summary":"Short description of London trip",
       "img":"images/london.jpg",
       "url":"uk-london.html",
-      "icon":"images/marker-london.png"
+      "icon":"markers/uk.png"
     },
     "geometry":{
       "type":"Point",
@@ -20,7 +20,7 @@
       "summary":"Short description of Paris trip",
       "img":"images/paris.jpg",
       "url":"fr-paris.html",
-      "icon":"images/marker-paris.png"
+      "icon":"markers/fr.png"
     },
     "geometry":{
       "type":"Point",
