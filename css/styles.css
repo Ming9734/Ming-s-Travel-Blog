@@ -275,4 +275,64 @@ body {
   height: 100%;
   filter: brightness(0.85); /* 略暗一點讓文字更清楚 */
 }
+/* ---------------- 浮動 Hero（index 專用） ---------------- */
+.hero-floating {
+  position: absolute;
+  top: 18%;                 /* 調整浮在地圖上的高度 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  padding: 2.5rem;
+  text-align: center;
+
+  /* 藍紫漸層 + 玻璃透明 */
+  background: linear-gradient(120deg, #4f46e5cc, #9333eacc); 
+  /* 上面結尾的 cc = 約 80% 不透明，可自行改 66、55、44 更透明 */
+
+  color: white;
+  border-radius: 20px;
+
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  backdrop-filter: blur(10px);
+  z-index: 1000;  /* 確保蓋在地圖上 */
+}
+
+.hero-floating h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.hero-floating p {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+}
+
+.hero-floating .btn {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  background: white;
+  color: #4f46e5;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.hero-floating .btn:hover {
+  background: #e2e8ff;
+  transform: scale(1.05);
+}
+
+.hero-floating .btn.secondary {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.hero-floating .btn.secondary:hover {
+  background: white;
+  color: #4f46e5;
+}
 
