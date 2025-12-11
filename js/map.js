@@ -37,13 +37,13 @@ if (mapContainer) {
         const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
 
         const baseIcon = L.icon({
-          iconUrl: props.icon || 'images/markers/default-marker.png',
+          iconUrl: props.icon || 'images/markers/default.png',
           iconSize: [30, 30],
           iconAnchor: [15, 30]
         });
 
         const bigIcon = L.icon({
-          iconUrl: props.icon || 'images/markers/default-marker.png',
+          iconUrl: props.icon || 'images/markers/default.png',
           iconSize: [50, 50],
           iconAnchor: [25, 50]
         });
