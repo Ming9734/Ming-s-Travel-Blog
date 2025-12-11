@@ -14,14 +14,16 @@ body {
 /* ------------------------------
    NAVIGATION BAR
 ------------------------------ */
-nav {
-  position: sticky;
+.navbar {
+  position: absolute; /* 固定在頁面上方 */
   top: 0;
-  z-index: 2000; /* VERY IMPORTANT: keeps dropdown above map */
+  left: 0;
+  width: 100%;
+  z-index: 10000; /* 高於地圖 */
   background: rgba(255,255,255,0.95);
-  padding: 1rem;
   display: flex;
   justify-content: center;
+  padding: 1rem;
 }
 
 .nav {
@@ -29,73 +31,40 @@ nav {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 2rem;
 }
 
 .nav li {
   position: relative;
+  margin: 0 10px;
 }
 
-nav a {
+.nav a {
   text-decoration: none;
   color: #222;
   font-weight: 500;
-  padding: 8px 12px;
-  display: block;
 }
 
-nav a.active {
-  border-bottom: 2px solid #6366f1;
-}
-
-/* ------------------------------
-   DROPDOWN – LEVEL 1 (Posts)
------------------------------- */
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 160px;
-  background: white;
-  border-radius: 8px;
-  padding: 8px 0;
+.dropdown-menu, .sub-menu {
   display: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  z-index: 3000;
+  position: absolute;
+  top: 100%; /* 母選單下方 */
+  left: 0;
+  background: white;
+  min-width: 150px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  z-index: 10000;
 }
 
 .dropdown:hover > .dropdown-menu {
   display: block;
 }
 
-/* ------------------------------
-   DROPDOWN – LEVEL 2 (UK → London)
------------------------------- */
-.dropdown-sub {
-  position: relative;
-}
-
-.dropdown-sub > a {
-  padding: 10px 16px;
-  white-space: nowrap;
-}
-
-.sub-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  min-width: 160px;
-  background: white;
-  border-radius: 8px;
-  padding: 8px 0;
-  display: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  z-index: 3500;
-}
-
 .dropdown-sub:hover > .sub-menu {
   display: block;
+  left: 100%; /* 子選單顯示在母選單右側 */
+  top: 0;
 }
+
 
 /* ------------------------------
    HOVER STYLES
