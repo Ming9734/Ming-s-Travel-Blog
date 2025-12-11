@@ -24,22 +24,16 @@ fetch("data/places.geojson")
   .then(r => r.json())
   .then(data => {
     L.geoJSON(data, {
-      pointToLayer: function (feature, latlng) {
+     pointToLayer: (feature, latlng) => {
+  return L.marker(latlng, {
+    icon: L.icon({
+      iconUrl: feature.properties.icon || "images/default-icon.png",
+      iconSize: [40, 40],
+      iconAnchor: [20, 40]
+    })
+  });
+}
 
-        // Normal icon
-        const normalIcon = L.icon({
-          iconUrl: "images/marker.png",
-          iconSize: [32, 32]
-        });
-
-        // Enlarged hover icon
-        const hoverIcon = L.icon({
-          iconUrl: "images/marker.png",
-          iconSize: [48, 48]
-        });
-
-        const marker = L.marker(latlng, { icon: normalIcon });
-        const props = feature.properties;
 
         // Hover (mouseenter)
         marker.on("mouseenter", () => {
