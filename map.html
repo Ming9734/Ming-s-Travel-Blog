@@ -2,28 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Map View - Travel Blog</title>
-
-  <!-- Leaflet 地圖樣式 -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-
-  <!-- 主站的 CSS -->
+  <title>Map View – Ming’s Travel Blog</title>
   <link rel="stylesheet" href="css/styles.css">
 
-  <style>
-    /* 確保地圖不擋住下拉選單 */
-    nav { z-index: 2000; }
-    #map { z-index: 1; }
-  </style>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <nav>
   <ul class="nav">
     <li><a href="index.html">Home</a></li>
-    <li><a class="active" href="map.html">Map View</a></li>
-
+    <li><a href="map.html" class="active">Map View</a></li>
     <li class="dropdown">
       <a href="posts.html">Posts</a>
       <ul class="dropdown-menu">
@@ -32,13 +22,11 @@
             <li><a href="uk-london.html">London</a></li>
           </ul>
         </li>
-
         <li class="dropdown-sub"><a href="#">France</a>
           <ul class="sub-menu">
             <li><a href="fr-paris.html">Paris</a></li>
           </ul>
         </li>
-
         <li class="dropdown-sub"><a href="#">Italy</a>
           <ul class="sub-menu">
             <li><a href="it-rome.html">Rome</a></li>
@@ -46,23 +34,22 @@
         </li>
       </ul>
     </li>
-
     <li><a href="about.html">About</a></li>
   </ul>
 </nav>
 
-<!-- INFO BOX -->
+<!-- 地圖資訊框 -->
 <div id="info-box">
-  <p>Hover a marker to preview</p>
+  <p>Hover a marker to see details.</p>
 </div>
 
-<!-- MAP -->
+<!-- 地圖 -->
 <div id="map"></div>
 
 <!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- 自己的地圖程式碼 -->
+<!-- 你的互動地圖 -->
 <script src="js/map.js"></script>
 
 </body>
