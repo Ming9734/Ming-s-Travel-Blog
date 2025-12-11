@@ -3,44 +3,52 @@ body {
   font-family: system-ui, sans-serif;
   background: linear-gradient(120deg, #4f46e5, #9333ea);
 }
-
+/* 導覽列置中 */
 .navbar {
-  position: absolute;
+  position: fixed;  /* 固定在頂部 */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10000;
   background: rgba(255,255,255,0.95);
+  z-index: 10000;
   display: flex;
   justify-content: center;
-  padding: 1rem;
+  padding: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .nav {
   list-style: none;
+  display: flex;
   margin: 0;
   padding: 0;
-  display: flex;
 }
 
-.nav li {
+.nav > li {
   position: relative;
-  margin: 0 10px;
+  margin: 0 20px;
 }
 
 .nav a {
   text-decoration: none;
   color: #222;
   font-weight: 500;
+  padding: 8px 12px;
+  display: block;
 }
 
-.dropdown-menu, .sub-menu {
-  display: none;
+.nav a:hover {
+  color: #4f46e5;
+}
+
+/* 母選單 */
+.dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: 100%;  /* 在母選單下方 */
   left: 0;
+  display: none;
   background: white;
-  min-width: 150px;
+  min-width: 180px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   z-index: 10000;
 }
@@ -49,11 +57,37 @@ body {
   display: block;
 }
 
+/* 子選單 */
+.sub-menu {
+  position: absolute;
+  top: 0;
+  left: 100%;  /* 右側展開 */
+  display: none;
+  background: white;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
 .dropdown-sub:hover > .sub-menu {
   display: block;
-  left: 100%;
-  top: 0;
 }
+
+/* 避免 hover 鬆開時消失 */
+.dropdown-menu li {
+  position: relative;
+}
+
+/* 可選：美化母/子選單 */
+.dropdown-menu a, .sub-menu a {
+  padding: 8px 12px;
+  color: #222;
+}
+
+.dropdown-menu a:hover, .sub-menu a:hover {
+  background: #f3f3f3;
+  color: #4f46e5;
+}
+
 
 .hero {
   text-align: center;
