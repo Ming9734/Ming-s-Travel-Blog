@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ming’s Travel Blog</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<meta charset="UTF-8">
+<title>Ming’s Travel Blog</title>
+
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 </head>
 <body>
 
@@ -21,19 +22,62 @@
   </ul>
 </nav>
 
-<header class="hero">
+<!-- Hero 漂浮框 -->
+<div class="hero-float">
   <h1>Ming’s Travel Blog</h1>
   <p>Slow travel across Europe.</p>
-  <div class="buttons">
-    <a href="posts.html" class="btn">View Posts</a>
-    <a href="map.html" class="btn secondary">Map View</a>
-  </div>
-</header>
+  <a href="posts.html" class="btn">View Posts</a>
+  <a href="map.html" class="btn secondary">Map View</a>
+</div>
 
-<div id="map" style="height:400px;"></div>
+<!-- 背景地圖（靜態） -->
+<div id="index-map" style="height:80vh;"></div>
 
+<!-- Leaflet -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="js/map.js"></script>
+
+<!-- 自動生成導覽列 -->
 <script src="js/nav.js"></script>
+
+<!-- 首頁靜態 map -->
+<script>
+const mapContainer = document.getElementById('index-map');
+if (mapContainer) {
+  const map = L.map('index-map', {
+    zoomControl: false,
+    dragging: false,
+    scrollWheelZoom: false,
+    doubleClickZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    touchZoom: false,
+  }).setView([50, 10], 4);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // 讀取 posts.json 並顯示 marker
+  fetch('data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      posts.forEach(p => {
+        const markerIcon = L.icon({
+          iconUrl: p.icon || 'images/markers/default.png',
+          iconSize: [32, 32],
+          iconAnchor: [16, 32]
+        });
+
+        // 非互動式 marker
+        L.marker([p.lat, p.lng], {
+          icon: markerIcon,
+          interactive: false
+        }).addTo(map);
+      });
+    });
+}
+</script>
+
 </body>
 </html>
