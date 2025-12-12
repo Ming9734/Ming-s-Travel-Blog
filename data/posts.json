@@ -34,5 +34,17 @@
     "image": "images/posts/mount-etna.jpg",
     "content": "<p>This is my Italian story.</p>",
     "icon": "images/markers/IT.png"
+  },
+  {
+    "id": "Three Towers of San Marino",
+    "title": "Three Towers of San Marino",
+    "country": "San Marino",
+    "city": "San Marino City",
+    "lat": 43.935308255770885,
+    "lng": 12.449347953050836,
+    "summary": "A slow walk through amazing towers.",
+    "image": "images/posts/three-towers-of-san-marino.jpg",
+    "content": "<p>This is my special story.</p>",
+    "icon": "images/markers/SM.png"
   }
 ]
