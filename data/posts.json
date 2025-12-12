@@ -12,15 +12,15 @@
     "icon": "images/markers/BG.png"
   },
   {
-    "id": "paris",
-    "title": "Paris in Spring",
+    "id": "Cité de Carcassonne",
+    "title": "Cité de Carcassonne",
     "country": "France",
-    "city": "Paris",
-    "lat": 48.8566,
-    "lng": 2.3522,
-    "summary": "Cafés, museums and spring light.",
-    "image": "images/posts/paris.jpg",
-    "content": "<p>This is my Paris story.</p>",
+    "city": "Carcassonne",
+    "lat": 43.20607377980027,
+    "lng": 2.364196100000358,
+    "summary": "A slow walk through historic Carcassonne.",
+    "image": "images/posts/cité-de-carcassonne.jpg",
+    "content": "<p>This is my Franch story.</p>",
     "icon": "images/markers/FR.png"
   }
 ]
