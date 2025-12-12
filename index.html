@@ -21,12 +21,10 @@
   </ul>
 </nav>
 
-
 <!-- 🌍 地圖背景容器 -->
 <div class="home-map-bg">
   <div id="home-map"></div>
 </div>
-
 
 <!-- 🟦 浮動 Hero 方塊 -->
 <header class="hero-floating">
@@ -39,6 +37,7 @@
 </header>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
   /* 地圖：首頁用靜態不可拖曳版本 */
   const map = L.map('home-map', {
@@ -49,14 +48,22 @@
     boxZoom: false,
     keyboard: false,
     tap: false,
-  }).setView([48.2082, 16.3738], 5); // 預設：歐洲中間
+  }).setView([48.2082, 16.3738], 5);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: ''
   }).addTo(map);
+
+  /* ⭐ 自動載入 posts.json 的標示（首頁） ⭐ */
+  fetch('data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      posts.forEach(p => {
+        L.marker([p.lat, p.lng]).addTo(map)
+          .bindPopup(`<b>${p.title}</b>`);
+      });
+    });
 </script>
-
-
 
 <script src="js/nav.js"></script>
 
