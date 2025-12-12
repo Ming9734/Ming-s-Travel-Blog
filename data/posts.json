@@ -22,5 +22,17 @@
     "image": "images/posts/cité-de-carcassonne.jpg",
     "content": "<p>This is my Franch story.</p>",
     "icon": "images/markers/FR.png"
+  },
+   {
+    "id": "Mount Etna",
+    "title": "Mount Etna",
+    "country": "Italy",
+    "city": "Catania",
+    "lat": 37.751839903707655,
+    "lng": 14.994711996785409,
+    "summary": "A slow walk through a beautiful volcano.",
+    "image": "images/posts/mount-etna.jpg",
+    "content": "<p>This is my Italian story.</p>",
+    "icon": "images/markers/IT.png"
   }
 ]
