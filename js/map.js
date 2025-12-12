@@ -1,44 +1,8 @@
-/* ────────────────────────────────
-   1) Index首頁的簡易地圖 #home-map
-──────────────────────────────── */
-if (document.getElementById('home-map')) {
-
-    // 讀取 posts.json
-    fetch('data/posts.json')
-      .then(r => r.json())
-      .then(posts => {
-
-        const map = L.map('home-map', {
-            zoomControl: false, // 首頁地圖更乾淨
-            dragging: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: false,
-            boxZoom: false,
-            keyboard: false,
-            tap: false,
-        }).setView([48.8566, 2.3522], 5);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19
-        }).addTo(map);
-
-        // 加 marker（無 popup，比較乾淨）
-        posts.forEach(p => {
-            L.marker([p.lat, p.lng]).addTo(map);
-        });
-
-      });
-}
-
-
-/* ────────────────────────────────
-   2) Map.html 的完整互動地圖 #map
-──────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   const mapContainer = document.getElementById('map');
   if (!mapContainer) return;   // 若不是 map.html，直接跳出
 
-  const map = L.map('map').setView([50, 10], 4);
+  const map = L.map('map').setView([48.8566, 2.3522], 5);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
