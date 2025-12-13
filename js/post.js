@@ -1,14 +1,56 @@
-// ----------------------------
-// post.js
-// ----------------------------
+// 取得文章 ID（例如 URL query: ?id=post1）
+const urlParams = new URLSearchParams(window.location.search);
+const postId = urlParams.get('id') || 'post1';
 
-// 取得 URL 中的 post id
-function getPostIdFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('id'); // post.html?id=123 → 123
-}
+// 導覽列初始隱藏
+const navbar = document.querySelector('.navbar');
+if (navbar) navbar.classList.add('navbar-hidden');
 
-// 初始化幻燈片
+const postCover = document.getElementById('post-cover');
+const coverImage = document.getElementById('cover-image');
+const coverTitle = document.getElementById('cover-title');
+const coverSubtitle = document.getElementById('cover-subtitle');
+const postLayout = document.getElementById('post-content');
+const enterBtn = document.getElementById('enter-post');
+
+// 讀取單篇文章資料
+fetch(`data/${postId}.json`)
+  .then(r => r.json())
+  .then(postData => {
+
+    // 設定封面
+    coverImage.src = postData.cover;
+    coverTitle.textContent = postData.title;
+    coverSubtitle.textContent = postData.location;
+
+    // 點擊 Enter Story
+    enterBtn.addEventListener('click', () => {
+
+      // 封面淡出
+      postCover.style.opacity = '0';
+      postCover.style.pointerEvents = 'none';
+      postCover.querySelector('.cover-overlay').style.opacity = '0';
+
+      setTimeout(() => {
+        postCover.remove();
+
+        // 導覽列淡入
+        if (navbar) navbar.classList.add('active');
+
+        // 顯示 Post Layout
+        postLayout.style.display = 'grid';
+
+        // 初始化幻燈片 & 文字 Tab
+        initGallery(postData.images);
+        initTabs(postData.tabs);
+
+      }, 600);
+    });
+
+  })
+  .catch(err => console.error('Failed to load post data:', err));
+
+// 幻燈片初始化
 function initGallery(images) {
   const gallery = document.querySelector('.post-gallery');
   if (!gallery || !images?.length) return;
@@ -26,85 +68,53 @@ function initGallery(images) {
   `;
 
   const img = gallery.querySelector('#gallery-img');
+
+  function showImage(newIndex) {
+    img.classList.add('fade-out');
+    setTimeout(() => {
+      index = newIndex;
+      img.src = images[index];
+      img.classList.remove('fade-out');
+    }, 400);
+  }
+
   gallery.querySelector('.prev').onclick = () => {
-    index = (index - 1 + images.length) % images.length;
-    img.src = images[index];
+    showImage((index - 1 + images.length) % images.length);
   };
   gallery.querySelector('.next').onclick = () => {
-    index = (index + 1) % images.length;
-    img.src = images[index];
+    showImage((index + 1) % images.length);
   };
 }
 
-// 初始化文字分頁
+// Tab 初始化
 function initTabs(tabs) {
   const tabsContainer = document.querySelector('.post-tabs');
-  const contentContainer = document.querySelector('.post-tab-content-wrapper');
-  if (!tabsContainer || !contentContainer || !tabs?.length) return;
+  const contentWrapper = document.querySelector('.post-tab-content-wrapper');
+
+  if (!tabsContainer || !contentWrapper || !tabs?.length) return;
 
   tabsContainer.innerHTML = '';
-  contentContainer.innerHTML = '';
+  contentWrapper.innerHTML = '';
 
-  tabs.forEach((tab, idx) => {
-    // 建立 tab 按鈕
+  tabs.forEach((tab, i) => {
     const btn = document.createElement('button');
-    btn.className = 'tab' + (idx === 0 ? ' active' : '');
+    btn.className = 'tab';
     btn.textContent = tab.title;
-    btn.dataset.tab = `tab-${idx}`;
+    btn.dataset.tab = `tab-${i}`;
+    if (i === 0) btn.classList.add('active');
     tabsContainer.appendChild(btn);
 
-    // 建立 tab 內容
-    const content = document.createElement('div');
-    content.id = `tab-${idx}`;
-    content.className = 'post-tab-content' + (idx === 0 ? ' active' : '');
-    content.innerHTML = tab.content;
-    contentContainer.appendChild(content);
+    const contentDiv = document.createElement('div');
+    contentDiv.id = `tab-${i}`;
+    contentDiv.className = 'post-tab-content';
+    if (i === 0) contentDiv.classList.add('active');
+    contentDiv.textContent = tab.content;
+    contentWrapper.appendChild(contentDiv);
 
-    // 點擊切換
     btn.addEventListener('click', () => {
       document.querySelectorAll('.tab, .post-tab-content').forEach(el => el.classList.remove('active'));
       btn.classList.add('active');
-      content.classList.add('active');
+      contentDiv.classList.add('active');
     });
   });
-}
-
-// 顯示封面與淡出後載入內容
-document.addEventListener('DOMContentLoaded', () => {
-  const navbar = document.querySelector('.navbar');
-  if (navbar) navbar.classList.add('navbar-hidden'); // 隱藏導覽列
-
-  const enterBtn = document.getElementById('enter-post');
-  enterBtn?.addEventListener('click', () => {
-    const cover = document.getElementById('post-cover');
-
-    // 封面淡出
-    cover.style.opacity = '0';
-    cover.style.pointerEvents = 'none';
-
-    setTimeout(() => {
-      cover.remove();
-
-      // 導覽列顯示
-      if (navbar) navbar.classList.add('active');
-
-      // 載入 post 資料
-      loadPostContent();
-    }, 600);
-  });
-});
-
-// 載入 post JSON
-function loadPostContent() {
-  const postId = getPostIdFromURL();
-  if (!postId) return;
-
-  fetch(`data/post_${postId}.json`)
-    .then(res => res.json())
-    .then(post => {
-      // 更新封面已經淡出，這裡只初始化幻燈片與文字
-      initGallery(post.images);
-      initTabs(post.tabs);
-    })
-    .catch(err => console.error('Failed to load post JSON', err));
 }
