@@ -1,11 +1,10 @@
 {
   "id": "st-alexander-nevsky-cathedral",
   "title": "St. Alexander Nevsky Cathedral",
+  "subtitle": "Sofia, Bulgaria",
   "country": "Bulgaria",
   "city": "Sofia",
-  "cover-image": "images/post/st-alexander-nevsky-cathedral-cover.jpg",
-  "cover-title": "St. Alexander Nevsky Cathedral",
-  "cover-subtitle": "Sofia, Bulgaria",
+  "image": "images/post/st-alexander-nevsky-cathedral-cover.jpg",
   "images": [
     "images/post/st-alexander-nevsky-cathedral-1.jpg",
     "images/post/st-alexander-nevsky-cathedral-2.jpg",
