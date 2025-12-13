@@ -24,10 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 設定封面
-      document.getElementById('cover-image').src = post.cover;
-      document.getElementById('cover-title').textContent = post.title;
-      document.getElementById('cover-subtitle').textContent = post.subtitle;
+document.getElementById('cover-image').src = post.cover;
+document.getElementById('cover-title').textContent = post.title;
+document.getElementById('cover-subtitle').textContent = post.subtitle;
 
+// 設定背景模糊
+const cover = document.querySelector('.post-cover');
+cover.style.setProperty('--cover-bg', url(${post.cover}));
+  
       // 幻燈片
       let index = 0;
       const galleryImg = document.getElementById('gallery-img');
