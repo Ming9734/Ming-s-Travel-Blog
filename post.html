@@ -2,26 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Post</title>
+  <title>Post Detail</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <!-- Fullscreen Cover -->
 <section id="post-cover" class="post-cover">
-  <img id="cover-image" src="images/sample-cover.jpg" alt="Cover Image">
-
+  <img id="cover-image" src="" alt="Cover Image">
   <div class="cover-overlay">
     <h1 id="cover-title">Post Title</h1>
     <p id="cover-subtitle">Location / Country</p>
-
-    <button id="enter-post" class="btn primary">
-      Enter Story
-    </button>
+    <button id="enter-post" class="btn primary">Enter Story</button>
   </div>
 </section>
 
-<!-- 導覽列（預設隱藏） -->
+<!-- 導覽列 -->
 <nav class="navbar navbar-hidden">
   <ul class="nav">
     <li><a href="index.html">Home</a></li>
@@ -35,11 +31,8 @@
 </nav>
 
 <!-- Post Content -->
-<section class="post-layout">
-  <!-- 左側幻燈片 -->
+<section class="post-layout" id="post-content" style="display:none;">
   <div class="post-gallery"></div>
-
-  <!-- 右側文字區 -->
   <div class="post-text">
     <div class="post-tabs"></div>
     <div class="post-tab-content-wrapper"></div>
