@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Post Detail</title>
-  <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<title>Post Detail</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -11,8 +11,8 @@
 <section id="post-cover" class="post-cover">
   <img id="cover-image" src="" alt="Cover Image">
   <div class="cover-overlay">
-    <h1 id="cover-title">Post Title</h1>
-    <p id="cover-subtitle">Location / Country</p>
+    <h1 id="cover-title"></h1>
+    <p id="cover-subtitle"></p>
     <button id="enter-post" class="btn primary">Enter Story</button>
   </div>
 </section>
@@ -31,13 +31,22 @@
 </nav>
 
 <!-- Post Content -->
-<section class="post-layout" id="post-content" style="display:none;">
-  <div class="post-gallery"></div>
-  <div class="post-text">
-    <div class="post-tabs"></div>
-    <div class="post-tab-content-wrapper"></div>
+<main class="post-layout" style="display:none;">
+  <!-- 幻燈片區 -->
+  <div class="post-gallery">
+    <div class="gallery-frame">
+      <img src="" id="gallery-img">
+      <button class="gallery-btn prev">‹</button>
+      <button class="gallery-btn next">›</button>
+    </div>
   </div>
-</section>
+
+  <!-- 文字區塊 -->
+  <div class="post-text">
+    <div class="post-tabs" id="post-tabs"></div>
+    <div id="post-tab-contents"></div>
+  </div>
+</main>
 
 <script src="js/post.js"></script>
 <script src="js/nav.js"></script>
