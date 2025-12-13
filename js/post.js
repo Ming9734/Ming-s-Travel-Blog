@@ -1,7 +1,8 @@
-// ----------------- 封面與 navbar -----------------
+// ------------------- 導覽列隱藏 -------------------
 const navbar = document.querySelector('.navbar');
 if (navbar) navbar.classList.add('navbar-hidden');
 
+// ------------------- 封面淡出 -------------------
 document.getElementById('enter-post')?.addEventListener('click', () => {
   const cover = document.getElementById('post-cover');
   cover.style.opacity = '0';
@@ -9,21 +10,28 @@ document.getElementById('enter-post')?.addEventListener('click', () => {
 
   setTimeout(() => {
     cover.remove();
-    if (navbar) navbar.classList.add('active'); // 顯示 navbar
-    initGallery(currentPost.images);
-    initTabs(currentPost.tabs);
+    if (navbar) navbar.classList.add('active');
   }, 600);
+
+  loadPostContent();
 });
 
-// ----------------- 幻燈片 -----------------
-let currentPost = {}; // 後續會用 fetch 讀取資料庫填入
+// ------------------- 載入 Post Detail -------------------
+function loadPostContent() {
+  fetch('data/post-detail.json')
+    .then(res => res.json())
+    .then(post => {
+      initGallery(post.images);
+      initTabs(post.tabs);
+    });
+}
 
+// ------------------- 幻燈片 -------------------
 function initGallery(images) {
   const gallery = document.querySelector('.post-gallery');
   if (!gallery || !images?.length) return;
 
   let index = 0;
-
   gallery.innerHTML = `
     <div class="gallery-frame">
       <img src="${images[0]}" id="gallery-img">
@@ -36,100 +44,44 @@ function initGallery(images) {
 
   const img = gallery.querySelector('#gallery-img');
 
-  function slideTo(newIndex, direction) {
-    const oldImg = img.cloneNode();
-    oldImg.src = img.src;
-    gallery.querySelector('.gallery-frame').appendChild(oldImg);
-
-    oldImg.classList.add(direction === 'next' ? 'slide-out-left' : 'slide-out-right');
-
-    img.src = images[newIndex];
-    img.classList.remove('slide-in-left', 'slide-in-right');
-
-    requestAnimationFrame(() => {
-      img.classList.add(direction === 'next' ? 'slide-in-right' : 'slide-in-left');
-    });
-
-    setTimeout(() => oldImg.remove(), 500);
-    index = newIndex;
-  }
-
   gallery.querySelector('.prev').onclick = () => {
-    const newIndex = (index - 1 + images.length) % images.length;
-    slideTo(newIndex, 'prev');
+    index = (index - 1 + images.length) % images.length;
+    img.src = images[index];
   };
 
   gallery.querySelector('.next').onclick = () => {
-    const newIndex = (index + 1) % images.length;
-    slideTo(newIndex, 'next');
+    index = (index + 1) % images.length;
+    img.src = images[index];
   };
 }
 
-// ----------------- 文字標籤 -----------------
+// ------------------- 文字標籤切換 -------------------
 function initTabs(tabs) {
-  const tabContainer = document.querySelector('.post-tabs');
-  const contentContainer = document.querySelector('.post-tab-content-container');
-  if (!tabContainer || !contentContainer) return;
+  const tabsContainer = document.querySelector('.post-tabs');
+  const contentsContainer = document.querySelector('.post-tab-contents');
 
-  tabContainer.innerHTML = '';
-  contentContainer.innerHTML = '';
+  if (!tabsContainer || !contentsContainer) return;
 
-  tabs.forEach((t, i) => {
+  tabs.forEach((tab, i) => {
     const btn = document.createElement('button');
     btn.className = 'tab';
-    btn.dataset.tab = `tab${i}`;
-    btn.textContent = t.title;
-    tabContainer.appendChild(btn);
+    btn.dataset.tab = `tab-${i}`;
+    btn.textContent = tab.title;
+    if (i === 0) btn.classList.add('active');
+    tabsContainer.appendChild(btn);
 
     const content = document.createElement('div');
     content.className = 'post-tab-content';
-    content.id = `tab${i}`;
-    content.innerHTML = t.content;
-    contentContainer.appendChild(content);
+    content.id = `tab-${i}`;
+    content.innerHTML = tab.content;
+    if (i === 0) content.classList.add('active');
+    contentsContainer.appendChild(content);
 
     btn.addEventListener('click', () => {
-      tabContainer.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-      contentContainer.querySelectorAll('.post-tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab, .post-tab-content')
+        .forEach(el => el.classList.remove('active'));
       btn.classList.add('active');
       content.classList.add('active');
     });
-
-    if (i === 0) {
-      btn.classList.add('active');
-      content.classList.add('active');
-    }
   });
-}
-
-// ----------------- 載入資料庫 -----------------
-const urlParams = new URLSearchParams(window.location.search);
-const postId = urlParams.get('id'); // 取得 URL 上的 id
-
-if (!postId) {
-  console.error('No post ID in URL');
-} else {
-  fetch(`data/post_${postId}.json`) // 根據 id 抓取對應 JSON
-    .then(r => r.json())
-    .then(data => {
-      currentPost = data;
-
-      document.getElementById('cover-image').src = data.cover;
-      document.getElementById('cover-title').textContent = data.title;
-      document.getElementById('cover-subtitle').textContent = data.subtitle;
-
-      // 建立幻燈片與文字區 DOM
-      const postLayout = document.createElement('div');
-      postLayout.className = 'post-layout';
-      postLayout.innerHTML = `
-        <div class="post-gallery"></div>
-        <div class="post-text">
-          <div class="post-tabs"></div>
-          <div class="post-tab-content-container"></div>
-        </div>
-      `;
-      document.body.appendChild(postLayout);
-    })
-    .catch(err => {
-      console.error('Failed to load post data:', err);
-    });
 }
