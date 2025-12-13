@@ -30,7 +30,7 @@ document.getElementById('cover-subtitle').textContent = post.subtitle;
 
 // 設定背景模糊
 const cover = document.querySelector('.post-cover');
-cover.style.setProperty('--cover-bg', url(${post.cover}));
+cover.style.setProperty('--cover-bg', `url(${post.cover})`);
   
       // 幻燈片
       let index = 0;
