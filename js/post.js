@@ -1,3 +1,4 @@
+
 // 一開始隱藏 navbar
 const navbar = document.querySelector('.navbar');
 if (navbar) navbar.classList.add('navbar-hidden');
