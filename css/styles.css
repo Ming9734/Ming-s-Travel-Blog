@@ -322,10 +322,7 @@ body {
   color: #4f46e5;
 }
 
-
-/* =========================
-   Post Fullscreen Cover
-========================= */
+/* ---------------- Post Fullscreen Cover ---------------- */
 .post-cover {
   position: fixed;
   inset: 0;
@@ -340,74 +337,45 @@ body {
   filter: brightness(0.85);
 }
 
-/* 霧化玻璃層 */
 .cover-overlay {
   position: absolute;
-  bottom: 30%;
+  bottom: 8%;
   left: 50%;
   transform: translateX(-50%);
   width: min(700px, 90%);
   padding: 2.5rem 3rem;
-
   background: linear-gradient(
     120deg,
     rgba(79,70,229,0.25),
     rgba(147,51,234,0.25)
   );
-
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
   border-radius: 24px;
   color: white;
   text-align: center;
-
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
 }
 
-.cover-overlay h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2.6rem;
-  font-weight: 700;
-}
+.cover-overlay h1 { margin:0 0 0.5rem; font-size:2.6rem; font-weight:700; }
+.cover-overlay p { margin:0 0 1.8rem; opacity:0.9; font-size:1.1rem; }
 
-.cover-overlay p {
-  margin: 0 0 1.8rem;
-  opacity: 0.9;
-  font-size: 1.1rem;
-}
-
-/* 封面按鈕 */
 #enter-post {
-  padding: 0.9rem 2.2rem;
-  border-radius: 999px;
-  border: none;
-  background: white;
-  color: #4f46e5;
-  font-weight: 600;
-  cursor: pointer;
+  padding:0.9rem 2.2rem;
+  border-radius:999px;
+  border:none;
+  background:white;
+  color:#4f46e5;
+  font-weight:600;
+  cursor:pointer;
   transition: transform 0.2s, background 0.3s;
 }
+#enter-post:hover { transform:scale(1.05); background:#f3f4f6; }
 
-#enter-post:hover {
-  transform: scale(1.05);
-  background: #f3f4f6;
-}
+/* ---------------- 導覽列 ---------------- */
+.navbar-hidden { opacity:0; pointer-events:none; transition:opacity 0.5s ease; }
+.navbar-hidden.active { opacity:1; pointer-events:auto; }
 
-/* 預設隱藏 navbar */
-.navbar-hidden {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-}
-
-/* 顯示時加上 active */
-.navbar-hidden.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ================= Post Layout ================= */
+/* ---------------- Post Layout ---------------- */
 .post-layout {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -417,35 +385,13 @@ body {
   padding: 0 2rem;
 }
 
-.post-gallery {
-  position: relative;
-  overflow: hidden;
-}
-
+.post-gallery { position: relative; }
 .post-gallery img {
   width: 100%;
   height: 70vh;
   object-fit: cover;
   border-radius: 16px;
-  transition: transform 0.5s ease, opacity 0.5s ease;
 }
-
-.post-gallery img.slide-out-left {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-
-.post-gallery img.slide-out-right {
-  transform: translateX(100%);
-  opacity: 0;
-}
-
-.post-gallery img.slide-in-left,
-.post-gallery img.slide-in-right {
-  transform: translateX(0);
-  opacity: 1;
-}
-
 .gallery-controls {
   position: absolute;
   bottom: 16px;
@@ -453,7 +399,6 @@ body {
   display: flex;
   gap: 10px;
 }
-
 .gallery-controls button {
   background: rgba(255,255,255,0.85);
   border: none;
@@ -483,7 +428,6 @@ body {
   padding: 0.4rem 0.8rem;
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  transition: color 0.3s, border-color 0.3s;
 }
 
 .post-tabs .tab.active {
@@ -494,21 +438,12 @@ body {
 .post-tab-content {
   display: none;
   line-height: 1.8;
-  opacity: 0;
-  transition: opacity 0.5s ease;
+}
+.post-tab-content.active { display: block; }
+
+/* ---------------- 響應式 ---------------- */
+@media (max-width:900px){
+  .post-layout { grid-template-columns:1fr; }
+  .post-gallery img { height:50vh; }
 }
 
-.post-tab-content.active {
-  display: block;
-  opacity: 1;
-}
-
-@media (max-width: 900px) {
-  .post-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .post-gallery img {
-    height: 50vh;
-  }
-}
