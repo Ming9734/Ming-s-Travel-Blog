@@ -4,16 +4,17 @@ if (navbar) navbar.classList.add('navbar-hidden');
 
 const postLayout = document.querySelector('.post-layout');
 
-// 從 URL 取得 post id
-const params = new URLSearchParams(window.location.search);
-const postId = params.get('id');
+// ----------------- 載入資料庫 -----------------
+const urlParams = new URLSearchParams(window.location.search);
+const postId = urlParams.get('id'); // 取得 URL 上的 id
 
-// 載入 post_id.json
-fetch(`data/post_id.json`)
-  .then(res => res.json())
-  .then(posts => {
-    const post = posts.find(p => p.id == postId);
-    if (!post) return;
+if (!postId) {
+  console.error('No post ID in URL');
+} else {
+  fetch(`data/post_${postId}.json`) // 根據 id 抓取對應 JSON
+    .then(r => r.json())
+    .then(data => {
+      currentPost = data;
 
     // 設定封面
     document.getElementById('cover-image').src = post.cover;
