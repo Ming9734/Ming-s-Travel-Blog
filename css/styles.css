@@ -392,15 +392,15 @@ body {
   transform: scale(1.05);
   background: #f3f4f6;
 }
-/* 導覽列：進場前隱藏 */
-.nav-hidden {
+/* 預設隱藏 */
+.navbar-hidden {
   opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
+  pointer-events: none; /* 點擊無效 */
+  transition: opacity 0.5s ease;
 }
 
-/* 導覽列：顯示動畫 */
-.navbar {
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* 顯示時加上 active */
+.navbar-hidden.active {
+  opacity: 1;
+  pointer-events: auto;
 }
-
