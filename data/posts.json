@@ -1,6 +1,6 @@
 [
   {
-    "id": "St. Alexander Nevsky Cathedral",
+    "id": "st-alexander-nevsky-cathedral",
     "title": "St. Alexander Nevsky Cathedral",
     "country": "Bulgaria",
     "city": "Sofia",
@@ -12,7 +12,7 @@
     "icon": "images/markers/BG.png"
   },
   {
-    "id": "Cité de Carcassonne",
+    "id": "cité-de-carcassonne",
     "title": "Cité de Carcassonne",
     "country": "France",
     "city": "Carcassonne",
@@ -24,7 +24,7 @@
     "icon": "images/markers/FR.png"
   },
    {
-    "id": "Mount Etna",
+    "id": "mount-etna",
     "title": "Mount Etna",
     "country": "Italy",
     "city": "Catania",
@@ -36,7 +36,7 @@
     "icon": "images/markers/IT.png"
   },
   {
-    "id": "Three Towers of San Marino",
+    "id": "three-towers-of-san-marino",
     "title": "Three Towers of San Marino",
     "country": "San Marino",
     "city": "San Marino City",
