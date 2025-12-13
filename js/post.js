@@ -14,7 +14,7 @@ const postLayout = document.getElementById('post-content');
 const enterBtn = document.getElementById('enter-post');
 
 // 讀取單篇文章資料
-fetch(`data/${postId}.json`)
+fetch(`data/post_${postId}.json`)
   .then(r => r.json())
   .then(postData => {
 
