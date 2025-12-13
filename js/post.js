@@ -86,3 +86,4 @@ document.getElementById('enter-post')?.addEventListener('click', () => {
     setTimeout(() => postLayout.style.opacity = '1', 50);
   }, 600);
 });
+
