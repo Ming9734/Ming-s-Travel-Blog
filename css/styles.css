@@ -343,7 +343,7 @@ body {
 /* 霧化玻璃層 */
 .cover-overlay {
   position: absolute;
-  bottom: 50%;
+  bottom: 30%;
   left: 50%;
   transform: translateX(-50%);
   width: min(700px, 90%);
