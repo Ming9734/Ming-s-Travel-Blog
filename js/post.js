@@ -1,37 +1,20 @@
-// ------------------- 導覽列隱藏 -------------------
-const navbar = document.querySelector('.navbar');
-if (navbar) navbar.classList.add('navbar-hidden');
+// ----------------------------
+// post.js
+// ----------------------------
 
-// ------------------- 封面淡出 -------------------
-document.getElementById('enter-post')?.addEventListener('click', () => {
-  const cover = document.getElementById('post-cover');
-  cover.style.opacity = '0';
-  cover.style.pointerEvents = 'none';
-
-  setTimeout(() => {
-    cover.remove();
-    if (navbar) navbar.classList.add('active');
-  }, 600);
-
-  loadPostContent();
-});
-
-// ------------------- 載入 Post Detail -------------------
-function loadPostContent() {
-  fetch('data/post-detail.json')
-    .then(res => res.json())
-    .then(post => {
-      initGallery(post.images);
-      initTabs(post.tabs);
-    });
+// 取得 URL 中的 post id
+function getPostIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('id'); // post.html?id=123 → 123
 }
 
-// ------------------- 幻燈片 -------------------
+// 初始化幻燈片
 function initGallery(images) {
   const gallery = document.querySelector('.post-gallery');
   if (!gallery || !images?.length) return;
 
   let index = 0;
+
   gallery.innerHTML = `
     <div class="gallery-frame">
       <img src="${images[0]}" id="gallery-img">
@@ -43,45 +26,85 @@ function initGallery(images) {
   `;
 
   const img = gallery.querySelector('#gallery-img');
-
   gallery.querySelector('.prev').onclick = () => {
     index = (index - 1 + images.length) % images.length;
     img.src = images[index];
   };
-
   gallery.querySelector('.next').onclick = () => {
     index = (index + 1) % images.length;
     img.src = images[index];
   };
 }
 
-// ------------------- 文字標籤切換 -------------------
+// 初始化文字分頁
 function initTabs(tabs) {
   const tabsContainer = document.querySelector('.post-tabs');
-  const contentsContainer = document.querySelector('.post-tab-contents');
+  const contentContainer = document.querySelector('.post-tab-content-wrapper');
+  if (!tabsContainer || !contentContainer || !tabs?.length) return;
 
-  if (!tabsContainer || !contentsContainer) return;
+  tabsContainer.innerHTML = '';
+  contentContainer.innerHTML = '';
 
-  tabs.forEach((tab, i) => {
+  tabs.forEach((tab, idx) => {
+    // 建立 tab 按鈕
     const btn = document.createElement('button');
-    btn.className = 'tab';
-    btn.dataset.tab = `tab-${i}`;
+    btn.className = 'tab' + (idx === 0 ? ' active' : '');
     btn.textContent = tab.title;
-    if (i === 0) btn.classList.add('active');
+    btn.dataset.tab = `tab-${idx}`;
     tabsContainer.appendChild(btn);
 
+    // 建立 tab 內容
     const content = document.createElement('div');
-    content.className = 'post-tab-content';
-    content.id = `tab-${i}`;
+    content.id = `tab-${idx}`;
+    content.className = 'post-tab-content' + (idx === 0 ? ' active' : '');
     content.innerHTML = tab.content;
-    if (i === 0) content.classList.add('active');
-    contentsContainer.appendChild(content);
+    contentContainer.appendChild(content);
 
+    // 點擊切換
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab, .post-tab-content')
-        .forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab, .post-tab-content').forEach(el => el.classList.remove('active'));
       btn.classList.add('active');
       content.classList.add('active');
     });
   });
+}
+
+// 顯示封面與淡出後載入內容
+document.addEventListener('DOMContentLoaded', () => {
+  const navbar = document.querySelector('.navbar');
+  if (navbar) navbar.classList.add('navbar-hidden'); // 隱藏導覽列
+
+  const enterBtn = document.getElementById('enter-post');
+  enterBtn?.addEventListener('click', () => {
+    const cover = document.getElementById('post-cover');
+
+    // 封面淡出
+    cover.style.opacity = '0';
+    cover.style.pointerEvents = 'none';
+
+    setTimeout(() => {
+      cover.remove();
+
+      // 導覽列顯示
+      if (navbar) navbar.classList.add('active');
+
+      // 載入 post 資料
+      loadPostContent();
+    }, 600);
+  });
+});
+
+// 載入 post JSON
+function loadPostContent() {
+  const postId = getPostIdFromURL();
+  if (!postId) return;
+
+  fetch(`data/post_${postId}.json`)
+    .then(res => res.json())
+    .then(post => {
+      // 更新封面已經淡出，這裡只初始化幻燈片與文字
+      initGallery(post.images);
+      initTabs(post.tabs);
+    })
+    .catch(err => console.error('Failed to load post JSON', err));
 }
