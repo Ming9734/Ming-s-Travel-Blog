@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Post</title>
+  <title>Post Detail</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <!-- Fullscreen Cover -->
 <section id="post-cover" class="post-cover">
-  <img id="cover-image" src="" alt="Cover Image">
+  <img id="cover-image" src="images/sample-cover.jpg" alt="Cover Image">
 
   <div class="cover-overlay">
     <h1 id="cover-title">Post Title</h1>
@@ -34,30 +34,23 @@
   </ul>
 </nav>
 
-<!-- 文章主體容器，初始隱藏 -->
-<div class="post-layout">
-  <!-- 左側幻燈片 -->
-  <div class="post-gallery">
-    <div class="gallery-frame">
-      <img id="gallery-img" src="" alt="Gallery">
-      <button class="gallery-btn prev">‹</button>
-      <button class="gallery-btn next">›</button>
-    </div>
-  </div>
+<!-- Post Content -->
+<div class="post-container post-layout">
+  <!-- 左半部幻燈片 -->
+  <div class="post-gallery"></div>
 
-  <!-- 右側文字區 -->
+  <!-- 右半部文字區 -->
   <div class="post-text">
-    <div class="tab-buttons">
-      <button class="tab active" data-tab="content1">Overview</button>
-      <button class="tab" data-tab="content2">Tips</button>
-      <button class="tab" data-tab="content3">History</button>
+    <div class="post-tabs">
+      <!-- 動態生成標籤 -->
     </div>
-    <div id="content1" class="tab-content active"></div>
-    <div id="content2" class="tab-content"></div>
-    <div id="content3" class="tab-content"></div>
+    <div class="post-tab-contents">
+      <!-- 動態生成文字內容 -->
+    </div>
   </div>
 </div>
-<script src="js/nav.js"></script>
+
 <script src="js/post.js"></script>
+<script src="js/nav.js"></script>
 </body>
 </html>
