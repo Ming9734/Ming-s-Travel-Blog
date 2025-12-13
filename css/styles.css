@@ -321,6 +321,8 @@ body {
   background: white;
   color: #4f46e5;
 }
+
+
 /* =========================
    Post Fullscreen Cover
 ========================= */
@@ -346,16 +348,20 @@ body {
   transform: translateX(-50%);
   width: min(700px, 90%);
   padding: 2.5rem 3rem;
+
   background: linear-gradient(
     120deg,
-    rgba(79,70,229,0.35),
-    rgba(147,51,234,0.35)
+    rgba(79,70,229,0.25),
+    rgba(147,51,234,0.25)
   );
+
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+
   border-radius: 24px;
   color: white;
   text-align: center;
+
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
 }
 
@@ -388,13 +394,14 @@ body {
   background: #f3f4f6;
 }
 
-/* ================= Navbar 顯示控制 ================= */
+/* 預設隱藏 navbar */
 .navbar-hidden {
   opacity: 0;
-  pointer-events: none; /* 點擊無效 */
+  pointer-events: none;
   transition: opacity 0.5s ease;
 }
 
+/* 顯示時加上 active */
 .navbar-hidden.active {
   opacity: 1;
   pointer-events: auto;
@@ -408,14 +415,11 @@ body {
   max-width: 1200px;
   margin: 6rem auto;
   padding: 0 2rem;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s, transform 0.8s;
 }
 
-/* ---------------- 左側幻燈片 ---------------- */
 .post-gallery {
   position: relative;
+  overflow: hidden;
 }
 
 .post-gallery img {
@@ -423,7 +427,23 @@ body {
   height: 70vh;
   object-fit: cover;
   border-radius: 16px;
-  transition: opacity 0.4s ease-in-out;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.post-gallery img.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.post-gallery img.slide-out-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.post-gallery img.slide-in-left,
+.post-gallery img.slide-in-right {
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .gallery-controls {
@@ -442,14 +462,8 @@ body {
   height: 44px;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: background 0.3s;
 }
 
-.gallery-controls button:hover {
-  background: rgba(255,255,255,1);
-}
-
-/* ---------------- 右側文字區 ---------------- */
 .post-text {
   background: white;
   border-radius: 16px;
@@ -480,17 +494,25 @@ body {
 .post-tab-content {
   display: none;
   line-height: 1.8;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 
 .post-tab-content.active {
   display: block;
+  opacity: 1;
 }
 
-/* ================= 响应式設計 ================= */
 @media (max-width: 900px) {
   .post-layout {
     grid-template-columns: 1fr;
   }
+
+  .post-gallery img {
+    height: 50vh;
+  }
+}
+
 
   .post-gallery img {
     height: 50vh;
