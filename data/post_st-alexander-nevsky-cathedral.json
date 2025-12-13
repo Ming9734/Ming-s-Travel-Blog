@@ -11,14 +11,14 @@
     "images/post/st-alexander-nevsky-cathedral-3.jpg",
     "images/post/st-alexander-nevsky-cathedral-4.jpg"
   ],
-  "contents": [
+  "texts": [
     {
-      "title": "History",
-      "html": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
+      "label": "History",
+      "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
     },
     {
-      "title": "Experience",
-      "html": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
+      "label": "Experience",
+      "content": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
     }
   ]
 }
