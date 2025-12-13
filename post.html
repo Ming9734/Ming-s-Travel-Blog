@@ -34,21 +34,29 @@
   </ul>
 </nav>
 
-<!-- 文章主體 -->
-<div class="post-container" style="display:none;">
+<!-- 文章主體容器，初始隱藏 -->
+<div class="post-container">
+  <!-- 左側幻燈片 -->
   <div class="post-gallery">
-    <!-- 幻燈片會由 JS 動態生成 -->
+    <div class="gallery-frame">
+      <img id="gallery-img" src="" alt="Gallery">
+      <button class="gallery-btn prev">‹</button>
+      <button class="gallery-btn next">›</button>
+    </div>
   </div>
-  <div class="post-content">
-    <div class="tabs">
-      <!-- Tab 按鈕 -->
+
+  <!-- 右側文字區 -->
+  <div class="post-text">
+    <div class="tab-buttons">
+      <button class="tab active" data-tab="content1">Overview</button>
+      <button class="tab" data-tab="content2">Tips</button>
+      <button class="tab" data-tab="content3">History</button>
     </div>
-    <div class="tab-contents">
-      <!-- Tab 內容 -->
-    </div>
+    <div id="content1" class="tab-content active"></div>
+    <div id="content2" class="tab-content"></div>
+    <div id="content3" class="tab-content"></div>
   </div>
 </div>
-
 <script src="js/nav.js"></script>
 <script src="js/post.js"></script>
 </body>
