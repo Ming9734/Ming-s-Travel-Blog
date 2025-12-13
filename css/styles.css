@@ -322,7 +322,7 @@ body {
   color: #4f46e5;
 }
 
-/* ---------------- Post Fullscreen Cover ---------------- */
+/* ----------------- Post Cover ----------------- */
 .post-cover {
   position: fixed;
   inset: 0;
@@ -346,36 +346,58 @@ body {
   padding: 2.5rem 3rem;
   background: linear-gradient(
     120deg,
-    rgba(79,70,229,0.25),
-    rgba(147,51,234,0.25)
+    rgba(79,70,229,0.35),
+    rgba(147,51,234,0.35)
   );
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: 24px;
   color: white;
   text-align: center;
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
 }
 
-.cover-overlay h1 { margin:0 0 0.5rem; font-size:2.6rem; font-weight:700; }
-.cover-overlay p { margin:0 0 1.8rem; opacity:0.9; font-size:1.1rem; }
+.cover-overlay h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+.cover-overlay p {
+  margin: 0 0 1.8rem;
+  opacity: 0.9;
+  font-size: 1.1rem;
+}
 
 #enter-post {
-  padding:0.9rem 2.2rem;
-  border-radius:999px;
-  border:none;
-  background:white;
-  color:#4f46e5;
-  font-weight:600;
-  cursor:pointer;
+  padding: 0.9rem 2.2rem;
+  border-radius: 999px;
+  border: none;
+  background: white;
+  color: #4f46e5;
+  font-weight: 600;
+  cursor: pointer;
   transition: transform 0.2s, background 0.3s;
 }
-#enter-post:hover { transform:scale(1.05); background:#f3f4f6; }
 
-/* ---------------- 導覽列 ---------------- */
-.navbar-hidden { opacity:0; pointer-events:none; transition:opacity 0.5s ease; }
-.navbar-hidden.active { opacity:1; pointer-events:auto; }
+#enter-post:hover {
+  transform: scale(1.05);
+  background: #f3f4f6;
+}
 
-/* ---------------- Post Layout ---------------- */
+/* ----------------- Navbar 隱藏/顯示 ----------------- */
+.navbar-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.navbar-hidden.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ----------------- Post Layout ----------------- */
 .post-layout {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -385,13 +407,13 @@ body {
   padding: 0 2rem;
 }
 
-.post-gallery { position: relative; }
 .post-gallery img {
   width: 100%;
   height: 70vh;
   object-fit: cover;
   border-radius: 16px;
 }
+
 .gallery-controls {
   position: absolute;
   bottom: 16px;
@@ -399,6 +421,7 @@ body {
   display: flex;
   gap: 10px;
 }
+
 .gallery-controls button {
   background: rgba(255,255,255,0.85);
   border: none;
@@ -439,11 +462,18 @@ body {
   display: none;
   line-height: 1.8;
 }
-.post-tab-content.active { display: block; }
 
-/* ---------------- 響應式 ---------------- */
-@media (max-width:900px){
-  .post-layout { grid-template-columns:1fr; }
-  .post-gallery img { height:50vh; }
+.post-tab-content.active {
+  display: block;
 }
 
+/* Responsive */
+@media (max-width: 900px) {
+  .post-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .post-gallery img {
+    height: 50vh;
+  }
+}
