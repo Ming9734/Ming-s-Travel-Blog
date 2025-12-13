@@ -17,6 +17,7 @@ document.getElementById('enter-post')?.addEventListener('click', () => {
 
 // ----------------- 幻燈片 -----------------
 let currentPost = {}; // 後續會用 fetch 讀取資料庫填入
+
 function initGallery(images) {
   const gallery = document.querySelector('.post-gallery');
   if (!gallery || !images?.length) return;
@@ -93,7 +94,6 @@ function initTabs(tabs) {
       content.classList.add('active');
     });
 
-    // 第一個預設 active
     if (i === 0) {
       btn.classList.add('active');
       content.classList.add('active');
@@ -102,24 +102,34 @@ function initTabs(tabs) {
 }
 
 // ----------------- 載入資料庫 -----------------
-fetch('data/post.json') // 每篇文章單獨的資料
-  .then(r => r.json())
-  .then(data => {
-    currentPost = data;
+const urlParams = new URLSearchParams(window.location.search);
+const postId = urlParams.get('id'); // 取得 URL 上的 id
 
-    document.getElementById('cover-image').src = data.cover;
-    document.getElementById('cover-title').textContent = data.title;
-    document.getElementById('cover-subtitle').textContent = data.subtitle;
+if (!postId) {
+  console.error('No post ID in URL');
+} else {
+  fetch(`data/post_${postId}.json`) // 根據 id 抓取對應 JSON
+    .then(r => r.json())
+    .then(data => {
+      currentPost = data;
 
-    // 建立幻燈片與文字區 DOM
-    const postLayout = document.createElement('div');
-    postLayout.className = 'post-layout';
-    postLayout.innerHTML = `
-      <div class="post-gallery"></div>
-      <div class="post-text">
-        <div class="post-tabs"></div>
-        <div class="post-tab-content-container"></div>
-      </div>
-    `;
-    document.body.appendChild(postLayout);
-  });
+      document.getElementById('cover-image').src = data.cover;
+      document.getElementById('cover-title').textContent = data.title;
+      document.getElementById('cover-subtitle').textContent = data.subtitle;
+
+      // 建立幻燈片與文字區 DOM
+      const postLayout = document.createElement('div');
+      postLayout.className = 'post-layout';
+      postLayout.innerHTML = `
+        <div class="post-gallery"></div>
+        <div class="post-text">
+          <div class="post-tabs"></div>
+          <div class="post-tab-content-container"></div>
+        </div>
+      `;
+      document.body.appendChild(postLayout);
+    })
+    .catch(err => {
+      console.error('Failed to load post data:', err);
+    });
+}
