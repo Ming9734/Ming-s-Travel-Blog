@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 設定封面
-document.getElementById('cover-image').src = post.cover;
+document.getElementById('cover-cover').src = post.cover;
 document.getElementById('cover-title').textContent = post.title;
 document.getElementById('cover-subtitle').textContent = post.subtitle;
 
