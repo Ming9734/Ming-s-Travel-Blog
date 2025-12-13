@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Post Detail</title>
+  <title>Post</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -21,7 +21,7 @@
   </div>
 </section>
 
-<!-- 導覽列 -->
+<!-- 導覽列（預設隱藏） -->
 <nav class="navbar navbar-hidden">
   <ul class="nav">
     <li><a href="index.html">Home</a></li>
@@ -35,20 +35,16 @@
 </nav>
 
 <!-- Post Content -->
-<div class="post-container post-layout">
-  <!-- 左半部幻燈片 -->
+<section class="post-layout">
+  <!-- 左側幻燈片 -->
   <div class="post-gallery"></div>
 
-  <!-- 右半部文字區 -->
+  <!-- 右側文字區 -->
   <div class="post-text">
-    <div class="post-tabs">
-      <!-- 動態生成標籤 -->
-    </div>
-    <div class="post-tab-contents">
-      <!-- 動態生成文字內容 -->
-    </div>
+    <div class="post-tabs"></div>
+    <div class="post-tab-content-wrapper"></div>
   </div>
-</div>
+</section>
 
 <script src="js/post.js"></script>
 <script src="js/nav.js"></script>
