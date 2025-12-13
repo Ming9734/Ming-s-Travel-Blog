@@ -1,120 +1,86 @@
-// 取得文章 ID（例如 URL query: ?id=post1）
-const urlParams = new URLSearchParams(window.location.search);
-const postId = urlParams.get('id') || 'post1';
-
-// 導覽列初始隱藏
+// 一開始隱藏 navbar
 const navbar = document.querySelector('.navbar');
 if (navbar) navbar.classList.add('navbar-hidden');
 
-const postCover = document.getElementById('post-cover');
-const coverImage = document.getElementById('cover-image');
-const coverTitle = document.getElementById('cover-title');
-const coverSubtitle = document.getElementById('cover-subtitle');
-const postLayout = document.getElementById('post-content');
-const enterBtn = document.getElementById('enter-post');
+const postLayout = document.querySelector('.post-layout');
 
-// 讀取單篇文章資料
-fetch(`data/post_${postId}.json`)
-  .then(r => r.json())
-  .then(postData => {
+// 從 URL 取得 post id
+const params = new URLSearchParams(window.location.search);
+const postId = params.get('id');
+
+// 載入 post_id.json
+fetch(`data/post_id.json`)
+  .then(res => res.json())
+  .then(posts => {
+    const post = posts.find(p => p.id == postId);
+    if (!post) return;
 
     // 設定封面
-    coverImage.src = postData.cover;
-    coverTitle.textContent = postData.title;
-    coverSubtitle.textContent = postData.location;
+    document.getElementById('cover-image').src = post.cover;
+    document.getElementById('cover-title').textContent = post.title;
+    document.getElementById('cover-subtitle').textContent = post.subtitle;
 
-    // 點擊 Enter Story
-    enterBtn.addEventListener('click', () => {
+    // 幻燈片
+    let index = 0;
+    const galleryImg = document.getElementById('gallery-img');
+    galleryImg.src = post.images[index];
 
-      // 封面淡出
-      postCover.style.opacity = '0';
-      postCover.style.pointerEvents = 'none';
-      postCover.querySelector('.cover-overlay').style.opacity = '0';
+    document.querySelector('.prev').onclick = () => {
+      index = (index - 1 + post.images.length) % post.images.length;
+      galleryImg.src = post.images[index];
+    };
+    document.querySelector('.next').onclick = () => {
+      index = (index + 1) % post.images.length;
+      galleryImg.src = post.images[index];
+    };
 
-      setTimeout(() => {
-        postCover.remove();
+    // 文字區塊 tabs
+    const tabsContainer = document.getElementById('post-tabs');
+    const contentsContainer = document.getElementById('post-tab-contents');
 
-        // 導覽列淡入
-        if (navbar) navbar.classList.add('active');
+    post.texts.forEach((txt, i) => {
+      const tab = document.createElement('button');
+      tab.className = 'tab';
+      tab.textContent = txt.label;
+      tab.dataset.index = i;
+      if (i===0) tab.classList.add('active');
+      tabsContainer.appendChild(tab);
 
-        // 顯示 Post Layout
-        postLayout.style.display = 'grid';
-
-        // 初始化幻燈片 & 文字 Tab
-        initGallery(postData.images);
-        initTabs(postData.tabs);
-
-      }, 600);
+      const div = document.createElement('div');
+      div.className = 'post-tab-content';
+      if (i===0) div.classList.add('active');
+      div.innerHTML = txt.content;
+      contentsContainer.appendChild(div);
     });
 
-  })
-  .catch(err => console.error('Failed to load post data:', err));
-
-// 幻燈片初始化
-function initGallery(images) {
-  const gallery = document.querySelector('.post-gallery');
-  if (!gallery || !images?.length) return;
-
-  let index = 0;
-
-  gallery.innerHTML = `
-    <div class="gallery-frame">
-      <img src="${images[0]}" id="gallery-img">
-      <div class="gallery-controls">
-        <button class="prev">‹</button>
-        <button class="next">›</button>
-      </div>
-    </div>
-  `;
-
-  const img = gallery.querySelector('#gallery-img');
-
-  function showImage(newIndex) {
-    img.classList.add('fade-out');
-    setTimeout(() => {
-      index = newIndex;
-      img.src = images[index];
-      img.classList.remove('fade-out');
-    }, 400);
-  }
-
-  gallery.querySelector('.prev').onclick = () => {
-    showImage((index - 1 + images.length) % images.length);
-  };
-  gallery.querySelector('.next').onclick = () => {
-    showImage((index + 1) % images.length);
-  };
-}
-
-// Tab 初始化
-function initTabs(tabs) {
-  const tabsContainer = document.querySelector('.post-tabs');
-  const contentWrapper = document.querySelector('.post-tab-content-wrapper');
-
-  if (!tabsContainer || !contentWrapper || !tabs?.length) return;
-
-  tabsContainer.innerHTML = '';
-  contentWrapper.innerHTML = '';
-
-  tabs.forEach((tab, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'tab';
-    btn.textContent = tab.title;
-    btn.dataset.tab = `tab-${i}`;
-    if (i === 0) btn.classList.add('active');
-    tabsContainer.appendChild(btn);
-
-    const contentDiv = document.createElement('div');
-    contentDiv.id = `tab-${i}`;
-    contentDiv.className = 'post-tab-content';
-    if (i === 0) contentDiv.classList.add('active');
-    contentDiv.textContent = tab.content;
-    contentWrapper.appendChild(contentDiv);
-
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab, .post-tab-content').forEach(el => el.classList.remove('active'));
-      btn.classList.add('active');
-      contentDiv.classList.add('active');
+    // tab 切換事件
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab, .post-tab-content')
+          .forEach(el => el.classList.remove('active'));
+        btn.classList.add('active');
+        contentsContainer.children[btn.dataset.index].classList.add('active');
+      });
     });
   });
-}
+
+// 點擊 Enter Story
+document.getElementById('enter-post')?.addEventListener('click', () => {
+  const cover = document.getElementById('post-cover');
+
+  // 封面淡出
+  cover.style.opacity = '0';
+  cover.style.pointerEvents = 'none';
+
+  setTimeout(() => {
+    cover.remove();
+
+    // 導覽列顯示
+    if (navbar) navbar.classList.add('active');
+
+    // 顯示正文
+    postLayout.style.display = 'grid';
+    postLayout.style.opacity = '0';
+    setTimeout(() => postLayout.style.opacity = '1', 50);
+  }, 600);
+});
