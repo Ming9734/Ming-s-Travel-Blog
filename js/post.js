@@ -45,3 +45,12 @@ function initGallery(images) {
     img.src = images[index];
   };
 }
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab, .tab-content')
+      .forEach(el => el.classList.remove('active'));
+
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
