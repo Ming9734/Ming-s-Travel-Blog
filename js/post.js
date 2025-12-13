@@ -1,12 +1,18 @@
-const id = new URLSearchParams(window.location.search).get('id');
+// 一開始隱藏 navbar
+const navbar = document.querySelector('.navbar');
+if (navbar) {
+  navbar.style.display = 'none';
+}
 
-fetch('data/posts.json')
-  .then(r => r.json())
-  .then(posts => {
-    const post = posts.find(p => p.id === id);
-    document.getElementById('postContent').innerHTML = `
-      <h1>${post.title}</h1>
-      <img src="${post.image}" style="width:100%; border-radius:12px;">
-      ${post.content}
-    `;
-  });
+// 點擊 Enter Story
+document.getElementById('enter-post')?.addEventListener('click', () => {
+  const cover = document.getElementById('post-cover');
+
+  cover.style.opacity = '0';
+  cover.style.pointerEvents = 'none';
+
+  setTimeout(() => {
+    cover.remove();
+    if (navbar) navbar.style.display = 'flex';
+  }, 600);
+});
