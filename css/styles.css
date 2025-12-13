@@ -404,3 +404,83 @@ body {
   opacity: 1;
   pointer-events: auto;
 }
+/* ================= Post Layout ================= */
+.post-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 6rem auto;
+  padding: 0 2rem;
+}
+.post-gallery {
+  position: relative;
+}
+
+.post-gallery img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.gallery-controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.gallery-controls button {
+  background: rgba(255,255,255,0.85);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.post-text {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+}
+
+.post-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.post-tabs .tab {
+  background: none;
+  border: none;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.post-tabs .tab.active {
+  border-color: #4f46e5;
+  color: #4f46e5;
+}
+
+.post-tab-content {
+  display: none;
+  line-height: 1.8;
+}
+
+.post-tab-content.active {
+  display: block;
+}
+@media (max-width: 900px) {
+  .post-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .post-gallery img {
+    height: 50vh;
+  }
+}
