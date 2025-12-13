@@ -33,7 +33,39 @@
   </ul>
 </nav>
 
-<article class="post" id="postContent"></article>
+<article class="post" id="postContent">
+
+  <div class="post-layout">
+
+    <!-- 📸 左側：照片集 -->
+    <section class="post-gallery">
+      <img id="gallery-image" src="" alt="Gallery Image">
+
+      <div class="gallery-controls">
+        <button id="prev-photo">‹</button>
+        <button id="next-photo">›</button>
+      </div>
+    </section>
+
+    <!-- 📖 右側：文字內容 -->
+    <section class="post-text">
+
+      <div class="post-tabs">
+        <button class="tab active" data-tab="story">Story</button>
+        <button class="tab" data-tab="tips">Notes</button>
+        <button class="tab" data-tab="route">Route</button>
+      </div>
+
+      <div class="post-tab-content active" id="tab-story"></div>
+      <div class="post-tab-content" id="tab-tips"></div>
+      <div class="post-tab-content" id="tab-route"></div>
+
+    </section>
+
+  </div>
+
+</article>
+
 
 <script src="js/post.js"></script>
 <script src="js/nav.js"></script>
