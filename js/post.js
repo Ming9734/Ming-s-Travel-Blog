@@ -30,7 +30,14 @@ coverImg.src = post.cover;
 // 背景模糊圖片（關鍵）
 const coverBg = document.querySelector('.cover-bg');
 coverBg.style.backgroundImage = `url("${post.cover}")`;
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.querySelector('.cover-overlay');
 
+  // 6 秒後才顯示
+  setTimeout(() => {
+    overlay.classList.add('show');
+  }, 6000);
+});
 // 文字
 document.getElementById('cover-title').textContent = post.title;
 document.getElementById('cover-subtitle').textContent = post.subtitle;
