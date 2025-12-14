@@ -1,61 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  /* ---------------- 基本元素 ---------------- */
   const navbar = document.querySelector('.navbar');
-  const postLayout = document.querySelector('.post-layout');
-  const overlay = document.querySelector('.cover-overlay');
-
   if (navbar) navbar.classList.add('navbar-hidden');
-  if (postLayout) postLayout.style.display = 'none';
 
-  /* ---------------- 讀取 URL id ---------------- */
+  const postLayout = document.querySelector('.post-layout');
+
   const urlParams = new URLSearchParams(window.location.search);
   const postId = urlParams.get('id');
-
   if (!postId) {
     console.error('❌ No post ID in URL');
     return;
   }
 
-  /* ---------------- 載入 JSON ---------------- */
-  fetch(data/post_${postId}.json)
+  fetch(`data/post_${postId}.json`)
     .then(r => r.json())
     .then(post => {
+      if (!post) return console.error('❌ No matching post');
 
-      /* ---------- 封面圖片 ---------- */
+      // 封面前景圖
       const coverImg = document.getElementById('cover-image');
-      const coverBg  = document.querySelector('.cover-bg');
+      if (coverImg) coverImg.src = post.cover;
 
-      coverImg.src = post.cover;
-      coverBg.style.backgroundImage = url("${post.cover}");
+      // 背景模糊圖
+      const coverBg = document.querySelector('.cover-bg');
+      if (coverBg) coverBg.style.backgroundImage = `url("${post.cover}")`;
 
+      // 文字
       document.getElementById('cover-title').textContent = post.title;
       document.getElementById('cover-subtitle').textContent = post.subtitle;
 
-      /* ---------- 延遲顯示 overlay ---------- */
+      // 延遲浮現 overlay
+      const overlay = document.querySelector('.cover-overlay');
       if (overlay) {
-        overlay.classList.remove('is-visible');
-        setTimeout(() => {
-          overlay.classList.add('is-visible');
-        }, 6000); // 6 秒
+        overlay.classList.remove('is-visible'); // 一開始隱藏
+        setTimeout(() => overlay.classList.add('is-visible'), 6000); // 6秒後浮現
       }
 
-      /* ---------- 幻燈片 ---------- */
+      // 幻燈片
       let index = 0;
       const galleryImg = document.getElementById('gallery-img');
-      galleryImg.src = post.images[0];
+      if (galleryImg && post.images.length) galleryImg.src = post.images[index];
 
-      document.querySelector('.prev').onclick = () => {
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+
+      if (prevBtn) prevBtn.onclick = () => {
         index = (index - 1 + post.images.length) % post.images.length;
         galleryImg.src = post.images[index];
       };
-
-      document.querySelector('.next').onclick = () => {
+      if (nextBtn) nextBtn.onclick = () => {
         index = (index + 1) % post.images.length;
         galleryImg.src = post.images[index];
       };
 
-      /* ---------- 文字 tabs ---------- */
+      // 文字區塊 tabs
       const tabsContainer = document.getElementById('post-tabs');
       const contentsContainer = document.getElementById('post-tab-contents');
 
@@ -74,37 +71,32 @@ document.addEventListener('DOMContentLoaded', () => {
         contentsContainer.appendChild(div);
       });
 
-      tabsContainer.addEventListener('click', e => {
-        if (!e.target.classList.contains('tab')) return;
-
-        document.querySelectorAll('.tab, .post-tab-content')
-          .forEach(el => el.classList.remove('active'));
-
-        e.target.classList.add('active');
-        contentsContainer.children[e.target.dataset.index]
-          .classList.add('active');
+      // tab 切換事件
+      document.querySelectorAll('.tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab, .post-tab-content')
+            .forEach(el => el.classList.remove('active'));
+          btn.classList.add('active');
+          contentsContainer.children[btn.dataset.index].classList.add('active');
+        });
       });
-
     })
-    .catch(err => console.error('❌ JSON error:', err));
+    .catch(err => console.error('❌ JSON 載入錯誤:', err));
 
-  /* ---------------- Enter Story ---------------- */
+  // Enter Story
   document.getElementById('enter-post')?.addEventListener('click', () => {
     const cover = document.getElementById('post-cover');
-
     cover.style.opacity = '0';
     cover.style.pointerEvents = 'none';
 
     setTimeout(() => {
       cover.remove();
-      navbar?.classList.add('active');
+
+      if (navbar) navbar.classList.add('active');
 
       postLayout.style.display = 'grid';
       postLayout.style.opacity = '0';
-      requestAnimationFrame(() => {
-        postLayout.style.opacity = '1';
-      });
+      setTimeout(() => postLayout.style.opacity = '1', 100);
     }, 700);
   });
-
 });
