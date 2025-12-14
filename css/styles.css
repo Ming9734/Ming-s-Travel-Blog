@@ -358,21 +358,21 @@ body {
   pointer-events: none;
 
   transition:
-    opacity 1.6s ease,
-    transform 1.6s ease;
+    opacity 1.8s ease,
+    transform 1.8s ease;
 
   position: absolute;
   bottom: 8%;
   left: 50%;
 }
 
-.cover-overlay.show {
+.cover-overlay.is-visible {
   opacity: 1;
   transform: translate(-50%, 0);
   pointer-events: auto;
 }
 
-.cover-overlay.show:hover {
+.cover-overlay.is-visible:hover {
   transform: translate(-50%, -4px);
 }
 
