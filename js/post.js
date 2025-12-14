@@ -23,17 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // // 設定封面資料
+      // 封面圖片（前景）
 const coverImg = document.getElementById('cover-image');
 coverImg.src = post.cover;
 
-// 背景模糊用同一張圖
-const coverSection = document.querySelector('.post-cover');
-coverSection.style.setProperty(
-  '--cover-bg',
-  `url("${post.cover}")`
-);
+// 背景模糊圖片（關鍵）
+const coverBg = document.querySelector('.cover-bg');
+coverBg.style.backgroundImage = `url("${post.cover}")`;
 
+// 文字
 document.getElementById('cover-title').textContent = post.title;
 document.getElementById('cover-subtitle').textContent = post.subtitle;
   
