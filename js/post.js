@@ -23,14 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // 設定封面
+      // // 設定封面資料
 document.getElementById('cover-image').src = post.cover;
 document.getElementById('cover-title').textContent = post.title;
 document.getElementById('cover-subtitle').textContent = post.subtitle;
 
-// 設定背景模糊
-const cover = document.querySelector('.post-cover');
-cover.style.setProperty('--cover-bg', `url(${post.cover})`);
+// 設定模糊背景
+const coverBg = document.querySelector('.cover-bg');
+coverBg.style.backgroundImage = `url("${post.cover}")`;
   
       // 幻燈片
       let index = 0;
