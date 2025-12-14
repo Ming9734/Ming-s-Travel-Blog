@@ -321,82 +321,83 @@ body {
   position: fixed;
   inset: 0;
   z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
   overflow: hidden;
-  background: black;
 }
 
-/* 🔹 模糊延伸背景 */
-.cover-bg {
+/* 背景模糊層 */
+.post-cover .cover-bg {
   position: absolute;
   inset: -10%;
+  background-image: var(--cover-bg);
   background-size: cover;
   background-position: center;
-  filter: blur(60px) brightness(0.7);
+  filter: blur(28px) brightness(0.65);
   transform: scale(1.1);
   z-index: 0;
 }
 
-/* 🔹 原圖完整顯示（不裁切） */
-.cover-image {
+/* 主圖：完整顯示、不裁切 */
+.post-cover img {
   position: relative;
   z-index: 1;
-  width: 100%;
-  height: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
   object-fit: contain;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.55);
+  border-radius: 8px;
 }
 
-/* 🔹 霧化玻璃文字區 */
+/* 玻璃文字區 */
 .cover-overlay {
   position: absolute;
-  bottom: 8%;
+  bottom: 6%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
 
-  width: min(700px, 90%);
-  padding: 2.5rem 3rem;
+  width: min(720px, 92%);
+  padding: 2.4rem 3rem;
 
-  background: linear-gradient(
-    120deg,
-    rgba(79,70,229,0.3),
-    rgba(147,51,234,0.3)
-  );
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
   border-radius: 24px;
   color: white;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
 }
 
 .cover-overlay h1 {
-  margin: 0 0 0.5rem;
-  font-size: 2.6rem;
+  margin: 0 0 0.4rem;
+  font-size: 2.4rem;
   font-weight: 700;
 }
 
 .cover-overlay p {
-  margin: 0 0 1.8rem;
-  opacity: 0.9;
-  font-size: 1.1rem;
+  margin-bottom: 1.6rem;
+  opacity: 0.85;
 }
 
-/* 🔹 按鈕 */
+/* 按鈕 */
 #enter-post {
-  padding: 0.9rem 2.2rem;
+  padding: 0.9rem 2.4rem;
   border-radius: 999px;
   border: none;
   background: white;
   color: #4f46e5;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
 #enter-post:hover {
-  transform: scale(1.05);
-  background: #f3f4f6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.3);
 }
 
 /* Navbar 隱藏/顯示 */
