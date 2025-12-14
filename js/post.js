@@ -1,69 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 一開始隱藏 navbar
+  /* ---------------- 基本元素 ---------------- */
   const navbar = document.querySelector('.navbar');
-  if (navbar) navbar.classList.add('navbar-hidden');
-
   const postLayout = document.querySelector('.post-layout');
+  const overlay = document.querySelector('.cover-overlay');
 
-  // ----------------- 載入資料庫 -----------------
+  if (navbar) navbar.classList.add('navbar-hidden');
+  if (postLayout) postLayout.style.display = 'none';
+
+  /* ---------------- 讀取 URL id ---------------- */
   const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get('id'); // 取得 URL 上的 id
+  const postId = urlParams.get('id');
 
   if (!postId) {
     console.error('❌ No post ID in URL');
     return;
   }
 
-  fetch(`data/post_${postId}.json`) // 根據 id 抓取對應 JSON
+  /* ---------------- 載入 JSON ---------------- */
+  fetch(data/post_${postId}.json)
     .then(r => r.json())
     .then(post => {
-      if (!post) {
-        console.error('❌ No matching post data');
-        return;
+
+      /* ---------- 封面圖片 ---------- */
+      const coverImg = document.getElementById('cover-image');
+      const coverBg  = document.querySelector('.cover-bg');
+
+      coverImg.src = post.cover;
+      coverBg.style.backgroundImage = url("${post.cover}");
+
+      document.getElementById('cover-title').textContent = post.title;
+      document.getElementById('cover-subtitle').textContent = post.subtitle;
+
+      /* ---------- 延遲顯示 overlay ---------- */
+      if (overlay) {
+        overlay.classList.remove('is-visible');
+        setTimeout(() => {
+          overlay.classList.add('is-visible');
+        }, 6000); // 6 秒
       }
 
-      // 封面圖片（前景）
-const coverImg = document.getElementById('cover-image');
-coverImg.src = post.cover;
-
-// 背景模糊圖片（關鍵）
-const coverBg = document.querySelector('.cover-bg');
-coverBg.style.backgroundImage = `url("${post.cover}")`;
-document.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.querySelector('.cover-overlay');
-
- document.addEventListener('DOMContentLoaded', () => {
-  const overlay = document.querySelector('.cover-overlay');
-  if (!overlay) return;
-
-  // 保險：一開始一定是隱藏
-  overlay.classList.remove('is-visible');
-
-  // 延遲 6 秒後浮現
-  setTimeout(() => {
-    overlay.classList.add('is-visible');
-  }, 6000); // 5~10 秒你可以自己調
-});
-// 文字
-document.getElementById('cover-title').textContent = post.title;
-document.getElementById('cover-subtitle').textContent = post.subtitle;
-  
-      // 幻燈片
+      /* ---------- 幻燈片 ---------- */
       let index = 0;
       const galleryImg = document.getElementById('gallery-img');
-      galleryImg.src = post.images[index];
+      galleryImg.src = post.images[0];
 
       document.querySelector('.prev').onclick = () => {
         index = (index - 1 + post.images.length) % post.images.length;
         galleryImg.src = post.images[index];
       };
+
       document.querySelector('.next').onclick = () => {
         index = (index + 1) % post.images.length;
         galleryImg.src = post.images[index];
       };
 
-      // 文字區塊 tabs
+      /* ---------- 文字 tabs ---------- */
       const tabsContainer = document.getElementById('post-tabs');
       const contentsContainer = document.getElementById('post-tab-contents');
 
@@ -82,37 +74,37 @@ document.getElementById('cover-subtitle').textContent = post.subtitle;
         contentsContainer.appendChild(div);
       });
 
-      // tab 切換事件
-      document.querySelectorAll('.tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.tab, .post-tab-content')
-            .forEach(el => el.classList.remove('active'));
-          btn.classList.add('active');
-          contentsContainer.children[btn.dataset.index].classList.add('active');
-        });
+      tabsContainer.addEventListener('click', e => {
+        if (!e.target.classList.contains('tab')) return;
+
+        document.querySelectorAll('.tab, .post-tab-content')
+          .forEach(el => el.classList.remove('active'));
+
+        e.target.classList.add('active');
+        contentsContainer.children[e.target.dataset.index]
+          .classList.add('active');
       });
+
     })
-    .catch(err => console.error('❌ JSON 載入錯誤:', err));
+    .catch(err => console.error('❌ JSON error:', err));
 
-
-  // ----------------- Enter Story 動畫 -----------------
+  /* ---------------- Enter Story ---------------- */
   document.getElementById('enter-post')?.addEventListener('click', () => {
     const cover = document.getElementById('post-cover');
 
-    // 封面淡出動畫
     cover.style.opacity = '0';
     cover.style.pointerEvents = 'none';
 
     setTimeout(() => {
       cover.remove();
+      navbar?.classList.add('active');
 
-      // 導覽列顯示
-      if (navbar) navbar.classList.add('active');
-
-      // 顯示正文
       postLayout.style.display = 'grid';
       postLayout.style.opacity = '0';
-      setTimeout(() => postLayout.style.opacity = '1', 100);
+      requestAnimationFrame(() => {
+        postLayout.style.opacity = '1';
+      });
     }, 700);
   });
+
 });
