@@ -331,7 +331,7 @@ body {
   inset: -15%;
   background-size: cover;
   background-position: center;
-  filter: blur(50px) brightness(0.75) saturate(1.1);
+  filter: blur(10px) brightness(0.75) saturate(1.1);
   transform: scale(1.2);
   z-index: 0;
 }
