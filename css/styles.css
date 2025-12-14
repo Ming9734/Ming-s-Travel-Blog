@@ -363,12 +363,17 @@ body {
   position: absolute;
   bottom: 8%;
   left: 50%;
+  
+  /* ✨ 優化：增加卡片左右寬度，讓內容更寬鬆 ✨ */
+  width: 90%; 
+  max-width: 550px; /* 限制最大寬度 */
+  padding: 3rem 2.5rem; /* ✨ 優化：增加上下內距，空間更足夠 ✨ */
+
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0.25),
     rgba(255,255,255,0.15)
   );
-
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 
@@ -380,6 +385,7 @@ body {
   z-index: 2;
 }
 
+
 .cover-overlay.is-visible {
   opacity: 1;
   transform: translate(-50%) translateY(0);
@@ -390,14 +396,21 @@ body {
   transform: translate(-50%) translateY(-4px);
 }
 
+/* 🔹 標題 (H1) - 更有氣勢 */
 .cover-overlay h1 {
-  font-size: 2.6rem;
-  margin-bottom: 0.5rem;
+  font-size: 3rem; /* ✨ 優化：放大標題字體 ✨ */
+  margin-bottom: 0.8rem; /* ✨ 優化：微調與副標的距離 ✨ */
+  font-weight: 700; /* 確保字體夠粗 */
+  line-height: 1.2; /* 調整行高避免太擠 */
 }
 
+/* 🔹 副標題 (p) - 強化存在感 */
 .cover-overlay p {
-  opacity: 0.9;
-  margin-bottom: 1.8rem;
+  opacity: 1; /* ✨ 優化：移除透明度，確保清晰可見 ✨ */
+  font-size: 1.2rem; /* ✨ 優化：放大字體 ✨ */
+  margin-bottom: 2.2rem; /* ✨ 優化：增加與按鈕的距離 ✨ */
+  font-weight: 400; /* 中等粗細 */
+  color: rgba(255, 255, 255, 0.95); /* 給一個明確的淺色 */
 }
 
 /* 🔹 按鈕 */
