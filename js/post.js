@@ -33,10 +33,17 @@ coverBg.style.backgroundImage = `url("${post.cover}")`;
 document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.querySelector('.cover-overlay');
 
-  // 6 秒後才顯示
+ document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.querySelector('.cover-overlay');
+  if (!overlay) return;
+
+  // 保險：一開始一定是隱藏
+  overlay.classList.remove('is-visible');
+
+  // 延遲 6 秒後浮現
   setTimeout(() => {
-    overlay.classList.add('show');
-  }, 6000);
+    overlay.classList.add('is-visible');
+  }, 6000); // 5~10 秒你可以自己調
 });
 // 文字
 document.getElementById('cover-title').textContent = post.title;
