@@ -321,180 +321,168 @@ body {
 }
 
 /* =========================
-   Fullscreen Post Cover
+   Fullscreen Post Cover
 ========================= */
 .post-cover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 20000;
-    /* 確保有過渡效果，與 JS 的 1500ms 匹配 */
-    transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out; 
-    /* 確保初始狀態 */
-    transform: scale(1); 
-    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 20000;
+    /* 封面放大動畫過渡 */
+    transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
+    transform: scale(1);
+    opacity: 1;
 }
 
 /* 模糊背景 */
 .cover-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    filter: blur(20px);
-    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(20px);
+    opacity: 0.8;
 }
 
 /* 封面原圖 */
 .cover-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
 }
 
 /* =========================
-   玻璃卡片 (.cover-overlay)
-   負責文字容器和進場/退場動畫
+   玻璃卡片 (.cover-overlay)
 ========================= */
 .cover-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    padding: 2rem 4rem;
-    color: white;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    padding: 2rem 4rem;
+    color: white;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-    /* 初始狀態：不可見 (透明且往下移動) */
-    opacity: 0;
-    transform: translate(-50%, -40%); /* 配合動畫的起點 */
-    pointer-events: auto; /* ✨ 關鍵：確保按鈕是可點擊的！ */
+    /* 初始狀態 */
+    opacity: 0;
+    transform: translate(-50%, -40%); /* 配合動畫的起點 */
+    pointer-events: auto; /* 確保按鈕可點擊 */
 
-    /* 點擊後淡出時的過渡時間 (與 JS 的 300ms 匹配) */
-    transition: opacity 0.3s ease, transform 0.2s ease-out; /* ✨ 新增 transform 過渡 ✨ */
-    pointer-events: auto;
+    /* 卡片淡出和 hover 效果的過渡時間 */
+    transition: opacity 0.3s ease, transform 0.2s ease-out;
 }
 
 /* 卡片進場動畫 Keyframes (1.8s) */
 @keyframes overlay-fade-in {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -40%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
 
 /* 卡片進場動畫目標狀態 */
 .cover-overlay.is-visible {
-    /* 這裡使用 animation 來控制 1.8s 的時長 */
-    animation: overlay-fade-in 1.8s ease-out forwards; 
-    opacity: 1; /* 確保最終狀態是完全不透明 */
-    transform: translate(-50%, -50%);
+    animation: overlay-fade-in 1.8s ease-out forwards;
+    opacity: 1;
+    transform: translate(-50%, -50%);
 }
-
 
 .cover-overlay.is-visible:hover {
-  transform: translate(-50%) translateY(-4px);
+  transform: translate(-50%, -50%) translateY(-4px); /* 修復 hover 導致 translate(-50%) 消失的問題 */
 }
 
-/* 🔹 標題 (H1) - 視覺焦點 */
+/* 🔹 標題 (H1) */
 .cover-overlay h1 {
-  font-size: 2.8rem; /* 比上次的 2.4rem 稍大，但比 3rem 小 */
-  margin-bottom: 0.8rem;
-  font-weight: 900; /* ✨ 優化：極粗體 (Boldest)，強調力量感 ✨ */
-  line-height: 1.1; 
-  /* 如果標題很長，可以加上文字陰影讓它在各種背景下更清晰 */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 🔹 副標題 (p) - 質感引言 */
+/* 🔹 副標題 (p) */
 .cover-overlay p {
-  opacity: 1;
-  font-size: 1.3rem; /* 介於您希望的大小之間 */
-  margin-bottom: 2.5rem; /* 增加與按鈕的距離 */
-  font-weight: 300; /* ✨ 優化：使用細體，與大標題形成對比 ✨ */
-  
-  /* ✨ 優化：使用柔和的顏色，增加層次感 ✨ */
-  color: rgba(255, 255, 255, 0.85); 
-  max-width: 80%; /* 限制副標寬度，讓文字形成一個舒適的區塊 */
-  margin-left: auto; /* 配合 max-width 實現置中 */
-  margin-right: auto;
+  opacity: 1;
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 🔹 按鈕 */
 #enter-post {
-  padding: 0.9rem 2.2rem;
-  border-radius: 999px;
-  border: none;
-  background: white;
-  color: #4f46e5;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s;
+  padding: 0.9rem 2.2rem;
+  border-radius: 999px;
+  border: none;
+  background: white;
+  color: #4f46e5;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s;
 }
 
 #enter-post:hover {
-  transform: scale(1.05);
-  background: #f3f4f6;
+  transform: scale(1.05);
+  background: #f3f4f6;
 }
 
 /* =========================
-   導覽列 (.navbar)
+   導覽列 (.navbar)
 ========================= */
 .navbar-hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-50px);
-    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50px);
+    transition: opacity 0.3s, transform 0.3s;
 }
 
 .navbar.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
 }
 
 /* ================= Post Layout (單一毛玻璃背景版) ================= */
 
 .post-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 6rem auto;
-    padding: 2rem;
-    align-items: stretch;
-    position: relative;
-    /* 初始隱藏狀態 (由 JS 在 DOMContentLoaded 時切換) */
-    opacity: 0; 
-    transition: opacity 0.5s ease-in; /* 內頁內容淡入效果 */
-    
-    /* 修正：如果不需要在 CSS 中預先偏離視線，則移除這裡的 transform 相關設定 */
+    display: none; /* 初始隱藏，由 JS 切換為 grid */
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 6rem auto;
+    padding: 2rem;
+    align-items: stretch;
+    position: relative;
+    opacity: 0; /* 初始透明 */
+    transition: opacity 0.5s ease-in; /* 內頁內容淡入效果 */
 }
 
 /* ✨ 覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
 .post-layout::before {
     content: '';
     position: absolute;
-    inset: 0; 
-    background: rgba(255, 255, 255, 0.1); 
+    inset: 0;
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border-radius: 16px;
@@ -506,8 +494,8 @@ body {
 .post-gallery, .post-text {
     position: relative;
     z-index: 1;
-    background: transparent; 
-    border-radius: 16px; 
+    background: transparent;
+    border-radius: 16px;
 }
 
 
@@ -515,7 +503,7 @@ body {
 .post-gallery {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
 .gallery-frame {
@@ -525,7 +513,6 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 16px;
-    
     background-size: cover;
     background-position: center;
 }
@@ -537,17 +524,8 @@ body {
     height: 100%;
     object-fit: contain;
     position: relative;
-    z-index: 2; 
-    /* 移除這裡的 backdrop-filter */
-    /* backdrop-filter: blur(5px) brightness(0.75); */
-    /* -webkit-backdrop-filter: blur(5px) brightness(0.75); */
+    z-index: 2;
 }
-
-/* ✨ 修訂幻燈片模糊邏輯：將模糊效果應用於 gallery-frame 的背景圖 ✨
-   由於 object-fit: contain 會讓 img 留白，backdrop-filter 在 img 上無法作用於背景圖。
-   如果背景圖就是模糊源，則不需要在 img 上設定 backdrop-filter。
-   建議：將 img 設定為不透明的容器，下方背景圖已經在 JS 中設定，並讓它成為模糊源。
-*/
 
 /* 🔹 幻燈片按鈕樣式 (維持不變) 🔹 */
 .gallery-btn {
@@ -558,12 +536,12 @@ body {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 50px; 
+  width: 50px;
   height: 50px;
-  font-size: 2rem; 
+  font-size: 2rem;
   cursor: pointer;
-  box-shadow: none; 
-  opacity: 0.6; 
+  box-shadow: none;
+  opacity: 0.6;
   transition: opacity 0.3s, background-color 0.3s, color 0.3s;
   z-index: 3;
   padding: 0;
@@ -584,7 +562,7 @@ body {
 
 /* 📝 文字區塊設計 */
 .post-text {
-  padding: 1rem 2.5rem 2.5rem 2.5rem; 
+  padding: 1rem 2.5rem 2.5rem 2.5rem;
   color: white;
   max-height: 70vh;
   overflow-y: auto;
@@ -627,7 +605,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   color: white;
   border-bottom: 2px solid white;
-  margin-bottom: -1px; 
+  margin-bottom: -1px;
 }
 
 .post-tab-content {
@@ -644,60 +622,42 @@ body {
 @media (max-width: 768px) {
     .post-layout {
         grid-template-columns: 1fr;
-        /* 修正：移除垂直間距以優化空間 */
-        gap: 2rem; 
+        gap: 2rem;
     }
-    
-    /* 手機上滾動高度應該更高 */
-    .post-text {
-        max-height: 50vh; 
-    }
+
+    .post-text {
+        max-height: 50vh;
+    }
 }
 
 
 /* ---------------- 進場動畫 (Entry Animations) ---------------- */
-/* 定義進場動畫的關鍵影格 (維持不變) */
-@keyframes slideInFade {
-  from {
+
+/* 應用於左右兩欄的初始動畫狀態 */
+.post-gallery, .post-text {
     opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
+    transform: translateY(20px); /* 初始偏離狀態 */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* 動畫平滑過渡 */
+}
+
+/* 啟動動畫時的狀態 (由 JS 加入 .animate-entry) */
+.post-gallery.animate-entry, .post-text.animate-entry {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-/* 應用於左右兩欄的動畫 class */
-.post-gallery, .post-text {
-    /* 修正：將初始狀態移到這裡，與 JS 保持一致 */
-    opacity: 0;
-    transform: translateY(20px); /* 初始偏離狀態 */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* 動畫平滑過渡 */
-}
-
-/* 啟動動畫時的狀態 */
-.post-gallery.animate-entry, .post-text.animate-entry {
-    /* 修正：直接設定最終狀態，讓 transition 處理動畫 */
-    opacity: 1; 
-    transform: translateY(0); 
-    /* 移除 animation 屬性，改用 transition，因為 JS 已經控制了時序 */
-    /* animation: slideInFade 0.8s ease-out forwards; */
 }
 
 
-/* 確保手機版佈局不受影響 */
+/* 確保手機版佈局不受影響 (禁用動畫) */
 @media (max-width: 768px) {
-    /* 修正：手機上禁用動畫，確保立即顯示 */
     .post-gallery, .post-text {
         transition: none; /* 移除動畫效果 */
         opacity: 1; /* 確保內容顯示 */
         transform: translateY(0); /* 確保位置正確 */
     }
 
-    /* 清理手機版不需要的動畫類別 */
-    .post-gallery.animate-entry, .post-text.animate-entry {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    /* 手機上 animate-entry 保持靜態 */
+    .post-gallery.animate-entry, .post-text.animate-entry {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
