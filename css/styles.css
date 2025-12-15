@@ -1,5 +1,4 @@
 
-
 /* ---------------- Body & 全局 ---------------- */
 body {
   margin: 0;
@@ -333,7 +332,7 @@ body {
   background: #111; /* 保底色，不會全黑 */
   
   /* ✨ 新增：確保平滑的縮放過渡效果 ✨ */
-  transition: transform 1s ease-in-out, opacity 1s ease-in-out; 
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out; 
 }
 
 /* 背景模糊層 */
@@ -356,45 +355,49 @@ body {
   object-fit: contain;
 }
 /* 🔹 玻璃卡片 */
+/* 🔹 玻璃卡片 */
 .cover-overlay {
   opacity: 0;
   transform: translateX(-50%) translateY(20px);
   pointer-events: none;
+  
+  /* 將過渡時間縮短為 0.3s，以配合新的序列動畫 JS */
   transition:
-    opacity 1.8s ease,
-    transform 1.8s ease;
+    opacity 0.5s ease,
+    transform 0.5s ease;
 
   position: absolute;
   bottom: 8%;
   left: 50%;
   
    width: 80%; 
-  max-width: 500px;
-  padding: 2rem;
+  max-width: 500px; /* 縮小卡片最大寬度 */
+  padding: 2rem; /* 縮小內距 */
 
-  /* 毛玻璃與背景色不變，效果很好 */
+  /* ✨ 確保有半透明背景色和 backdrop-filter 屬性 ✨ */
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0.25),
     rgba(255,255,255,0.15)
   );
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); /* 減少模糊效果 */
   -webkit-backdrop-filter: blur(8px);
+  
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
 
-  /* ✨ 優化：置中對齊，更有電影感 ✨ */
+  /* 置中對齊，更有電影感 */
   color: white;
   text-align: center; 
   z-index: 2;
 }
-
 
 .cover-overlay.is-visible {
   opacity: 1;
   transform: translate(-50%) translateY(0);
   pointer-events: auto;
 }
+
 
 .cover-overlay.is-visible:hover {
   transform: translate(-50%) translateY(-4px);
@@ -458,14 +461,14 @@ body {
   position: relative; /* 作為偽元素定位的基準 */
 }
 
-/* ✨ 新增：覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
+/* ✨ 覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
 .post-layout::before {
     content: '';
     position: absolute;
     inset: 0; /* 覆蓋整個 post-layout */
     background: rgba(255, 255, 255, 0.1); /* 半透明白色背景 */
-    backdrop-filter: blur(10px); /* 毛玻璃效果 */
-    -webkit-backdrop-filter: blur(10px); /* 兼容性處理 */
+    backdrop-filter: blur(5px); /* 毛玻璃效果 */
+    -webkit-backdrop-filter: blur(5px); /* 兼容性處理 */
     border-radius: 16px; /* 圓角 */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* 陰影 */
     z-index: 0; /* 放在所有內容之下 */
@@ -490,34 +493,36 @@ body {
 /* gallery-frame 和 ::before 保持原本的邏輯，用於圖片本身的模糊延伸 */
 .gallery-frame {
     width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3; /* ✨ 新增：設置相片容器為 4:3 的長寬比 ✨ */
+    height: auto; /* 使用長寬比替代固定高度 */
+    aspect-ratio: 4 / 3; /* 設定相片容器為 4:3 的長寬比 */
     position: relative;
     overflow: hidden;
     border-radius: 16px; /* 相片容器的圓角 */
-    --current-image-url: none; 
-}
+    
+    /* 移除 --current-image-url 變數定義，因為我們改用 JS 直接設定背景圖 */
+    /* background-color: white; */ /* 移除白色背景，讓 post-layout 的毛玻璃透上來 */
 
-.gallery-frame::before {
-    content: '';
-    position: absolute;
-    inset: 0; 
-    background-image: var(--current-image-url); 
+    /* ✨ JavaScript 會在這裡動態設定 background-image 屬性 ✨ */
     background-size: cover;
     background-position: center;
-    z-index: 1; 
-    filter: blur(10px) brightness(0.75);
-    -webkit-filter: blur(10px) brightness(0.75);
-    transform: scale(1.1); 
 }
+
+
+/* ✨ 移除 ::before 偽元素的使用，改用 backdrop-filter 在 img 上 ✨ */
+/* .gallery-frame::before { ... } */
+
 
 /* 幻燈片圖片本身 */
 .post-gallery img#gallery-img {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain; /* 確保圖片完整顯示，產生空白區域 */
     position: relative;
     z-index: 2; 
+
+    /* ✨ 關鍵點：在這裡使用 backdrop-filter 來模糊下面的背景圖！✨ */
+    backdrop-filter: blur(5px) brightness(0.75);
+    -webkit-backdrop-filter: blur(5px) brightness(0.75);
 }
 
 /* 🔹 幻燈片按鈕樣式 (已修復並整合) 🔹 */
@@ -641,7 +646,7 @@ body {
 .animate-entry {
   opacity: 0; /* 預設隱藏 */
   /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
-  animation: slideInFade 0.6s ease-out forwards; 
+  animation: slideInFade 0.8s ease-out forwards; 
 }
 
 /* 確保手機版佈局不受影響 */
@@ -652,4 +657,3 @@ body {
         transform: translateY(0);
     }
 }
-
