@@ -146,4 +146,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (postLayout) postLayout.style.display = 'grid'; 
                     if (navbar) navbar.classList.add('active'); 
 
-                    // 獲取左右兩
+                    // 獲取左右兩欄元素，開始交錯進場動畫
+                    const galleryElement = document.querySelector('.post-gallery');
+                    const textElement = document.querySelector('.post-text');
+
+                    setTimeout(() => {
+                        if (galleryElement) {
+                            galleryElement.classList.add('animate-entry');
+                        }
+                        if (textElement) {
+                            setTimeout(() => {
+                                textElement.classList.add('animate-entry');
+                            }, 200); 
+                        }
+                    }, 50);
+                     
+                    // 最後，等待所有動畫結束後，將封面從 DOM 中移除 (清理 DOM)
+                    setTimeout(() => {
+                        if (cover) cover.remove();
+                    }, 800); 
+                     
+                }, 2000); // 2000ms = 500ms(卡片隱藏結束) + 1500ms(封面放大結束)
+            });
+
+
+        }) // <--- fetch 成功的回呼函式結束
+        .catch(err => {
+             console.error('❌ JSON 載入錯誤:', err);
+             // 如果載入失敗，可以在這裡新增邏輯來隱藏載入畫面或顯示錯誤訊息
+        });
+
+}); // <--- DOMContentLoaded 結束
