@@ -359,28 +359,36 @@ body {
   opacity: 0;
   transform: translateX(-50%) translateY(20px);
   pointer-events: none;
+  
+  /* ✨ 優化：將過渡時間縮短為 0.3s，以配合新的序列動畫 JS ✨ */
   transition:
-    opacity 1.8s ease,
-    transform 1.8s ease;
+    opacity 0.3s ease,
+    transform 0.3s ease;
 
   position: absolute;
   bottom: 8%;
   left: 50%;
   
    width: 80%; 
-  max-width: 500px; /* 卡片可以稍微寬一點 */
-  padding: 2rem; /* 增加內距，創造呼吸感 */
+  max-width: 500px; /* 縮小卡片最大寬度 */
+  padding: 2rem; /* 縮小內距 */
 
-  /* 毛玻璃與背景色不變，效果很好 */
+  /* 毛玻璃與背景色 */
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0.25),
     rgba(255,255,255,0.15)
   );
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); /* 減少模糊效果 */
   -webkit-backdrop-filter: blur(8px);
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+
+  /* 置中對齊，更有電影感 */
+  color: white;
+  text-align: center; 
+  z-index: 2;
+}
 
   /* ✨ 優化：置中對齊，更有電影感 ✨ */
   color: white;
