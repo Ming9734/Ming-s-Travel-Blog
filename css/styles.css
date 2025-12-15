@@ -363,8 +363,8 @@ body {
   
   /* 將過渡時間縮短為 0.3s，以配合新的序列動畫 JS */
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+    opacity 1.8s ease,
+    transform 1.8s ease;
 
   position: absolute;
   bottom: 8%;
