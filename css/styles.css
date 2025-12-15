@@ -489,7 +489,8 @@ body {
 /* gallery-frame 和 ::before 保持原本的邏輯，用於圖片本身的模糊延伸 */
 .gallery-frame {
     width: 100%;
-    height: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3; /* ✨ 新增：設置相片容器為 4:3 的長寬比 ✨ */
     position: relative;
     overflow: hidden;
     border-radius: 16px; /* 相片容器的圓角 */
