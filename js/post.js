@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.querySelector('.cover-overlay');
       if (overlay) {
         overlay.classList.remove('is-visible'); 
-        setTimeout(() => overlay.classList.add('is-visible'), 2000);
+        setTimeout(() => overlay.classList.add('is-visible'), 1000);
       }
 
       // --- 幻燈片功能 (已修復並優化) ---
