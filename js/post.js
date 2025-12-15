@@ -35,22 +35,53 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => overlay.classList.add('is-visible'), 2000); // 2秒後浮現
       }
 
-      // 幻燈片
-      let index = 0;
-      const galleryImg = document.getElementById('gallery-img');
-      if (galleryImg && post.images.length) galleryImg.src = post.images[index];
+      // 在 post.js 中找到這個區塊：
 
-      const prevBtn = document.querySelector('.prev');
-      const nextBtn = document.querySelector('.next');
+// 幻燈片
+let index = 0;
+const galleryImg = document.getElementById('gallery-img');
+// ✨ 新增這行：獲取圖片的父容器 ✨
+const galleryFrame = document.querySelector('.gallery-frame'); 
 
-      if (prevBtn) prevBtn.onclick = () => {
-        index = (index - 1 + post.images.length) % post.images.length;
-        galleryImg.src = post.images[index];
-      };
-      if (nextBtn) nextBtn.onclick = () => {
-        index = (index + 1) % post.images.length;
-        galleryImg.src = post.images[index];
-      };
+
+// 創建一個共用的函式來更新圖片和背景
+function updateGalleryImage(newIndex, imagesArray) {
+    index = newIndex;
+    if (galleryImg) {
+        galleryImg.src = imagesArray[index];
+    }
+    // ✨ 新增：同時更新容器的背景圖片，以實現模糊延伸效果 ✨
+    if (galleryFrame) {
+        galleryFrame.style.backgroundImage = `url("${imagesArray[index]}")`;
+        // 可以選擇在這裡增加一個 filter 來預先模糊背景圖
+        // galleryFrame.style.filter = 'blur(10px) brightness(0.8)'; 
+    }
+}
+
+
+// 在 fetch 的 .then 區塊內，將圖片初始化設置替換為新函式：
+
+/* 原始碼：
+if (galleryImg && post.images.length) galleryImg.src = post.images[index]; 
+*/
+
+// ✨ 替換為：
+if (galleryImg && post.images && post.images.length > 0) {
+    updateGalleryImage(0, post.images);
+}
+
+
+// 更新按鈕的 onclick 事件處理器，使用新函式：
+
+if (prevBtn) prevBtn.onclick = () => {
+    const newIndex = (index - 1 + post.images.length) % post.images.length;
+    updateGalleryImage(newIndex, post.images); // 使用新函式
+};
+
+if (nextBtn) nextBtn.onclick = () => {
+    const newIndex = (index + 1) % post.images.length;
+    updateGalleryImage(newIndex, post.images); // 使用新函式
+};
 
       // 文字區塊 tabs
       const tabsContainer = document.getElementById('post-tabs');
