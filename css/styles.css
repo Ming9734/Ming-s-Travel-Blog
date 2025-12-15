@@ -551,7 +551,7 @@ body {
 /* 📝 文字區塊設計 */
 .post-text {
   /* 背景已經設定為 transparent */
-  padding: 2.5rem;
+  padding: 1.5rem 2.5rem 2.5rem 2.5rem; 
   color: white; /* 確保文字顏色為白色 */
 }
 
