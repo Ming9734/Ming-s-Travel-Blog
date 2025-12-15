@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlay = document.querySelector('.cover-overlay');
       if (overlay) {
         overlay.classList.remove('is-visible'); 
-        setTimeout(() => overlay.classList.add('is-visible'), 2000); 
+        setTimeout(() => overlay.classList.add('is-visible'), 1000); 
       }
 
       // --- 幻燈片功能 (最終版) ---
@@ -118,17 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const cover = document.getElementById('post-cover');
     const overlay = document.querySelector('.cover-overlay'); // 確保在這裡再次獲取 overlay 元素
 
-    // Step 1: 立即隱藏毛玻璃卡片 (overlay) (0.3s 過渡)
+    // Step 1: 立即隱藏毛玻璃卡片 (overlay) (0.5s 過渡)
     if (overlay) {
         overlay.style.opacity = '0';
         overlay.style.pointerEvents = 'none';
     }
 
-    // Step 2: 等待卡片隱藏後，觸發封面放大動畫 (1s 過渡)
+    // Step 2: 等待卡片隱藏後，觸發封面放大動畫 (1.5s 過渡)
     setTimeout(() => {
         cover.style.transform = 'scale(1.5)'; 
         cover.style.opacity = '0';            
-    }, 300); 
+    }, 500); 
 
 
     // Step 3: 等待所有動畫結束後再切換到內頁
@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // 最後，等待所有動畫結束後，將封面從 DOM 中移除
       setTimeout(() => {
         cover.remove();
-      }, 700); 
+      },800); 
       
-    }, 1300); // 1300ms = 300ms(卡片隱藏結束) + 1000ms(封面放大結束)
+    }, 2000); // 2000ms = 500ms(卡片隱藏結束) + 1500ms(封面放大結束)
   });
 });
