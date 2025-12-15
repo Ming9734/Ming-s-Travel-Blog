@@ -102,20 +102,41 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('❌ JSON 載入錯誤:', err));
 
+  // 將原有的 Enter Story 區塊替換為以下程式碼：
   // Enter Story
   document.getElementById('enter-post')?.addEventListener('click', () => {
     const cover = document.getElementById('post-cover');
+    
+    // 淡出封面
     cover.style.opacity = '0';
     cover.style.pointerEvents = 'none';
 
+    // 等待封面淡出後執行
     setTimeout(() => {
-      cover.remove();
+      cover.remove(); // 從 DOM 中移除封面
 
-      if (navbar) navbar.classList.add('active');
+      if (navbar) navbar.classList.add('active'); // 顯示導覽列
 
+      // 顯示內頁佈局容器
       postLayout.style.display = 'grid';
-      postLayout.style.opacity = '0';
-      setTimeout(() => postLayout.style.opacity = '1', 100);
-    }, 700);
+      // 獲取左右兩欄元素 (請確保這裡的選擇器與您的 HTML 結構一致)
+      const galleryElement = document.querySelector('.post-gallery');
+      const textElement = document.querySelector('.post-text');
+
+      // ✨ 開始交錯進場動畫 ✨
+      
+      // 左側相片集立即開始動畫
+      if (galleryElement) {
+        galleryElement.classList.add('animate-entry');
+      }
+
+      // 右側文字區塊延遲 200ms 開始動畫
+      if (textElement) {
+        setTimeout(() => {
+          textElement.classList.add('animate-entry');
+        }, 200); 
+      }
+      
+    }, 700); // 700ms 應與 CSS opacity transition 時間一致
   });
 });
