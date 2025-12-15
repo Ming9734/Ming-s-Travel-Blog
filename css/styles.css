@@ -359,7 +359,7 @@ body {
 .cover-overlay {
   opacity: 0;
   /* transform 初始值將由 @keyframes overlay-fade-in 控制 */
-  pointer-events: none;
+  pointer-events: auto;
   
   /* 僅保留 opacity 的快速過渡，用於快速消失 */
   transition: opacity 0.2s ease; 
