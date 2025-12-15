@@ -501,29 +501,51 @@ body {
 }
 
 
-/* 按鈕樣式保持不變 */
+
+
+/* 按鈕預設樣式：透明、靠邊、有陰影 */
 .gallery-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.85);
+  
+  /* ✨ 優化：預設背景更透明，減少干擾 ✨ */
+  background: rgba(255, 255, 255, 0.2); 
+  color: white; /* 箭頭顏色變白 */
+  
   border: none;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  font-size: 1.5rem;
+  width: 50px; /* 稍微加大按鈕尺寸 */
+  height: 50px;
+  font-size: 2rem; /* 稍微加大箭頭圖示 */
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  transition: background 0.3s;
-  z-index: 3; /* 確保按鈕在圖片之上 */
+  
+  /* ✨ 優化：移除陰影，靠透明度變化更簡潔 ✨ */
+  box-shadow: none; 
+
+  /* ✨ 優化：加入平滑的過渡動畫 ✨ */
+  opacity: 0.6; 
+  transition: opacity 0.3s, background-color 0.3s;
+  
+  z-index: 3; 
+  /* 增加一些距離邊緣的空間 */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* 按鈕靠邊定位 */
+.gallery-btn.prev {left: 15px;}
+.gallery-btn.next {right: 15px;}
+
+/* ✨ 優化：滑鼠移入時完全顯示且背景實色化 ✨ */
 .gallery-btn:hover {
-  background: white;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.9); /* 滑鼠移過時變為接近實白的背景 */
+  color: #4f46e5; /* 箭頭變為主題藍紫色 */
 }
 
-.gallery-btn.prev {left:10px;}
-.gallery-btn.next {right:10px;}
 
 /* 文字區塊設計 */
 .post-text {
