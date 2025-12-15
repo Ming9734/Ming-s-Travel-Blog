@@ -4,12 +4,12 @@
   "subtitle": "Sofia, Bulgaria",
   "country": "Bulgaria",
   "city": "Sofia",
-  "cover": "images/post/st-alexander-nevsky-cathedral-cover.jpg",
+  "cover": "images/post/st-alexander-nevsky-cathedral/cover.jpg",
   "images": [
-    "images/post/st-alexander-nevsky-cathedral-1.jpg",
-    "images/post/st-alexander-nevsky-cathedral-2.jpg",
-    "images/post/st-alexander-nevsky-cathedral-3.jpg",
-    "images/post/st-alexander-nevsky-cathedral-4.jpg"
+    "images/post/st-alexander-nevsky-cathedral/1.jpg",
+    "images/post/st-alexander-nevsky-cathedral/2.jpg",
+    "images/post/st-alexander-nevsky-cathedral/3.jpg",
+    "images/post/st-alexander-nevsky-cathedral/4.jpg"
   ],
   "texts": [
     {
