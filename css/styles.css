@@ -330,6 +330,9 @@ body {
   z-index: 20000;
   overflow: hidden;
   background: #111; /* 保底色，不會全黑 */
+  
+  /* ✨ 新增：確保平滑的縮放過渡效果 ✨ */
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out; 
 }
 
 /* 背景模糊層 */
