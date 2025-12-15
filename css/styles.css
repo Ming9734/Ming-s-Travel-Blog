@@ -355,12 +355,13 @@ body {
   object-fit: contain;
 }
 /* 🔹 玻璃卡片 */
+/* 🔹 玻璃卡片 */
 .cover-overlay {
   opacity: 0;
   transform: translateX(-50%) translateY(20px);
   pointer-events: none;
   
-  /* ✨ 優化：將過渡時間縮短為 0.3s，以配合新的序列動畫 JS ✨ */
+  /* 將過渡時間縮短為 0.3s，以配合新的序列動畫 JS */
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
@@ -373,7 +374,7 @@ body {
   max-width: 500px; /* 縮小卡片最大寬度 */
   padding: 2rem; /* 縮小內距 */
 
-  /* 毛玻璃與背景色 */
+  /* ✨ 確保有半透明背景色和 backdrop-filter 屬性 ✨ */
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0.25),
@@ -381,6 +382,7 @@ body {
   );
   backdrop-filter: blur(8px); /* 減少模糊效果 */
   -webkit-backdrop-filter: blur(8px);
+  
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
 
@@ -390,18 +392,12 @@ body {
   z-index: 2;
 }
 
-  /* ✨ 優化：置中對齊，更有電影感 ✨ */
-  color: white;
-  text-align: center; 
-  z-index: 2;
-}
-
-
 .cover-overlay.is-visible {
   opacity: 1;
   transform: translate(-50%) translateY(0);
   pointer-events: auto;
 }
+
 
 .cover-overlay.is-visible:hover {
   transform: translate(-50%) translateY(-4px);
