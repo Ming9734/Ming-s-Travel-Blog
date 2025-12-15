@@ -102,41 +102,46 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('❌ JSON 載入錯誤:', err));
 
-  // 將原有的 Enter Story 區塊替換為以下程式碼：
+
   // Enter Story
   document.getElementById('enter-post')?.addEventListener('click', () => {
     const cover = document.getElementById('post-cover');
     
-    // 淡出封面
+    // 開始淡出封面 (持續 700ms)
     cover.style.opacity = '0';
     cover.style.pointerEvents = 'none';
 
-    // 等待封面淡出後執行
+    // 等待封面淡出動畫幾乎完成後，再顯示內頁容器
     setTimeout(() => {
-      cover.remove(); // 從 DOM 中移除封面
-
-      if (navbar) navbar.classList.add('active'); // 顯示導覽列
-
       // 顯示內頁佈局容器
       postLayout.style.display = 'grid';
-      // 獲取左右兩欄元素 (請確保這裡的選擇器與您的 HTML 結構一致)
+      if (navbar) navbar.classList.add('active'); // 顯示導覽列
+
+      // 獲取左右兩欄元素
       const galleryElement = document.querySelector('.post-gallery');
       const textElement = document.querySelector('.post-text');
 
-      // ✨ 開始交錯進場動畫 ✨
-      
-      // 左側相片集立即開始動畫
-      if (galleryElement) {
-        galleryElement.classList.add('animate-entry');
-      }
+      // ✨ 在這裡增加一個短暫延遲 (例如 50ms)，確保瀏覽器完成佈局渲染後再觸發 CSS 動畫 ✨
+      setTimeout(() => {
+          // 左側相片集開始動畫
+          if (galleryElement) {
+            galleryElement.classList.add('animate-entry');
+          }
 
-      // 右側文字區塊延遲 200ms 開始動畫
-      if (textElement) {
-        setTimeout(() => {
-          textElement.classList.add('animate-entry');
-        }, 200); 
-      }
+          // 右側文字區塊延遲 200ms 開始動畫
+          if (textElement) {
+            setTimeout(() => {
+              textElement.classList.add('animate-entry');
+            }, 200); 
+          }
+      }, 50); // 50ms 的微小延遲確保動畫順利觸發
       
-    }, 700); // 700ms 應與 CSS opacity transition 時間一致
+      
+      // 最後，等待所有動畫結束後，將封面從 DOM 中移除，以釋放資源
+      setTimeout(() => {
+        cover.remove();
+      }, 700); // 總動畫時間後移除
+      
+    }, 700); // 這個 700ms 讓封面淡出動畫結束
   });
 });
