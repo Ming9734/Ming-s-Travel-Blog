@@ -1,4 +1,5 @@
 
+
 /* ---------------- Body & 全局 ---------------- */
 body {
   margin: 0;
@@ -321,343 +322,334 @@ body {
 }
 
 /* =========================
-   Fullscreen Post Cover
+   Fullscreen Post Cover
 ========================= */
+
 .post-cover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 20000;
-    /* 封面放大動畫過渡 */
-    transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out;
-    transform: scale(1);
-    opacity: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  overflow: hidden;
+  background: #111; /* 保底色，不會全黑 */
+  
+  /* ✨ 新增：確保平滑的縮放過渡效果 ✨ */
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out; 
 }
 
-/* 模糊背景 */
+/* 背景模糊層 */
 .cover-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    filter: blur(20px);
-    opacity: 0.8;
+  position: absolute;
+  inset: -15%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px) brightness(0.75) saturate(1.1);
+  transform: scale(1.2);
+  z-index: 0;
 }
 
-/* 封面原圖 */
+/* 前景原圖（完整顯示，不裁切） */
 .cover-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.5;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
-
-/* =========================
-   玻璃卡片 (.cover-overlay)
-========================= */
+/* 🔹 玻璃卡片 */
 .cover-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 2;
-    padding: 2rem 4rem;
-    color: white;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+  pointer-events: none;
+  transition:
+    opacity 1.8s ease,
+    transform 1.8s ease;
 
-    /* 初始狀態 */
-    opacity: 0;
-    transform: translate(-50%, -40%); /* 配合動畫的起點 */
-    pointer-events: auto; /* 確保按鈕可點擊 */
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  
+   width: 90%; 
+  max-width: 700px; /* 卡片可以稍微寬一點 */
+  padding: 3rem; /* 增加內距，創造呼吸感 */
 
-    /* 卡片淡出和 hover 效果的過渡時間 */
-    transition: opacity 0.3s ease, transform 0.2s ease-out;
+  /* 毛玻璃與背景色不變，效果很好 */
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0.25),
+    rgba(255,255,255,0.15)
+  );
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+
+  /* ✨ 優化：置中對齊，更有電影感 ✨ */
+  color: white;
+  text-align: center; 
+  z-index: 2;
 }
 
-/* 卡片進場動畫 Keyframes (1.8s) */
-@keyframes overlay-fade-in {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -40%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
 
-/* 卡片進場動畫目標狀態 */
 .cover-overlay.is-visible {
-    animation: overlay-fade-in 1.8s ease-out forwards;
-    opacity: 1;
-    transform: translate(-50%, -50%);
+  opacity: 1;
+  transform: translate(-50%) translateY(0);
+  pointer-events: auto;
 }
 
 .cover-overlay.is-visible:hover {
-  transform: translate(-50%, -50%) translateY(-4px); /* 修復 hover 導致 translate(-50%) 消失的問題 */
+  transform: translate(-50%) translateY(-4px);
 }
 
-/* 🔹 標題 (H1) */
+/* 🔹 標題 (H1) - 視覺焦點 */
 .cover-overlay h1 {
-  font-size: 2.8rem;
-  margin-bottom: 0.8rem;
-  font-weight: 900;
-  line-height: 1.1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 2.8rem; /* 比上次的 2.4rem 稍大，但比 3rem 小 */
+  margin-bottom: 0.8rem;
+  font-weight: 900; /* ✨ 優化：極粗體 (Boldest)，強調力量感 ✨ */
+  line-height: 1.1; 
+  /* 如果標題很長，可以加上文字陰影讓它在各種背景下更清晰 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 🔹 副標題 (p) */
+/* 🔹 副標題 (p) - 質感引言 */
 .cover-overlay p {
-  opacity: 1;
-  font-size: 1.3rem;
-  margin-bottom: 2.5rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  opacity: 1;
+  font-size: 1.3rem; /* 介於您希望的大小之間 */
+  margin-bottom: 2.5rem; /* 增加與按鈕的距離 */
+  font-weight: 300; /* ✨ 優化：使用細體，與大標題形成對比 ✨ */
+  
+  /* ✨ 優化：使用柔和的顏色，增加層次感 ✨ */
+  color: rgba(255, 255, 255, 0.85); 
+  max-width: 80%; /* 限制副標寬度，讓文字形成一個舒適的區塊 */
+  margin-left: auto; /* 配合 max-width 實現置中 */
+  margin-right: auto;
 }
 
 /* 🔹 按鈕 */
 #enter-post {
-  padding: 0.9rem 2.2rem;
-  border-radius: 999px;
-  border: none;
-  background: white;
-  color: #4f46e5;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s;
+  padding: 0.9rem 2.2rem;
+  border-radius: 999px;
+  border: none;
+  background: white;
+  color: #4f46e5;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s;
 }
 
 #enter-post:hover {
-  transform: scale(1.05);
-  background: #f3f4f6;
+  transform: scale(1.05);
+  background: #f3f4f6;
 }
 
-/* =========================
-   導覽列 (.navbar)
-========================= */
-.navbar-hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-50px);
-    transition: opacity 0.3s, transform 0.3s;
-}
-
-.navbar.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
+/* Navbar 隱藏/顯示 */
+.navbar-hidden {opacity:0;pointer-events:none;transition:opacity 0.5s;}
+.navbar-hidden.active {opacity:1;pointer-events:auto;}
 
 /* ================= Post Layout (單一毛玻璃背景版) ================= */
 
 .post-layout {
-    display: none; /* 初始隱藏，由 JS 切換為 grid */
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 1200px;
-    margin: 6rem auto;
-    padding: 2rem;
-    align-items: stretch;
-    position: relative;
-    opacity: 0; /* 初始透明 */
-    transition: opacity 0.5s ease-in; /* 內頁內容淡入效果 */
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 6rem auto;
+  padding: 2rem; /* 確保內容有內距 */
+  align-items: stretch; /* 確保左右兩欄高度一致 */
+  position: relative; /* 作為偽元素定位的基準 */
 }
 
-/* ✨ 覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
+/* ✨ 新增：覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
 .post-layout::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    z-index: 0;
+    content: '';
+    position: absolute;
+    inset: 0; /* 覆蓋整個 post-layout */
+    background: rgba(255, 255, 255, 0.1); /* 半透明白色背景 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    -webkit-backdrop-filter: blur(10px); /* 兼容性處理 */
+    border-radius: 16px; /* 圓角 */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* 陰影 */
+    z-index: 0; /* 放在所有內容之下 */
 }
 
 /* 確保 post-layout 的子元素在毛玻璃背景之上 */
 .post-gallery, .post-text {
-    position: relative;
-    z-index: 1;
-    background: transparent;
-    border-radius: 16px;
+    position: relative; /* 提升堆疊順序 */
+    z-index: 1; /* 確保在 ::before (z-index: 0) 之上 */
+    background: transparent; /* 將背景設為透明，以便看到後面的毛玻璃 */
+    border-radius: 16px; /* 保留圓角視覺 */
 }
 
 
 /* 幻燈片容器的細節調整 */
 .post-gallery {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
+/* gallery-frame 和 ::before 保持原本的邏輯，用於圖片本身的模糊延伸 */
 .gallery-frame {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 3;
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3; /* ✨ 新增：設置相片容器為 4:3 的長寬比 ✨ */
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px; /* 相片容器的圓角 */
+    --current-image-url: none; 
 }
 
+.gallery-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0; 
+    background-image: var(--current-image-url); 
+    background-size: cover;
+    background-position: center;
+    z-index: 1; 
+    filter: blur(10px) brightness(0.75);
+    -webkit-filter: blur(10px) brightness(0.75);
+    transform: scale(1.1); 
+}
 
 /* 幻燈片圖片本身 */
 .post-gallery img#gallery-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    position: relative;
-    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    position: relative;
+    z-index: 2; 
 }
 
-/* 🔹 幻燈片按鈕樣式 (維持不變) 🔹 */
+/* 🔹 幻燈片按鈕樣式 (已修復並整合) 🔹 */
 .gallery-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 2rem;
-  cursor: pointer;
-  box-shadow: none;
-  opacity: 0.6;
-  transition: opacity 0.3s, background-color 0.3s, color 0.3s;
-  z-index: 3;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2); /* 預設透明背景 */
+  color: white; /* 箭頭顏色 */
+  border: none;
+  border-radius: 50%;
+  width: 50px; 
+  height: 50px;
+  font-size: 2rem; 
+  cursor: pointer;
+  box-shadow: none; 
+  opacity: 0.6; 
+  transition: opacity 0.3s, background-color 0.3s, color 0.3s;
+  z-index: 3; /* 確保按鈕在圖片之上 */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gallery-btn.prev {left: 15px;}
 .gallery-btn.next {right: 15px;}
 
 .gallery-btn:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.9);
-  color: #4f46e5;
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.9); /* 滑鼠移過時變為接近實白的背景 */
+  color: #4f46e5; /* 箭頭變為主題藍紫色 */
 }
 
 
 /* 📝 文字區塊設計 */
 .post-text {
-  padding: 1rem 2.5rem 2.5rem 2.5rem;
-  color: white;
-  max-height: 70vh;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+  /* 背景已經設定為 transparent */
+  padding: 1rem 2.5rem 2.5rem 2.5rem; 
+  color: white; /* 確保文字顏色為白色 */
+  /* ✨ 優化：設置最大高度並允許垂直滾動 ✨ */
+  max-height: 70vh; /* 例如，設置為與相片區大致相同的高度 */
+  overflow-y: auto; /* 內容超出時顯示垂直滾動條 */
+
+  /* 優化：美化滾動條樣式 (僅適用於 Webkit 瀏覽器，如 Chrome/Safari) */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
 }
 
-/* Webkit 滾動條樣式 (維持不變) */
+/* Webkit 滾動條樣式 */
 .post-text::-webkit-scrollbar {
-  width: 8px;
+  width: 8px;
 }
 
 .post-text::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
 }
 
-/* 📝 Tab 書籤設計 (維持不變) */
+/* 📝 Tab 書籤設計 */
 .post-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  padding-bottom: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 淡白色底線 */
+  padding-bottom: 0.5rem;
 }
 
 .post-tabs .tab {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
-  cursor: pointer;
-  border-radius: 8px 8px 0 0;
-  transition: background 0.3s, color 0.3s;
-  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1); /* Tab 預設背景 */
+  border: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.3s, color 0.3s;
+  color: rgba(255, 255, 255, 0.7); /* 預設文字顏色 */
 }
 
 .post-tabs .tab.active {
-  border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border-bottom: 2px solid white;
-  margin-bottom: -1px;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.2); /* 選中時顏色稍深 */
+  color: white; /* 選中時文字亮白 */
+  border-bottom: 2px solid white; /* 強調當前書籤 */
+  margin-bottom: -1px; 
 }
 
 .post-tab-content {
-  display: none;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+  display: none;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .post-tab-content.active {
-  display: block;
+  display: block;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
-    .post-layout {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .post-text {
-        max-height: 50vh;
-    }
+    .post-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
+/* 將以下 CSS 程式碼塊複製到 styles.css 檔案的最底部 */
 
 /* ---------------- 進場動畫 (Entry Animations) ---------------- */
-
-/* 應用於左右兩欄的初始動畫狀態 */
-.post-gallery, .post-text {
-    opacity: 0;
-    transform: translateY(20px); /* 初始偏離狀態 */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* 動畫平滑過渡 */
+/* 定義進場動畫的關鍵影格 */
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* 從下方 20px 處開始 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* 移動到最終位置 */
+  }
 }
 
-/* 啟動動畫時的狀態 (由 JS 加入 .animate-entry) */
-.post-gallery.animate-entry, .post-text.animate-entry {
-    opacity: 1;
-    transform: translateY(0);
+/* 應用於左右兩欄的動畫 class */
+.animate-entry {
+  opacity: 0; /* 預設隱藏 */
+  /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
+  animation: slideInFade 0.6s ease-out forwards; 
 }
 
-
-/* 確保手機版佈局不受影響 (禁用動畫) */
+/* 確保手機版佈局不受影響 */
 @media (max-width: 768px) {
-    .post-gallery, .post-text {
-        transition: none; /* 移除動畫效果 */
-        opacity: 1; /* 確保內容顯示 */
-        transform: translateY(0); /* 確保位置正確 */
-    }
-
-    /* 手機上 animate-entry 保持靜態 */
-    .post-gallery.animate-entry, .post-text.animate-entry {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    .animate-entry {
+        animation: none; /* 在手機上可以禁用複雜動畫 */
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
