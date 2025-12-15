@@ -616,3 +616,35 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* 將以下 CSS 程式碼塊複製到 styles.css 檔案的最底部 */
+
+/* ---------------- 進場動畫 (Entry Animations) ---------------- */
+/* 定義進場動畫的關鍵影格 */
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* 從下方 20px 處開始 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* 移動到最終位置 */
+  }
+}
+
+/* 應用於左右兩欄的動畫 class */
+.animate-entry {
+  opacity: 0; /* 預設隱藏 */
+  /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
+  animation: slideInFade 0.6s ease-out forwards; 
+}
+
+/* 確保手機版佈局不受影響 */
+@media (max-width: 768px) {
+    .animate-entry {
+        animation: none; /* 在手機上可以禁用複雜動畫 */
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
