@@ -1,9 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 初始化設置 ---
     const navbar = document.querySelector('.navbar');
-    if (navbar) navbar.classList.add('navbar-hidden');
+    // 導覽列一開始隱藏
+    if (navbar) navbar.classList.add('navbar-hidden'); 
 
-    const postLayout = document.querySelector('.post-layout');
+    // 獲取內文區塊
+    const postLayout = document.querySelector('.post-layout'); 
 
     // --- 獲取文章 ID ---
     const urlParams = new URLSearchParams(window.location.search);
@@ -18,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`data/post_${postId}.json`)
         .then(response => {
             if (!response.ok) {
-                // 如果 JSON 檔案找不到或伺服器錯誤
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!post) {
                 return console.error('❌ No matching post data found');
             }
-
+            
             // --- 設置封面視覺元素 ---
             const coverImg = document.getElementById('cover-image');
             if (coverImg) coverImg.src = post.cover;
@@ -39,32 +40,28 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('cover-title').textContent = post.title;
             document.getElementById('cover-subtitle').textContent = post.subtitle;
 
-            // --- 延遲浮現玻璃卡片 (Overlay) ---
+            // --- 卡片進場控制 ---
             const overlay = document.querySelector('.cover-overlay');
             if (overlay) {
-                // 確保 overlay 元素可以被後面的點擊事件訪問到
-                setTimeout(() => overlay.classList.add('is-visible'), 1000); 
+                // 1. 卡片延遲 1000ms 後開始出現 (動畫時長 1.8s 由 CSS 控制)
+                setTimeout(() => {
+                    overlay.classList.add('is-visible');
+                    // 2. 確保卡片出現後，按鈕是可點擊的 (CSS已設置 pointer-events: auto)
+                }, 1000); 
             }
 
-            // --- 幻燈片功能 (最終版) ---
+            // --- 幻燈片功能 ---
             let index = 0;
             const galleryImg = document.getElementById('gallery-img');
             const galleryFrame = document.querySelector('.gallery-frame');
 
-            // 共用函式：更新圖片和背景
             function updateGalleryImage(newIndex, imagesArray) {
                 index = newIndex;
-                const imageUrl = imagesArray[index]; 
-
-                if (galleryImg) {
-                    galleryImg.src = imageUrl;
-                }
-                if (galleryFrame) {
-                    galleryFrame.style.backgroundImage = `url("${imageUrl}")`;
-                }
+                const imageUrl = imagesArray[index];
+                if (galleryImg) galleryImg.src = imageUrl;
+                if (galleryFrame) galleryFrame.style.backgroundImage = `url("${imageUrl}")`;
             }
 
-            // 初始化幻燈片
             if (galleryImg && post.images && post.images.length > 0) {
                 updateGalleryImage(0, post.images);
             }
@@ -93,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (tabsContainer && contentsContainer) {
                 post.texts.forEach((txt, i) => {
+                    // (Tabs 創建和點擊邏輯保持不變)
                     const tab = document.createElement('button');
                     tab.className = 'tab';
                     tab.textContent = txt.label;
@@ -119,61 +117,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             // ==============================================================
-            // 🌟 關鍵修訂：將點擊事件移動到這裡 (在 post 資料載入成功之後) 🌟
+            // 🌟 點擊事件 (卡片淡出 -> 封面放大) 🌟
             // ==============================================================
             document.getElementById('enter-post')?.addEventListener('click', () => {
-                // console.log('✅ Enter Story Clicked! Starting animation sequence.'); // 測試用
-
+                
                 const cover = document.getElementById('post-cover');
-                const overlayElement = document.querySelector('.cover-overlay'); // 使用 overlayElement 避免變數覆蓋
+                const overlayElement = document.querySelector('.cover-overlay');
+                
+                // 定義動畫時間 (與 CSS 同步)
+                const CARD_FADE_OUT_MS = 300;     // 卡片快速淡出時間
+                const COVER_ZOOM_DURATION_MS = 1500; // 封面放大時間
 
-                // Step 1: 立即隱藏毛玻璃卡片 (overlay) (0.5s 過渡)
+
+                // Step 1: 啟動卡片快速淡出 (0.3s)
                 if (overlayElement) {
                     overlayElement.style.opacity = '0';
-                    overlayElement.style.pointerEvents = 'none';
+                    overlayElement.style.pointerEvents = 'none'; // 禁用點擊，防止重複操作
                 }
 
-                // Step 2: 等待卡片隱藏後，觸發封面放大動畫 (1.5s 過渡)
+                // Step 2: 等待卡片淡出完成，然後啟動封面放大
                 setTimeout(() => {
-                    cover.style.transform = 'scale(1.5)'; 
-                    cover.style.opacity = '0';            
-                }, 500); 
+                    cover.style.transform = 'scale(1.5)';
+                    cover.style.opacity = '0';
+                }, CARD_FADE_OUT_MS); 
 
-
-                // Step 3: 等待所有動畫結束後再切換到內頁
+                // Step 3: 等待所有動畫結束後，切換到內頁
+                // 總延遲 = 卡片淡出時間 + 封面放大時間
+                const TOTAL_DELAY_MS = CARD_FADE_OUT_MS + COVER_ZOOM_DURATION_MS;
+                
                 setTimeout(() => {
-                    // 顯示內頁佈局容器 (postLayout 在頂部已獲取)
+                    // 顯示內頁佈局容器
                     if (postLayout) postLayout.style.display = 'grid'; 
-                    if (navbar) navbar.classList.add('active'); 
+                    // 顯示導覽列 (假設您在 CSS 中有 .navbar.active 樣式)
+                    if (navbar) {
+                        navbar.classList.remove('navbar-hidden');
+                        navbar.classList.add('active'); 
+                    }
 
-                    // 獲取左右兩欄元素，開始交錯進場動畫
+                    // 內頁進場動畫 (交錯效果)
                     const galleryElement = document.querySelector('.post-gallery');
                     const textElement = document.querySelector('.post-text');
 
+                    // 確保內頁元素開始動畫
                     setTimeout(() => {
-                        if (galleryElement) {
-                            galleryElement.classList.add('animate-entry');
-                        }
+                        if (galleryElement) galleryElement.classList.add('animate-entry');
                         if (textElement) {
                             setTimeout(() => {
                                 textElement.classList.add('animate-entry');
-                            }, 200); 
+                            }, 200); // 文本區塊延遲 200ms
                         }
                     }, 50);
                      
-                    // 最後，等待所有動畫結束後，將封面從 DOM 中移除 (清理 DOM)
+                    // 最後，將封面從 DOM 中移除 (清理 DOM)
                     setTimeout(() => {
                         if (cover) cover.remove();
-                    }, 800); 
+                    }, 800); // 800ms 後移除，確保動畫已完成
                      
-                }, 2000); // 2000ms = 500ms(卡片隱藏結束) + 1500ms(封面放大結束)
+                }, TOTAL_DELAY_MS); 
             });
 
 
-        }) // <--- fetch 成功的回呼函式結束
+        }) 
         .catch(err => {
              console.error('❌ JSON 載入錯誤:', err);
-             // 如果載入失敗，可以在這裡新增邏輯來隱藏載入畫面或顯示錯誤訊息
+             // 如果載入失敗，可以在這裡顯示錯誤訊息給用戶
         });
 
-}); // <--- DOMContentLoaded 結束
+});
