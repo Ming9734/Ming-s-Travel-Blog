@@ -441,7 +441,7 @@ body {
 .navbar-hidden {opacity:0;pointer-events:none;transition:opacity 0.5s;}
 .navbar-hidden.active {opacity:1;pointer-events:auto;}
 
-/* ================= Post Layout ================= */
+/* ================= Post Layout (單一毛玻璃背景版) ================= */
 
 .post-layout {
   display: grid;
@@ -461,7 +461,7 @@ body {
     inset: 0; /* 覆蓋整個 post-layout */
     background: rgba(255, 255, 255, 0.1); /* 半透明白色背景 */
     backdrop-filter: blur(10px); /* 毛玻璃效果 */
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* 兼容性處理 */
     border-radius: 16px; /* 圓角 */
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* 陰影 */
     z-index: 0; /* 放在所有內容之下 */
@@ -471,15 +471,13 @@ body {
 .post-gallery, .post-text {
     position: relative; /* 提升堆疊順序 */
     z-index: 1; /* 確保在 ::before (z-index: 0) 之上 */
-    /* ✨ 將背景設為透明，以便看到後面的毛玻璃 ✨ */
-    background: transparent; 
+    background: transparent; /* 將背景設為透明，以便看到後面的毛玻璃 */
     border-radius: 16px; /* 保留圓角視覺 */
 }
 
 
 /* 幻燈片容器的細節調整 */
 .post-gallery {
-    /* 這裡不需要毛玻璃或背景色了，因為父層已經有了 */
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -517,8 +515,37 @@ body {
     z-index: 2; 
 }
 
-/* 按鈕樣式 (z-index: 3) */
-/* ... (保留按鈕原有樣式) ... */
+/* 🔹 幻燈片按鈕樣式 (已修復並整合) 🔹 */
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.2); /* 預設透明背景 */
+  color: white; /* 箭頭顏色 */
+  border: none;
+  border-radius: 50%;
+  width: 50px; 
+  height: 50px;
+  font-size: 2rem; 
+  cursor: pointer;
+  box-shadow: none; 
+  opacity: 0.6; 
+  transition: opacity 0.3s, background-color 0.3s, color 0.3s;
+  z-index: 3; /* 確保按鈕在圖片之上 */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-btn.prev {left: 15px;}
+.gallery-btn.next {right: 15px;}
+
+.gallery-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.9); /* 滑鼠移過時變為接近實白的背景 */
+  color: #4f46e5; /* 箭頭變為主題藍紫色 */
+}
 
 
 /* 📝 文字區塊設計 */
@@ -529,8 +556,42 @@ body {
 }
 
 /* 📝 Tab 書籤設計 */
-/* ... (保留上一個回覆中的白色系列 Tab 樣式) ... */
+.post-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 淡白色底線 */
+  padding-bottom: 0.5rem;
+}
 
+.post-tabs .tab {
+  background: rgba(255, 255, 255, 0.1); /* Tab 預設背景 */
+  border: none;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  transition: background 0.3s, color 0.3s;
+  color: rgba(255, 255, 255, 0.7); /* 預設文字顏色 */
+}
+
+.post-tabs .tab.active {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.2); /* 選中時顏色稍深 */
+  color: white; /* 選中時文字亮白 */
+  border-bottom: 2px solid white; /* 強調當前書籤 */
+  margin-bottom: -1px; 
+}
+
+.post-tab-content {
+  display: none;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.post-tab-content.active {
+  display: block;
+}
 
 /* 響應式設計 */
 @media (max-width: 768px) {
@@ -538,4 +599,3 @@ body {
         grid-template-columns: 1fr;
     }
 }
-
