@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // --- 延遲浮現玻璃卡片 (Overlay) ---
       const overlay = document.querySelector('.cover-overlay');
       if (overlay) {
-        overlay.classList.remove('is-visible'); 
+       
         setTimeout(() => overlay.classList.add('is-visible'), 1000); 
       }
 
