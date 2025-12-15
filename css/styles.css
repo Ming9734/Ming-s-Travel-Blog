@@ -454,38 +454,54 @@ body {
   transition: opacity 0.6s;
 }
 
-/* 為相簿容器添加相對定位，並設置背景模糊效果的容器 */
+/* 為相簿容器添加相對定位，並定義 CSS 變數 */
 .post-gallery {
   position: relative; 
 }
 
-/* 確保 .gallery-frame 容器佔滿空間，並應用背景模糊 */
 .post-gallery .gallery-frame {
     width: 100%;
     height: 70vh; /* 設置一個固定的高度 */
     position: relative;
     overflow: hidden; /* 隱藏超出邊界的背景延伸 */
     border-radius: 16px;
-    background-size: cover; /* 背景圖覆蓋容器 */
+    
+    /* 定義一個 CSS 變數，JS 會更新這個變數 */
+    --current-image-url: none; 
+}
+
+/* ✨ 關鍵修復：使用偽元素創建獨立的模糊背景層 ✨ */
+.post-gallery .gallery-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0; /* 讓偽元素完全覆蓋父容器 */
+    
+    /* 使用 JS 設定的背景圖片 URL */
+    background-image: var(--current-image-url); 
+    background-size: cover;
     background-position: center;
-    /* 為背景圖添加模糊效果，需要 JS 動態設置 backgroundImage */
-    filter: blur(10px) brightness(0.8); 
-    /* 確保圓角效果也作用在背景延伸圖上 */
+    z-index: 1; /* 放在前景圖片之下 */
+    
+    /* 在這裡應用模糊效果，只影響這個偽元素 */
+    filter: blur(10px) brightness(0.8);
     -webkit-filter: blur(10px) brightness(0.8);
+    
+    /* 讓背景圖稍微延伸出去，確保模糊邊緣不會有銳利邊界 */
+    transform: scale(1.1); 
 }
 
 
-/* 幻燈片圖片本身：完整顯示在容器中央，不裁切 */
+/* 幻燈片圖片本身：完整顯示在容器中央，保持清晰 */
 .post-gallery img#gallery-img {
     width: 100%;
     height: 100%;
     object-fit: contain; /* 確保圖片完整顯示，留下空白區域讓背景延伸圖顯示 */
     position: relative;
-    z-index: 2; /* 確保圖片在模糊背景之上 */
+    z-index: 2; /* 確保圖片在模糊背景之上 (z-index: 1) */
 }
 
 
-/* 按鈕位置現在會相對於 .post-gallery */
+/* 按鈕樣式保持不變 */
 .gallery-btn {
   position: absolute;
   top: 50%;
@@ -497,7 +513,7 @@ body {
   height: 44px;
   font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 增加陰影讓按鈕更明顯 */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: background 0.3s;
   z-index: 3; /* 確保按鈕在圖片之上 */
 }
@@ -509,45 +525,45 @@ body {
 .gallery-btn.prev {left:10px;}
 .gallery-btn.next {right:10px;}
 
-/* ✨ 優化 3: 文字區塊設計 - 簡潔明亮風格 ✨ */
+/* 文字區塊設計 */
 .post-text {
   background: white;
   border-radius: 16px;
   padding: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* 增加微妙的陰影 */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* ✨ 優化 3: Tab 書籤設計 ✨ */
+/* Tab 書籤設計 */
 .post-tabs {
   display: flex;
-  gap: 0.5rem; /* 縮小書籤間距 */
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid #eee; /* 為整個書籤列增加底線 */
+  border-bottom: 1px solid #eee;
   padding-bottom: 0.5rem;
 }
 
 .post-tabs .tab {
-  background: #f9f9f9; /* 預設背景色 */
+  background: #f9f9f9;
   border: none;
   font-weight: 600;
-  padding: 0.6rem 1.2rem; /* 調整大小 */
+  padding: 0.6rem 1.2rem;
   cursor: pointer;
-  border-radius: 8px 8px 0 0; /* 圓角只在上方 */
+  border-radius: 8px 8px 0 0;
   transition: background 0.3s, color 0.3s;
   color: #666;
 }
 
 .post-tabs .tab.active {
   border-color: #4f46e5;
-  background: white; /* 被選中時背景變白 */
-  color: #4f46e5; /* 主題色 */
-  border-bottom: 2px solid #4f46e5; /* 強調當前書籤 */
-  margin-bottom: -1px; /* 視覺上覆蓋掉父層的底線 */
+  background: white;
+  color: #4f46e5;
+  border-bottom: 2px solid #4f46e5;
+  margin-bottom: -1px;
 }
 
 .post-tab-content {
   display: none;
-  line-height: 1.7; /* 增加行高，文字更易讀 */
+  line-height: 1.7;
   color: #333;
 }
 
@@ -555,9 +571,10 @@ body {
   display: block;
 }
 
-/* 確保響應式設計，手機版時佈局變為垂直堆疊 */
+/* 響應式設計 */
 @media (max-width: 768px) {
     .post-layout {
         grid-template-columns: 1fr;
     }
 }
+
