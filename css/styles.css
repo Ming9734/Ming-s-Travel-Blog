@@ -368,9 +368,9 @@ body {
   bottom: 8%;
   left: 50%;
   
-   width: 90%; 
-  max-width: 700px; /* 卡片可以稍微寬一點 */
-  padding: 3rem; /* 增加內距，創造呼吸感 */
+   width: 80%; 
+  max-width: 500px;
+  padding: 2rem;
 
   /* 毛玻璃與背景色不變，效果很好 */
   background: linear-gradient(
