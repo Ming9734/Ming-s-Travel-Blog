@@ -31,57 +31,45 @@ document.addEventListener('DOMContentLoaded', () => {
       // 延遲浮現 overlay
       const overlay = document.querySelector('.cover-overlay');
       if (overlay) {
-        overlay.classList.remove('is-visible'); // 一開始隱藏
-        setTimeout(() => overlay.classList.add('is-visible'), 2000); // 2秒後浮現
+        overlay.classList.remove('is-visible'); 
+        setTimeout(() => overlay.classList.add('is-visible'), 2000);
       }
 
-      // 在 post.js 中找到這個區塊：
+      // --- 幻燈片功能 (已修復並優化) ---
+      let index = 0;
+      const galleryImg = document.getElementById('gallery-img');
+      const galleryFrame = document.querySelector('.gallery-frame'); // 獲取父容器
 
-// 幻燈片
-let index = 0;
-const galleryImg = document.getElementById('gallery-img');
-// ✨ 新增這行：獲取圖片的父容器 ✨
-const galleryFrame = document.querySelector('.gallery-frame'); 
+      // 共用函式：更新圖片和背景變數
+      function updateGalleryImage(newIndex, imagesArray) {
+          index = newIndex;
+          if (galleryImg) {
+              galleryImg.src = imagesArray[index];
+          }
+          if (galleryFrame) {
+              // ✨ 設置 CSS 變數，讓 CSS 中的 ::before 使用它來模糊背景 ✨
+              galleryFrame.style.setProperty('--current-image-url', `url("${imagesArray[index]}")`);
+          }
+      }
 
+      // 初始化幻燈片
+      if (galleryImg && post.images && post.images.length > 0) {
+          updateGalleryImage(0, post.images);
+      }
 
-// 創建一個共用的函式來更新圖片和背景
-function updateGalleryImage(newIndex, imagesArray) {
-    index = newIndex;
-    if (galleryImg) {
-        galleryImg.src = imagesArray[index];
-    }
-    // ✨ 新增：同時更新容器的背景圖片，以實現模糊延伸效果 ✨
-    if (galleryFrame) {
-        galleryFrame.style.backgroundImage = `url("${imagesArray[index]}")`;
-        // 可以選擇在這裡增加一個 filter 來預先模糊背景圖
-        // galleryFrame.style.filter = 'blur(10px) brightness(0.8)'; 
-    }
-}
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
 
+      if (prevBtn) prevBtn.onclick = () => {
+        const newIndex = (index - 1 + post.images.length) % post.images.length;
+        updateGalleryImage(newIndex, post.images);
+      };
+      if (nextBtn) nextBtn.onclick = () => {
+        const newIndex = (index + 1) % post.images.length;
+        updateGalleryImage(newIndex, post.images);
+      };
+      // --- 幻燈片功能結束 ---
 
-// 在 fetch 的 .then 區塊內，將圖片初始化設置替換為新函式：
-
-/* 原始碼：
-if (galleryImg && post.images.length) galleryImg.src = post.images[index]; 
-*/
-
-// ✨ 替換為：
-if (galleryImg && post.images && post.images.length > 0) {
-    updateGalleryImage(0, post.images);
-}
-
-
-// 更新按鈕的 onclick 事件處理器，使用新函式：
-
-if (prevBtn) prevBtn.onclick = () => {
-    const newIndex = (index - 1 + post.images.length) % post.images.length;
-    updateGalleryImage(newIndex, post.images); // 使用新函式
-};
-
-if (nextBtn) nextBtn.onclick = () => {
-    const newIndex = (index + 1) % post.images.length;
-    updateGalleryImage(newIndex, post.images); // 使用新函式
-};
 
       // 文字區塊 tabs
       const tabsContainer = document.getElementById('post-tabs');
