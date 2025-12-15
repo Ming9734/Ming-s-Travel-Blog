@@ -1,0 +1,30 @@
+{
+  "id": "mount-etna",
+  "title": "Mount Etna",
+  "subtitle": "Catania, Italy",
+  "country": "Italy",
+  "city": "Catania",
+  "cover": "images/post/mount-etna-cover.jpg",
+  "images": [
+    "images/post/mount-etna-1.jpg",
+    "images/post/mount-etna-2.jpg",
+    "images/post/mount-etna-3.jpg",
+    "images/post/mount-etna-4.jpg",
+    "images/post/mount-etna-5.jpg",
+    "images/post/mount-etna-6.jpg",
+    "images/post/mount-etna-7.jpg",
+    "images/post/mount-etna-8.jpg",
+    "images/post/mount-etna-9.jpg",
+    "images/post/mount-etna-10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "History",
+      "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
+    },
+    {
+      "label": "Experience",
+      "content": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
+    }
+  ]
+}
