@@ -332,7 +332,7 @@ body {
   background: #111; /* 保底色，不會全黑 */
   
   /* ✨ 新增：確保平滑的縮放過渡效果 ✨ */
-  transition: transform 1s ease-in-out, opacity 1s ease-in-out; 
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out; 
 }
 
 /* 背景模糊層 */
@@ -363,8 +363,8 @@ body {
   
   /* 將過渡時間縮短為 0.3s，以配合新的序列動畫 JS */
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    opacity 0.5s ease,
+    transform 0.5s ease;
 
   position: absolute;
   bottom: 8%;
@@ -646,7 +646,7 @@ body {
 .animate-entry {
   opacity: 0; /* 預設隱藏 */
   /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
-  animation: slideInFade 0.6s ease-out forwards; 
+  animation: slideInFade 0.8s ease-out forwards; 
 }
 
 /* 確保手機版佈局不受影響 */
