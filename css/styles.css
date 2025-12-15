@@ -498,6 +498,7 @@ body {
     object-fit: contain; /* 確保圖片完整顯示，留下空白區域讓背景延伸圖顯示 */
     position: relative;
     z-index: 2; /* 確保圖片在模糊背景之上 (z-index: 1) */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); 
 }
 
 
