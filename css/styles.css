@@ -354,7 +354,7 @@ body {
   height: 100%;
   object-fit: contain;
 }
-/* 🔹 玻璃卡片 */
+
 /* 🔹 玻璃卡片 */
 .cover-overlay {
   opacity: 0;
@@ -363,8 +363,8 @@ body {
   
   /* 將過渡時間縮短為 0.3s，以配合新的序列動畫 JS */
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+    opacity 1s ease,
+    transform 1s ease;
 
   position: absolute;
   bottom: 8%;
