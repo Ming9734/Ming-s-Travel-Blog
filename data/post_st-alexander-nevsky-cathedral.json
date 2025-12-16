@@ -13,6 +13,15 @@
   ],
   "texts": [
     {
+      "label": "Highlights",
+      "content": "<ul>\
+    <li>Iconic Byzantine Revival–style Eastern Orthodox church</li>\
+    <li>Once the largest Eastern Orthodox church in the world</li>\
+    <li>Built in memory of Russian soldiers who died in the Russo-Turkish War, whose sacrifice contributed to Bulgaria’s independence</li>\
+    <li>Named after an ancient Russian prince who defended his realm against invasions by the Swedes and the Teutonic Knights, securing the role of Eastern Orthodoxy in Eastern Europe</li>\
+  </ul>"
+    },
+    {
       "label": "History",
       "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
     },
