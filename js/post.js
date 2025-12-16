@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         cover.style.transform = 'scale(1.5)'; 
         cover.style.opacity = '0';            
-    }, 500); 
+    }, 1000); 
 
 
     // Step 3: 等待所有動畫結束後再切換到內頁
@@ -158,6 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cover.remove();
       },800); 
       
-    }, 2000); // 2000ms = 500ms(卡片隱藏結束) + 1500ms(封面放大結束)
+    }, 2500); // 2000ms = 500ms(卡片隱藏結束) + 1500ms(封面放大結束)
   });
 });
