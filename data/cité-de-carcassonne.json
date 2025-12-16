@@ -1,0 +1,30 @@
+{
+  "id": "cité-de-carcassonne",
+  "title": "Cité de Carcassonne",
+  "subtitle": "Carcassonne, France",
+  "country": "France",
+  "city": "Carcassonne",
+  "cover": "images/post/cité-de-carcassonne/cover.jpg",
+  "images": [
+    "images/post/cité-de-carcassonne/1.jpg",
+    "images/post/cité-de-carcassonne/2.jpg",
+    "images/post/cité-de-carcassonne/3.jpg",
+    "images/post/cité-de-carcassonne/4.jpg",
+    "images/post/cité-de-carcassonne/5.jpg",
+    "images/post/cité-de-carcassonne/6.jpg",
+    "images/post/cité-de-carcassonne/7.jpg",
+    "images/post/cité-de-carcassonne/8.jpg",
+    "images/post/cité-de-carcassonne/9.jpg",
+    "images/post/cité-de-carcassonne/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "History",
+      "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
+    },
+    {
+      "label": "Experience",
+      "content": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
+    }
+  ]
+}
