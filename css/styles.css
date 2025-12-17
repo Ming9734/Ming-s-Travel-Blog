@@ -231,7 +231,6 @@ body {
   position: absolute;
   z-index: 2000;
   pointer-events: none;
-  /* 增加微小的過渡感，讓移動更順滑 */
   transition: opacity 0.3s ease, transform 0.1s ease-out;
   display: none;
 }
@@ -239,14 +238,11 @@ body {
 /* 預覽卡片整體容器 */
 .map-preview-card {
   width: 280px;
-  /* 稍微深一點的底色，增加玻璃厚度感 */
-  background: rgba(15, 15, 15, 0.3); 
+  background: rgba(255, 255, 255, 0.1); 
   border-radius: 20px;
   overflow: hidden;
-  /* 強大且深邃的陰影，讓卡片浮現於地圖之上 */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-  /* 高對比度的邊框，模擬玻璃切面亮光 */
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 亮色邊框強化邊緣 */
 }
 
 /* 上半部圖片區域 */
@@ -255,29 +251,27 @@ body {
   height: 160px;
   object-fit: cover;
   display: block;
-  /* 圖片底部加一點點變暗處理，與下方文字區銜接 */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 🌟 下半部：強化版透明玻璃內容區 🌟 */
+/* 🌟 下半部：藍紫漸層透明玻璃內容區 🌟 */
 .preview-content {
   padding: 16px;
-  /* 使用深色漸層背景，確保白色文字 100% 清晰 */
+  /* 使用與 body 呼應的藍紫漸層，但加入透明度 (alpha) */
   background: linear-gradient(
     135deg, 
-    rgba(0, 0, 0, 0.6) 0%,   /* 上方深色遮罩 */
-    rgba(20, 20, 20, 0.4) 100%
+    rgba(79, 70, 229, 0.75) 0%,   /* #4f46e5 的半透明版 */
+    rgba(147, 51, 234, 0.75) 100%  /* #9333ea 的半透明版 */
   );
-  backdrop-filter: blur(15px); /* 增加模糊度，完全隔絕地圖背景干擾 */
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
   position: relative;
 }
 
-/* 內容標籤 (跟隨主題紫色) */
+/* 內容標籤 (白色背景，紫色文字以增加對比) */
 .preview-content .badge {
   display: inline-block;
-  background: linear-gradient(90deg, #4f46e5, #9333ea);
-  color: white;
+  background: white;
+  color: #4f46e5;
   font-size: 0.7rem;
   padding: 3px 10px;
   border-radius: 20px;
@@ -285,7 +279,6 @@ body {
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .preview-content h3 {
@@ -293,27 +286,25 @@ body {
   font-size: 1.25rem;
   color: #ffffff;
   font-weight: 700;
-  /* ✨ 關鍵：多重陰影讓文字在任何背景下都清楚 */
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 1);
+  /* 即使背景有色，仍保留陰影確保清晰 */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .preview-content p {
   margin: 0 0 12px 0;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.9); /* 提高文字亮度 */
+  color: rgba(255, 255, 255, 0.95); 
   line-height: 1.5;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* 底部點擊提示 (改用明亮的琥珀色提高引導性) */
+/* 底部點擊提示 (恢復為原本的淡紫色) */
 .click-hint {
   font-size: 0.75rem;
-  color: #fbbf24; 
-  font-weight: 700;
+  color: #a5b4fc; 
+  font-weight: 600;
   display: flex;
   align-items: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .click-hint::before {
