@@ -62,11 +62,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 // 跟隨滑鼠
-                marker.on('mousemove', (e) => {
-                    const pos = e.containerPoint;
-                    infoBox.style.left = (pos.x + 15) + 'px';
-                    infoBox.style.top = (pos.y + 15) + 'px';
-                });
+                // 跟隨滑鼠並防止溢出
+marker.on('mousemove', (e) => {
+    const pos = e.containerPoint; // 獲取相對於地圖容器的座標
+    
+    const padding = 20;          // 滑鼠與卡片之間的間距
+    const edgeBuffer = 15;       // 距離地圖邊緣的最小緩衝（不貼死邊緣）
+    
+    // 獲取卡片本身的寬高
+    const cardWidth = infoBox.offsetWidth;
+    const cardHeight = infoBox.offsetHeight;
+    
+    // 獲取地圖容器的寬高
+    const containerWidth = mapContainer.clientWidth;
+    const containerHeight = mapContainer.clientHeight;
+
+    // --- X 軸邏輯 ---
+    let leftPos = pos.x + padding;
+    // 如果「目前位置 + 卡片寬度 + 緩衝」超過容器寬度
+    if (leftPos + cardWidth + edgeBuffer > containerWidth) {
+        // 則改為顯示在滑鼠左側
+        leftPos = pos.x - cardWidth - padding;
+    }
+    // 確保不會超出左邊界
+    leftPos = Math.max(edgeBuffer, leftPos);
+
+    // --- Y 軸邏輯 ---
+    let topPos = pos.y + padding;
+    // 如果「目前位置 + 卡片高度 + 緩衝」超過容器高度
+    if (topPos + cardHeight + edgeBuffer > containerHeight) {
+        // 則改為顯示在滑鼠上方
+        topPos = pos.y - cardHeight - padding;
+    }
+    // 確保不會超出頂部邊界 (例如被導覽列擋住)
+    topPos = Math.max(edgeBuffer, topPos);
+
+    // 套用位置
+    infoBox.style.left = leftPos + 'px';
+    infoBox.style.top = topPos + 'px';
+});
 
                 // 移出事件
                 marker.on('mouseout', () => {
