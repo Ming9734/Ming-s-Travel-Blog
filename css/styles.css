@@ -301,7 +301,7 @@ body {
 /* 底部點擊提示 (恢復為原本的淡紫色) */
 .click-hint {
   font-size: 0.75rem;
-  color: #a5b4fc; 
+  color: #EE82EE; 
   font-weight: 600;
   display: flex;
   align-items: center;
