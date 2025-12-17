@@ -102,6 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (posts.length > 0) {
                 map.fitBounds(clusterGroup.getBounds().pad(0.1));
             }
+            // 🌟 放在這裡！確保地圖在調整完邊界後，強制刷新一次大小
+            setTimeout(() => {
+                map.invalidateSize();
+            }, 300);
         })
         .catch(err => console.error('Error loading map data:', err));
 });
