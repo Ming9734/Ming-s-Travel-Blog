@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     marker.setIcon(bigIcon);
                     infoBox.innerHTML = `
                         <div class="map-preview-card">
-                            <img src="${p.image}">
+                            <img src="${p.preview}">
                             <div class="preview-content">
                                 <span class="badge">${p.country}</span>
                                 <h3>${p.title}</h3>
