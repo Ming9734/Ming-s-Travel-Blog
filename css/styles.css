@@ -8,8 +8,6 @@ body {
     rgba(79, 70, 229, 0.8) 0%,   /* #4f46e5 的半透明版 */
     rgba(147, 51, 234, 0.8) 100%  /* #9333ea 的半透明版 */
   );
-  backdrop-filter: blur(12px); 
-  -webkit-backdrop-filter: blur(12px);
   color: #222;
 }
 /* ---------------- about ---------------- */
