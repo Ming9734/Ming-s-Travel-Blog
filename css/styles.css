@@ -257,28 +257,36 @@ body {
 }
 
 /* ---------------- 浮動 Hero（index 專用） ---------------- */
+
 .hero-floating {
-  position: fixed;
-  top: 50%; 
-  left: 50%;
-  transform: translate(-50%, -50%); /* 居中定位 */
-  /* 調整 top 屬性，讓它在導覽列下方居中 */
-  margin-top: 39px; /* 78px navbar 高度的一半，讓視覺上居中 */
-  z-index: 1000;  /* 確保蓋在地圖上 */
+  /* 1. 強制脫離所有容器，定位在螢幕視窗 */
+  position: fixed !important; 
+  
+  /* 2. 精確中心點設定 */
+  top: 50% !important;
+  left: 50% !important;
+  
+  /* 3. 關鍵修正：確保 transform 是唯一的位移來源 */
+  transform: translate(-50%, -50%) !important;
+  
+  /* 4. 移除所有可能導致偏移的 margin */
+  margin: 0 !important; 
+  
+  /* 5. 確保層級在地圖之上 */
+  z-index: 9999 !important;
+
+  /* --- 以下為視覺樣式 --- */
   width: 480px;
+  max-width: 85%;
   padding: 2.5rem;
   text-align: center;
-
-  /* 藍紫漸層 + 玻璃透明 */
-  background: linear-gradient(120deg, #4f46e555, #9333ea55); 
-  /* 上面結尾的 cc = 約 80% 不透明，可自行改 66、55、44 更透明 */
-
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.45), rgba(147, 51, 234, 0.45));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
   color: white;
-  border-radius: 20px;
-
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-  backdrop-filter: blur(3px);
- 
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .hero-floating h1 {
