@@ -1,48 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Map View - Ming’s Travel Blog</title>
-
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
-<!-- MarkerCluster CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <meta charset="UTF-8">
+    <title>Map View - Ming’s Travel Blog</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
 </head>
-<body>
+<body class="map-page">
 
-<!-- 導覽列 -->
 <nav class="navbar">
-  <ul class="nav">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="map.html">Map</a></li>
-    <li class="dropdown" id="posts-menu">
-  <a href="posts.html">Posts</a>
-  <ul class="dropdown-menu" id="posts-dropdown"></ul>
-</li>
-    <li><a href="about.html">About</a></li>
-  </ul>
+    <ul class="nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li class="dropdown" id="posts-menu">
+            <a href="posts.html">Posts</a>
+            <ul class="dropdown-menu" id="posts-dropdown"></ul>
+        </li>
+        <li><a href="about.html">About</a></li>
+    </ul>
 </nav>
-  
+
 <div id="map"></div>
 
 <header class="hero-floating-map">
-  <h1>Europe Travel Map</h1>
-  <p>Exploring the historic paths across the continent.</p>
+    <h1>Europe Travel Map</h1>
+    <p>Explore the historic paths and stories across the continent.</p>
 </header>
 
-<!-- 地圖容器 -->
-<div id="map" style="height:80vh;"></div>
-
-<!-- Leaflet -->
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<!-- MarkerCluster -->
 <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-<!-- 自動生成導覽列 -->
 <script src="js/nav.js"></script>
-<!-- 地圖與 marker 控制 -->
 <script src="js/map.js"></script>
 
 </body>
