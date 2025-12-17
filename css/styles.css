@@ -178,6 +178,18 @@ body {
   filter: brightness(0.85);
   background-color: #222; /* 地圖沒出來前顯示深色 */
 }
+
+/* 1. 地圖容器：強制滿版並扣除導覽列空間 */
+#map {
+    position: absolute; /* 使用絕對定位 */
+    top: 70px;         /* 導覽列的高度，確保地圖從導覽列下方開始 */
+    left: 0;
+    right: 0;
+    bottom: 0;         /* 延伸到視窗底部 */
+    width: 100%;
+    height: calc(100vh - 70px); /* 🌟 關鍵：強制高度為視窗高度減去導覽列 */
+    z-index: 1;        /* 地圖在最底層 */
+}
 /* ---------------- 1. 浮動玻璃標題面板 (地圖左上角) ---------------- */
 .hero-floating-map {
   position: absolute;
