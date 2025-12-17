@@ -19,12 +19,20 @@
   ],
   "texts": [
     {
-      "label": "History",
-      "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
+    "label": "Highlights",
+    "content": "<ul><li>A UNESCO World Heritage Site</li><li>One of the finest and best-preserved medieval fortified cities, renowned for its rare double ring of walls</li><li>A remarkable example of architectural restoration by Viollet-le-Duc, also known for restoring Mont-Saint-Michel and Notre-Dame de Paris</li><li>Still a living city, with residents continuing to live within the fortress walls</li><li>A historic stronghold shaped by different peoples, religions, and faiths over the centuries</li></ul>"
     },
     {
-      "label": "Experience",
-      "content": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
+      "label": "Overview",
+      "content": "<p>Alexander Nevsky Cathedral is a classic Neo-Byzantine Eastern Orthodox church in Sofia, Bulgaria. Construction began in 1882, but the main work was carried out between 1904 and 1912. Until 2000, it was the largest completed Eastern Orthodox cathedral in the world, and it remains the largest in the Balkan Peninsula. Its enormous gilded domes and building materials sourced from around the world give it a grand and luxurious appearance. The cathedral’s monumental scale and ornate design make it one of Bulgaria’s most important national symbols, as well as a must-visit landmark for anyone travelling to Sofia.</p><p>The cathedral was built to commemorate Russian soldiers who died in the Russo-Turkish War, a conflict that paved the way for Bulgaria’s independence from the Ottoman Empire. It is named after Alexander Nevsky, a revered Russian prince and military leader who successfully repelled invasions by the Swedes and the Teutonic Knights, securing the position of Eastern Orthodoxy in Eastern Europe. Between 1916 and 1920, during World War I, the cathedral was temporarily renamed Sts. Cyril and Methodius Cathedral due to Bulgaria and Russia being on opposing sides, but the original name was restored shortly after the war.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Even before arriving in Bulgaria, I was captivated by images of Alexander Nevsky Cathedral online. Its grandeur and architectural design immediately drew my attention, and I knew it would be a must-visit location in Sofia.</p><p>Stepping inside the cathedral was breathtaking. It was my first time entering an Eastern Orthodox church and also my first experience in a massive Byzantine-style building. The interior is very different from Gothic churches: there are no supporting columns disrupting the space, so the expansive hall beneath the huge central dome feels open and awe-inspiring.</p><p>Because the small windows are only near the central dome, the interior remains dim even when the sun is shining brightly outside. Candlelight and lamps illuminate the walls and ceilings, highlighting the intricate murals and adding to the sense of sacred mystery.</p><p>The main altar is also very different from Catholic churches. Instead of a large statue of Jesus and rows of pews, there are rows of icons. Worshippers approach the icons to kiss, touch, or whisper their prayers. Watching the people pray was deeply moving; regardless of faith, their expressions showed sincerity and unwavering devotion. Unfortunately, photography is not allowed inside the cathedral, so I could only try to convey my impressions through words.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<p>Alexander Nevsky Cathedral is a quintessential example of Neo-Byzantine architecture. This style is characterised by a Greek cross layout with a central large dome surrounded by four smaller domes of equal size. Unlike the elongated Latin-cross layout typical of Catholic churches, Greek-cross churches appear more square when viewed from above. This architectural style was especially common in the former Russian Empire, Yugoslavia, and Bulgaria.</p>"
     }
   ]
 }
