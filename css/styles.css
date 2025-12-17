@@ -290,25 +290,53 @@ body {
   opacity: 1;
 }
 
-/* ---------------- Map ---------------- */
+/* 🌍 1. 全螢幕地圖佈局 (扣除導覽列高度) */
 #map {
-  height: 80vh;
+  position: absolute;
+  top: 70px; /* 這裡請填入您導覽列的實際高度 */
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  position: relative;
-  z-index: 1;
+  z-index: 1; /* 地圖在底層 */
 }
 
-#info-box {
+/* 🧊 2. 玻璃效果浮動面板 */
+.hero-floating-map {
   position: absolute;
-  max-width: 280px;
-  pointer-events: none;
-  background: white;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 500;
-  transition: transform 0.2s, opacity 0.2s;
+  top: 100px; /* 距離導覽列下方一點點 */
+  left: 30px;
+  z-index: 1000; /* 確保在地圖之上 */
+  
+  width: 320px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.2); /* 半透明 */
+  backdrop-filter: blur(12px); /* 磨砂玻璃 */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  
+  /* 讓滑鼠可以穿過標題區塊點擊地圖（選用） */
+  pointer-events: none; 
 }
+
+.hero-floating-map h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-floating-map p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+
 /* 🌍 首頁背景地圖：強制滿版 */
 #home-map {
   position: fixed !important;
