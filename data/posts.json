@@ -6,9 +6,8 @@
     "city": "Sofia",
     "lat": 42.696029827626234,
     "lng": 23.332531500138508,
-    "summary": "A slow walk through historic Sofia.",
+    "summary": "Alexander Nevsky Cathedral is Sofia’s most iconic landmark and a monumental Neo-Byzantine Eastern Orthodox cathedral. Once the largest completed Orthodox church in the world, it stands as a powerful symbol of Bulgaria’s history, faith, and national identity.",
     "image": "images/posts/st-alexander-nevsky-cathedral.jpg",
-    "content": "<p>This is my full Sofia travel story.</p>",
     "icon": "images/markers/BG.png"
   },
   {
@@ -20,7 +19,6 @@
     "lng": 2.364196100000358,
     "summary": "A slow walk through historic Carcassonne.",
     "image": "images/posts/cité-de-carcassonne.jpg",
-    "content": "<p>This is my Franch story.</p>",
     "icon": "images/markers/FR.png"
   },
    {
@@ -32,7 +30,6 @@
     "lng": 14.994711996785409,
     "summary": "A slow walk through a beautiful volcano.",
     "image": "images/posts/mount-etna.jpg",
-    "content": "<p>This is my Italian story.</p>",
     "icon": "images/markers/IT.png"
   },
   {
@@ -44,7 +41,6 @@
     "lng": 12.449347953050836,
     "summary": "A slow walk through amazing towers.",
     "image": "images/posts/three-towers-of-san-marino.jpg",
-    "content": "<p>This is my special story.</p>",
     "icon": "images/markers/SM.png"
   }
 ]
