@@ -8,7 +8,8 @@
     "lng": 23.332531500138508,
     "summary": "It is Sofia’s most iconic Neo-Byzantine landmark and a powerful symbol of Bulgaria’s history and faith.",
     "image": "images/posts/st-alexander-nevsky-cathedral.jpg",
-    "icon": "images/markers/BG.png"
+    "icon": "images/markers/BG.png",
+    "preview": "images/post/st-alexander-nevsky-cathedral/cover.jpg"
   },
   {
     "id": "cité-de-carcassonne",
@@ -19,7 +20,8 @@
     "lng": 2.364196100000358,
     "summary": "A slow walk through historic Carcassonne.",
     "image": "images/posts/cité-de-carcassonne.jpg",
-    "icon": "images/markers/FR.png"
+    "icon": "images/markers/FR.png",
+    "preview": "images/post/cité-de-carcassonne/cover.jpg"
   },
    {
     "id": "mount-etna",
@@ -30,7 +32,8 @@
     "lng": 14.994711996785409,
     "summary": "A slow walk through a beautiful volcano.",
     "image": "images/posts/mount-etna.jpg",
-    "icon": "images/markers/IT.png"
+    "icon": "images/markers/IT.png",
+    "preview": "images/post/mount-etna/cover.jpg"
   },
   {
     "id": "three-towers-of-san-marino",
@@ -41,6 +44,7 @@
     "lng": 12.449347953050836,
     "summary": "A slow walk through amazing towers.",
     "image": "images/posts/three-towers-of-san-marino.jpg",
-    "icon": "images/markers/SM.png"
+    "icon": "images/markers/SM.png",
+    "preview": "images/post/three-towers-of-san-marino/cover.jpg"
   }
 ]
