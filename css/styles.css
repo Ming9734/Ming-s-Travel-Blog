@@ -259,8 +259,8 @@ body {
   /* 使用與 body 呼應的藍紫漸層，但加入透明度 (alpha) */
   background: linear-gradient(
     135deg, 
-    rgba(79, 70, 229, 0.75) 0%,   /* #4f46e5 的半透明版 */
-    rgba(147, 51, 234, 0.75) 100%  /* #9333ea 的半透明版 */
+    rgba(79, 70, 229, 0.5) 0%,   /* #4f46e5 的半透明版 */
+    rgba(147, 51, 234, 0.5) 100%  /* #9333ea 的半透明版 */
   );
   backdrop-filter: blur(12px); 
   -webkit-backdrop-filter: blur(12px);
