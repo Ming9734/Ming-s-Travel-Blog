@@ -6,10 +6,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </head>
-<body>
-
-<!-- 導覽列 -->
-<nav class="navbar">
+<body class="home-page"> <nav class="navbar">
   <ul class="nav">
     <li><a href="index.html">Home</a></li>
     <li><a href="map.html">Map</a></li>
@@ -21,15 +18,13 @@
   </ul>
 </nav>
 
-<!-- 🌍 地圖背景容器 -->
-<div id="home-map" style="height: calc(100vh - 78px); width: 100%;"></div>
+<div id="home-map"></div>
 
-<!-- 🟦 浮動 Hero 方塊 -->
 <header class="hero-floating">
   <h1>Ming’s Travel Blog</h1>
   <p>Slow travel across Europe.</p>
   <div class="buttons">
-    <a href="posts.html" class="btn secondary">View Posts</a>
+    <a href="posts.html" class="btn">View Posts</a>
     <a href="map.html" class="btn secondary">Map View</a>
   </div>
 </header>
@@ -37,22 +32,25 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-  // 首頁地圖 (home-map)
+  // 初始化地圖
   const map = L.map('home-map', {
     zoomControl: false,
-    dragging: false,
+    dragging: true, // 首頁地圖建議可以開啟拖曳增加互動
     scrollWheelZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    keyboard: false,
-    tap: false,
   }).setView([48.2082, 16.3738], 5);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: ''
   }).addTo(map);
 
-  // 從 posts.json 生成 marker
+  // 💡 關鍵：強制刷新地圖大小以適應 calc 高度
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      map.invalidateSize();
+    }, 200);
+  });
+
+  // 從 posts.json 生成 marker (保持不變)
   fetch('data/posts.json')
     .then(r => r.json())
     .then(posts => {
@@ -62,7 +60,6 @@
           iconSize: [40, 40],
           iconAnchor: [20, 40],
         });
-
         L.marker([p.lat, p.lng], { icon: customIcon })
           .addTo(map)
           .bindPopup(`<b>${p.title}</b>`);
