@@ -615,6 +615,30 @@ body {
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* 1. 隱藏預設的圓點並移除邊距 */
+.post-tab-content ul {
+  list-style: none; /* 隱藏原本的黑點 */
+  padding-left: 0.5rem;
+  margin: 1.2rem 0;
+}
+
+/* 2. 在每個 li 前面加上星星 */
+.post-tab-content li {
+  position: relative;
+  padding-left: 1.8rem; /* 為星星留出空間 */
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.post-tab-content li::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  color: #fffb00;
+  text-shadow: 0 0 8px rgba(255, 251, 0, 0.6); /* 讓星星發微光 */
+}
+
 .post-tab-content.active {
   display: block;
 }
