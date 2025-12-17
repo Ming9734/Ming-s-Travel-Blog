@@ -1,71 +1,59 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');
-    if (!mapContainer) return; // 確保只在 map.html 執行
+    if (!mapContainer) return;
 
-    // 1. 初始化地圖 (設定初始視角為歐洲中心)
+    // 1. 初始化地圖
     const map = L.map('map').setView([48.8566, 2.3522], 5);
 
-    // 2. 載入底圖 (OpenStreetMap)
+    // 2. 載入底圖
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // 3. 設定 MarkerCluster (標記群組)
+    // 3. 標記群組
     const clusterGroup = L.markerClusterGroup({
         spiderfyOnMaxZoom: true,
         showCoverageOnHover: false,
         maxClusterRadius: 40
     });
 
-    // 4. 建立浮動 InfoBox (卡片預覽)
+    // 4. 建立預覽盒子
     const infoBox = document.createElement('div');
     infoBox.id = 'info-box';
-    // 初始樣式設定
-    Object.assign(infoBox.style, {
-        position: 'absolute',
-        display: 'none',
-        zIndex: '1000',
-        pointerEvents: 'none', // 🌟 關鍵：避免滑鼠卡在盒子上面導致 marker 閃爍
-        transition: 'opacity 0.2s ease'
-    });
+    infoBox.style.display = 'none';
     mapContainer.appendChild(infoBox);
 
-    // 5. 載入資料並生成標記
+    // 5. 抓取資料
     fetch('data/posts.json')
         .then(r => r.json())
         .then(posts => {
             posts.forEach(p => {
-                const coords = [p.lat, p.lng];
-
-                // 定義大小圖示
                 const baseIcon = L.icon({
                     iconUrl: p.icon || 'images/markers/default.png',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 30]
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32]
                 });
 
                 const bigIcon = L.icon({
                     iconUrl: p.icon || 'images/markers/default.png',
-                    iconSize: [45, 45],
-                    iconAnchor: [22, 45]
+                    iconSize: [48, 48],
+                    iconAnchor: [24, 48]
                 });
 
-                const marker = L.marker(coords, { icon: baseIcon });
+                const marker = L.marker([p.lat, p.lng], { icon: baseIcon });
 
-                // --- 事件處理：滑鼠進入 ---
-                marker.on('mouseover', (e) => {
-                    marker.setIcon(bigIcon); // 變大效果
-                    
-                    // 填入卡片內容 (套用你的玻璃質感樣式)
+                // 懸停事件
+                marker.on('mouseover', () => {
+                    marker.setIcon(bigIcon);
                     infoBox.innerHTML = `
                         <div class="map-preview-card">
-                            <img src="${p.image}" alt="${p.title}">
+                            <img src="${p.image}">
                             <div class="preview-content">
                                 <span class="badge">${p.country}</span>
                                 <h3>${p.title}</h3>
                                 <p>${p.summary}</p>
-                                <div class="click-hint">Click to read more →</div>
+                                <span class="click-hint">Click to read more →</span>
                             </div>
                         </div>
                     `;
@@ -73,23 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     infoBox.style.opacity = '1';
                 });
 
-                // --- 事件處理：滑鼠移動 (讓卡片跟隨滑鼠) ---
+                // 跟隨滑鼠
                 marker.on('mousemove', (e) => {
-                    // 使用 containerPoint 獲取相對於地圖容器的精準座標
-                    const point = e.containerPoint;
-                    // 偏移 15px 避免擋住滑鼠指針
-                    infoBox.style.left = (point.x + 15) + 'px';
-                    infoBox.style.top = (point.y + 15) + 'px';
+                    const pos = e.containerPoint;
+                    infoBox.style.left = (pos.x + 15) + 'px';
+                    infoBox.style.top = (pos.y + 15) + 'px';
                 });
 
-                // --- 事件處理：滑鼠離開 ---
+                // 移出事件
                 marker.on('mouseout', () => {
-                    marker.setIcon(baseIcon); // 恢復大小
+                    marker.setIcon(baseIcon);
                     infoBox.style.display = 'none';
-                    infoBox.style.opacity = '0';
                 });
 
-                // --- 事件處理：點擊跳轉 ---
+                // 點擊事件
                 marker.on('click', () => {
                     window.location.href = `post.html?id=${p.id}`;
                 });
@@ -97,15 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 clusterGroup.addLayer(marker);
             });
 
-            // 將所有標記加入地圖並自動調整視野
             map.addLayer(clusterGroup);
+
+            // 自動縮放以包含所有點
             if (posts.length > 0) {
                 map.fitBounds(clusterGroup.getBounds().pad(0.1));
             }
-            // 🌟 放在這裡！確保地圖在調整完邊界後，強制刷新一次大小
+
+            // 🌟 核心修正：強制地圖刷新大小，解決「不會動」或「灰色區塊」
             setTimeout(() => {
                 map.invalidateSize();
-            }, 300);
-        })
-        .catch(err => console.error('Error loading map data:', err));
+            }, 400);
+        });
+
+    // 視窗縮放時也要刷新
+    window.addEventListener('resize', () => {
+        map.invalidateSize();
+    });
 });
