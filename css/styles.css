@@ -253,6 +253,7 @@ body {
   left: 0;
   z-index: 1; /* 確保它在 Hero 浮動框之下 */
   filter: brightness(0.85);
+  background-color: #ccc;
 }
 
 /* ---------------- 浮動 Hero（index 專用） ---------------- */
