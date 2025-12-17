@@ -226,58 +226,89 @@ body {
   line-height: 1.4;
 }
 
-/* ---------------- 2. 地圖上的浮動 InfoBox (隨滑鼠移動容器) ---------------- */
+/* ---------------- 2. 地圖上的浮動 InfoBox ---------------- */
 #info-box {
-  position: absolute; /* 🌟 必須是 absolute 才能隨滑鼠座標移動 */
-  z-index: 2000;      /* 確保在最上層 */
-  pointer-events: none; 
-  transition: opacity 0.2s ease;
-  display: none;      /* 初始隱藏，由 JS 控制 */
+  position: absolute;
+  z-index: 2000;
+  pointer-events: none; /* 讓滑鼠操作可以穿透到地圖 */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: none;
 }
 
-/* 預覽卡片的玻璃質感樣式 (你原有的部分) */
+/* 預覽卡片整體容器 */
 .map-preview-card {
-  width: 260px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.1); /* 極透明底色 */
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 預覽卡片的圖片樣式優化 */
+/* 上半部圖片區域 */
 .map-preview-card img {
   width: 100%;
-  height: 150px;       /* 稍微增加高度，讓照片顯示更清楚 */
-  object-fit: contain; /* 🌟 關鍵：完整顯示整張照片，不裁切 */
+  height: 160px;
+  object-fit: cover; /* 改為 cover 填滿上方，視覺上比較大器 */
   display: block;
-  
-  /* 💡 新增：背景填充 */
-  /* 如果照片比例不合，左右或上下會出現深色背景，讓卡片維持統一形狀 */
-  background-color: rgba(0, 0, 0, 0.05); 
-  padding: 5px;        /* 讓照片跟邊框有一點點呼吸空間 */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* 🌟 下半部：透明玻璃效果內容區 🌟 */
+.preview-content {
+  padding: 16px;
+  /* 核心玻璃感設定 */
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.15), 
+    rgba(255, 255, 255, 0.05)
+  );
+  backdrop-filter: blur(12px); /* 磨砂玻璃感 */
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+}
 
-
-.preview-content { padding: 12px; }
-
+/* 內容標籤 (跟隨主題紫色) */
 .preview-content .badge {
   display: inline-block;
-  background: #4f46e5;
+  background: linear-gradient(90deg, #4f46e5, #9333ea); /* 匹配你的全局漸層 */
   color: white;
   font-size: 0.7rem;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 20px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.preview-content h3 { margin: 0 0 4px 0; font-size: 1.1rem; color: #1a1a1a; }
-.preview-content p { margin: 0 0 8px 0; font-size: 0.85rem; color: #4b5563; line-height: 1.4; }
-.click-hint { font-size: 0.75rem; color: #4f46e5; font-weight: 700; }
+.preview-content h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.2rem;
+  color: #ffffff; /* 改為白色，在深色/模糊背景下更亮眼 */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.preview-content p {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8); /* 淺灰色文字 */
+  line-height: 1.5;
+}
+
+/* 底部點擊提示 */
+.click-hint {
+  font-size: 0.75rem;
+  color: #a5b4fc; /* 淺紫色，引導點擊 */
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.click-hint::before {
+  content: '➜ '; /* 加一個小箭頭更有動感 */
+  margin-right: 4px;
+}
 
 /* ---------------- Posts 總覽頁 ---------------- */
 .posts-grid {
