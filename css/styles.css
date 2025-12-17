@@ -167,37 +167,63 @@ body {
   color: #4f46e5;
 }
 
-/* ---------------- Map 專用 Hero 區塊 ---------------- */
-.hero.hero-map {
-  /* 縮小高度，讓地圖能更早出現在視野中 */
-  padding: 5rem 1rem 2rem 1rem; 
-  background: linear-gradient(135deg, #4f46e5, #9333ea);
-  color: white;
-  text-align: center;
+/* 🌍 首頁背景地圖：強制滿版 */
+#home-map {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important; /* 強制寬度為視窗寬 */
+  height: 100vh !important; /* 強制高度為視窗高 */
+  z-index: 1; /* 在最底層 */
+  filter: brightness(0.85);
+  background-color: #222; /* 地圖沒出來前顯示深色 */
+}
+/* ---------------- 1. 浮動玻璃標題面板 (地圖左上角) ---------------- */
+.hero-floating-map {
+  position: absolute;
+  top: 100px; /* 避開導覽列的高度 */
+  left: 30px;
+  z-index: 1000; /* 確保在地圖之上 */
+  width: 300px;
+  padding: 1.5rem;
+  
+  /* 玻璃質感核心設定 */
+  background: rgba(255, 255, 255, 0.25); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  pointer-events: none; /* 讓滑鼠可以穿過面板操作地圖 */
 }
 
-.hero.hero-map h1 {
-  font-size: 2.2rem;
+.hero-floating-map h1 {
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: #1a1a1a;
 }
 
-.hero.hero-map p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+.hero-floating-map p {
+  font-size: 1rem;
   font-weight: 400;
+  color: #333;
   opacity: 0.9;
+  line-height: 1.4;
 }
 
-/* ---------------- 地圖上的浮動 InfoBox ---------------- */
+/* ---------------- 2. 地圖上的浮動 InfoBox (隨滑鼠移動容器) ---------------- */
 #info-box {
-  /* 這裡對應 JS 生成的容器 */
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none; /* 🌟 極其重要：防止滑鼠被卡片擋住 */
+  position: absolute; /* 🌟 必須是 absolute 才能隨滑鼠座標移動 */
+  z-index: 2000;      /* 確保在最上層 */
+  pointer-events: none; 
+  transition: opacity 0.2s ease;
+  display: none;      /* 初始隱藏，由 JS 控制 */
 }
 
-/* 預覽卡片的玻璃質感樣式 */
+/* 預覽卡片的玻璃質感樣式 (你原有的部分) */
 .map-preview-card {
   width: 240px;
   background: rgba(255, 255, 255, 0.9);
@@ -209,6 +235,7 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* 圖片與內容樣式保持不變... */
 .map-preview-card img {
   width: 100%;
   height: 130px;
@@ -216,9 +243,7 @@ body {
   display: block;
 }
 
-.preview-content {
-  padding: 12px;
-}
+.preview-content { padding: 12px; }
 
 .preview-content .badge {
   display: inline-block;
@@ -231,24 +256,9 @@ body {
   font-weight: 600;
 }
 
-.preview-content h3 {
-  margin: 0 0 4px 0;
-  font-size: 1.1rem;
-  color: #1a1a1a;
-}
-
-.preview-content p {
-  margin: 0 0 8px 0;
-  font-size: 0.85rem;
-  color: #4b5563;
-  line-height: 1.4;
-}
-
-.click-hint {
-  font-size: 0.75rem;
-  color: #4f46e5;
-  font-weight: 700;
-}
+.preview-content h3 { margin: 0 0 4px 0; font-size: 1.1rem; color: #1a1a1a; }
+.preview-content p { margin: 0 0 8px 0; font-size: 0.85rem; color: #4b5563; line-height: 1.4; }
+.click-hint { font-size: 0.75rem; color: #4f46e5; font-weight: 700; }
 
 /* ---------------- Posts 總覽頁 ---------------- */
 .posts-grid {
@@ -290,64 +300,6 @@ body {
   opacity: 1;
 }
 
-/* 🌍 1. 全螢幕地圖佈局 (扣除導覽列高度) */
-#map {
-  position: absolute;
-  top: 70px; /* 這裡請填入您導覽列的實際高度 */
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  z-index: 1; /* 地圖在底層 */
-}
-
-/* 🧊 2. 玻璃效果浮動面板 */
-.hero-floating-map {
-  position: absolute;
-  top: 100px; /* 距離導覽列下方一點點 */
-  left: 30px;
-  z-index: 1000; /* 確保在地圖之上 */
-  
-  width: 320px;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.2); /* 半透明 */
-  backdrop-filter: blur(12px); /* 磨砂玻璃 */
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  color: white;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  
-  /* 讓滑鼠可以穿過標題區塊點擊地圖（選用） */
-  pointer-events: none; 
-}
-
-.hero-floating-map h1 {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.hero-floating-map p {
-  margin: 0;
-  font-size: 0.95rem;
-  opacity: 0.9;
-  line-height: 1.4;
-}
-
-
-/* 🌍 首頁背景地圖：強制滿版 */
-#home-map {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100vw !important; /* 強制寬度為視窗寬 */
-  height: 100vh !important; /* 強制高度為視窗高 */
-  z-index: 1; /* 在最底層 */
-  filter: brightness(0.85);
-  background-color: #222; /* 地圖沒出來前顯示深色 */
-}
 
 /* ---------------- 浮動 Hero（index 專用） ---------------- */
 
