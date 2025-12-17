@@ -3,7 +3,13 @@
 body {
   margin: 0;
   font-family: 'Poppins', system-ui, sans-serif; /* 改用 Google Font Poppins */
-  background: linear-gradient(120deg, #4f46e5, #9333ea);
+  background: linear-gradient(
+    135deg, 
+    rgba(79, 70, 229, 0.3) 0%,   /* #4f46e5 的半透明版 */
+    rgba(147, 51, 234, 0.3) 100%  /* #9333ea 的半透明版 */
+  );
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
   color: #222;
 }
 /* ---------------- about ---------------- */
