@@ -773,6 +773,13 @@ body {
   text-shadow: 0 0 8px rgba(255, 251, 0, 0.6); /* 讓星星發微光 */
 }
 
+.post-tab-content ul ul li::before {
+  content: '└─'; /* 使用簡單的轉角線，或是 '-' */
+  color: rgba(255, 255, 255, 0.5); /* 顏色淡一點，才不會搶戲 */
+  font-size: 0.8rem;
+  top: 1px; /* 微調位置 */
+}
+
 .post-tab-content.active {
   display: block;
 }
