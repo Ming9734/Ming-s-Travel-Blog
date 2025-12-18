@@ -19,12 +19,20 @@
   ],
   "texts": [
     {
-      "label": "History",
-      "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
+      "label": "Highlights",
+      "content": ""<ul><li>A UNESCO World Heritage Site</li><li>Europe’s highest active volcano, rising to around 3,403 metres</li><li>One of the world’s largest and most active volcanoes</li><li>A dramatic product of the Eurasian and African tectonic plates colliding</li><li>A mountain steeped in Greek mythology, believed to imprison the giant Typhon and house the forge of Hephaestus</li></ul>"
     },
     {
-      "label": "Experience",
-      "content": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
+      "label": "Overview",
+      "content": "<p>Mount Etna rises on the eastern side of Sicily and is the highest active volcano in Europe, as well as one of the largest and most active volcanoes in the world. It is recognised as a UNESCO World Heritage Site for its exceptional geological significance.</p><p>Formed by the collision of the Eurasian and African tectonic plates, Mount Etna remains in a constant state of activity, erupting every few years. In 2024, a major eruption increased its height from 3,357 metres to approximately 3,403 metres, marking the highest recorded elevation in its history. Etna’s eruptions occur from multiple, shifting vents, leaving behind countless visible craters scattered across its slopes.</p><p>For tens of thousands of years, the volcano has posed a threat to nearby communities, yet it has also brought great benefits. Layers of volcanic ash have enriched the soil, creating exceptionally fertile land that supports the agriculture and prosperity of the Catania Plain.</p>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Mount Etna rises on the eastern side of Sicily and is the highest active volcano in Europe, as well as one of the largest and most active volcanoes in the world. It is recognised as a UNESCO World Heritage Site for its exceptional geological significance.</p><p>Formed by the collision of the Eurasian and African tectonic plates, Mount Etna remains in a constant state of activity, erupting every few years. In 2024, a major eruption increased its height from 3,357 metres to approximately 3,403 metres, marking the highest recorded elevation in its history. Etna’s eruptions occur from multiple, shifting vents, leaving behind countless visible craters scattered across its slopes.</p><p>For tens of thousands of years, the volcano has posed a threat to nearby communities, yet it has also brought great benefits. Layers of volcanic ash have enriched the soil, creating exceptionally fertile land that supports the agriculture and prosperity of the Catania Plain.</p>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Mount Etna rises on the eastern side of Sicily and is the highest active volcano in Europe, as well as one of the largest and most active volcanoes in the world. It is recognised as a UNESCO World Heritage Site for its exceptional geological significance.</p><p>Formed by the collision of the Eurasian and African tectonic plates, Mount Etna remains in a constant state of activity, erupting every few years. In 2024, a major eruption increased its height from 3,357 metres to approximately 3,403 metres, marking the highest recorded elevation in its history. Etna’s eruptions occur from multiple, shifting vents, leaving behind countless visible craters scattered across its slopes.</p><p>For tens of thousands of years, the volcano has posed a threat to nearby communities, yet it has also brought great benefits. Layers of volcanic ash have enriched the soil, creating exceptionally fertile land that supports the agriculture and prosperity of the Catania Plain.</p>"
     }
   ]
 }
