@@ -15,7 +15,7 @@ fetch('data/posts.json')
         <img src="${p.image}">
         <div class="overlay">
           <h3>${p.title}</h3>
-          <h4><strong>${p.city},${p.country}</strong></h4>
+          <h4><strong>${p.city}, ${p.country}</strong></h4>
           <p>${p.summary}</p>
           <span class="click-hint">Read more →</span>
         </div>
