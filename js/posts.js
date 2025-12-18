@@ -17,7 +17,7 @@ fetch('data/posts.json')
           <h3>${p.title}</h3>
           <h4><strong>${p.city},${p.country}</strong></h4>
           <p>${p.summary}</p>
-          <a>Read more →</a>
+          <span class="click-hint">Read more →</span>
         </div>
       `;
       grid.appendChild(card);
