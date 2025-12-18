@@ -313,16 +313,9 @@ body {
 
 /* 將圖示改到文字後方 */
 .click-hint::after {
-  content: ' ➜';       /* 把空格移到箭頭前面，才不會跟文字黏在一起 */
+  content: '➜';       
   margin-left: 8px;    /* 設定箭頭與左邊文字的距離 */
   font-weight: bold;   /* 讓箭頭粗一點 */
-  transition: transform 0.3s; /* 為了之後做動畫準備 */
-}
-
-/* 進階：滑鼠移上去時，讓箭頭動起來 (這會讓你的地圖卡片更精緻) */
-.map-preview-card:hover .click-hint::after {
-  transform: translateX(5px); /* 滑鼠靠近時，箭頭會向右滑動 5px */
-  display: inline-block;      /* transform 必須在 block 類型的元素才有效 */
 }
 
 /* ---------------- Posts 總覽頁 ---------------- */
