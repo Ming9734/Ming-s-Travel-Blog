@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="badge">${p.city} , ${p.country}</span>
                                 <h3>${p.title}</h3>
                                 <p>${p.summary}</p>
-                                <span class="click-hint">Click to read more →</span>
+                                <span class="click-hint">Click to read more</span>
                             </div>
                         </div>
                     `;
