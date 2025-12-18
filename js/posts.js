@@ -15,9 +15,9 @@ fetch('data/posts.json')
         <img src="${p.image}">
         <div class="overlay">
           <h3>${p.title}</h3>
-          <p><strong>${p.city},${p.country}</strong></p>
+          <h4><strong>${p.city},${p.country}</strong></h4>
           <p>${p.summary}</p>
-          <span>Read more →</span>
+          <a>Read more →</a>
         </div>
       `;
       grid.appendChild(card);
