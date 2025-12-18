@@ -42,9 +42,21 @@
     "city": "San Marino City",
     "lat": 43.935308255770885,
     "lng": 12.449347953050836,
-    "summary": "They stand perched on Monte Titano as enduring symbols of the world’s oldest constitutional republic, reflecting centuries of independence and resilience.",
+    "summary": "A UNESCO site atop Monte Titano, symbolising centuries of independence and resilience in the world’s oldest constitutional republic.",
     "image": "images/posts/three-towers-of-san-marino.jpg",
     "icon": "images/markers/SM.png",
     "preview": "images/post/three-towers-of-san-marino/cover.jpg"
-  }
+  },
+  {
+  "id": "palau-de-la-música-catalana",
+  "title": "Palau de la Música Catalana",
+  "country": "Spain",
+  "city": "Barcelona",
+  "lat": 41.38757282388888, 
+  "lng": 2.17531207118302,
+  "summary": "A UNESCO World Heritage concert hall showcasing Catalan Modernisme, where architecture, art, and music converge in vibrant colour and light.",
+  "image": "images/posts/palau-de-la-música-catalana.jpg",
+  "icon": "images/markers/ES.png",
+  "preview": "images/post/palau-de-la-música-catalana/cover.jpg"
+  
 ]
