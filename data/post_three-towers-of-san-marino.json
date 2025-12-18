@@ -19,12 +19,20 @@
   ],
   "texts": [
     {
-      "label": "History",
-      "content": "<p>St. Alexander Nevsky Cathedral is a stunning example of Neo-Byzantine architecture...</p>"
+    "label": "Highlights",
+    "content": "<ul><li>A UNESCO World Heritage Site</li><li><ul><li>First Tower (Guaita) — 11th century, oldest, served as lookout and prison</li><liSecond Tower (Cesta) — highest point of Mount Titano, historic watchtower and prison</li><li>Third Tower (Montale) — strategic defensive outpost against invasions</li></ul></li><li>San Marino, one of the world’s oldest constitutional republics and the fifth smallest country in the world, which survived the Napoleonic Wars, Italian unification, and both World Wars</li></ul>"
     },
     {
-      "label": "Experience",
-      "content": "<p>Walking around Sofia, you'll find charming streets and local cafes...</p>"
+      "label": "Overview",
+      "content": "<p>The Three Towers of San Marino, perched atop Monte Titano for centuries, are iconic symbols of the world’s oldest and fifth-smallest constitutional republic. They have witnessed how San Marino survived Napoleon, Italian unification, and both World Wars, maintaining its independence amidst a continent long engulfed in conflict.</p><p>The towers were not built at the same time. The First Tower (Guaita), constructed in the 11th century, is the oldest and one of Italy’s oldest fortresses. Its pentagonal base was expanded and restored over centuries; the central core served as a lookout, while ground-floor rooms were used as a prison. The Second Tower (Cesta), built at the end of the 11th century on Monte Titano’s highest point, also functioned as a watchtower and prison, later restored in the 20th century as a medieval weapons museum. The Third Tower (Montale), completed in the late 13th century, is the smallest but strategically positioned to defend San Marino from invasions.</p><p>All three towers are built on classic European pentagonal fortress bases, remain visible across Monte Titano, and continue to draw visitors as a testament to San Marino’s resilience, medieval heritage, and independence.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>San Marino, the world’s fifth-smallest country, has always held a strange fascination for me—so much so that this trip was entirely dedicated to visiting it. Like many microstates, access is limited to roadways, which adds a touch of mystery to the journey. As we approached, the road twisted sharply up a series of steep hills in a zigzag pattern, and just when I thought we had reached the summit, I was struck by the towering peak of Monte Titano, with the city perched high above, a clear reminder of how it has remained independent for centuries.</p><p>Stepping into the old city, I initially felt a twinge of disappointment—it wasn’t the dense, immersive historical atmosphere I had imagined, but rather a tourist-friendly area filled with shops. Then, as rain began to fall and the main attractions, the Three Towers, were shrouded in mist, an unexpected magic unfolded. The towers emerged through the clouds in a dreamlike haze, evoking a surreal “castle in the sky” feeling that was far more enchanting than any sunny-day view could have offered.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>History of San Marino</h2><p>San Marino traces its beginnings to 301 AD, when a stonemason named Marino led a group of followers to Monte Titano to escape Roman persecution, establishing a Christian community and monastery. The territory was later granted to Marino by a local noblewoman, marking the foundation of the republic.</p><p>In the Middle Ages, governance was organised under the Arengo, a council of local family heads, creating the first republican government without a monarch. The Arengo appointed two captains regent, a system that continues to this day. Recognised by the Pope in 1291 as an independent state, San Marino passed its first constitutional law in 1295, formalised in 1600. Over centuries, it skilfully navigated European conflicts and threats, maintaining sovereignty through diplomacy and strategic alliances, including support for Garibaldi during Italian unification, ensuring the republic’s survival as an independent microstate on the Italian peninsula.</p>"
     }
   ]
 }
