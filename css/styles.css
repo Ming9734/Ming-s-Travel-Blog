@@ -364,7 +364,7 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .post-card .overlay h3 {
-   margin: 0 0 6px 0;
+  margin: 0 0 12px 0;
   font-size: 1.25rem;
   color: #ffffff;
   font-weight: 700;
@@ -372,9 +372,9 @@ body {
 }
 .post-card .overlay h4 {
   margin: 0 0 12px 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.95); 
-  line-height: 1.2;
+  line-height: 1.5;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 .post-card .click-hint {
