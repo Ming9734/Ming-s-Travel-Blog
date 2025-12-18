@@ -1,0 +1,38 @@
+{
+  "id": "palau-de-la-música-catalana",
+  "title": "Palau de la Música Catalana",
+  "subtitle": "Barcelona, Spain",
+  "country": "Spain",
+  "city": "Barcelona",
+  "cover": "images/post/palau-de-la-música-catalana/cover.jpg",
+  "images": [
+    "images/post/palau-de-la-música-catalana/1.jpg",
+    "images/post/palau-de-la-música-catalana/2.jpg",
+    "images/post/palau-de-la-música-catalana/3.jpg",
+    "images/post/palau-de-la-música-catalana/4.jpg",
+    "images/post/palau-de-la-música-catalana/5.jpg",
+    "images/post/palau-de-la-música-catalana/6.jpg",
+    "images/post/palau-de-la-música-catalana/7.jpg",
+    "images/post/palau-de-la-música-catalana/8.jpg",
+    "images/post/palau-de-la-música-catalana/9.jpg",
+    "images/post/palau-de-la-música-catalana/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>a UNESCO World Heritage Site, the only music hall in the world recognised as such</li><li>A pinnacle of Catalan Modernisme and Art Nouveau</li><li>Designed by Lluís Domènech i Montaner, one of Barcelona’s architectural masters</li><li>Designed by Lluís Domènech i Montaner, one of Barcelona’s architectural masters</li><li>Blending natural motifs with ornate style, combining practicality and artistry</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Built between 1905 and 1908, the Palau de la Música Catalana represents the pinnacle of Catalan Modernisme and Art Nouveau, designed by one of Barcelona’s architectural masters, Lluís Domènech i Montaner. Commissioned and funded by the Orfeó Català choir, it is the only concert hall in the world recognised as a UNESCO World Heritage Site, alongside Montaner’s Hospital de Sant Pau.</p><p>The building seamlessly combines structural innovation with decorative splendour, showcasing Montaner’s emphasis on harmony, practicality, and natural motifs. Its most iconic feature, the stained-glass skylight dome, floods the hall with natural light, creating a sense of the sun shining under a blue sky. This clever use of daylight not only illuminates the space but also enhances its acoustics, resulting in sound that is clear, balanced, and resonant. The Palau de la Música Catalana thus embodies a perfect fusion of architecture, music, and nature, reflecting the cultural and artistic ambitions of early 20th-century Catalonia.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>I hadn’t originally planned to visit the Palau de la Música Catalana, and it’s not among Barcelona’s most famous attractions, but I was quickly captivated by photos online. Once inside, the space proved even more breathtaking. This visit made me realise just how much I love Catalan Modernisme—the use of light and colour is unlike anything I’ve seen, radiant yet never overwhelming. The concert hall’s stained-glass dome left the deepest impression, becoming the most memorable and striking design of my trip. For anyone with a passion for architecture or art, this hidden gem in Barcelona is an absolute must-see.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Interior & Exterior Features</h2><p>The exterior of the building is dominated by elaborate sculptures, while the balcony columns are covered in floral ceramic mosaics that celebrate the beauty of nature. Inside, visitors encounter intricate sculptures, decorative glass, and wrought iron, all hallmarks of the lavish Catalan Modernisme style. The stage is adorned with mosaics and 18 three-dimensional muses, each depicted playing a different instrument, representing the diversity of musical forms. On either side of the stage are two monumental statues: Wagner’s Valkyrie on horseback on the left, symbolising European Romantic music, and a performer in traditional Catalan costume on the right, celebrating the vitality of local folk music.</p><p>Together, these elements—vivid mosaics, sculptural detail, metalwork, and natural imagery—demonstrate Montaner’s ability to merge practicality with ornate artistry, making the Palau de la Música Catalana a masterpiece where architecture, visual art, and musical culture converge.</p>"
+    }
+  ]
+}
