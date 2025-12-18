@@ -314,7 +314,7 @@ body {
 /* 將圖示改到文字後方 */
 .click-hint::after {
   content: '➜';       
-  margin-left: 8px;    /* 設定箭頭與左邊文字的距離 */
+  margin-left: 4px;    /* 設定箭頭與左邊文字的距離 */
   font-weight: bold;   /* 讓箭頭粗一點 */
 }
 
