@@ -58,5 +58,16 @@
   "image": "images/posts/palau-de-la-música-catalana.jpg",
   "icon": "images/markers/ES.png",
   "preview": "images/post/palau-de-la-música-catalana/cover.jpg"
-  }
+  },
+  {
+  "id": "kronborg-castle",
+  "title": "Kronborg Castle",
+  "country": "Denmark",
+  "city": "Helsingør",
+  "lat": 56.03899022911766, 
+  "lng": 12.621713158183251,
+  "summary": "A UNESCO World Heritage fortress commanding the Øresund Strait, where history, maritime strategy, and Shakespearean legend converge.",
+  "image": "images/posts/kronborg-castle.jpg",
+  "icon": "images/markers/DK.png",
+  "preview": "images/post/kronborg-castle/cover.jpg"
 ]
