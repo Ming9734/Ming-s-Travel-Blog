@@ -70,5 +70,17 @@
   "image": "images/posts/kronborg-castle.jpg",
   "icon": "images/markers/DK.png",
   "preview": "images/post/kronborg-castle/cover.jpg"
-  }
+  },
+  {
+  "id": "dom-luís-i-bridge",
+  "title": "Dom Luís I Bridge",
+  "country": "Portugal",
+  "city": "Porto",
+  "lat": 41.13994268301674, 
+  "lng": -8.60945922970226,
+  "summary": "A UNESCO World Heritage iron arch bridge spanning the Douro, where 19th-century engineering ambition shaped Porto’s riverfront and urban identity.",
+  "image": "images/posts/dom-luís-i-bridge.jpg",
+  "icon": "images/markers/PT.png",
+  "preview": "images/post/dom-luís-i-bridge/cover.jpg"
+  } 
 ]
