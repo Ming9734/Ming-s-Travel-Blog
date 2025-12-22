@@ -1,0 +1,38 @@
+{
+  "id": "dom-luís-i-bridge",
+  "title": "Dom Luís I Bridge",
+  "subtitle": "Porto, Portugal",
+  "country": "Portugal",
+  "city": "Porto",
+  "cover": "images/post/dom-luís-i-bridge/cover.jpg",
+  "images": [
+    "images/post/dom-luís-i-bridge/1.jpg",
+    "images/post/dom-luís-i-bridge/2.jpg",
+    "images/post/dom-luís-i-bridge/3.jpg",
+    "images/post/dom-luís-i-bridge/4.jpg",
+    "images/post/dom-luís-i-bridge/5.jpg",
+    "images/post/dom-luís-i-bridge/6.jpg",
+    "images/post/dom-luís-i-bridge/7.jpg",
+    "images/post/dom-luís-i-bridge/8.jpg",
+    "images/post/dom-luís-i-bridge/9.jpg",
+    "images/post/dom-luís-i-bridge/10.jpg"
+  ],
+  "texts": [
+    {
+    "label": "Highlights",
+    "content": "<ul><li>A UNESCO World Heritage Site</li><li>Once the longest single-span arch bridge in the world at the time of completion</li><li>A distinctive double-deck steel bridge design</li><li>Designed by Théophile Seyrig, a disciple of Gustave Eiffel</li><li>Named after the Portuguese king, sharing the same date as the bridge’s inauguration</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Spanning the Douro River between Porto and Vila Nova de Gaia, the Dom Luís I Bridge is a monumental double-deck iron arch bridge and one of Porto’s most recognisable landmarks. Completed in 1886, it was the world’s longest arch bridge at the time, reflecting the city’s rapid growth and its importance as Portugal’s second-largest port.</p><p>The bridge was designed by Belgian engineer Théophile Seyrig, a former collaborator and student of Gustave Eiffel. Seyrig had previously worked with Eiffel on the nearby Maria Pia Bridge, and the structural similarities between the two—most notably the elegant iron arch and lightweight latticework—clearly reflect this shared engineering lineage. Unlike earlier single-deck proposals, the Dom Luís I Bridge adopted a two-level design to accommodate increasing cross-river traffic, with a lower deck for vehicles and pedestrians and an upper deck—now electrified—for trams and foot traffic.</p><p>Built without any piers in the river itself, the bridge allows ships to navigate the Douro freely, reinforcing its role not only as a transport link but also as a key piece of Porto’s river-based economy.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>It is almost impossible to arrive in Porto without being drawn to the Dom Luís I Bridge. From nearly anywhere along the Douro’s banks, its immense structure dominates the skyline, and at first sight, the bridge’s bold design and dramatic span leave a lasting impression.</p><p>Walking across the upper deck offers sweeping views over Porto’s historic centre, while the gaze naturally follows the Douro River as it flows westward toward the Atlantic—once carrying countless barrels of prized port wine to the wider world. Yet the most memorable moment comes at sunset, when the fading light pours in from the river mouth, bathing the old town in warm golden tones. Reflected in the gently winding Douro below, the scene becomes one of Porto’s most unforgettable sights.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Naming and Civic Identity</h2><p>Construction began in 1881 on the site of Porto’s former suspension bridge and concluded on 31 October 1886. The bridge was named after King Luís I of Portugal, as its completion coincided with the date of his birthday, though whether this was intentional remains uncertain.</p><p>Notably, the king did not attend the inauguration. In response, local sentiment led to the omission of the royal honorific “Dom” from the bridge’s name, leaving it officially known as “Ponte Luís I”—a small but telling detail that reflects Porto’s long-standing sense of civic independence.</p>"
+    }
+  ]
+}
