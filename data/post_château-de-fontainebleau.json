@@ -1,0 +1,38 @@
+{
+  "id": "château-de-fontainebleau",
+  "title": "Château de Fontainebleau",
+  "subtitle": "Carcassonne, France",
+  "country": "France",
+  "city": "Fontainebleau",
+  "cover": "images/post/château-de-fontainebleau/cover.jpg",
+  "images": [
+    "images/post/château-de-fontainebleau/1.jpg",
+    "images/post/château-de-fontainebleau/2.jpg",
+    "images/post/château-de-fontainebleau/3.jpg",
+    "images/post/château-de-fontainebleau/4.jpg",
+    "images/post/château-de-fontainebleau/5.jpg",
+    "images/post/château-de-fontainebleau/6.jpg",
+    "images/post/château-de-fontainebleau/7.jpg",
+    "images/post/château-de-fontainebleau/8.jpg",
+    "images/post/château-de-fontainebleau/9.jpg",
+    "images/post/château-de-fontainebleau/10.jpg"
+  ],
+  "texts": [
+    {
+    "label": "Highlights",
+    "content": "<ul><li>A UNESCO World Heritage Site</li><li>One of France’s oldest and most continuously used royal residences</li><li>The birthplace of the School of Fontainebleau, blending Italian Mannerism with French artistic traditions</li><li>Napoleon’s principal imperial residence, showcasing the grandeur of the Empire style</li><li>The palace where Napoleon signed his abdication and began his exile</li><li>The palace where Napoleon signed his abdication and began his exile</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Situated on the outskirts of Greater Paris, the Palace of Fontainebleau is one of France’s most enduring royal residences. From the 12th century until the fall of the monarchy in the 19th century, it served as a principal royal palace for more than seven hundred years. This exceptional continuity—spanning medieval kings, Renaissance monarchs, and imperial rule—allows Fontainebleau to present a far richer and more layered narrative of French history than Versailles, earning its place as a UNESCO World Heritage Site.</p><p>Originally a royal hunting lodge surrounded by forests and natural springs—reflected in the name “Fontainebleau,” often interpreted as “beautiful fountain”—the site gradually evolved through centuries of royal expansion. Its most transformative period came in the 16th century under Francis I, who invited Italian masters such as Rosso Fiorentino and Primaticcio to decorate the palace. Their work introduced late Renaissance Mannerism to France and gave birth to the distinctive School of Fontainebleau. This new artistic language, blending Italian sophistication with French tradition, is most vividly embodied in the Gallery of Francis I, whose richly decorated walls marked a turning point in French royal art and later influenced spaces as grand as the Hall of Mirrors at Versailles.</p><p>In the centuries that followed, rulers including Henry IV, Louis XIII, and Louis XIV continued to reshape Fontainebleau into a palace of remarkable scale and character. Even after Versailles emerged as the political heart of royal power, Fontainebleau retained a special status as a retreat—valued for its seclusion, hunting grounds, and deep-rooted sense of royal continuity.</p><p>That continuity extended beyond the monarchy itself: in the early 19th century, the palace entered a final and dramatic phase as the preferred residence of Napoleon Bonaparte, marking both the height and the end of its role as a seat of power.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Fontainebleau was my favourite stop of the entire Paris trip. Although it lies some distance from the city and lacks the fame of Versailles, this very remoteness gives it a rare sense of calm. Walking through the palace, I found myself imagining that past French monarchs may have felt something similar—coming here to escape the pressures, obligations, and noise of court life.</p><p>Compared with the overwhelming energy of Paris and the dazzling grandeur of Versailles, Fontainebleau’s understated elegance resonated with me far more deeply. The extensive use of wood throughout the interiors adds a warmth and softness that feels both refined and intimate. Beyond the palace, the vast forest reinforces this atmosphere. As a former hunting residence, it avoids the rigid symmetry of formal French gardens, preserving instead a more natural landscape that invites unhurried wandering. It is a place where history feels lived-in rather than staged, offering a quiet refuge from the weight of everyday life.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Napoleon and the Weight of History</h2><p>Fontainebleau’s final and most dramatic chapter unfolded under Napoleon Bonaparte in the early 19th century. He transformed the palace into his primary residence, introducing the Empire style and using classical Roman imagery to project imperial authority. The throne room, preserved today in its original location and form, stands as a rare and tangible expression of this vision—France’s only throne to survive intact, designed as a direct symbol of Napoleonic power.</p><p>Yet Fontainebleau was also the stage for Napoleon’s fall. In 1814, it was here, at the foot of the palace’s iconic horseshoe-shaped staircase, that he bid an emotional farewell to his Imperial Guard before signing his abdication and departing into exile. In that moment, the palace shifted from a symbol of imperial ambition to a silent witness to the end of an era.</p>"
+    }
+  ]
+}
