@@ -35,9 +35,11 @@
   // 初始化地圖
   const map = L.map('home-map', {
     zoomControl: false,
-    dragging: true, // 首頁地圖建議可以開啟拖曳增加互動
+    dragging: true, 
     scrollWheelZoom: false,
-  }).setView([48.2082, 16.3738], 5);
+    minZoom: 3, // 建議設定最小縮放，防止使用者縮小到看見重複的世界地圖
+    maxZoom: 18
+}).setView([54.5260, 15.2551], 3.5);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: ''
