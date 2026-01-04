@@ -94,5 +94,16 @@
   "image": "images/posts/château-de-fontainebleau.jpg",
   "icon": "images/markers/FR.png",
   "preview": "images/post/château-de-fontainebleau/cover.jpg"
-  }
+  },
+  {
+  "id": "rocher-du-bock",
+  "title": "Rocher du Bock",
+  "country": "Luxembourg",
+  "city": "Luxembourg City",
+  "lat": 49.6114159999954, 
+  "lng": 6.136216299999222,
+  "summary": "A UNESCO World Heritage fortress remnant carved into rock, bearing witness to centuries of siege, resilience, and strategic power at the heart of Europe.",
+  "image": "images/posts/rocher-du-bock.jpg",
+  "icon": "images/markers/LU.png",
+  "preview": "images/post/rocher-du-bock/cover.jpg"
 ]
