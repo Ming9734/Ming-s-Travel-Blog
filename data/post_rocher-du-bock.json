@@ -1,0 +1,38 @@
+{
+  "id": "rocher-du-bock",
+  "title": "Rocher du Bock",
+  "subtitle": "Luxembourg City, Luxembourg",
+  "country": "Luxembourg",
+  "city": "Luxembourg City",
+  "cover": "images/post/rocher-du-bock/cover.jpg",
+  "images": [
+    "images/post/rocher-du-bock/1.jpg",
+    "images/post/rocher-du-bock/2.jpg",
+    "images/post/rocher-du-bock/3.jpg",
+    "images/post/rocher-du-bock/4.jpg",
+    "images/post/rocher-du-bock/5.jpg",
+    "images/post/rocher-du-bock/6.jpg",
+    "images/post/rocher-du-bock/7.jpg",
+    "images/post/rocher-du-bock/8.jpg",
+    "images/post/rocher-du-bock/9.jpg",
+    "images/post/rocher-du-bock/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>Remnants of the Luxembourg Fortress, ingeniously carved into solid rock and reinforced with multiple underground tunnels, once considered virtually impregnable</li><li>Long celebrated as the “Gibraltar of the North” for its formidable defences</li><li>A site of exceptional strategic importance, repeatedly besieged, dismantled, and rebuilt over the centuries</li><li>Largely dismantled following the Treaty of London, leaving only select sections preserved today</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Perched on a narrow rocky promontory almost entirely encircled by the Alzette River and its valley, the Bock promontory occupies a naturally defensive position with only a narrow connection to the rest of Luxembourg City. From its earliest beginnings, this terrain shaped Luxembourg into one of Europe’s most formidable strongholds, transforming the city into a heavily fortified fortress of exceptional strategic value.</p><p>Over the centuries, Luxembourg’s defences were repeatedly expanded, destroyed, and rebuilt as control of the city passed between major European powers. Successive rulers exploited the rock itself, carving deep tunnels, layered casemates, and artillery platforms directly into the cliff, creating a complex system that made the fortress extraordinarily difficult to capture. This evolving military landscape reflected both advances in warfare and the city’s persistent importance at the crossroads of European power.</p><p>The effectiveness of these fortifications was most clearly demonstrated in 1794, when Luxembourg endured a seven-month siege during the French Revolutionary Wars. Although the garrison ultimately surrendered, the city was never taken by force. The French consequently regarded Luxembourg as the strongest fortress in Europe apart from Gibraltar itself, a reputation that gave rise to its enduring epithet, “the Gibraltar of the North.”</p><p>Following the Luxembourg Crisis of 1867, the Treaty of London confirmed the country’s independence and permanent neutrality, on the condition that the fortress be dismantled. Most of Luxembourg’s vast defences were subsequently demolished, fundamentally reshaping the city. Today, the Bock Casemates remain as the most significant surviving remnants of this once-mighty fortress and are recognised as a UNESCO World Heritage Site.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Luxembourg is a place easily overlooked—both as a city and as a country—yet it holds a quiet and compelling allure. Entering the old town from its only relatively gentle approach, it initially felt like an unassuming small town, pleasant but unremarkable. That impression changed the moment I reached the edge overlooking the Alzette valley. Below, the river winds through the gorge, flanked by tightly clustered houses, and it is only then that one truly realises the scale of the site: standing atop a sheer fortress plateau, commanding the landscape beneath.</p><p>Within the Bock Casemates themselves, much has been reduced to ruins, yet the ingenuity remains unmistakable. Walking through the carved rock passages, it is impossible not to admire the sheer ambition of creating such an extensive and complex tunnel system within solid stone. Even in its fragmented state, the fortress fully justifies its reputation as the “Gibraltar of the North”—a title that speaks not only to its strategic strength, but to the extraordinary human effort embedded in its cliffs.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Origins and Evolution of the Fortress</h2><p>The earliest fortifications on the Bock can be traced back to the 4th century, when a small Roman outpost guarded two important routes crossing at this location. In 963, Count Siegfried of Ardennes acquired the site and began expanding it to protect his territory, laying the foundations for what would later become the powerful House of Luxembourg.</p><p>Through the Middle Ages, the Bock developed from a single stronghold into the core of a fortified city, serving as the residence of the Counts of Luxembourg by the 11th century. Control later passed to Burgundy, the Habsburgs, and Spain, each leaving its mark on the defences. Particularly in the 1640s, Spanish engineers undertook major reconstructions, adapting the fortress to new forms of artillery warfare by exploiting natural rock fissures and dividing the Bock into interconnected defensive sections linked by bridges.</p><p>After French forces under Louis XIV destroyed much of the fortress in 1684, it was rebuilt on an even grander scale by leading military engineers of the time. Extensive underground galleries and gun emplacements were added, later further expanded by the Austrians in the 18th century. These layered tunnels and casemates formed a concealed yet formidable defensive network connecting the Bock with the wider fortress of Luxembourg.</p>"
+    }
+  ]
+}
