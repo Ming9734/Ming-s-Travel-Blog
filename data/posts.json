@@ -106,5 +106,17 @@
   "image": "images/posts/rocher-du-bock.jpg",
   "icon": "images/markers/LU.png",
   "preview": "images/post/rocher-du-bock/cover.jpg"
+  },
+  {
+  "id": "valle-dei-templi",
+  "title": "Valle dei Templi",
+  "country": "Italy",
+  "city": "Agrigento",
+  "lat": 37.28970236932364, 
+  "lng": 13.592150460072101,
+  "summary": "A UNESCO World Heritage landscape where monumental Doric temples rise above the Mediterranean, bearing witness to the power, faith, and ambition of ancient Greek civilisation beyond the mainland.",
+  "image": "images/posts/valle-dei-templi.jpg",
+  "icon": "images/markers/IT.png",
+  "preview": "images/post/valle-dei-templi/cover.jpg"
   }
 ]
