@@ -1,0 +1,39 @@
+
+{
+  "id": "valle-dei-templi",
+  "title": "Valle dei Templi",
+  "subtitle": "Agrigento, Italy",
+  "country": "Italy",
+  "city": "Agrigento",
+  "cover": "images/post/valle-dei-templi/cover.jpg",
+  "images": [
+    "images/post/valle-dei-templi/1.jpg",
+    "images/post/valle-dei-templi/2.jpg",
+    "images/post/valle-dei-templi/3.jpg",
+    "images/post/valle-dei-templi/4.jpg",
+    "images/post/valle-dei-templi/5.jpg",
+    "images/post/valle-dei-templi/6.jpg",
+    "images/post/valle-dei-templi/7.jpg",
+    "images/post/valle-dei-templi/8.jpg",
+    "images/post/valle-dei-templi/9.jpg",
+    "images/post/valle-dei-templi/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>The largest and best-preserved group of ancient Greek temples outside mainland Greece</li><li>A defining example of classical Greek Doric architecture</li><li>Built to project civic order, religious devotion, and cultural identity to the wider world</li><li>Many structures were destroyed by fires during the Carthaginian invasion</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Located on the southern coast of Sicily near modern-day Agrigento, the Valley of the Temples marks the sacred and civic heart of ancient Akragas, one of the most powerful Greek colonies in the western Mediterranean. Founded around the late 6th century BCE by settlers from Gela, the city flourished rapidly thanks to fertile land, maritime trade, and its strategic position between Greek and Phoenician worlds. By the 5th century BCE, Akragas rivalled Syracuse in wealth and influence, earning praise from the poet Pindar as “the most beautiful city inhabited by mortals.”</p><p>Despite its name, the Valley of the Temples is not a true valley. The major sanctuaries rise along a low ridge at the southern edge of the ancient city, forming a near-linear sequence of monumental Doric temples. Facing the sea, this sacred skyline served not only as a religious centre but also as a powerful statement of identity—marking the boundary between the civic and the divine, and presenting a visible image of order, faith, and cultural confidence to those approaching from afar.</p><p>Much of this architectural splendour was funded by agricultural prosperity, particularly through the export of grain, wine, and olive oil. The city reached its political and military peak under the tyrant Theron, whose alliance with Syracuse culminated in the decisive Greek victory over Carthage at the Battle of Himera in 480 BCE. Ambitious building projects followed, including plans for what was intended to be the largest Greek temple ever constructed. Yet this golden age was short-lived. In 406 BCE, Carthaginian forces returned, capturing and devastating Akragas. The city never recovered its former stature, and many of its temples were left damaged, abandoned, or unfinished.</p><p>Much of this architectural splendour was funded by agricultural prosperity, particularly through the export of grain, wine, and olive oil. The city reached its political and military peak under the tyrant Theron, whose alliance with Syracuse culminated in the decisive Greek victory over Carthage at the Battle of Himera in 480 BCE. Ambitious building projects followed, including plans for what was intended to be the largest Greek temple ever constructed. Yet this golden age was short-lived. In 406 BCE, Carthaginian forces returned, capturing and devastating Akragas. The city never recovered its former stature, and many of its temples were left damaged, abandoned, or unfinished.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>For someone who has yet to set foot on mainland Greece, the Valley of the Temples had long held a special allure. Its concentration of ancient Greek temples made it one of the first places I noted down when planning a trip to Sicily, and it quickly became a must-visit on my itinerary. Ironically, on the very day we planned to go, the site was closed for a concert. We had no choice but to adjust our plans on the spot—dropping our luggage in the city and rushing to enter just before closing time.</p><p>That unexpected change turned out to be a gift. Arriving in the final hours before sunset was, in hindsight, the perfect moment to experience the site. The heat of the Sicilian day had softened, and as the sun began to sink, the temples and surrounding landscape were slowly washed in a warm, golden light. It was one of the most beautiful sunsets I have ever witnessed.</p><p>The scale of the Valley of the Temples far exceeded my expectations. Walking among these monumental remains, a sense of awe arises almost instinctively. Confronted with structures built thousands of years ago, it is impossible not to admire the technical skill, conviction, and aesthetic vision of those who created them. Standing on the ridge, overlooking the valley below and the distant sea beyond, I felt a powerful blend of reverence and humility—an awareness of both the sacred atmosphere surrounding these temples and one’s own smallness within the vast sweep of time and space. It is a feeling that lingers long after leaving the site.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Additional Notes — Major Temples</h2><p>Temple of Concordia</p><p>Dating to the mid-5th century BCE, this is the best-preserved temple in the valley and one of the finest surviving examples of a Doric Greek temple anywhere in the world. Its remarkable condition owes much to its later conversion into a Christian church during Late Antiquity, which spared it from dismantling. The name “Concordia” derives from a Roman inscription found nearby; the original deity worshipped here remains unknown. Notably, the temple’s façade closely resembles the silhouette later adopted for the UNESCO World Heritage emblem.</p><p>Temple of Hera (Juno)</p><p>Positioned at the eastern end of the ridge and occupying the highest point within the sanctuary, the Temple of Hera held a commanding and symbolic location. Dedicated to the goddess of marriage, legitimacy, and social order, its elevated setting reinforced its role as a guardian of civic boundaries. Severely damaged during the Carthaginian sack of 406 BCE, the temple survives today mainly in its foundations and partial colonnade.</p><p>Temple of Heracles (Hercules)</p><p>Probably the earliest of the major temples, constructed at the end of the 6th century BCE, this sanctuary was dedicated to Heracles—the hero of endurance, labour, and perseverance. His cult resonated strongly with Greek colonists forging new lives far from their homeland. After centuries of destruction caused by fire, earthquakes, and stone reuse, eight Doric columns remain standing, offering a powerful glimpse of its original scale.</p><p>Temple of Olympian Zeus</p><p>Conceived after the victory at Himera, this temple was intended to surpass all others in size and grandeur. Unlike typical Greek temples, it employed massive engaged columns and featured colossal stone figures known as Telamones, appearing to support the structure with human strength. The project’s immense ambition may have contributed to its fate: construction was likely still underway when Carthaginian forces destroyed the city in 406 BCE, leaving the temple unfinished. Its ruins remain among the most evocative in the valley, embodying both triumph and hubris.</p>"
+    }
+  ]
+}
