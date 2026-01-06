@@ -821,3 +821,48 @@ body {
         transform: translateY(0);
     }
 }
+/* 📱 手機版導覽列與多層級選單修正 */
+@media (max-width: 768px) {
+  /* 1. 讓導覽列在手機上可以滾動（如果項目太多） */
+  .nav {
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+
+  /* 2. 修正下拉選單容器 */
+  .dropdown-menu {
+    position: static; /* 改為靜態定位，隨內容撐開 */
+    width: 100%;
+    min-width: 200px;
+    box-shadow: none; /* 移除陰影讓層級感更像列表 */
+    background: rgba(0, 0, 0, 0.03); /* 給予極淡背景區分 */
+  }
+
+  /* 3. 關鍵：修正第三層選單 (Sub-menu) */
+  .sub-menu {
+    position: static; /* 核心修改：不再向右噴出，改為向下撐開 */
+    width: 100%;
+    left: 0;          /* 重設左邊距 */
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.05); /* 比第二層更深一點點 */
+    padding-left: 15px; /* 增加縮排，讓使用者知道這是子項目 */
+  }
+
+  /* 4. 調整點擊/懸停範圍 */
+  .nav > li {
+    margin: 5px 10px;
+    width: 100%; /* 讓選單項目滿版好點擊 */
+    text-align: center;
+  }
+
+  .dropdown-menu a, .sub-menu a {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05); /* 增加細分隔線 */
+  }
+
+  /* 5. 確保懸停時能正確顯示（如果你的 JS 沒有控制切換） */
+  .dropdown:hover > .dropdown-menu,
+  .dropdown-sub:hover > .sub-menu {
+    display: block;
+  }
+}
