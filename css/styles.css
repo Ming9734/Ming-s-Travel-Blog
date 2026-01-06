@@ -821,48 +821,56 @@ body {
         transform: translateY(0);
     }
 }
-/* 📱 手機版導覽列與多層級選單修正 */
-@media (max-width: 768px) {
-  /* 1. 讓導覽列在手機上可以滾動（如果項目太多） */
+
+/* 📱 手機版導覽列與多層級選單修正 - 增強版 */
+@media screen and (max-width: 992px) { /* 將範圍擴大到 992px，確保平板也受惠 */
+  
   .nav {
-    flex-wrap: wrap; 
-    justify-content: center;
-  }
-
-  /* 2. 修正下拉選單容器 */
-  .dropdown-menu {
-    position: static; /* 改為靜態定位，隨內容撐開 */
+    flex-direction: column; /* 強制垂直排列 */
+    align-items: center;
     width: 100%;
-    min-width: 200px;
-    box-shadow: none; /* 移除陰影讓層級感更像列表 */
-    background: rgba(0, 0, 0, 0.03); /* 給予極淡背景區分 */
   }
 
-  /* 3. 關鍵：修正第三層選單 (Sub-menu) */
-  .sub-menu {
-    position: static; /* 核心修改：不再向右噴出，改為向下撐開 */
-    width: 100%;
-    left: 0;          /* 重設左邊距 */
-    box-shadow: none;
-    background: rgba(0, 0, 0, 0.05); /* 比第二層更深一點點 */
-    padding-left: 15px; /* 增加縮排，讓使用者知道這是子項目 */
-  }
-
-  /* 4. 調整點擊/懸停範圍 */
   .nav > li {
-    margin: 5px 10px;
-    width: 100%; /* 讓選單項目滿版好點擊 */
+    width: 100%;
+    margin: 0;
     text-align: center;
   }
 
-  .dropdown-menu a, .sub-menu a {
-    padding: 10px 15px;
-    border-bottom: 1px solid rgba(0,0,0,0.05); /* 增加細分隔線 */
+  /* 修正第二層 */
+  .dropdown-menu {
+    position: static !important; /* 使用 !important 確保覆蓋原本的 absolute */
+    display: none; 
+    width: 100% !important;
+    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    transform: none !important; /* 移除任何位移 */
   }
 
-  /* 5. 確保懸停時能正確顯示（如果你的 JS 沒有控制切換） */
+  /* 修正第三層 (最關鍵的地方) */
+  .sub-menu {
+    position: static !important; /* 強制取消向右飄移 */
+    display: none;
+    width: 100% !important;
+    left: 0 !important;
+    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0.08) !important; /* 顏色再深一點點做區隔 */
+    padding-left: 20px !important; /* 明確的縮排 */
+  }
+
+  /* 當滑鼠懸停或點擊時顯示（手機版 hover 其實就是點擊） */
   .dropdown:hover > .dropdown-menu,
   .dropdown-sub:hover > .sub-menu {
-    display: block;
+    display: block !important;
+  }
+
+  .nav a {
+    padding: 12px 20px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+  }
+
+  /* 移除手機版不必要的底線動畫，避免視覺混亂 */
+  .nav a::after {
+    display: none !important;
   }
 }
