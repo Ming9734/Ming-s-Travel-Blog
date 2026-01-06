@@ -822,57 +822,53 @@ body {
     }
 }
 
-/* 📱 手機版：主選單橫向，且確保下拉選單可見 */
+/* 📱 手機版：主選單橫向，且子選單向下展開防止誤觸 */
 @media screen and (max-width: 992px) {
   
-  /* 1. 導覽列容器：取消 overflow 限制，否則下拉選單會被切掉 */
   .navbar {
     overflow: visible !important;
   }
 
-  .nav {
-    flex-direction: row !important;
-    justify-content: center;
-    flex-wrap: nowrap !important;
-    /* 移除 overflow-x: auto 以免切掉選單 */
-  }
-
-  /* 2. 下拉選單 (第二層)：強制寬度並置中 */
+  /* 2. 下拉選單 (第二層)：取消固定寬度，改用內容撐開 */
   .dropdown-menu {
     position: absolute !important;
     top: 100% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important; /* 水平置中於母體 */
-    width: 200px !important;
+    left: 0 !important; /* 改從左側開始，比較不會超出螢幕右邊 */
+    width: auto !important;
+    min-width: 220px !important; /* 增加寬度防止文字溢出 */
+    max-width: 90vw !important;  /* 防止超出手機螢幕 */
     background: white !important;
-    display: none; /* 預設隱藏 */
     box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
     border-radius: 8px;
+    padding: 5px 0 !important;
   }
 
-  /* 3. 第三層 (最核心修正)：向下推開，不向外噴 */
+  /* 3. 第三層：強制垂直嵌入，解決「點擊第一層連帶點到第三層」的問題 */
   .sub-menu {
-    position: static !important; /* 關鍵：垂直嵌入第二層內 */
+    position: static !important; /* 關鍵：變成垂直條列 */
+    display: none; 
     width: 100% !important;
-    background: #f4f4f4 !important; /* 淺灰色與第二層區隔 */
-    display: none;
+    background: #f8f9fa !important;
     box-shadow: none !important;
-    padding-left: 20px !important;
-    border-top: 1px solid #ddd;
+    padding-left: 15px !important; /* 縮排 */
+    border-left: 3px solid #4f46e5; /* 增加左側條狀視覺色 */
   }
 
-  /* 4. 顯示邏輯 */
+  /* 解決文字超出格子：讓文字自動換行或撐大 */
+  .dropdown-menu a, .sub-menu a {
+    white-space: normal !important; /* 允許長文字換行 */
+    word-break: break-word;        /* 強制斷句 */
+    line-height: 1.4 !important;
+    padding: 12px 15px !important;
+  }
+
+  /* 4. 觸發顯示 (解決點擊穿透) */
   .dropdown:hover > .dropdown-menu {
     display: block !important;
   }
   
+  /* 只有當第二層被觸發時，第三層才顯示 */
   .dropdown-sub:hover > .sub-menu {
     display: block !important;
-  }
-
-  /* 5. 增加點擊區域，防止手機誤觸 */
-  .nav a {
-    padding: 10px 8px !important;
-    white-space: nowrap; /* 防止主選單文字斷行 */
   }
 }
