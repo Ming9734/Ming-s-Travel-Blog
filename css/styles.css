@@ -822,55 +822,57 @@ body {
     }
 }
 
-/* 📱 手機版：主選單維持橫向，子選單優化 */
+/* 📱 手機版：主選單橫向，且確保下拉選單可見 */
 @media screen and (max-width: 992px) {
   
-  /* 1. 確保主選單還是橫的，並允許左右滑動（如果太長） */
+  /* 1. 導覽列容器：取消 overflow 限制，否則下拉選單會被切掉 */
+  .navbar {
+    overflow: visible !important;
+  }
+
   .nav {
-    flex-direction: row !important; 
+    flex-direction: row !important;
+    justify-content: center;
     flex-wrap: nowrap !important;
-    overflow-x: auto; /* 項目太多時可左右滑動 */
-    justify-content: flex-start;
-    padding: 0 10px;
-    -webkit-overflow-scrolling: touch;
+    /* 移除 overflow-x: auto 以免切掉選單 */
   }
 
-  .nav > li {
-    margin: 0 10px !important;
-    flex: 0 0 auto; /* 防止主選項被擠壓 */
-  }
-
-  /* 2. 下拉選單（第二層）：改成在主選單下方展開 */
+  /* 2. 下拉選單 (第二層)：強制寬度並置中 */
   .dropdown-menu {
-    position: absolute !important; /* 回歸絕對定位 */
-    top: 100%;
+    position: absolute !important;
+    top: 100% !important;
     left: 50% !important;
-    transform: translateX(-50%) !important; /* 居中對齊主選項 */
-    min-width: 160px !important;
+    transform: translateX(-50%) !important; /* 水平置中於母體 */
+    width: 200px !important;
     background: white !important;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
+    display: none; /* 預設隱藏 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+    border-radius: 8px;
   }
 
-  /* 3. 關鍵：修正第三層 (Sub-menu) - 改為向下垂直嵌入 */
+  /* 3. 第三層 (最核心修正)：向下推開，不向外噴 */
   .sub-menu {
-    position: static !important; /* 不再向右飄，而是向下推開 */
-    display: none;
+    position: static !important; /* 關鍵：垂直嵌入第二層內 */
     width: 100% !important;
-    left: 0 !important;
-    background: #f9f9f9 !important; /* 淺灰色背景區分 */
+    background: #f4f4f4 !important; /* 淺灰色與第二層區隔 */
+    display: none;
     box-shadow: none !important;
-    padding-left: 15px !important; /* 縮排感 */
-    border-top: 1px solid #eee;
+    padding-left: 20px !important;
+    border-top: 1px solid #ddd;
   }
 
-  /* 4. 當第二層被懸停時，確保第三層正常運作 */
+  /* 4. 顯示邏輯 */
+  .dropdown:hover > .dropdown-menu {
+    display: block !important;
+  }
+  
   .dropdown-sub:hover > .sub-menu {
     display: block !important;
   }
 
-  /* 調整連結間距，方便手指點擊 */
-  .dropdown-menu a {
-    padding: 12px 15px !important;
-    font-size: 0.95rem;
+  /* 5. 增加點擊區域，防止手機誤觸 */
+  .nav a {
+    padding: 10px 8px !important;
+    white-space: nowrap; /* 防止主選單文字斷行 */
   }
 }
