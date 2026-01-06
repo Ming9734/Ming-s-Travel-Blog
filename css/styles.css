@@ -822,55 +822,55 @@ body {
     }
 }
 
-/* 📱 手機版導覽列與多層級選單修正 - 增強版 */
-@media screen and (max-width: 992px) { /* 將範圍擴大到 992px，確保平板也受惠 */
+/* 📱 手機版：主選單維持橫向，子選單優化 */
+@media screen and (max-width: 992px) {
   
+  /* 1. 確保主選單還是橫的，並允許左右滑動（如果太長） */
   .nav {
-    flex-direction: column; /* 強制垂直排列 */
-    align-items: center;
-    width: 100%;
+    flex-direction: row !important; 
+    flex-wrap: nowrap !important;
+    overflow-x: auto; /* 項目太多時可左右滑動 */
+    justify-content: flex-start;
+    padding: 0 10px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav > li {
-    width: 100%;
-    margin: 0;
-    text-align: center;
+    margin: 0 10px !important;
+    flex: 0 0 auto; /* 防止主選項被擠壓 */
   }
 
-  /* 修正第二層 */
+  /* 2. 下拉選單（第二層）：改成在主選單下方展開 */
   .dropdown-menu {
-    position: static !important; /* 使用 !important 確保覆蓋原本的 absolute */
-    display: none; 
-    width: 100% !important;
-    box-shadow: none !important;
-    background: rgba(0, 0, 0, 0.05) !important;
-    transform: none !important; /* 移除任何位移 */
+    position: absolute !important; /* 回歸絕對定位 */
+    top: 100%;
+    left: 50% !important;
+    transform: translateX(-50%) !important; /* 居中對齊主選項 */
+    min-width: 160px !important;
+    background: white !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
   }
 
-  /* 修正第三層 (最關鍵的地方) */
+  /* 3. 關鍵：修正第三層 (Sub-menu) - 改為向下垂直嵌入 */
   .sub-menu {
-    position: static !important; /* 強制取消向右飄移 */
+    position: static !important; /* 不再向右飄，而是向下推開 */
     display: none;
     width: 100% !important;
     left: 0 !important;
+    background: #f9f9f9 !important; /* 淺灰色背景區分 */
     box-shadow: none !important;
-    background: rgba(0, 0, 0, 0.08) !important; /* 顏色再深一點點做區隔 */
-    padding-left: 20px !important; /* 明確的縮排 */
+    padding-left: 15px !important; /* 縮排感 */
+    border-top: 1px solid #eee;
   }
 
-  /* 當滑鼠懸停或點擊時顯示（手機版 hover 其實就是點擊） */
-  .dropdown:hover > .dropdown-menu,
+  /* 4. 當第二層被懸停時，確保第三層正常運作 */
   .dropdown-sub:hover > .sub-menu {
     display: block !important;
   }
 
-  .nav a {
-    padding: 12px 20px !important;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-  }
-
-  /* 移除手機版不必要的底線動畫，避免視覺混亂 */
-  .nav a::after {
-    display: none !important;
+  /* 調整連結間距，方便手指點擊 */
+  .dropdown-menu a {
+    padding: 12px 15px !important;
+    font-size: 0.95rem;
   }
 }
