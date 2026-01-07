@@ -823,33 +823,51 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-  /* 🌟 強制關閉所有懸停觸發顯示的可能 */
-  .dropdown:hover > .dropdown-menu,
-  .dropdown-sub:hover > .sub-menu {
-    display: none !important; 
+  /* 1. 預設狀態：通通隱藏，但不要加 !important */
+  .dropdown-menu, .sub-menu {
+    display: none; 
+    position: absolute !important;
   }
 
-  /* 🌟 只有 JS 加入的 menu-open 才能讓選單出現 */
+  /* 2. 🌟 核心修正：讓 menu-open 具有最高優先權 */
+  /* 這樣當 JS 作用時，它會覆蓋掉所有隱藏指令 */
   .menu-open {
     display: block !important;
   }
 
-  /* 保持之前的寬度與換行設定 */
+  /* 3. 徹底禁用手機版的 hover 自動顯示功能 */
+  /* 我們不寫 !important 在 none 上，就不會鎖死選單 */
+  .dropdown:hover > .dropdown-menu,
+  .dropdown-sub:hover > .sub-menu {
+    display: none; 
+  }
+
+  /* 4. 維持寬度與換行設定 */
   .dropdown-menu {
-    position: absolute !important;
     width: 85vw !important;
     max-width: 300px !important;
-    white-space: normal !important;
+    background: white !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+    z-index: 9999 !important;
   }
 
   .sub-menu {
     position: static !important;
     width: 100% !important;
+    background: #f8f9fa !important;
+    padding-left: 15px !important;
   }
 
   .dropdown-menu a, .sub-menu a {
     white-space: normal !important;
     word-break: break-word !important;
     display: block !important;
+    color: #333 !important; /* 確保文字顏色正確 */
+    padding: 12px 15px !important;
+  }
+
+  /* 5. 確保導覽列本身不會遮擋 */
+  .navbar {
+    overflow: visible !important;
   }
 }
