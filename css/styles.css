@@ -822,46 +822,34 @@ body {
     }
 }
 
-/* 📱 手機版：修正寬度溢出問題 */
+/* 📱 手機版：只解決「撐開」問題，不干涉顯示邏輯 */
 @media screen and (max-width: 992px) {
   
-  /* 1. 防止整張網頁左右晃動 */
-  html, body {
-    overflow-x: hidden !important;
-    position: relative;
+  /* 1. 核心修正：解決文字太長撐開寬度的問題 */
+  .dropdown-menu a, .sub-menu a {
+    white-space: normal !important;  /* 允許文字換行，不准橫向生長 */
+    word-wrap: break-word !important; /* 長單字強制斷行 */
+    box-sizing: border-box !important; /* 確保 padding 不會撐寬格子 */
+    display: block !important;
+    line-height: 1.4 !important;
   }
 
+  /* 2. 限制寬度：確保下拉選單本體不會超過螢幕 */
+  .dropdown-menu {
+    max-width: 85vw !important; /* 限制寬度在螢幕 85% 以內 */
+    /* 注意：這裡「不要」寫 display: none !important，
+       讓它維持原本的狀態，否則 JS 會點不開 */
+  }
+
+  /* 3. 確保地圖頁不被干擾 */
   .navbar {
+    overflow: visible !important; /* 必須是 visible，下拉選單才出得來 */
     width: 100% !important;
     max-width: 100vw !important;
-    overflow: visible !important; /* 確保下拉選單能顯示 */
   }
 
-  /* 2. 下拉選單：設定最大寬度限制 */
-  .dropdown-menu {
-    /* 這裡維持你原本的定位方式 (可能是 absolute) */
-    max-width: 90vw !important;  /* 🌟 核心：強制寬度不超過螢幕 90% */
-    box-sizing: border-box !important; /* 🌟 核心：確保內距不撐開寬度 */
-    
-    /* 防止內部內容橫向溢出 */
-    overflow-x: hidden !important; 
-    overflow-y: auto !important;
-    max-height: 70vh; /* 防止太長 */
-  }
-
-  /* 3. 第三層子選單：同樣鎖定寬度 */
-  .sub-menu {
-    width: 100% !important;
-    box-sizing: border-box !important;
-    max-width: 100% !important;
-  }
-
-  /* 4. 關鍵：文字強制換行，不要橫著長 */
-  .dropdown-menu a, .sub-menu a {
-    display: block !important;
-    white-space: normal !important; /* 允許文字自動換行 */
-    word-break: break-word !important; /* 長單字自動斷行 */
-    padding: 12px 15px !important;
-    box-sizing: border-box !important; /* 寬度包含內距 */
+  /* 4. 防止整頁左右晃動 */
+  html, body {
+    overflow-x: hidden !important;
   }
 }
