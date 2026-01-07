@@ -822,52 +822,59 @@ body {
     }
 }
 
-/* 📱 手機版專用修正 (992px 以下) */
 @media screen and (max-width: 992px) {
-  /* 1. 預設狀態：通通隱藏 */
+  /* 1. 預設隱藏 */
   .dropdown-menu, .sub-menu {
-    display: none; 
-    position: absolute !important;
-    top: 100% !important;
+    display: none;
+    position: relative !important; /* 🌟 關鍵：改為 relative，讓它在父層內乖乖排隊 */
+    top: 0 !important;
     left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    box-shadow: none !important;
   }
 
-  /* 2. 🌟 讓 JS 控制的 class 具有最高優先權 */
+  /* 2. 第二層選單的特殊外殼 (這層要飄在導覽列下) */
+  .nav > li > .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 320px !important;
+    background: white !important;
+    display: none; /* 由 JS 控制 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+    border-radius: 8px;
+    z-index: 10005 !important;
+  }
+
+  /* 3. 當選單打開時 */
   .menu-open {
     display: block !important;
   }
 
-  /* 3. 核心修正：解決文字太長撐開寬度的問題 */
-  .dropdown-menu {
-    width: 85vw !important; /* 限制寬度在螢幕 85% 以內 */
-    max-width: 300px !important;
-    background: white !important;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
-    z-index: 9999 !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
-
+  /* 4. 第三層子選單 (城市列表)：確保它是垂直推開，不要重疊 */
   .sub-menu {
-    position: static !important; /* 第三層向下展開 */
-    width: 100% !important;
-    background: #f8f9fa !important;
-    padding-left: 15px !important;
-    transform: none !important; /* 移除置中效果 */
+    background: #f1f5f9 !important; /* 換個底色，讓層級分明 */
+    border-left: 4px solid #4f46e5 !important;
+    margin: 5px 0 !important;
   }
 
-  /* 4. 文字換行設定 */
+  /* 5. 解決連擊與文字換行 */
   .dropdown-menu a, .sub-menu a {
     white-space: normal !important;
     word-break: break-word !important;
+    line-height: 1.5 !important;
+    padding: 12px 20px !important;
     display: block !important;
-    padding: 12px 15px !important;
     color: #333 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
   }
 
-  /* 5. 禁用手機版的 Hover 自動觸發，改由 JS 掌控 */
-  .dropdown:hover > .dropdown-menu,
-  .dropdown-sub:hover > .sub-menu {
-    display: none; 
+  /* 確保文章標題（最後一層）更容易點擊 */
+  .sub-menu li a {
+    font-weight: 400;
+    font-size: 0.95rem;
   }
 }
