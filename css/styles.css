@@ -822,68 +822,46 @@ body {
     }
 }
 
-/* 📱 手機版：解除遮擋並鎖定寬度 */
+/* 📱 手機版：修正寬度溢出問題 */
 @media screen and (max-width: 992px) {
   
-  /* 1. 確保最外層容器允許內容溢出顯示 */
+  /* 1. 防止整張網頁左右晃動 */
+  html, body {
+    overflow-x: hidden !important;
+    position: relative;
+  }
+
   .navbar {
     width: 100% !important;
-    height: auto !important;    /* 讓高度可以根據內容伸縮，或者固定在 70px */
-    min-height: 70px;
-    overflow: visible !important; /* 🌟 關鍵：絕對不能是 hidden，否則選單會消失 */
-    position: fixed;
-    z-index: 10000;
+    max-width: 100vw !important;
+    overflow: visible !important; /* 確保下拉選單能顯示 */
   }
 
-  .nav {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: center;
-    overflow: visible !important; /* 🌟 關鍵：解除內部容器的剪裁 */
-    width: 100%;
-  }
-
-  /* 2. 下拉選單：修正定位與層級 */
+  /* 2. 下拉選單：設定最大寬度限制 */
   .dropdown-menu {
-    position: absolute !important;
-    top: 100% !important; /* 緊貼導覽列下方 */
-    left: 50% !important;
-    transform: translateX(-50%) !important; 
+    /* 這裡維持你原本的定位方式 (可能是 absolute) */
+    max-width: 90vw !important;  /* 🌟 核心：強制寬度不超過螢幕 90% */
+    box-sizing: border-box !important; /* 🌟 核心：確保內距不撐開寬度 */
     
-    width: 92vw !important;
-    max-width: 350px !important;
-    background: white !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
-    border-radius: 12px;
-    z-index: 20000 !important; /* 確保在地圖與所有元件之上 */
-    
-    /* 預設隱藏，由 JS 控制 */
-    display: none !important;
-    box-sizing: border-box !important;
+    /* 防止內部內容橫向溢出 */
+    overflow-x: hidden !important; 
+    overflow-y: auto !important;
+    max-height: 70vh; /* 防止太長 */
   }
 
-  /* 3. 當 JS 作用時顯示選單 */
-  .menu-open {
-    display: block !important;
-  }
-
-  /* 4. 第三層：向下推開 */
+  /* 3. 第三層子選單：同樣鎖定寬度 */
   .sub-menu {
-    position: static !important;
-    display: none !important; /* 預設隱藏 */
     width: 100% !important;
-    background: #f8f9fa !important;
-    padding-left: 15px !important;
     box-sizing: border-box !important;
+    max-width: 100% !important;
   }
 
-  /* 5. 文字換行與顏色，防止文字消失 */
+  /* 4. 關鍵：文字強制換行，不要橫著長 */
   .dropdown-menu a, .sub-menu a {
     display: block !important;
-    color: #333 !important; /* 確保文字不是白色（白色會看不見） */
-    white-space: normal !important;
-    word-break: break-word !important;
+    white-space: normal !important; /* 允許文字自動換行 */
+    word-break: break-word !important; /* 長單字自動斷行 */
     padding: 12px 15px !important;
-    border-bottom: 1px solid #eee;
+    box-sizing: border-box !important; /* 寬度包含內距 */
   }
 }
