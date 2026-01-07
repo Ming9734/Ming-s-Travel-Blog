@@ -822,7 +822,7 @@ body {
     }
 }
 
-@@media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
   /* 🌟 強制關閉所有懸停觸發顯示的可能 */
   .dropdown:hover > .dropdown-menu,
   .dropdown-sub:hover > .sub-menu {
