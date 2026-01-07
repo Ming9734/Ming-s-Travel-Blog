@@ -52,47 +52,36 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * 手機版專用：點擊控制函式
  * 邏輯：未展開時點擊為展開，已展開時點擊則跳轉
- */
-function initMobileMenu() {
-  // 選取所有包含子選單的連結
+ function initMobileMenu() {
   const menuLinks = document.querySelectorAll('.dropdown > a, .dropdown-sub > a');
 
   menuLinks.forEach(link => {
+    // 使用 click 事件，但加強攔截
     link.addEventListener('click', function(e) {
-      // 僅在手機/平板模式下執行
       if (window.innerWidth <= 992) {
         const nextMenu = this.nextElementSibling;
 
-        // 檢查是否有下級選單需要控制
         if (nextMenu && (nextMenu.classList.contains('dropdown-menu') || nextMenu.classList.contains('sub-menu'))) {
           
-          // 核心判斷：如果選單目前是隱藏的 (沒有 menu-open class)
+          // 如果選單目前是關閉狀態
           if (!nextMenu.classList.contains('menu-open')) {
-            e.preventDefault();  // 攔截跳轉
-            e.stopPropagation(); // 防止事件冒泡
+            // 🌟 這是關鍵：阻止所有後續行為
+            e.preventDefault(); 
+            e.stopPropagation();
+            e.stopImmediatePropagation(); // 阻止同一個元素上的其他監聽器
 
-            // 關閉同層級其他已打開的選單 (維持介面整潔)
+            // 關閉同層級其他選單
             const parentUl = this.parentElement.parentElement;
-            const openSiblings = parentUl.querySelectorAll('.menu-open');
-            openSiblings.forEach(menu => menu.classList.remove('menu-open'));
+            parentUl.querySelectorAll('.menu-open').forEach(m => {
+              if (m !== nextMenu) m.classList.remove('menu-open');
+            });
 
             // 打開當前選單
             nextMenu.classList.add('menu-open');
-            console.log("手機版：展開選單");
-          } else {
-            // 如果已經是 menu-open 狀態，則不執行 preventDefault
-            // 瀏覽器會執行原本 A 標籤的 href 跳轉
-            console.log("手機版：執行跳轉");
-          }
+          } 
+          // 如果已經打開了，就不執行 e.preventDefault()，讓它正常跳轉
         }
       }
     });
-  });
-
-  // 點擊頁面其他地方時，關閉所有手機版選單 (選用，增加體驗)
-  document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 992 && !e.target.closest('.nav')) {
-      document.querySelectorAll('.menu-open').forEach(m => m.classList.remove('menu-open'));
-    }
   });
 }
