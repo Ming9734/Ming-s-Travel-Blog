@@ -822,52 +822,52 @@ body {
     }
 }
 
+/* 📱 手機版專用修正 (992px 以下) */
 @media screen and (max-width: 992px) {
-  /* 1. 預設狀態：通通隱藏，但不要加 !important */
+  /* 1. 預設狀態：通通隱藏 */
   .dropdown-menu, .sub-menu {
     display: none; 
     position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
   }
 
-  /* 2. 🌟 核心修正：讓 menu-open 具有最高優先權 */
-  /* 這樣當 JS 作用時，它會覆蓋掉所有隱藏指令 */
+  /* 2. 🌟 讓 JS 控制的 class 具有最高優先權 */
   .menu-open {
     display: block !important;
   }
 
-  /* 3. 徹底禁用手機版的 hover 自動顯示功能 */
-  /* 我們不寫 !important 在 none 上，就不會鎖死選單 */
-  .dropdown:hover > .dropdown-menu,
-  .dropdown-sub:hover > .sub-menu {
-    display: none; 
-  }
-
-  /* 4. 維持寬度與換行設定 */
+  /* 3. 核心修正：解決文字太長撐開寬度的問題 */
   .dropdown-menu {
-    width: 85vw !important;
+    width: 85vw !important; /* 限制寬度在螢幕 85% 以內 */
     max-width: 300px !important;
     background: white !important;
     box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
     z-index: 9999 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
   }
 
   .sub-menu {
-    position: static !important;
+    position: static !important; /* 第三層向下展開 */
     width: 100% !important;
     background: #f8f9fa !important;
     padding-left: 15px !important;
+    transform: none !important; /* 移除置中效果 */
   }
 
+  /* 4. 文字換行設定 */
   .dropdown-menu a, .sub-menu a {
     white-space: normal !important;
     word-break: break-word !important;
     display: block !important;
-    color: #333 !important; /* 確保文字顏色正確 */
     padding: 12px 15px !important;
+    color: #333 !important;
   }
 
-  /* 5. 確保導覽列本身不會遮擋 */
-  .navbar {
-    overflow: visible !important;
+  /* 5. 禁用手機版的 Hover 自動觸發，改由 JS 掌控 */
+  .dropdown:hover > .dropdown-menu,
+  .dropdown-sub:hover > .sub-menu {
+    display: none; 
   }
 }
