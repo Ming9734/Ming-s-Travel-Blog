@@ -822,45 +822,34 @@ body {
     }
 }
 
-@media screen and (max-width: 992px) {
-  /* 1. 防止整頁左右滑動 */
-  html, body {
-    overflow-x: hidden !important;
+@@media screen and (max-width: 992px) {
+  /* 🌟 強制關閉所有懸停觸發顯示的可能 */
+  .dropdown:hover > .dropdown-menu,
+  .dropdown-sub:hover > .sub-menu {
+    display: none !important; 
   }
 
-  /* 2. 第二層選單：改為固定寬度並靠左，防止噴出螢幕 */
+  /* 🌟 只有 JS 加入的 menu-open 才能讓選單出現 */
+  .menu-open {
+    display: block !important;
+  }
+
+  /* 保持之前的寬度與換行設定 */
   .dropdown-menu {
     position: absolute !important;
-    left: 0 !important;
-    right: auto !important;
-    width: 85vw !important;  /* 限制寬度在螢幕 85% */
+    width: 85vw !important;
     max-width: 300px !important;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2) !important;
-    overflow-x: hidden !important;
+    white-space: normal !important;
   }
 
-  /* 3. 第三層選單 (關鍵修正)：取消向右展開，改為向下嵌入 */
   .sub-menu {
-    position: static !important; /* 🌟 讓它不再往右噴，而是向下推開 */
-    display: none; 
+    position: static !important;
     width: 100% !important;
-    background: #f9f9f9 !important;
-    box-shadow: none !important;
-    padding-left: 20px !important; /* 縮排表示層級 */
-    border-left: 3px solid #ccc;
   }
 
-  /* 4. 懸停觸發 (確保手機模擬點擊能運作) */
-  .dropdown-sub:hover > .sub-menu {
-    display: block !important;
-  }
-
-  /* 5. 文字換行：防止長標題撐破格子 */
   .dropdown-menu a, .sub-menu a {
-    white-space: normal !important; /* 🌟 允許文字換行 */
+    white-space: normal !important;
     word-break: break-word !important;
     display: block !important;
-    padding: 12px 15px !important;
-    box-sizing: border-box !important;
   }
 }
