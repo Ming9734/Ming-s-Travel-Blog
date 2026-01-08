@@ -496,22 +496,25 @@ body {
   object-fit: contain;
 }
 
-/* 🔹 玻璃卡片修正 */
-/* 🔹 1. 電腦版與基本設定 */
+/* ================================================= */
+/* 🔹 玻璃卡片：電腦與手機獨立邏輯完美版            */
+/* ================================================= */
+
 .cover-overlay {
   opacity: 0;
   pointer-events: none;
   position: absolute;
   left: 50%;
-  top: 50%; /* 🌟 統一使用 top 50% 作為基準 */
-  /* 使用中心點定位，並預設稍微下移 20px 做進場動畫 */
-  transform: translate(-50%, -40%); 
   
-  transition: opacity 1s ease, transform 0.8s ease;
+  /* 🌟 電腦版：保持你最喜歡的底部浮現設定 */
+  bottom: 12%; 
+  transform: translate(-50%, 20px); 
+  
+  transition: opacity 1s ease, transform 0.8s ease, box-shadow 0.3s ease;
 
   width: 90%;
   max-width: 500px;
-  padding: 2rem;
+  padding: 2.5rem;
   background: linear-gradient(120deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -522,51 +525,69 @@ body {
   z-index: 2;
 }
 
-/* 顯示時的狀態 */
+/* 🟢 電腦版顯示狀態 */
 .cover-overlay.is-visible {
   opacity: 1;
-  /* 🌟 動畫終點：回到正中心 (或你希望的中心偏下位置) */
-  transform: translate(-50%, -30%); 
+  transform: translate(-50%, 0); 
   pointer-events: auto;
 }
 
-/* 🌟 2. 徹底移除手機版的 Hover 位移 (防止點擊時亂跳) */
-@media screen and (max-width: 992px) {
-  .cover-overlay.is-visible:hover,
-  .cover-overlay.is-visible:active {
-    /* 🌟 強制保持跟顯示狀態一樣的 transform，不准位移 */
-    transform: translate(-50%, -30%) scale(1) !important;
-  }
-
-  .cover-overlay {
-    top: 50%; /* 手機版如果覺得太高或太低，只動這個 % 數 */
-    padding: 1.5rem;
-  }
+/* 🟠 電腦版 Hover：原地微縮放 */
+.cover-overlay.is-visible:hover {
+  transform: translate(-50%, 0) scale(1.03); 
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
-/* 🔹 標題 (H1) - 視覺焦點 */
+/* 📱 手機版專屬邏輯 (@media 區塊) */
+@media screen and (max-width: 992px) {
+  .cover-overlay {
+    bottom: auto;
+    /* 🌟 修改點：設定為你測試後最滿意的 55% 位置 */
+    top: 55%; 
+    
+    /* 初始狀態：中心對齊並往下偏一點點做進場動畫 */
+    transform: translate(-50%, -50%) translateY(20px);
+    
+    width: 85%;
+    padding: 1.5rem;
+  }
+
+  .cover-overlay.is-visible {
+    /* 進場終點：回到精確的 55% 中心點 */
+    transform: translate(-50%, -50%) translateY(0); 
+  }
+
+  /* 🚫 徹底解決手機版點擊跳動問題 */
+  .cover-overlay.is-visible:hover,
+  .cover-overlay.is-visible:active {
+    /* 強制鎖定座標，不准在點擊時產生位移 */
+    transform: translate(-50%, -50%) translateY(0) scale(1) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35) !important;
+  }
+
+  .cover-overlay h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .cover-overlay p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+}
+
+/* 🔹 文字樣式 (保持原本的高質感設定) */
 .cover-overlay h1 {
-  font-size: 2.8rem; /* 比上次的 2.4rem 稍大，但比 3rem 小 */
+  font-size: 2.8rem;
   margin-bottom: 0.8rem;
-  font-weight: 900; /* ✨ 優化：極粗體 (Boldest)，強調力量感 ✨ */
-  line-height: 1.1; 
-  /* 如果標題很長，可以加上文字陰影讓它在各種背景下更清晰 */
+  font-weight: 900;
+  line-height: 1.1;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* 🔹 副標題 (p) - 質感引言 */
 .cover-overlay p {
-  opacity: 1;
-  font-size: 1.3rem; /* 介於您希望的大小之間 */
-  margin-bottom: 2.5rem; /* 增加與按鈕的距離 */
-  font-weight: 300; /* ✨ 優化：使用細體，與大標題形成對比 ✨ */
-  
-  /* ✨ 優化：使用柔和的顏色，增加層次感 ✨ */
-  color: rgba(255, 255, 255, 0.85); 
-  max-width: 80%; /* 限制副標寬度，讓文字形成一個舒適的區塊 */
-  margin-left: auto; /* 配合 max-width 實現置中 */
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 85%;
+  margin-left: auto;
   margin-right: auto;
 }
+
 
 /* 🔹 按鈕 */
 #enter-post {
