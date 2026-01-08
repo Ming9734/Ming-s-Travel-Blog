@@ -838,79 +838,76 @@ body {
 }
 
 /* 針對 768px 以下的手機版：強制圖上文下 */
+/* 針對 768px 以下的手機版：暴力重置 */
 @media screen and (max-width: 768px) {
   
-  /* 1. 文章主容器：徹底摧毀 Grid，改用垂直 Flex */
-  .post-layout {
+  /* 使用 main#id 或 main.post-layout.active 增加權重 */
+  body main.post-layout, 
+  body main.post-layout.active {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column !important; /* 🌟 核心：強制垂直 */
     
-    /* 🌟 最重要：徹底洗掉電腦版的網格設定 */
-    grid-template-columns: none !important; 
+    /* 徹底摧毀任何網格殘留 */
+    grid-template-columns: none !important;
     grid-template-areas: none !important;
     
-    height: auto !important;
-    min-height: 100vh !important; /* 確保背景至少填滿螢幕 */
-    max-height: none !important;
-    margin: 80px auto 20px auto !important;
-    padding: 15px !important;
+    /* 尺寸修正 */
     width: 95% !important;
-    overflow: visible !important; /* 關閉容器內部捲軸 */
-    gap: 20px !important; /* 給予圖片和文字一點間距 */
-  }
-  .post-layout.active {
-    display: flex !important; 
-    flex-direction: column !important;
-    
-    /* 必須確保高度是自動的，否則內容會被切掉 */
+    max-width: 95% !important;
     height: auto !important;
     min-height: 100vh !important;
     max-height: none !important;
+    
+    /* 佈局修正 */
+    margin: 80px auto 30px auto !important;
+    padding: 15px !important;
+    gap: 20px !important;
     overflow: visible !important;
-    margin-top: 80px !important;
+    position: relative !important;
   }
 
-  /* 2. 玻璃背景：跟隨垂直內容撐開 */
-  .post-layout::before {
+  /* 確保背景層跟著長高 */
+  body main.post-layout::before {
+    content: '' !important;
     position: absolute !important;
     inset: 0 !important;
-    width: 100% !important;
     height: 100% !important;
-    z-index: 0 !important;
+    width: 100% !important;
   }
 
-  /* 3. 圖片區：強制寬度 100% */
+  /* 圖片區：置頂並強制滿版 */
   .post-gallery {
-    position: relative !important;
-    display: block !important;
     width: 100% !important;
-    height: auto !important;
-    order: 1 !important; /* 確保在上面 */
-    z-index: 2 !important;
+    min-width: 100% !important;
+    flex: none !important; /* 禁用 flex 壓縮 */
+    order: 1 !important;   /* 絕對排在第一個 */
     margin: 0 0 10px 0 !important;
   }
 
   .gallery-frame {
     width: 100% !important;
-    height: auto !important;
     aspect-ratio: 4 / 3 !important;
+    height: auto !important;
   }
 
-  /* 4. 文字區：讓內容自然向下延伸 */
+  /* 文字區：置底並解除滾軸 */
   .post-text {
-    position: relative !important;
-    display: block !important;
     width: 100% !important;
-    height: auto !important; 
+    min-width: 100% !important;
+    flex: none !important;
+    order: 2 !important;   /* 絕對排在第二個 */
+    
+    height: auto !important;
     max-height: none !important;
-    order: 2 !important; /* 確保在下面 */
-    z-index: 2 !important;
-    overflow: visible !important; /* 🌟 核心：移除內部捲軸，讓文字長度撐開網頁 */
+    overflow: visible !important;
     padding: 10px !important;
   }
 
-  /* 5. 動畫與透明度修正：確保手機上一進場就看得到 */
+  /* 修正動畫：防止元素因為動畫初始值（opacity: 0）而消失 */
   .animate-entry {
     animation: none !important;
     opacity: 1 !important;
-    transform: none !
+    visibility: visible !important;
+    transform: none !important;
+  }
+}
