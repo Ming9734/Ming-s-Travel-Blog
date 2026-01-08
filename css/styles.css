@@ -507,7 +507,8 @@ body {
   left: 50%;
   
   /* 🌟 電腦版：保持你最喜歡的底部浮現設定 */
-  bottom: 12%; 
+  bottom: 7% !important; /* 🌟 強制基準點為 7% */
+  top: auto !important;    /* 🌟 徹底踢掉 top 的干擾 */
   transform: translate(-50%, 20px); 
   
   transition: opacity 1s ease, transform 0.8s ease, box-shadow 0.3s ease;
@@ -528,6 +529,8 @@ body {
 /* 🟢 電腦版顯示狀態 */
 .cover-overlay.is-visible {
   opacity: 1;
+  bottom: 7% !important; /* 🌟 確保終點基準點依然是 7% */
+  top: auto !important;
   transform: translate(-50%, 0); 
   pointer-events: auto;
 }
