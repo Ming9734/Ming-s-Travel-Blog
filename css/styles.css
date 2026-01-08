@@ -796,103 +796,74 @@ body {
 
 
 /* ================================================= */
-/* 📱 行動裝置整合修正 (覆蓋原本所有的 @media 區塊)  */
+/* 📱 手機版最終修正：修復導覽列 + 保持圖上文下       */
 /* ================================================= */
 
-/* 第一階段：針對 992px 以下 (平板與手機) */
+/* 第一階段：針對 992px 以下 (修復導覽列選單) */
 @media screen and (max-width: 992px) {
-  /* 導覽列下拉選單修正 */
+  /* 1. 強制導覽列橫向排列並置中，防止按鈕疊在一起 */
+  .nav {
+    display: flex !important;
+    flex-direction: row !important; 
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .nav > li {
+    margin: 0 10px !important; /* 縮小左右間距防止溢出 */
+  }
+
+  .nav a {
+    font-size: 0.9rem !important; /* 手機版字體縮小一點點 */
+    padding: 5px 8px !important;
+  }
+
+  /* 2. 下拉選單修正：避免遮住內容 */
   .nav > li > .dropdown-menu {
     position: absolute !important;
     top: 100% !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    width: 90vw !important;
-    max-width: 320px !important;
+    width: 200px !important;
     background: white !important;
-    z-index: 10005 !important;
-    border-radius: 8px;
-  }
-  
-  /* 封面玻璃卡片位置修正：置中顯示 */
-  .cover-overlay {
-    bottom: auto !important;
-    top: 60% !important; 
-    transform: translate(-50%, -50%) !important;
-    width: 85% !important;
-  }
-  .cover-overlay.is-visible {
-    opacity: 1 !important;
-    transform: translate(-50%, -50%) !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
+    border-radius: 8px !important;
   }
 }
 
-/* 第二階段：針對 768px 以下 (手機版：強制圖上文下) */
+/* 第二階段：針對 768px 以下 (保持圖上文下) */
 @media screen and (max-width: 768px) {
-
-  body { background: red !important; }
-
-
-  /* 1. 容器重組：摧毀 Grid，改用垂直 Flex */
-  body .post-layout.active, 
-  body .post-layout {
+  
+  /* 3. 內容區塊圖上文下 */
+  body .post-layout, 
+  body .post-layout.active {
     display: flex !important;
-    flex-direction: column !important; /* 🌟 核心：垂直排列 */
-    
-    grid-template-columns: none !important; 
-    grid-template-areas: none !important;
-    
-    width: 100% !important;
-    height: auto !important;            /* 🌟 解除電腦版 70vh 限制 */
+    flex-direction: column !important;
+    height: auto !important;
     min-height: 100vh !important;
-    max-height: none !important;
-    
-    margin: 60px 0 0 0 !important;
-    padding: 10px !important;
-    overflow: visible !important;       /* 🌟 讓整個網頁可以往下捲動 */
+    grid-template-columns: none !important;
+    margin-top: 70px !important; /* 確保不被導覽列遮住 */
+    padding: 15px !important;
+    overflow: visible !important;
   }
 
-  /* 2. 背景毛玻璃層：確保寬高跟隨垂直內容撐開 */
-  body .post-layout::before {
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 0 !important;
-  }
-
-  /* 3. 相片集區塊：強制寬度 100%，排在上方 */
   .post-gallery {
     width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 0 20px 0 !important;
-    flex: none !important;
-    order: 1 !important;                /* 🌟 確保圖片在上面 */
+    order: 1 !important;
+    margin-bottom: 20px !important;
   }
 
-  .gallery-frame {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 4 / 3 !important;     /* 🌟 保持相片 4:3 比例 */
-  }
-
-  /* 4. 文字介紹區塊：解除內部捲軸，排在下方 */
   .post-text {
     width: 100% !important;
-    max-width: 100% !important;
+    order: 2 !important;
     height: auto !important;
-    max-height: none !important;
-    padding: 10px 15px 80px 15px !important;
-    overflow: visible !important;       /* 🌟 移除文字框內的捲軸 */
-    order: 2 !important;                /* 🌟 確保文字在下面 */
-    flex: none !important;
+    overflow: visible !important;
   }
 
-  /* 5. 修正動畫：確保內容在手機上直接顯示，不因動畫透明 */
-  .animate-entry {
-    animation: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
+  /* 4. 修正導覽列在極窄螢幕下的間距 */
+  .navbar {
+    padding: 0.5rem 0 !important;
   }
 }
