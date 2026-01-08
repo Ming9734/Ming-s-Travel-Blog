@@ -796,93 +796,89 @@ body {
 
 
 /* ================================================= */
-/* 📱 最終修復：層級導覽列 + 玻璃比例 + 圖上文下     */
+/* 📱 最終歸位：橫向母導覽列 + 向下階梯選單 + 比例優化 */
 /* ================================================= */
 
 @media screen and (max-width: 992px) {
   
-  /* 1. 導覽列：回歸我們討論過的垂直層級 (像樓梯一樣) */
-  body .navbar {
-    height: auto !important;
-    padding: 10px 0 !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-  }
-
+  /* 1. 母導覽列：維持橫向 (與電腦版一致) */
   body .nav {
-    flex-direction: column !important; /* 核心：垂直排列 */
-    align-items: flex-start !important;
-    padding-left: 10% !important; /* 讓整體微偏左，留出美感 */
+    flex-direction: row !important; /* 🌟 回歸橫向排列 */
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 5px !important;
   }
 
   body .nav > li {
-    width: 90% !important;
-    margin: 8px 0 !important;
+    margin: 5px 10px !important;
+    position: relative; /* 基準 */
   }
 
-  /* 🌟 下拉選單：向下推擠內容，並用縮排表示層級 */
+  /* 2. 下拉選單：向下展開逻辑 (核心) */
   body .dropdown-menu, 
   body .sub-menu {
-    position: static !important; /* 關鍵：不再漂浮，而是佔據空間向下排隊 */
-    display: block !important;   /* 手機版直接展開 */
-    width: 100% !important;
+    position: static !important; /* 🌟 關鍵：不漂浮、不向右，直接在下方佔位 */
+    display: none;               /* 預設隱藏，由點擊觸發 */
+    width: auto !important;
+    min-width: 150px !important;
     box-shadow: none !important;
-    background: rgba(0, 0, 0, 0.03) !important;
-    padding-left: 20px !important; /* 第二層縮排 */
-    margin-top: 5px !important;
-    border-left: 1.5px solid #4f46e5; /* 藍色層級線 */
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-left: 2px solid #4f46e5 !important; /* 階梯縮排線 */
+    margin: 5px 0 0 10px !important;
+    padding: 5px 0 5px 15px !important;
   }
 
-  body .sub-menu {
-    padding-left: 20px !important; /* 第三層再縮排 */
-    border-left: 1.5px solid #9333ea; /* 紫色層級線 */
+  /* 當父層被點擊/激活時顯示 */
+  .dropdown.active > .dropdown-menu,
+  .dropdown-sub.active > .sub-menu {
+    display: block !important;
   }
 
-  /* 2. 封面毛玻璃：修正比例 (解決變太長的問題) */
+  /* 3. 封面毛玻璃：修正長寬比 (避免太長) */
   body .cover-overlay {
     top: 60% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     
-    width: 88% !important;        /* 恢復寬度，呈現橫向矩形 */
-    max-width: 380px !important;
+    width: 90% !important;        /* 寬度拉寬 */
+    max-width: 420px !important;  /* 限制最大寬度 */
     height: auto !important;
-    padding: 1.5rem !important;
+    min-height: unset !important; /* 🌟 移除可能存在的最小高度 */
     
-    /* 確保內容不撐開高度 */
+    padding: 1.2rem 1.5rem !important; /* 縮小上下內距 */
     display: flex !important;
     flex-direction: column !important;
-    gap: 8px !important;
-    border-radius: 24px !important;
-    transition: none !important; 
+    gap: 5px !important;          /* 縮小標題與副標題間距 */
+    border-radius: 20px !important;
+    transition: none !important;
   }
 
-  /* 關閉所有手機上的 Hover 縮放，防止誤觸 */
-  body .cover-overlay:hover,
-  body .cover-overlay.is-visible:hover {
-    transform: translate(-50%, -50%) !important;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3) !important;
+  /* 確保標題位置在卡片內最優化 */
+  #cover-title { 
+    font-size: 1.3rem !important; 
+    margin: 0 !important; 
+    line-height: 1.2 !important;
   }
-
-  #cover-title { font-size: 1.4rem !important; margin: 0 !important; }
-  #cover-subtitle { font-size: 0.9rem !important; margin: 0 !important; }
+  #cover-subtitle { 
+    font-size: 0.85rem !important; 
+    margin: 0 !important; 
+    opacity: 0.9 !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
-  
-  /* 3. Post 內容：強制圖上文下 (回歸那個你感謝我的版本) */
+  /* 4. Post 頁面內容：保持圖上文下 */
   body .post-layout, 
   body .post-layout.active {
     display: flex !important;
-    flex-direction: column !important; /* 圖上文下核心 */
+    flex-direction: column !important;
     margin-top: 80px !important;
     padding: 15px !important;
     height: auto !important;
     min-height: 100vh !important;
     grid-template-columns: none !important;
-    overflow: visible !important;
   }
 
-  /* 圖片區塊在前 */
   .post-gallery {
     width: 100% !important;
     order: 1 !important;
@@ -891,17 +887,13 @@ body {
 
   .gallery-frame {
     width: 100% !important;
-    aspect-ratio: 4 / 3 !important; /* 恢復相片黃金比例 */
-    height: auto !important;
+    aspect-ratio: 4 / 3 !important;
   }
 
-  /* 文字區塊在後 */
   .post-text {
     width: 100% !important;
     order: 2 !important;
     height: auto !important;
-    max-height: none !important;
     overflow: visible !important;
-    padding: 0 10px 100px 10px !important;
   }
 }
