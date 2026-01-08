@@ -835,51 +835,58 @@ body {
 }
 
 /* 針對 768px 以下的手機版深度修復 */
+
 @media screen and (max-width: 768px) {
   
   /* 3. 文章佈局：徹底解除 Grid 並修正長條問題 */
   .post-layout {
-    display: flex !important;
-    flex-direction: column !important; /* 強制圖上文下垂直排列 */
-    height: auto !important;           /* 🌟 核心：解除 70vh，解決長條壓縮問題 */
-    min-height: auto !important;
+    display: flex !important;           /* 絕對強制改為 flex */
+    flex-direction: column !important;  /* 絕對強制垂直排列 */
+    
+    height: auto !important;            /* 解除固定高度 */
+    min-height: none !important;        /* 移除任何最小高度限制 */
     max-height: none !important;
+    
     margin: 80px auto 30px auto !important;
     padding: 15px !important;
-    width: 92% !important;
-    gap: 20px !important;              /* 圖文之間的間距 */
-    overflow: visible !important;      /* 讓網頁自然向下滑動 */
+    width: 95% !important;              /* 稍微加寬，讓手機空間更大 */
+    gap: 0 !important;                  /* 先設為 0，靠子元素間距控制 */
+    overflow: visible !important;       /* 確保不會產生內部滾軸 */
   }
 
   /* 確保玻璃背景覆蓋垂直增長後的區域 */
   .post-layout::before {
     inset: 0 !important;
     height: 100% !important;
+    position: absolute !important;
   }
 
-  /* 4. 圖片區域：強制滿版 */
+  /* 4. 圖片區域：強制滿版且位於上方 */
   .post-gallery {
     display: block !important;
     width: 100% !important;
     height: auto !important;
-    order: 1 !important;               /* 確保在上方 */
+    flex: none !important;              /* 解除 flex 佔比 */
+    order: 1 !important;                /* 確保在第一順位 */
+    margin-bottom: 20px !important;     /* 手動增加與下方文字的間距 */
   }
 
   .gallery-frame {
     width: 100% !important;
     height: auto !important;
-    aspect-ratio: 4 / 3 !important;    /* 鎖定相片比例 */
+    aspect-ratio: 4 / 3 !important;     /* 保持圖片比例 */
   }
 
-  /* 5. 文字區域：解除所有滾動條 */
+  /* 5. 文字區域：解除所有滾動條且位於下方 */
   .post-text {
     display: block !important;
     width: 100% !important;
-    height: auto !important;           /* 🌟 核心：解除固定高度 */
+    height: auto !important;            /* 讓文字自然撐開高度 */
     max-height: none !important;
-    overflow-y: visible !important;     /* 🌟 關鍵：關閉內部滾輪，直接撐開 */
+    overflow-y: visible !important;     /* 關閉內部滾軸 */
     padding: 10px !important;
-    order: 2 !important;               /* 確保在圖片下方 */
+    order: 2 !important;                /* 確保在第二順位 */
+    flex: none !important;
   }
 
   /* 6. 禁用導致跑位的動畫 */
