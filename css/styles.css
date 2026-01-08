@@ -796,40 +796,47 @@ body {
 
 
 /* ================================================= */
-/* 📱 手機版最終修正：修復導覽列 + 保持圖上文下       */
+/* 📱 最終強制修正版：修復導覽列 + 60% 位置毛玻璃     */
 /* ================================================= */
 
-/* 第一階段：針對 992px 以下 (修復導覽列選單) */
+/* 第一階段：針對 992px 以下 (修復導覽列與封面卡片) */
 @media screen and (max-width: 992px) {
-  /* 1. 強制導覽列橫向排列並置中，防止按鈕疊在一起 */
-  .nav {
+  
+  /* 1. 強制修復導覽列：確保它固定在最上方且不崩壞 */
+  body .navbar {
     display: flex !important;
-    flex-direction: row !important; 
-    justify-content: center !important;
-    align-items: center !important;
+    position: fixed !important;
+    top: 0 !important;
     width: 100% !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    z-index: 99999 !important; /* 確保在最最上層 */
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body .nav {
+    flex-direction: row !important; /* 確保橫向排列 */
+    justify-content: center !important;
     padding: 0 !important;
+    margin: 0 !important;
   }
 
-  .nav > li {
-    margin: 0 10px !important; /* 縮小左右間距防止溢出 */
-  }
-
-  .nav a {
-    font-size: 0.9rem !important; /* 手機版字體縮小一點點 */
-    padding: 5px 8px !important;
-  }
-
-  /* 2. 下拉選單修正：避免遮住內容 */
-  .nav > li > .dropdown-menu {
-    position: absolute !important;
-    top: 100% !important;
+  /* 2. 強制封面玻璃卡片位在 60% 高度 (置中偏下) */
+  body .cover-overlay, 
+  body .cover-overlay.is-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    
+    /* 核心位置設定 */
+    bottom: auto !important;
+    top: 60% !important; 
     left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 200px !important;
-    background: white !important;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
-    border-radius: 8px !important;
+    transform: translate(-50%, -50%) !important; /* 完美置中 */
+    
+    width: 85% !important;
+    max-width: 400px !important;
+    display: block !important;
+    visibility: visible !important;
   }
 }
 
@@ -844,7 +851,7 @@ body {
     height: auto !important;
     min-height: 100vh !important;
     grid-template-columns: none !important;
-    margin-top: 70px !important; /* 確保不被導覽列遮住 */
+    margin-top: 70px !important; /* 避開導覽列 */
     padding: 15px !important;
     overflow: visible !important;
   }
@@ -860,10 +867,14 @@ body {
     order: 2 !important;
     height: auto !important;
     overflow: visible !important;
+    padding-bottom: 80px !important;
   }
 
-  /* 4. 修正導覽列在極窄螢幕下的間距 */
-  .navbar {
-    padding: 0.5rem 0 !important;
+  /* 4. 再次確保動畫不會隱藏內容 */
+  .animate-entry {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    transform: none !important;
   }
 }
