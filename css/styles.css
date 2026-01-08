@@ -793,84 +793,114 @@ body {
   /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
   animation: slideInFade 0.8s ease-out forwards; 
 }
-
 /* ================================================= */
-/* 📱 最終修復：解決 post.html 導覽列過大與全站白底問題 */
+/* 📱 最終歸位整合：正確導覽列邏輯 + 比例優化 + 零白底 */
 /* ================================================= */
 
-/* 1. 徹底解決全站導覽列白底與階梯展開 */
 @media screen and (max-width: 992px) {
-  /* 移除所有頁面下拉選單的背景 */
-  .dropdown-menu, .sub-menu {
-    position: static !important;
-    display: none; 
-    background: transparent !important; /* 🌟 殺掉白底 */
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding-left: 20px !important;
-    width: 100% !important;
-    min-width: unset !important;
-  }
-
-  .dropdown.active > .dropdown-menu,
-  .dropdown-sub.active > .sub-menu {
-    display: block !important;
-  }
-
-  /* 2. 針對 post.html 導覽列過大的強制縮小 */
-  /* 我們強制讓 navbar 內的 nav 保持緊湊，不被內容撐開 */
+  
+  /* 1. 【導覽列一致化】強制所有頁面長得一模一樣，不再過大 */
   .navbar {
-    width: 100vw !important; /* 確保寬度等於螢幕寬度 */
-    left: 0 !important;
-    right: 0 !important;
-    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 50px !important;
+    padding: 5px 0 !important;
+    background: rgba(255, 255, 255, 0.98) !important;
   }
 
   .nav {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: row !important; /* 母選單橫排 */
     justify-content: center !important;
-    flex-wrap: nowrap !important; /* 🌟 強制不換行，防止變大 */
-    max-width: 100% !important;
-    overflow: hidden !important; /* 防止內容溢出撐大 */
+    flex-wrap: nowrap !important;
+    gap: 12px !important;
   }
 
-  /* 3. 毛玻璃：回歸精緻比例 (寬度 80%，高度自動) */
+  .nav a {
+    font-size: 0.9rem !important; /* 統一字體大小，解決過大問題 */
+    padding: 8px 10px !important;
+  }
+
+  /* 2. 【正確導覽列邏輯】階梯展開 + 徹底殺死白底 */
+  .dropdown-menu, .sub-menu {
+    position: relative !important; /* 🌟 關鍵：依循你提供的正確版邏輯，垂直排隊 */
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    display: none; /* 由 JS 控制 menu-open */
+    
+    /* 🌟 徹底殺死白底，只留左側藍線 */
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-left: 4px solid #4f46e5 !important; 
+    margin: 5px 0 !important;
+    padding-left: 15px !important;
+  }
+
+  /* 配合 JS 的展開 class */
+  .menu-open, .dropdown.active > .dropdown-menu, .dropdown-sub.active > .sub-menu {
+    display: block !important;
+  }
+
+  /* 3. 【毛玻璃比例】回歸精緻橫向感，不再寬度 100% */
   .cover-overlay {
     top: 60% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 80% !important;          /* 🌟 縮小寬度，不再 100% */
-    max-width: 320px !important;    /* 🌟 限制最大寬度 */
+    
+    width: 85% !important;         /* 恢復 85% 寬度 */
+    max-width: 380px !important;    /* 限制最大寬度，避免過大 */
     height: auto !important;
-    padding: 1.2rem !important;     /* 縮小內距，解決過大的問題 */
-    aspect-ratio: 16 / 10 !important; 
+    aspect-ratio: 16 / 10 !important; /* 🌟 強制橫向黃金比例 */
+    
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
+    align-items: center !important;
+    padding: 1.2rem !important;
     border-radius: 20px !important;
   }
+
+  #cover-title { font-size: 1.4rem !important; margin-bottom: 5px !important; }
+  #cover-subtitle { font-size: 0.9rem !important; margin-bottom: 12px !important; }
 }
 
-/* 4. 圖上文下：確保內容不會撐大網頁寬度 */
 @media screen and (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important; /* 🌟 防止橫向捲動導致導覽列變大 */
-    width: 100%;
-  }
-
+  
+  /* 4. 【圖上文下】確保文字格子延伸到底部 */
   .post-layout {
     display: flex !important;
     flex-direction: column !important;
-    width: 100% !important;
+    height: auto !important;       /* 允許無限延伸 */
+    min-height: 100vh !important;
     margin-top: 60px !important;
-    box-sizing: border-box !important;
+    padding: 15px !important;
   }
 
-  .post-gallery, .post-text {
+  .post-gallery {
     width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
+    order: 1 !important;
+    margin-bottom: 20px !important;
+  }
+
+  /* 🌟 修正：文字格子延伸到底部，解決太短的問題 */
+  .post-text {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 400px !important;  /* 確保格子有足夠深度 */
+    order: 2 !important;
+    overflow: visible !important;  /* 展開文字，不准出現內部滾軸 */
+    padding: 10px 15px 100px 15px !important;
+    background: transparent !important;
+  }
+
+  /* 解決內部動畫可能導致的消失 */
+  .animate-entry {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
   }
 }
