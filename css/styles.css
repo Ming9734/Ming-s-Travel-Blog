@@ -538,35 +538,16 @@ body {
 
 /* 📱 3. 手機版專屬位置修正 (針對你說的太偏下) */
 @media screen and (max-width: 992px) {
+  .cover-overlay.is-visible:hover,
+  .cover-overlay.is-visible:active {
+    /* 🌟 強制保持跟顯示狀態一樣的 transform，不准位移 */
+    transform: translate(-50%, -30%) scale(1) !important;
+  }
+
   .cover-overlay {
-    bottom: auto;
-    /* 🌟 調整這裡：從 60% 調升到 50% 或更小，數字越小越往上 */
-    top: 55%; 
-    
-    /* 🌟 關鍵：使用 -50%, -50% 讓卡片以自己的中心點定位，位置最準 */
-    left: 50%;
-    transform: translate(-50%, -50%) translateY(20px); 
-    
-    width: 85%;
+    top: 50%; /* 手機版如果覺得太高或太低，只動這個 % 數 */
     padding: 1.5rem;
-    transition: opacity 1s ease, transform 0.6s ease;
   }
-  
-  /* 當卡片顯示時 */
-  .cover-overlay.is-visible {
-    opacity: 1;
-    transform: translate(-50%, -50%) translateY(0); 
-  }
-
-  .cover-overlay h1 {
-    font-size: 1.6rem; /* 稍微再縮小一點標題，釋放垂直空間 */
-  }
-}
-
-
-
-.cover-overlay.is-visible:hover {
-  transform: translate(-50%) translateY(-4px);
 }
 
 /* 🔹 標題 (H1) - 視覺焦點 */
