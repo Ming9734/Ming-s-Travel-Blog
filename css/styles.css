@@ -499,25 +499,22 @@ body {
 /* ================================================= */
 /* 🔹 玻璃卡片：電腦與手機獨立邏輯完美版            */
 /* ================================================= */
-/* ================================================= */
-/* 🔹 玻璃卡片：精緻縮小版 (電腦 7% / 手機 55%)      */
-/* ================================================= */
 
 .cover-overlay {
   opacity: 0;
   pointer-events: none;
   position: absolute;
   left: 50%;
-  bottom: 7%; /* 🌟 電腦版已下移 5% */
   
-  /* 🌟 尺寸縮減：讓外觀更精緻 */
-  width: 85%;
-  max-width: 420px; 
-  padding: 2.2rem; /* 稍微縮小內距 */
-
-  transform: translate(-50%, 20px);
+  /* 🌟 電腦版：保持你最喜歡的底部浮現設定 */
+  bottom: 7%; 
+  transform: translate(-50%, 20px); 
+  
   transition: opacity 1s ease, transform 0.8s ease, box-shadow 0.3s ease;
 
+  width: 90%;
+  max-width: 500px;
+  padding: 2.5rem;
   background: linear-gradient(120deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -528,44 +525,48 @@ body {
   z-index: 2;
 }
 
+/* 🟢 電腦版顯示狀態 */
 .cover-overlay.is-visible {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0); 
   pointer-events: auto;
 }
 
-/* 📱 手機版專屬微調 */
+/* 🟠 電腦版 Hover：原地微縮放 */
+.cover-overlay.is-visible:hover {
+  transform: translate(-50%, 0) scale(1.03); 
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+/* 📱 手機版專屬邏輯 (@media 區塊) */
 @media screen and (max-width: 992px) {
   .cover-overlay {
     bottom: auto;
-    top: 55%; /* 🌟 保持你最滿意的位置 */
+    /* 🌟 修改點：設定為你測試後最滿意的 55% 位置 */
+    top: 55%; 
     
-    /* 🌟 手機版尺寸縮減：左右留白增加 */
-    width: 80%; 
-    padding: 1.5rem; 
-    
+    /* 初始狀態：中心對齊並往下偏一點點做進場動畫 */
     transform: translate(-50%, -50%) translateY(20px);
+    
+    width: 85%;
+    padding: 1.5rem;
   }
 
   .cover-overlay.is-visible {
+    /* 進場終點：回到精確的 55% 中心點 */
     transform: translate(-50%, -50%) translateY(0); 
   }
 
-  /* 鎖定手機點擊位移 */
+  /* 🚫 徹底解決手機版點擊跳動問題 */
   .cover-overlay.is-visible:hover,
   .cover-overlay.is-visible:active {
+    /* 強制鎖定座標，不准在點擊時產生位移 */
     transform: translate(-50%, -50%) translateY(0) scale(1) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35) !important;
   }
 
-  /* 🌟 手機版字體微調：配合縮小的卡片 */
-  .cover-overlay h1 {
-    font-size: 1.6rem; 
-    margin-bottom: 0.5rem;
-  }
-  .cover-overlay p {
-    font-size: 1rem;
-    max-width: 90%;
-  }
+  .cover-overlay h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .cover-overlay p { font-size: 1.1rem; margin-bottom: 1.5rem; }
 }
 
 /* 🔹 文字樣式 (保持原本的高質感設定) */
