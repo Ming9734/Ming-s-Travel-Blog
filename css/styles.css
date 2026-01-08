@@ -820,37 +820,61 @@ body {
   display: block;
 }
 
-@media (max-width: 768px) {
-  /* 🌟 核心：強制改為單欄排列 */
+/* ================================================= */
+/* 📱 核心修復：手機版強制垂直排列 (圖在上、文在下)    */
+/* ================================================= */
+
+@media screen and (max-width: 768px) {
+  /* 1. 強制解除 Grid，改用 Flex 垂直排列 */
   .post-layout {
-    grid-template-columns: 1fr !important; /* 廢除左右兩欄 */
     display: flex !important;
-    flex-direction: column !important;    /* 強制垂直排列 */
-    height: auto !important;              /* 讓高度隨內容延伸，不再鎖死在 80vh */
-    margin: 5rem 1rem 2rem 1rem !important; /* 留出上方導覽列空間 */
-    padding: 10px !important;
-    gap: 1.5rem !important;
+    flex-direction: column !important; /* 🌟 關鍵：由上至下 */
+    grid-template-columns: 1fr !important; /* 廢除雙欄 */
+    
+    /* 2. 解決長條問題：高度改為 auto */
+    height: auto !important; 
+    min-height: 100vh;
+    max-height: none !important;
+    
+    /* 3. 間距調整 */
+    margin: 80px auto 20px auto !important; /* 避開頂部導覽列 */
+    padding: 15px !important;
+    gap: 1rem !important;
+    overflow: visible !important; /* 讓整個頁面滑動 */
   }
 
-  /* 🌟 相簿區塊：固定寬度與比例 */
+  /* 4. 強制圖片在最上方 */
   .post-gallery {
     width: 100% !important;
-    order: 1; /* 確保在最上面 */
+    order: 1 !important; /* 🌟 第一順位 */
+    margin-bottom: 0 !important;
   }
 
   .gallery-frame {
-    aspect-ratio: 16 / 9 !important; /* 手機版建議橫屏比例 */
+    aspect-ratio: 16 / 9 !important; /* 確保圖片容器比例正確 */
     height: auto !important;
   }
 
-  /* 🌟 文字區塊：確保不會太擠 */
+  /* 5. 強制文字在圖片下方 */
   .post-text {
     width: 100% !important;
-    order: 2; /* 確保在相簿下面 */
+    order: 2 !important; /* 🌟 第二順位 */
     height: auto !important;
     max-height: none !important;
-    overflow-y: visible !important; /* 手機版直接向下滑，不用內部滾輪 */
-    padding: 1rem !important;
+    overflow-y: visible !important; /* 關閉內部滾輪，跟隨頁面捲動 */
+    padding: 1.5rem 1rem !important;
+  }
+
+  /* 6. 毛玻璃背景層修復 */
+  .post-layout::before {
+    border-radius: 12px;
+  }
+
+  /* 7. 動畫修復：防止手機版閃爍或位移 */
+  .animate-entry {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
