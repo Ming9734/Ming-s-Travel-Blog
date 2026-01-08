@@ -794,38 +794,23 @@ body {
   animation: slideInFade 0.8s ease-out forwards; 
 }
 
-
 /* ================================================= */
-/* 📱 恢復我們討論過的最成功版本：階梯導覽列 + 精緻毛玻璃 */
+/* 📱 最終修復：解決 post.html 導覽列過大與全站白底問題 */
 /* ================================================= */
 
+/* 1. 徹底解決全站導覽列白底與階梯展開 */
 @media screen and (max-width: 992px) {
-  
-  /* 1. 全站導覽列：母選單橫排，子選單向下階梯式展開 */
-  .navbar {
-    height: auto !important;
-    padding: 5px 0 !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-  }
-
-  .nav {
-    display: flex !important;
-    flex-direction: row !important; /* 🌟 保持母選單橫向 */
-    justify-content: center !important;
-    flex-wrap: wrap !important;     /* 寬度不夠時自動換行而非擠壓 */
-    gap: 15px !important;
-  }
-
-  /* 🌟 核心：子選單向下佔位，形成階梯感 */
+  /* 移除所有頁面下拉選單的背景 */
   .dropdown-menu, .sub-menu {
-    position: static !important;    /* 🌟 核心：不漂浮、不向右，向下推 */
-    display: none;                  /* 點擊才顯示 */
-    width: 100% !important;
-    background: transparent !important; /* 移除巨幅白底 */
+    position: static !important;
+    display: none; 
+    background: transparent !important; /* 🌟 殺掉白底 */
+    background-color: transparent !important;
     box-shadow: none !important;
-    border-left: 2px solid #4f46e5 !important; /* 階梯縮排線 */
-    padding-left: 15px !important;
-    margin: 5px 0 !important;
+    border: none !important;
+    padding-left: 20px !important;
+    width: 100% !important;
+    min-width: unset !important;
   }
 
   .dropdown.active > .dropdown-menu,
@@ -833,58 +818,59 @@ body {
     display: block !important;
   }
 
-  /* 2. 封面毛玻璃：恢復你滿意的橫向比例與字體間距 */
+  /* 2. 針對 post.html 導覽列過大的強制縮小 */
+  /* 我們強制讓 navbar 內的 nav 保持緊湊，不被內容撐開 */
+  .navbar {
+    width: 100vw !important; /* 確保寬度等於螢幕寬度 */
+    left: 0 !important;
+    right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .nav {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    flex-wrap: nowrap !important; /* 🌟 強制不換行，防止變大 */
+    max-width: 100% !important;
+    overflow: hidden !important; /* 防止內容溢出撐大 */
+  }
+
+  /* 3. 毛玻璃：回歸精緻比例 (寬度 80%，高度自動) */
   .cover-overlay {
     top: 60% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    
-    width: 88% !important;         /* 較寬的橫向感 */
-    max-width: 400px !important;
-    height: auto !important;       /* 高度隨內容，不鎖定 */
-    
+    width: 80% !important;          /* 🌟 縮小寬度，不再 100% */
+    max-width: 320px !important;    /* 🌟 限制最大寬度 */
+    height: auto !important;
+    padding: 1.2rem !important;     /* 縮小內距，解決過大的問題 */
+    aspect-ratio: 16 / 10 !important; 
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
-    align-items: center !important;
-    
-    padding: 1.5rem 2rem !important; /* 左右寬、上下窄的黃金比例 */
-    border-radius: 24px !important;
-  }
-
-  /* 修正內容在毛玻璃內過度擁擠的問題 */
-  #cover-title { 
-    font-size: 1.5rem !important; 
-    margin: 0 0 10px 0 !important; 
-    white-space: nowrap !important; /* 避免標題換行拉長高度 */
-  }
-  #cover-subtitle { 
-    font-size: 0.95rem !important; 
-    margin: 0 0 15px 0 !important; 
+    border-radius: 20px !important;
   }
 }
 
+/* 4. 圖上文下：確保內容不會撐大網頁寬度 */
 @media screen and (max-width: 768px) {
-  /* 3. Post 頁面：保持圖上文下 (我們討論過最正確的排法) */
+  html, body {
+    overflow-x: hidden !important; /* 🌟 防止橫向捲動導致導覽列變大 */
+    width: 100%;
+  }
+
   .post-layout {
     display: flex !important;
     flex-direction: column !important;
-    margin-top: 80px !important;
-    height: auto !important;
-    min-height: 100vh !important;
-    overflow: visible !important;
+    width: 100% !important;
+    margin-top: 60px !important;
+    box-sizing: border-box !important;
   }
 
-  .post-gallery {
+  .post-gallery, .post-text {
     width: 100% !important;
-    order: 1 !important; /* 圖在上 */
-    margin-bottom: 20px !important;
-  }
-
-  .post-text {
-    width: 100% !important;
-    order: 2 !important; /* 文在下 */
-    height: auto !important;
-    overflow: visible !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
