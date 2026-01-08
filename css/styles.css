@@ -821,25 +821,36 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* 🌟 核心：強制改為單欄排列 */
   .post-layout {
-    grid-template-columns: 1fr; /* 🌟 改為單欄排版 */
-    height: auto;               /* 🌟 手機版改回自動高度，方便長文閱讀 */
-    margin: 4rem 1rem;
-    padding: 1rem;
+    grid-template-columns: 1fr !important; /* 廢除左右兩欄 */
+    display: flex !important;
+    flex-direction: column !important;    /* 強制垂直排列 */
+    height: auto !important;              /* 讓高度隨內容延伸，不再鎖死在 80vh */
+    margin: 5rem 1rem 2rem 1rem !important; /* 留出上方導覽列空間 */
+    padding: 10px !important;
+    gap: 1.5rem !important;
   }
-  
+
+  /* 🌟 相簿區塊：固定寬度與比例 */
   .post-gallery {
-    width: 100%;
-    margin-bottom: 1.5rem;      /* 🌟 增加與下方文字的間距 */
+    width: 100% !important;
+    order: 1; /* 確保在最上面 */
   }
 
   .gallery-frame {
-    aspect-ratio: 16 / 9;       /* 🌟 手機版相簿改為橫向寬螢幕比例，更好閱讀 */
+    aspect-ratio: 16 / 9 !important; /* 手機版建議橫屏比例 */
+    height: auto !important;
   }
 
+  /* 🌟 文字區塊：確保不會太擠 */
   .post-text {
-    height: auto;               /* 🌟 取消手機版滾動限制 */
-    padding: 1rem;
+    width: 100% !important;
+    order: 2; /* 確保在相簿下面 */
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important; /* 手機版直接向下滑，不用內部滾輪 */
+    padding: 1rem !important;
   }
 }
 
