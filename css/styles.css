@@ -824,57 +824,54 @@ body {
 /* 📱 核心修復：手機版強制垂直排列 (圖在上、文在下)    */
 /* ================================================= */
 
+/* ================================================= */
+/* 📱 最終手段：強制破除 Grid 並排，修正長條問題      */
+/* ================================================= */
+
 @media screen and (max-width: 768px) {
-  /* 1. 強制解除 Grid，改用 Flex 垂直排列 */
+  /* 1. 破除並排：強制將 Grid 轉為 Block 模式 */
   .post-layout {
-    display: flex !important;
-    flex-direction: column !important; /* 🌟 關鍵：由上至下 */
-    grid-template-columns: 1fr !important; /* 廢除雙欄 */
-    
-    /* 2. 解決長條問題：高度改為 auto */
-    height: auto !important; 
-    min-height: 100vh;
-    max-height: none !important;
-    
-    /* 3. 間距調整 */
-    margin: 80px auto 20px auto !important; /* 避開頂部導覽列 */
-    padding: 15px !important;
-    gap: 1rem !important;
-    overflow: visible !important; /* 讓整個頁面滑動 */
+    display: block !important;    /* 🌟 放棄 Grid/Flex，直接用最原始的區塊排列 */
+    width: 95% !important;
+    max-width: none !important;
+    height: auto !important;      /* 🌟 解決長條問題：解除 70vh 限制 */
+    margin: 80px auto 20px auto !important;
+    padding: 10px !important;
+    overflow: visible !important; 
   }
 
-  /* 4. 強制圖片在最上方 */
+  /* 2. 圖片區塊：強制寬度 100% */
   .post-gallery {
+    display: block !important;
     width: 100% !important;
-    order: 1 !important; /* 🌟 第一順位 */
-    margin-bottom: 0 !important;
+    height: auto !important;
+    position: relative !important;
+    margin-bottom: 20px !important; /* 與下方文字拉開距離 */
   }
 
   .gallery-frame {
-    aspect-ratio: 16 / 9 !important; /* 確保圖片容器比例正確 */
-    height: auto !important;
-  }
-
-  /* 5. 強制文字在圖片下方 */
-  .post-text {
     width: 100% !important;
-    order: 2 !important; /* 🌟 第二順位 */
     height: auto !important;
-    max-height: none !important;
-    overflow-y: visible !important; /* 關閉內部滾輪，跟隨頁面捲動 */
-    padding: 1.5rem 1rem !important;
+    aspect-ratio: 4 / 3 !important; /* 保持相片比例 */
   }
 
-  /* 6. 毛玻璃背景層修復 */
-  .post-layout::before {
-    border-radius: 12px;
+  /* 3. 文字區塊：解除所有固定高度 */
+  .post-text {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;      /* 🌟 解除高度限制 */
+    max-height: none !important;   /* 🌟 解除高度限制 */
+    padding: 1rem !important;
+    overflow-y: visible !important; /* 關閉內部滾動條 */
+    background: transparent !important;
   }
 
-  /* 7. 動畫修復：防止手機版閃爍或位移 */
+  /* 4. 動畫鎖定：防止動畫造成的位移閃爍 */
   .animate-entry {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
   }
 }
 
