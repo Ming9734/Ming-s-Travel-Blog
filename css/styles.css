@@ -541,6 +541,58 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
+/* 📱 手機版專屬邏輯 (@media 區塊) */
+@media screen and (max-width: 992px) {
+  .cover-overlay {
+    bottom: auto !important;
+    /* 🌟 修改點：設定為你測試後最滿意的 55% 位置 */
+    top: 60% !important; 
+    
+    /* 初始狀態：中心對齊並往下偏一點點做進場動畫 */
+    transform: translate(-50%, -50%) translateY(20px);
+    
+    width: 85%;
+    padding: 1.5rem;
+  }
+
+  .cover-overlay.is-visible {
+    /* 進場終點：回到精確的 55% 中心點 */
+    transform: translate(-50%, -50%) translateY(0); 
+  }
+
+  /* 🚫 徹底解決手機版點擊跳動問題 */
+  .cover-overlay.is-visible:hover,
+  .cover-overlay.is-visible:active {
+    /* 強制鎖定座標，不准在點擊時產生位移 */
+    transform: translate(-50%, -50%) translateY(0) scale(1) !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35) !important;
+  }
+
+  .cover-overlay h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .cover-overlay p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+}
+
+/* 🔹 文字樣式 (保持原本的高質感設定) */
+.cover-overlay h1 {
+  font-size: 2.2rem;
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cover-overlay p {
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 /* 🔹 按鈕 */
 #enter-post {
   padding: 0.9rem 2.2rem;
@@ -565,20 +617,16 @@ body {
 /* ================= Post Layout (單一毛玻璃背景版) ================= */
 
 .post-layout {
-  display: none; /* 初始隱藏，由 JS 加上 class 或改 display 來顯示 */
+  display: grid;
   grid-template-columns: 1fr 1fr; 
   gap: 3rem;
   max-width: 1200px;
   margin: 6rem auto;
   padding: 2rem; /* 確保內容有內距 */
   position: relative; /* 作為偽元素定位的基準 */
-  height: 70vh;           /* 🌟 強制固定高度，不隨文字多寡改變 */
+  height: 80vh;           /* 🌟 強制固定高度，不隨文字多寡改變 */
   align-items: center;    /* 🌟 確保左右兩欄垂直置中 */
   overflow: hidden;       /* 🌟 防止外層容器溢出 */
-}
-/* 🌟 新增這個：當被 JS 激活時，電腦版預設用 grid 顯示 */
-.post-layout.active {
-  display: grid; 
 }
 
 /* ✨ 覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
@@ -684,7 +732,7 @@ body {
   padding: 1rem 2.5rem 2.5rem 2.5rem; 
   color: white; /* 確保文字顏色為白色 */
   /* ✨ 優化：設置最大高度並允許垂直滾動 ✨ */
-  height: 100%;           /* 🌟 填滿固定的 70vh */
+  height: 100%;           /* 🌟 填滿固定的 80vh */
   max-height: none;       /* 🌟 取消原本的 70vh 限制 */
   overflow-y: auto;       /* 🌟 滾輪出現在這裡，不會撐開容器 */
 
@@ -772,7 +820,14 @@ body {
   display: block;
 }
 
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .post-layout {
+        grid-template-columns: 1fr;
+    }
+}
 
+/* 將以下 CSS 程式碼塊複製到 styles.css 檔案的最底部 */
 
 /* ---------------- 進場動畫 (Entry Animations) ---------------- */
 /* 定義進場動畫的關鍵影格 */
@@ -793,114 +848,69 @@ body {
   /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
   animation: slideInFade 0.8s ease-out forwards; 
 }
-/* ================================================= */
-/* 📱 最終歸位整合：正確導覽列邏輯 + 比例優化 + 零白底 */
-/* ================================================= */
+
+/* 確保手機版佈局不受影響 */
+@media (max-width: 768px) {
+    .animate-entry {
+        animation: none; /* 在手機上可以禁用複雜動畫 */
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 @media screen and (max-width: 992px) {
-  
-  /* 1. 【導覽列一致化】強制所有頁面長得一模一樣，不再過大 */
-  .navbar {
-    height: auto !important;
-    min-height: 50px !important;
-    padding: 5px 0 !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-  }
-
-  .nav {
-    display: flex !important;
-    flex-direction: row !important; /* 母選單橫排 */
-    justify-content: center !important;
-    flex-wrap: nowrap !important;
-    gap: 12px !important;
-  }
-
-  .nav a {
-    font-size: 0.9rem !important; /* 統一字體大小，解決過大問題 */
-    padding: 8px 10px !important;
-  }
-
-  /* 2. 【正確導覽列邏輯】階梯展開 + 徹底殺死白底 */
+  /* 1. 預設隱藏 */
   .dropdown-menu, .sub-menu {
-    position: relative !important; /* 🌟 關鍵：依循你提供的正確版邏輯，垂直排隊 */
+    display: none;
+    position: relative !important; /* 🌟 關鍵：改為 relative，讓它在父層內乖乖排隊 */
     top: 0 !important;
     left: 0 !important;
     transform: none !important;
     width: 100% !important;
-    display: none; /* 由 JS 控制 menu-open */
-    
-    /* 🌟 徹底殺死白底，只留左側藍線 */
-    background: transparent !important;
-    background-color: transparent !important;
     box-shadow: none !important;
-    border: none !important;
-    border-left: 4px solid #4f46e5 !important; 
-    margin: 5px 0 !important;
-    padding-left: 15px !important;
   }
 
-  /* 配合 JS 的展開 class */
-  .menu-open, .dropdown.active > .dropdown-menu, .dropdown-sub.active > .sub-menu {
+  /* 2. 第二層選單的特殊外殼 (這層要飄在導覽列下) */
+  .nav > li > .dropdown-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 90vw !important;
+    max-width: 320px !important;
+    background: white !important;
+    display: none; /* 由 JS 控制 */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
+    border-radius: 8px;
+    z-index: 10005 !important;
+  }
+
+  /* 3. 當選單打開時 */
+  .menu-open {
     display: block !important;
   }
 
-  /* 3. 【毛玻璃比例】回歸精緻橫向感，不再寬度 100% */
-  .cover-overlay {
-    top: 60% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    
-    width: 85% !important;         /* 恢復 85% 寬度 */
-    max-width: 380px !important;    /* 限制最大寬度，避免過大 */
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important; /* 🌟 強制橫向黃金比例 */
-    
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    padding: 1.2rem !important;
-    border-radius: 20px !important;
+  /* 4. 第三層子選單 (城市列表)：確保它是垂直推開，不要重疊 */
+  .sub-menu {
+    background: #f1f5f9 !important; /* 換個底色，讓層級分明 */
+    border-left: 4px solid #4f46e5 !important;
+    margin: 5px 0 !important;
   }
 
-  #cover-title { font-size: 1.4rem !important; margin-bottom: 5px !important; }
-  #cover-subtitle { font-size: 0.9rem !important; margin-bottom: 12px !important; }
-}
-
-@media screen and (max-width: 768px) {
-  
-  /* 4. 【圖上文下】確保文字格子延伸到底部 */
-  .post-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    height: auto !important;       /* 允許無限延伸 */
-    min-height: 100vh !important;
-    margin-top: 60px !important;
-    padding: 15px !important;
+  /* 5. 解決連擊與文字換行 */
+  .dropdown-menu a, .sub-menu a {
+    white-space: normal !important;
+    word-break: break-word !important;
+    line-height: 1.5 !important;
+    padding: 12px 20px !important;
+    display: block !important;
+    color: #333 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
   }
 
-  .post-gallery {
-    width: 100% !important;
-    order: 1 !important;
-    margin-bottom: 20px !important;
-  }
-
-  /* 🌟 修正：文字格子延伸到底部，解決太短的問題 */
-  .post-text {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    min-height: 400px !important;  /* 確保格子有足夠深度 */
-    order: 2 !important;
-    overflow: visible !important;  /* 展開文字，不准出現內部滾軸 */
-    padding: 10px 15px 100px 15px !important;
-    background: transparent !important;
-  }
-
-  /* 解決內部動畫可能導致的消失 */
-  .animate-entry {
-    opacity: 1 !important;
-    animation: none !important;
-    transform: none !important;
+  /* 確保文章標題（最後一層）更容易點擊 */
+  .sub-menu li a {
+    font-weight: 400;
+    font-size: 0.95rem;
   }
 }
