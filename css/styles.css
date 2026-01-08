@@ -539,21 +539,27 @@ body {
 /* 📱 3. 手機版專屬位置修正 (針對你說的太偏下) */
 @media screen and (max-width: 992px) {
   .cover-overlay {
-    /* 🌟 改用 top 比例，確保它出現在照片中間偏下方，不受底部工具列干擾 */
     bottom: auto;
-    top: 60%; 
+    /* 🌟 調整這裡：從 60% 調升到 50% 或更小，數字越小越往上 */
+    top: 45%; 
+    
+    /* 🌟 關鍵：使用 -50%, -50% 讓卡片以自己的中心點定位，位置最準 */
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px); 
+    
     width: 85%;
     padding: 1.5rem;
+    transition: opacity 1s ease, transform 0.6s ease;
   }
   
-  .cover-overlay h1 {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+  /* 當卡片顯示時 */
+  .cover-overlay.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0); 
   }
 
-  /* 手機版通常不需要 Hover 效果，避免觸控後卡住 */
-  .cover-overlay.is-visible:hover {
-    transform: translate(-50%, 0) scale(1);
+  .cover-overlay h1 {
+    font-size: 1.6rem; /* 稍微再縮小一點標題，釋放垂直空間 */
   }
 }
 
