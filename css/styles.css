@@ -541,58 +541,6 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,0.5);
 }
 
-/* 📱 手機版專屬邏輯 (@media 區塊) */
-@media screen and (max-width: 992px) {
-  .cover-overlay {
-    bottom: auto !important;
-    /* 🌟 修改點：設定為你測試後最滿意的 55% 位置 */
-    top: 60% !important; 
-    
-    /* 初始狀態：中心對齊並往下偏一點點做進場動畫 */
-    transform: translate(-50%, -50%) translateY(20px);
-    
-    width: 85%;
-    padding: 1.5rem;
-  }
-
-  .cover-overlay.is-visible {
-    /* 進場終點：回到精確的 55% 中心點 */
-    transform: translate(-50%, -50%) translateY(0); 
-  }
-
-  /* 🚫 徹底解決手機版點擊跳動問題 */
-  .cover-overlay.is-visible:hover,
-  .cover-overlay.is-visible:active {
-    /* 強制鎖定座標，不准在點擊時產生位移 */
-    transform: translate(-50%, -50%) translateY(0) scale(1) !important;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35) !important;
-  }
-
-  .cover-overlay h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-  .cover-overlay p { font-size: 1.1rem; margin-bottom: 1.5rem; }
-}
-
-/* 🔹 文字樣式 (保持原本的高質感設定) */
-.cover-overlay h1 {
-  font-size: 2.2rem;
-  margin-top: 0;
-  margin-bottom: 0.8rem;
-  font-weight: 900;
-  line-height: 1.1;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.cover-overlay p {
-  font-size: 1.3rem;
-  margin-bottom: 2.5rem;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 85%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
 /* 🔹 按鈕 */
 #enter-post {
   padding: 0.9rem 2.2rem;
@@ -820,60 +768,7 @@ body {
   display: block;
 }
 
-/* ================================================= */
-/* 📱 核心修復：手機版強制垂直排列 (圖在上、文在下)    */
-/* ================================================= */
 
-/* ================================================= */
-/* 📱 最終手段：強制破除 Grid 並排，修正長條問題      */
-/* ================================================= */
-
-@media screen and (max-width: 768px) {
-  /* 1. 破除並排：強制將 Grid 轉為 Block 模式 */
-  .post-layout {
-    display: block !important;    /* 🌟 放棄 Grid/Flex，直接用最原始的區塊排列 */
-    width: 95% !important;
-    max-width: none !important;
-    height: auto !important;      /* 🌟 解決長條問題：解除 70vh 限制 */
-    margin: 80px auto 20px auto !important;
-    padding: 10px !important;
-    overflow: visible !important; 
-  }
-
-  /* 2. 圖片區塊：強制寬度 100% */
-  .post-gallery {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-    position: relative !important;
-    margin-bottom: 20px !important; /* 與下方文字拉開距離 */
-  }
-
-  .gallery-frame {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 4 / 3 !important; /* 保持相片比例 */
-  }
-
-  /* 3. 文字區塊：解除所有固定高度 */
-  .post-text {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;      /* 🌟 解除高度限制 */
-    max-height: none !important;   /* 🌟 解除高度限制 */
-    padding: 1rem !important;
-    overflow-y: visible !important; /* 關閉內部滾動條 */
-    background: transparent !important;
-  }
-
-  /* 4. 動畫鎖定：防止動畫造成的位移閃爍 */
-  .animate-entry {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
 
 /* ---------------- 進場動畫 (Entry Animations) ---------------- */
 /* 定義進場動畫的關鍵影格 */
@@ -895,28 +790,21 @@ body {
   animation: slideInFade 0.8s ease-out forwards; 
 }
 
-/* 確保手機版佈局不受影響 */
-@media (max-width: 768px) {
-    .animate-entry {
-        animation: none; /* 在手機上可以禁用複雜動畫 */
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+
+/* ================================================= */
+/* 📱 完美統整版：手機與平板 RWD (取代所有舊 media)     */
+/* ================================================= */
 
 @media screen and (max-width: 992px) {
-  /* 1. 預設隱藏 */
+  /* 1. 導覽列 & 下拉選單 */
   .dropdown-menu, .sub-menu {
     display: none;
-    position: relative !important; /* 🌟 關鍵：改為 relative，讓它在父層內乖乖排隊 */
+    position: relative !important;
     top: 0 !important;
     left: 0 !important;
-    transform: none !important;
     width: 100% !important;
     box-shadow: none !important;
   }
-
-  /* 2. 第二層選單的特殊外殼 (這層要飄在導覽列下) */
   .nav > li > .dropdown-menu {
     position: absolute !important;
     top: 100% !important;
@@ -925,38 +813,79 @@ body {
     width: 90vw !important;
     max-width: 320px !important;
     background: white !important;
-    display: none; /* 由 JS 控制 */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2) !important;
-    border-radius: 8px;
     z-index: 10005 !important;
+    border-radius: 8px;
+  }
+  .menu-open { display: block !important; }
+  .sub-menu { background: #f1f5f9 !important; border-left: 4px solid #4f46e5 !important; }
+
+  /* 2. 封面玻璃卡片修正 */
+  .cover-overlay {
+    bottom: auto !important;
+    top: 60% !important; 
+    transform: translate(-50%, -50%) !important;
+    width: 85% !important;
+  }
+  /* 🌟 新增：手機版被觸發顯示時的狀態 🌟 */
+.cover-overlay.is-visible {
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) translateY(0) !important; /* 回到中心點 */
+  pointer-events: auto !important;
+}
+}
+
+/* 針對 768px 以下的手機版深度修復 */
+@media screen and (max-width: 768px) {
+  
+  /* 3. 文章佈局：徹底解除 Grid 並修正長條問題 */
+  .post-layout {
+    display: flex !important;
+    flex-direction: column !important; /* 強制圖上文下垂直排列 */
+    height: auto !important;           /* 🌟 核心：解除 70vh，解決長條壓縮問題 */
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 80px auto 30px auto !important;
+    padding: 15px !important;
+    width: 92% !important;
+    gap: 20px !important;              /* 圖文之間的間距 */
+    overflow: visible !important;      /* 讓網頁自然向下滑動 */
   }
 
-  /* 3. 當選單打開時 */
-  .menu-open {
+  /* 確保玻璃背景覆蓋垂直增長後的區域 */
+  .post-layout::before {
+    inset: 0 !important;
+    height: 100% !important;
+  }
+
+  /* 4. 圖片區域：強制滿版 */
+  .post-gallery {
     display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    order: 1 !important;               /* 確保在上方 */
   }
 
-  /* 4. 第三層子選單 (城市列表)：確保它是垂直推開，不要重疊 */
-  .sub-menu {
-    background: #f1f5f9 !important; /* 換個底色，讓層級分明 */
-    border-left: 4px solid #4f46e5 !important;
-    margin: 5px 0 !important;
+  .gallery-frame {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 3 !important;    /* 鎖定相片比例 */
   }
 
-  /* 5. 解決連擊與文字換行 */
-  .dropdown-menu a, .sub-menu a {
-    white-space: normal !important;
-    word-break: break-word !important;
-    line-height: 1.5 !important;
-    padding: 12px 20px !important;
+  /* 5. 文字區域：解除所有滾動條 */
+  .post-text {
     display: block !important;
-    color: #333 !important;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    width: 100% !important;
+    height: auto !important;           /* 🌟 核心：解除固定高度 */
+    max-height: none !important;
+    overflow-y: visible !important;     /* 🌟 關鍵：關閉內部滾輪，直接撐開 */
+    padding: 10px !important;
+    order: 2 !important;               /* 確保在圖片下方 */
   }
 
-  /* 確保文章標題（最後一層）更容易點擊 */
-  .sub-menu li a {
-    font-weight: 400;
-    font-size: 0.95rem;
+  /* 6. 禁用導致跑位的動畫 */
+  .animate-entry {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
