@@ -576,6 +576,10 @@ body {
   align-items: center;    /* 🌟 確保左右兩欄垂直置中 */
   overflow: hidden;       /* 🌟 防止外層容器溢出 */
 }
+/* 🌟 新增這個：當被 JS 激活時，電腦版預設用 grid 顯示 */
+.post-layout.active {
+  display: grid; 
+}
 
 /* ✨ 覆蓋整個 post-layout 的毛玻璃背景層 ✨ */
 .post-layout::before {
@@ -853,6 +857,17 @@ body {
     width: 95% !important;
     overflow: visible !important; /* 關閉容器內部捲軸 */
     gap: 20px !important; /* 給予圖片和文字一點間距 */
+  }
+  .post-layout.active {
+    display: flex !important; 
+    flex-direction: column !important;
+    
+    /* 必須確保高度是自動的，否則內容會被切掉 */
+    height: auto !important;
+    min-height: 100vh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    margin-top: 80px !important;
   }
 
   /* 2. 玻璃背景：跟隨垂直內容撐開 */
