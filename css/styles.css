@@ -507,7 +507,7 @@ body {
   left: 50%;
   
   /* 🌟 電腦版：保持你最喜歡的底部浮現設定 */
-  bottom: 7%; 
+  bottom: 12%; 
   transform: translate(-50%, 20px); 
   
   transition: opacity 1s ease, transform 0.8s ease, box-shadow 0.3s ease;
