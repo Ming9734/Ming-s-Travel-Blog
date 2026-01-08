@@ -829,7 +829,10 @@ body {
 
 /* 第二階段：針對 768px 以下 (手機版：強制圖上文下) */
 @media screen and (max-width: 768px) {
-  
+
+  body { background: red !important; }
+
+
   /* 1. 容器重組：摧毀 Grid，改用垂直 Flex */
   body .post-layout.active, 
   body .post-layout {
