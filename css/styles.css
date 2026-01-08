@@ -496,48 +496,65 @@ body {
   object-fit: contain;
 }
 
-/* 🔹 玻璃卡片 */
+/* 🔹 玻璃卡片修正 */
 .cover-overlay {
   opacity: 0;
-  transform: translateX(-50%) translateY(20px);
   pointer-events: none;
-  
-  /* 將過渡時間縮短為 0.3s，以配合新的序列動畫 JS */
-  transition:
-    opacity 1s ease,
-    transform 1s ease;
+  transition: opacity 1s ease, transform 1s ease;
 
   position: absolute;
-  bottom: 8%;
-  left: 50%;
+  /* 🌟 修改重點：改用 bottom 比例，並優化置中方式 */
+  bottom: 15%;      /* 調整這個數值可以控制卡片的高低 (15% 約在中間偏下) */
+  left: 5%;         /* 左右留點邊距 */
+  right: 5%;        /* 左右留點邊距 */
+  margin: 0 auto;   /* 配合寬度實現置中 */
   
-   width: 80%; 
-  max-width: 500px; /* 縮小卡片最大寬度 */
-  padding: 2rem; /* 縮小內距 */
+  width: auto;      /* 讓寬度隨 left/right 自動縮放 */
+  max-width: 450px; 
+  padding: 1.5rem;  /* 手機版內距縮小一點 */
 
-  /* ✨ 確保有半透明背景色和 backdrop-filter 屬性 ✨ */
   background: linear-gradient(
     120deg,
     rgba(255,255,255,0.25),
     rgba(255,255,255,0.15)
   );
-  backdrop-filter: blur(8px); /* 減少模糊效果 */
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  
+
   border-radius: 24px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-
-  /* 置中對齊，更有電影感 */
   color: white;
   text-align: center; 
   z-index: 2;
+
+  /* 🌟 初始動畫狀態：從下方微調上來 */
+  transform: translateY(20px); 
 }
 
+/* 顯示時的狀態 */
 .cover-overlay.is-visible {
   opacity: 1;
-  transform: translate(-50%) translateY(0);
+  transform: translateY(0); /* 回到原本位置 */
   pointer-events: auto;
 }
+
+/* 📱 針對小螢幕的手機微調 */
+@media screen and (max-width: 480px) {
+  .cover-overlay {
+    bottom: 10%;    /* 手機螢幕較短，稍微再往下壓一點點，避免遮到照片重點 */
+    padding: 1.2rem;
+  }
+  
+  .cover-overlay h1 {
+    font-size: 1.8rem; /* 手機版標題字體縮小，避免換行過多 */
+  }
+  
+  .cover-overlay p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
 
 
 .cover-overlay.is-visible:hover {
