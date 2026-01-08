@@ -796,84 +796,108 @@ body {
 
 
 /* ================================================= */
-/* 📱 最終強制修正版：修復導覽列 + 60% 位置毛玻璃     */
+/* 📱 手機版終極整合：導覽列展開 + 縮小比例 + 圖上文下 */
 /* ================================================= */
 
-/* 第一階段：針對 992px 以下 (修復導覽列與封面卡片) */
 @media screen and (max-width: 992px) {
   
-  /* 1. 強制修復導覽列：確保它固定在最上方且不崩壞 */
+  /* 1. 導覽列：縮小比例 + 垂直展開 */
   body .navbar {
-    display: flex !important;
-    position: fixed !important;
-    top: 0 !important;
-    width: 100% !important;
-    background: rgba(255, 255, 255, 0.95) !important;
-    z-index: 99999 !important; /* 確保在最最上層 */
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    padding: 0.2rem 0 !important;
+    height: auto !important;
+    min-height: 50px !important;
   }
 
   body .nav {
-    flex-direction: row !important; /* 確保橫向排列 */
-    justify-content: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    flex-direction: column !important;  /* 🌟 核心：選項改為上下排列 */
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 5px 0 !important;
   }
 
-  /* 2. 強制封面玻璃卡片位在 60% 高度 (置中偏下) */
-  body .cover-overlay, 
-  body .cover-overlay.is-visible {
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    
-    /* 核心位置設定 */
-    bottom: auto !important;
+  body .nav > li {
+    margin: 3px 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  body .nav a {
+    font-size: 0.8rem !important;      /* 🌟 縮小字體 */
+    padding: 5px 10px !important;
+    display: inline-block !important;
+  }
+
+  /* 2. 封面玻璃卡片：縮小並固定在 60% 位置 */
+  body .cover-overlay {
     top: 60% !important; 
     left: 50% !important;
-    transform: translate(-50%, -50%) !important; /* 完美置中 */
+    transform: translate(-50%, -50%) !important;
+    width: 75% !important;              /* 🌟 再次縮小寬度 */
+    max-width: 280px !important;
+    padding: 1rem !important;
+    border-radius: 16px !important;
     
-    width: 85% !important;
-    max-width: 400px !important;
-    display: block !important;
-    visibility: visible !important;
+    /* 🌟 關閉 Hover 縮放與動畫 */
+    transition: none !important; 
+    pointer-events: auto !important;
   }
+
+  body .cover-overlay.is-visible:hover {
+    transform: translate(-50%, -50%) !important; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
+  }
+
+  #cover-title { font-size: 1.2rem !important; margin-bottom: 5px !important; }
+  #cover-subtitle { font-size: 0.8rem !important; margin-bottom: 10px !important; }
+  #enter-post { padding: 0.5rem 1.2rem !important; font-size: 0.75rem !important; }
 }
 
-/* 第二階段：針對 768px 以下 (保持圖上文下) */
 @media screen and (max-width: 768px) {
   
-  /* 3. 內容區塊圖上文下 */
+  /* 3. 【關鍵】圖上文下重組 (Post 頁面) */
   body .post-layout, 
   body .post-layout.active {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column !important; /* 🌟 核心：強制垂直堆疊 */
     height: auto !important;
     min-height: 100vh !important;
-    grid-template-columns: none !important;
-    margin-top: 70px !important; /* 避開導覽列 */
-    padding: 15px !important;
+    max-height: none !important;
+    grid-template-columns: none !important; /* 摧毀電腦版的 Grid */
+    
+    /* 🌟 下移間距：確保不被展開後的導覽列遮住 */
+    margin-top: 150px !important; 
+    padding: 10px !important;
     overflow: visible !important;
   }
 
+  /* 4. 相片區 (在上) */
   .post-gallery {
     width: 100% !important;
-    order: 1 !important;
-    margin-bottom: 20px !important;
+    flex: none !important;
+    order: 1 !important;               /* 強制排第一 */
+    margin-bottom: 15px !important;
   }
 
+  .gallery-frame {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;   /* 🌟 縮小圖片高度比例 */
+    height: auto !important;
+  }
+
+  /* 5. 文字區 (在下) */
   .post-text {
     width: 100% !important;
-    order: 2 !important;
+    flex: none !important;
+    order: 2 !important;               /* 強制排第二 */
     height: auto !important;
-    overflow: visible !important;
-    padding-bottom: 80px !important;
+    max-height: none !important;
+    overflow: visible !important;      /* 🌟 移除內部滾軸 */
+    padding: 10px 15px 100px 15px !important;
   }
 
-  /* 4. 再次確保動畫不會隱藏內容 */
+  /* 關閉進場動畫，防止手機端加載延遲或消失 */
   .animate-entry {
     opacity: 1 !important;
-    visibility: visible !important;
     animation: none !important;
     transform: none !important;
   }
