@@ -507,8 +507,8 @@ body {
   left: 50%;
   
   /* 🌟 電腦版：保持你最喜歡的底部浮現設定 */
-  bottom: 7% !important; /* 🌟 強制基準點為 7% */
-  top: auto !important;    /* 🌟 徹底踢掉 top 的干擾 */
+  bottom: 7%;
+  top: auto;
   transform: translate(-50%, 20px); 
   
   transition: opacity 1s ease, transform 0.8s ease, box-shadow 0.3s ease;
@@ -529,8 +529,8 @@ body {
 /* 🟢 電腦版顯示狀態 */
 .cover-overlay.is-visible {
   opacity: 1;
-  bottom: 7% !important; /* 🌟 確保終點基準點依然是 7% */
-  top: auto !important;
+  bottom: 7%;
+  top: auto;
   transform: translate(-50%, 0); 
   pointer-events: auto;
 }
@@ -544,9 +544,9 @@ body {
 /* 📱 手機版專屬邏輯 (@media 區塊) */
 @media screen and (max-width: 992px) {
   .cover-overlay {
-    bottom: auto;
+    bottom: auto !important;
     /* 🌟 修改點：設定為你測試後最滿意的 55% 位置 */
-    top: 55%; 
+    top: 55% !important; 
     
     /* 初始狀態：中心對齊並往下偏一點點做進場動畫 */
     transform: translate(-50%, -50%) translateY(20px);
