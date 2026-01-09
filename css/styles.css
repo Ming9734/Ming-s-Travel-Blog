@@ -934,83 +934,96 @@ body {
 
 
 /* ================================================= */
-/* 📱 手機版絕對修正：圖上文下 + 固定相簿 + 固定書籤 */
+/* 📱 手機版終極修正：打破 Grid，強制執行 App 佈局 */
 /* ================================================= */
 
 @media screen and (max-width: 768px) {
-  /* 1. 強制重置 grid 為 flex，實現上下排版 */
+  /* 1. 外層容器：取消 Grid，改用 Block 佈局 */
   .post-layout {
-    display: flex !important;           /* 🌟 強制切換為 Flex */
-    flex-direction: column !important;  /* 🌟 確保圖在上，文在下 */
-    height: 100vh !important;           /* 🌟 鎖定全螢幕高度 */
-    margin: 0 !important;               /* 移除邊距 */
-    padding-top: 70px !important;       /* 避開導覽列 */
-    max-width: 100% !important;
-    overflow: hidden !important;        /* 禁止外層滾動 */
-    border-radius: 0 !important;
+    display: block !important;           /* 🌟 徹底切斷 Grid 影響 */
+    position: relative !important;
+    height: 100vh !important;            /* 鎖定全螢幕 */
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;         /* 禁止全網頁滾動 */
+    width: 100% !important;
   }
 
-  /* 2. 相簿區域：固定高度，不隨文字捲動 */
+  /* 2. 相簿區域：強制固定在頂部 (避開導覽列) */
   .post-gallery {
-    flex: 0 0 40% !important;          /* 🌟 固定佔據螢幕 40% 高度 */
-    height: 40% !important;
+    position: absolute !important;
+    top: 70px !important;                /* 導覽列高度 */
+    left: 0 !important;
     width: 100% !important;
-    padding: 0 !important;
-    position: relative !important;
+    height: 35vh !important;             /* 🌟 強制佔據視窗 35% */
+    z-index: 10 !important;
+    display: block !important;
   }
   
   .gallery-frame {
-    border-radius: 0 !important;        /* 手機版圖片鋪滿 */
     height: 100% !important;
+    width: 100% !important;
+    border-radius: 0 !important;
   }
 
-  /* 3. 文字內容區：設定為可捲動容器 */
+  /* 3. 文字內容區：強制定位在相簿下方，並填滿剩餘空間 */
   .post-text {
-    flex: 1 !important;                 /* 🌟 佔據剩下的 60% 空間 */
+    position: absolute !important;
+    top: calc(70px + 35vh) !important;   /* 🌟 從導覽列+相簿下方開始 */
+    bottom: 0 !important;                /* 延伸到最底部 */
+    left: 0 !important;
+    width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     padding: 0 !important;
-    overflow: hidden !important;        /* 讓內部 tab-content 去滾動 */
-    background: rgba(0, 0, 0, 0.4) !important; /* 增加閱讀對比度 */
+    margin: 0 !important;
+    background: rgba(20, 20, 20, 0.6) !important; /* 加深背景方便閱讀 */
+    z-index: 5 !important;
+    overflow: hidden !important;         /* 內部分層滾動 */
   }
 
-  /* 4. 書籤 (Tabs)：固定在文字區頂部 */
+  /* 4. 書籤 (Tabs)：吸附在文字區頂部 */
   .post-tabs {
     flex: 0 0 auto !important;
-    position: sticky !important;
-    top: 0;
-    z-index: 10;
-    padding: 15px !important;
-    background: rgba(30, 30, 30, 0.8) !important; /* 深色背景確保書籤清晰 */
+    padding: 10px 15px !important;
     margin: 0 !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
     display: flex !important;
-    overflow-x: auto !important;
-    gap: 10px !important;
+    overflow-x: auto !important;         /* 橫向滑動書籤 */
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .post-tabs .tab {
+    padding: 8px 15px !important;
+    font-size: 0.9rem !important;
+    white-space: nowrap !important;
   }
 
-  /* 5. 內文列表：真正下滑的區域 */
+  /* 5. 內文列表：真正執行「下滑」的區塊 */
   .post-tab-content {
-    flex: 1 !important;
-    overflow-y: auto !important;        /* 🌟 只有這裡會出現滾動條 */
-    padding: 20px 25px !important;
-    display: none;                      /* 預設隱藏，由 JS 切換 active */
+    flex: 1 !important;                  /* 🌟 自動填滿剩下的所有高度 */
+    overflow-y: auto !important;         /* 🌟 開啟獨立滾動條 */
+    padding: 20px !important;
+    display: none;                       /* JS 控制 */
     -webkit-overflow-scrolling: touch;
   }
 
   .post-tab-content.active {
-    display: block !important;          /* 顯示當前書籤內容 */
+    display: block !important;
   }
 
-  /* 修正毛玻璃背景在手機版全滿 */
+  /* 毛玻璃背板：適配全螢幕 */
   .post-layout::before {
     border-radius: 0 !important;
     inset: 0 !important;
   }
-  
-  /* 縮小手機版箭頭，避免太擠 */
+
+  /* 隱藏不必要的按鈕縮小 */
   .gallery-btn {
     width: 35px !important;
     height: 35px !important;
     font-size: 1.2rem !important;
+    opacity: 0.8 !important;
   }
 }
