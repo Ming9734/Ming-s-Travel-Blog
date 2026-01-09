@@ -85,50 +85,49 @@ body {
   transform: scale(1.05); /* 微放大 */
 }
 
-/* ---------------- 下拉選單 ---------------- */
-.dropdown-menu {
+/* ================================================= */
+/* 🌟 下拉選單：全平台半透明質感 (保留微動畫)         */
+/* ================================================= */
+
+/* 1. 選單容器：統一改為半透明毛玻璃 */
+.dropdown-menu, .sub-menu {
   position: absolute;
-  top: 100%;
-  left: 0;
-  display: none;
-  background: white;
+  background: rgba(255, 255, 255, 0.85); /* 🌟 半透明白 */
+  backdrop-filter: blur(12px);          /* 🌟 毛玻璃模糊 */
+  -webkit-backdrop-filter: blur(12px);
   min-width: 180px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
   z-index: 10001;
-}
-
-.dropdown:hover > .dropdown-menu {
-  display: block;
-}
-
-.dropdown-sub {
-  position: relative;
-}
-
-.sub-menu {
-  position: absolute;
-  top: 0;
-  left: 100%;
   display: none;
-  background: white;
-  min-width: 180px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 增加細緻邊框感 */
+  border-radius: 8px; /* 增加一點圓角更有質感 */
+  overflow: hidden;
 }
 
-.dropdown-sub:hover > .sub-menu {
-  display: block;
-}
+/* 顯示邏輯 */
+.dropdown:hover > .dropdown-menu { display: block; }
+.dropdown-sub { position: relative; }
+.dropdown-sub:hover > .sub-menu { display: block; }
 
+.sub-menu { top: 0; left: 100%; }
+
+/* 2. 選單選項與微動畫 (完整保留並優化質感) */
 .dropdown-menu a, .sub-menu a {
-  padding: 8px 12px;
+  padding: 10px 16px;
   color: #222;
+  text-decoration: none;
   display: block;
-  transition: background 0.3s, color 0.3s;
+  font-weight: 500;
+  /* 🌟 保留並增強你的微動畫 */
+  transition: all 0.3s ease; 
+  background: transparent;
 }
 
+/* 🌟 你最喜歡的 Hover 微動畫：背景變色 + 文字變色 + 微位移 */
 .dropdown-menu a:hover, .sub-menu a:hover {
-  background: #f3f3f3;
+  background: rgba(79, 70, 229, 0.1); /* 淡淡的主題藍紫色 */
   color: #4f46e5;
+  padding-left: 20px; /* 微位移效果，讓動畫更靈動 */
 }
 
 /* ---------------- Hero 區域 ---------------- */
