@@ -980,6 +980,7 @@ body {
     display: flex !important;
     flex-direction: column !important;
     height: 62% !important;
+    width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
     overflow: hidden !important;        /* 限制內部滾動 */
@@ -991,6 +992,7 @@ body {
   .post-tabs {
     flex: 0 0 auto !important;          /* 高度固定，不隨內容滾動 */
     margin-bottom: 0 !important;
+    width: 100% !important;
     padding: 10px 15px !important;
     background: rgba(20, 20, 20, 0.9) !important;
     overflow-x: auto !important;        /* 標籤太多可橫移 */
@@ -1001,6 +1003,7 @@ body {
   /* 6. 內容捲動區：這是唯一可以下滑的地方 */
   #post-tab-contents {
     flex: 1 !important;
+    width: 100% !important;
     overflow-y: auto !important;        /* 🌟 開啟下滑權限 */
     padding: 20px 20px 100px 20px !important; /* 底部墊高防遮擋 */
     -webkit-overflow-scrolling: touch;  /* iOS 滑動順暢感 */
