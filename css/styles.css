@@ -980,10 +980,11 @@ body {
     display: flex !important;
     flex-direction: column !important;
     height: 62% !important;
-    width: 100% !important;
+    width: 100vw !important;        /* 🌟 強制使用視窗寬度 */
+    max-width: 100vw !important;    /* 🌟 絕對禁止超過螢幕 */
     padding: 0 !important;
     margin: 0 !important;
-    overflow: hidden !important;        /* 限制內部滾動 */
+    overflow-x: hidden !important;  /* 🌟 徹底禁止橫向滾動 */
     border-radius: 0 !important;
     background: rgba(0,0,0,0.3) !important;
   }
@@ -1005,12 +1006,21 @@ body {
     flex: 1 !important;
     width: 100% !important;
     overflow-y: auto !important;        /* 🌟 開啟下滑權限 */
+    overflow-x: hidden !important;  /* 🌟 再次確保不橫移 */
     padding: 20px 20px 100px 20px !important; /* 底部墊高防遮擋 */
     -webkit-overflow-scrolling: touch;  /* iOS 滑動順暢感 */
+    word-wrap: break-word !important;   /* 🌟 關鍵：強制長單字換行 */
+    overflow-wrap: break-word !important; /* 🌟 關鍵：強制換行 */
   }
 
   .post-tab-content {
     width: 100% !important;
+    max-width: 100% !important;
+    display: none; /* 預設隱藏由 JS 控制 */
+  }
+  
+  .post-tab-content.active {
+    display: block !important;
   }
 
   /* 7. 進場動畫修正：確保手機版看得到內容 */
