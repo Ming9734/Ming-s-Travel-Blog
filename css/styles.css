@@ -937,7 +937,7 @@ body {
 /* 📱 手機版終極修正版 (貼在 CSS 最底部)             */
 /* ================================================= */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   /* 1. 基礎容器歸零：徹底粉碎 Grid 並改為 Flex */
   body .post-layout {
     display: flex !important;           /* 🌟 強制轉 Flex */
