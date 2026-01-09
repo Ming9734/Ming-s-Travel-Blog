@@ -946,7 +946,7 @@ body {
     position: fixed !important;         /* 🌟 禁止背景滾動 */
     top: 0 !important;
     left: 0 !important;
-    width: 100vw !important;
+    width: 100% !important;
     padding: 70px 0 0 0 !important;     /* 避開導覽列 */
     margin: 0 !important;
     gap: 0 !important;                  /* 移除電腦版的 gap */
@@ -1011,12 +1011,14 @@ body {
     -webkit-overflow-scrolling: touch;  /* iOS 滑動順暢感 */
     word-wrap: break-word !important;   /* 🌟 關鍵：強制長單字換行 */
     overflow-wrap: break-word !important; /* 🌟 關鍵：強制換行 */
+    white-space: normal !important;    /* 確保文字不會一直往右延伸 */
   }
 
   .post-tab-content {
     width: 100% !important;
     max-width: 100% !important;
     display: none; /* 預設隱藏由 JS 控制 */
+    line-height: 1.6 !important;
   }
   
   .post-tab-content.active {
