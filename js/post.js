@@ -135,11 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Step 3: 等待所有動畫結束後再切換到內頁
     setTimeout(() => {
       // 顯示內頁佈局容器
-      if (window.innerWidth <= 768) {
-          postLayout.style.display = 'flex'; // 手機版用 flex
-      } else {
-          postLayout.style.display = 'grid'; // 電腦版用 grid
-      }
+      postLayout.style.display = "";
       if (navbar) navbar.classList.add('active'); 
 
       // 獲取左右兩欄元素，開始交錯進場動畫
