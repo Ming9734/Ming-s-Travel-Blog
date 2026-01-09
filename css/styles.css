@@ -771,13 +771,17 @@ body {
 /* 📝 Tab 書籤設計 */
 .post-tabs {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;       /* 🌟 關鍵：允許標籤在寬度不夠時自動換行，不強制單行 */
+  gap: 0.8rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* 淡白色底線 */
   padding-bottom: 0.5rem;
+  overflow-x: visible;   /* 確保不會出現水平捲動條 */
+  white-space: normal;   /* 允許文字換行 */
 }
 
 .post-tabs .tab {
+  flex: 0 0 auto;        /* 🌟 確保標籤寬度由文字決定，不會被壓縮 */
   background: rgba(255, 255, 255, 0.1); /* Tab 預設背景 */
   border: none;
   font-weight: 600;
@@ -787,19 +791,35 @@ body {
   transition: background 0.3s, color 0.3s;
   color: rgba(255, 255, 255, 0.7); /* 預設文字顏色 */
 }
+.post-text {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;      /* 讓容器本身固定 */
+}
 
 .post-tabs .tab.active {
   border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.2); /* 選中時顏色稍深 */
+  background: rgba(255, 255, 255, 0.25); /* 選中時顏色稍深 */
   color: white; /* 選中時文字亮白 */
   border-bottom: 2px solid white; /* 強調當前書籤 */
   margin-bottom: -1px; 
+  opacity: 1; /* 確保選中項完全不透明 */
 }
 
 .post-tab-content {
+  
   display: none;
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.9);
+  display: none; /* 保持由 JS 控制顯示 */
+  line-height: 1.8; /* 稍微增加行高，閱讀更輕鬆 */
+  color: rgba(255, 255, 255, 0.95); /* 提升文字對比度 */
+  
+  /* ✨ 新增：確保文字跟上方固定標籤列有舒服的距離 */
+  padding-top: 5px; 
+  
+  /* 🌟 電腦版強制換行保險 */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* 1. 隱藏預設的圓點並移除邊距 */
@@ -807,6 +827,9 @@ body {
   list-style: none; /* 隱藏原本的黑點 */
   padding-left: 0.5rem;
   margin: 1.2rem 0;
+}
+.post-tab-content.active {
+  display: block; /* 選中時顯示 */
 }
 
 /* 2. 在每個 li 前面加上星星 */
@@ -816,6 +839,9 @@ body {
   margin-bottom: 0.8rem;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
+  /* ✨ 新增這兩行：確保長文字在星星後方乖乖換行，不撐開容器 ✨ */
+  word-break: break-word;     /* 強制長單字換行 */
+  box-sizing: border-box;     /* 讓 padding 不會增加寬度 */
 }
 
 .post-tab-content li::before {
