@@ -934,73 +934,81 @@ body {
 
 
 /* ================================================= */
-/* 📱 手機版專屬：圖上文下 + 標籤固定 + 內容滑動       */
+/* 📱 手機版強效修正 (強迫覆蓋所有 JS 設定)           */
 /* ================================================= */
 
 @media screen and (max-width: 768px) {
-  /* 1. 修正主容器：強制垂直排列，鎖定高度 */
-  .post-layout {
-    display: flex !important;
-    flex-direction: column !important;
-    height: 100vh !important;
+  /* 1. 強制把 Main 容器變成 Flex 垂直排列 */
+  main.post-layout {
+    display: flex !important;           /* 🌟 強制打破 Grid */
+    flex-direction: column !important;  /* 🌟 強制圖上文下 */
+    position: fixed !important;         /* 🌟 鎖死視窗防止全頁滾動 */
+    top: 0 !important;
+    left: 0 !important;
     width: 100vw !important;
+    height: 100vh !important;
+    padding: 70px 0 0 0 !important;     /* 避開 Navbar */
     margin: 0 !important;
-    padding: 70px 0 0 0 !important; /* 避開 navbar */
-    overflow: hidden !important; /* 禁止全網頁滾動 */
-    position: fixed !important;
-    top: 0; left: 0;
+    border-radius: 0 !important;
   }
 
-  /* 2. 相簿：固定高度佔比 */
+  /* 2. 幻燈片區：固定在螢幕上半部 35% */
   .post-gallery {
-    flex: 0 0 35% !important; /* 🌟 圖片佔螢幕 35% */
+    flex: 0 0 35% !important;           
     height: 35% !important;
     width: 100% !important;
-    padding: 0 !important;
+    z-index: 10 !important;
   }
 
   .gallery-frame {
-    border-radius: 0 !important;
     height: 100% !important;
+    border-radius: 0 !important;
   }
 
-  /* 3. 文字區塊：佔據剩餘 65% */
+  /* 3. 文字區塊：填滿下半部 65% 並改為 Flex 容器 */
   .post-text {
-    flex: 1 !important;
+    flex: 1 !important;                 
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: column !important;  /* 🌟 讓 Tabs 與內容垂直分組 */
+    width: 100% !important;
     padding: 0 !important;
     margin: 0 !important;
     background: rgba(0, 0, 0, 0.4) !important;
-    overflow: hidden !important; /* 讓內容容器去捲動 */
+    overflow: hidden !important;        /* 禁止這裡滾動 */
+    border-radius: 0 !important;
   }
 
-  /* 4. 書籤列 (Tabs)：黏在頂部，禁止隨內容捲動 */
+  /* 4. 關鍵：書籤列固定 (你的 HTML 中它在 post-text 裡) */
   .post-tabs {
-    flex: 0 0 auto !important;
-    padding: 12px !important;
-    background: rgba(30, 30, 30, 0.9) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    display: flex !important;
-    overflow-x: auto !important; /* 橫向捲動標籤 */
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* 5. 內容滑動區 (這是你的 HTML id) */
-  #post-tab-contents {
-    flex: 1 !important;
-    overflow-y: auto !important; /* 🌟 核心：只有這裡可以上下滑動 */
-    padding: 20px 20px 60px 20px !important;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* 確保內容寬度正常 */
-  .post-tab-content {
+    flex: 0 0 auto !important;          /* 🌟 不准縮放，固定高度 */
     width: 100% !important;
+    display: flex !important;
+    overflow-x: auto !important;        /* 橫向滑動標籤 */
+    background: rgba(30, 30, 30, 0.9) !important;
+    padding: 10px 15px !important;
+    z-index: 20 !important;
+    white-space: nowrap;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
   }
 
-  /* 修正進場動畫在手機版的干擾 */
+  /* 5. 關鍵：內容捲動區 (你的 HTML ID) */
+  #post-tab-contents {
+    flex: 1 !important;                 /* 🌟 佔據所有剩餘空間 */
+    overflow-y: auto !important;        /* 🌟 只有這裡可以上下滑動 */
+    padding: 20px 20px 80px 20px !important;
+    -webkit-overflow-scrolling: touch;
+    display: block !important;          /* 確保顯示 */
+  }
+
+  /* 確保切換內容時的顯示 */
+  .post-tab-content {
+    display: none; 
+  }
+  .post-tab-content.active {
+    display: block !important;
+  }
+
+  /* 移除動畫在手機版的干擾 */
   .animate-entry {
     opacity: 1 !important;
     transform: none !important;
