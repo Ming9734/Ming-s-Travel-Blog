@@ -133,31 +133,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Step 3: 等待所有動畫結束後再切換到內頁
+setTimeout(() => {
+    // 1. 顯示容器：此時 CSS 已經設定 opacity: 0，所以畫面依然是乾淨的
+    postLayout.style.display = "flex"; // 確保是 flex 佈局
+    
+    // 2. 顯示導覽列
+    if (navbar) {
+        navbar.classList.remove('navbar-hidden'); // 移除隱藏類
+        navbar.classList.add('active'); 
+    }
+
+    // 獲取元素
+    const galleryElement = document.querySelector('.post-gallery');
+    const textElement = document.querySelector('.post-text');
+
+    // 3. 關鍵：使用 requestAnimationFrame 確保瀏覽器已完成 layout 計算
+    requestAnimationFrame(() => {
+        // 給予極短的延遲，確保 transition 能被偵測到
+        setTimeout(() => {
+            // 相簿先出
+            if (galleryElement) {
+                galleryElement.classList.add('animate-entry');
+            }
+            
+            // 文字後出 (Stagger Effect 增加質感)
+            if (textElement) {
+                setTimeout(() => {
+                    textElement.classList.add('animate-entry');
+                }, 350); // 延遲 0.35 秒，層次感最美
+            }
+        }, 50); 
+    });
+
+    // 4. 最後將已完全透明的封面移除
     setTimeout(() => {
-      // 顯示內頁佈局容器
-      postLayout.style.display = "";
-      if (navbar) navbar.classList.add('active'); 
-
-      // 獲取左右兩欄元素，開始交錯進場動畫
-      const galleryElement = document.querySelector('.post-gallery');
-      const textElement = document.querySelector('.post-text');
-
-      setTimeout(() => {
-          if (galleryElement) {
-            galleryElement.classList.add('animate-entry');
-          }
-          if (textElement) {
-            setTimeout(() => {
-              textElement.classList.add('animate-entry');
-            }, 200); 
-          }
-      }, 50);
-      
-      // 最後，等待所有動畫結束後，將封面從 DOM 中移除
-      setTimeout(() => {
-        cover.remove();
-      },800); 
-      
-    }, 2500); // 2000ms = 500ms(卡片隱藏結束) + 1500ms(封面放大結束)
+        if (cover) cover.remove();
+    }, 1500); 
+    
+}, 2200); // 這裡的時間稍微縮短一點點（原 2500），讓節奏更緊湊
   });
 });
