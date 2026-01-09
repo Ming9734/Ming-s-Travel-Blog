@@ -661,10 +661,25 @@ body {
 
 /* 確保 post-layout 的子元素在毛玻璃背景之上 */
 .post-gallery, .post-text {
-    position: relative; /* 提升堆疊順序 */
-    z-index: 1; /* 確保在 ::before (z-index: 0) 之上 */
-    background: transparent; /* 將背景設為透明，以便看到後面的毛玻璃 */
-    border-radius: 16px; /* 保留圓角視覺 */
+  /* 1. 保留原本的外觀設定 */
+    position: relative; 
+    z-index: 1; 
+    background: transparent; 
+    border-radius: 16px; 
+
+    /* 2. 新增：動畫初始隱藏狀態 (解決閃爍) */
+    opacity: 0;
+    transform: translateY(40px); /* 初始位置向下位移，更有浮現感 */
+    visibility: hidden;           /* 徹底防止在 display 切換時閃爍 */
+    
+    /* 3. 新增：絲滑的過渡效果 */
+    transition: 
+        opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), 
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 1.2s;
+        
+    /* 4. 優化效能：預告瀏覽器這兩個屬性會動 */
+    will-change: opacity, transform;
 }
 
 
@@ -872,28 +887,13 @@ body {
     }
 }
 
-/* 將以下 CSS 程式碼塊複製到 styles.css 檔案的最底部 */
-
-/* ---------------- 進場動畫 (Entry Animations) ---------------- */
-/* 定義進場動畫的關鍵影格 */
-@keyframes slideInFade {
-  from {
-    opacity: 0;
-    transform: translateY(20px); /* 從下方 20px 處開始 */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0); /* 移動到最終位置 */
-  }
+/* 這是全新的：定義「目的地」狀態 */
+.post-gallery.animate-entry, 
+.post-text.animate-entry {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
 }
-
-/* 應用於左右兩欄的動畫 class */
-.animate-entry {
-  opacity: 0; /* 預設隱藏 */
-  /* 使用動畫，持續 0.6 秒，使用 ease-out 緩動函式 */
-  animation: slideInFade 0.8s ease-out forwards; 
-}
-
 /* 確保手機版佈局不受影響 */
 @media (max-width: 768px) {
     .animate-entry {
