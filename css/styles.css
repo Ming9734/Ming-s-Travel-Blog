@@ -931,82 +931,86 @@ body {
     font-size: 0.95rem;
   }
 }
+
+
 /* ================================================= */
-/* 📱 手機版專屬：圖上文下 + 相簿固定 + 書籤固定 + 內文滾動 */
+/* 📱 手機版絕對修正：圖上文下 + 固定相簿 + 固定書籤 */
 /* ================================================= */
 
-@media (max-width: 768px) {
-  /* 1. 重新定義外層容器：鎖定視窗高度，防止整個網頁隨便滾動 */
+@media screen and (max-width: 768px) {
+  /* 1. 強制重置 grid 為 flex，實現上下排版 */
   .post-layout {
-    display: flex !important;
-    flex-direction: column !important; /* 確保圖上文下 */
-    height: calc(100vh - 70px) !important; /* 鎖定在導覽列下方的剩餘高度 */
-    margin: 70px 0 0 0 !important; /* 貼緊頂部 */
-    padding: 0 !important;
-    gap: 0 !important;
-    border-radius: 0 !important;
-    overflow: hidden !important; /* 禁止外層滾動 */
-  }
-
-  /* 去除毛玻璃背景的圓角，讓它填滿手機寬度 */
-  .post-layout::before {
+    display: flex !important;           /* 🌟 強制切換為 Flex */
+    flex-direction: column !important;  /* 🌟 確保圖在上，文在下 */
+    height: 100vh !important;           /* 🌟 鎖定全螢幕高度 */
+    margin: 0 !important;               /* 移除邊距 */
+    padding-top: 70px !important;       /* 避開導覽列 */
+    max-width: 100% !important;
+    overflow: hidden !important;        /* 禁止外層滾動 */
     border-radius: 0 !important;
   }
 
-  /* 2. 相簿區域：固定在上方，不隨文字捲動 */
+  /* 2. 相簿區域：固定高度，不隨文字捲動 */
   .post-gallery {
-    flex: 0 0 40% !important; /* 佔據螢幕約 40% 高度 */
+    flex: 0 0 40% !important;          /* 🌟 固定佔據螢幕 40% 高度 */
+    height: 40% !important;
     width: 100% !important;
-    z-index: 10 !important;
-    padding: 10px !important;
-    box-sizing: border-box;
+    padding: 0 !important;
+    position: relative !important;
   }
   
   .gallery-frame {
+    border-radius: 0 !important;        /* 手機版圖片鋪滿 */
     height: 100% !important;
-    aspect-ratio: auto !important; /* 手機版不強制 4:3，改隨容器填滿 */
   }
 
-  /* 3. 文字內容區：這是核心滾動區 */
+  /* 3. 文字內容區：設定為可捲動容器 */
   .post-text {
-    flex: 1 !important; /* 佔據剩餘的所有空間 */
+    flex: 1 !important;                 /* 🌟 佔據剩下的 60% 空間 */
     display: flex !important;
     flex-direction: column !important;
     padding: 0 !important;
-    overflow: hidden !important; /* 內部再分層 */
-    background: rgba(0, 0, 0, 0.2) !important; /* 稍微加深區隔 */
+    overflow: hidden !important;        /* 讓內部 tab-content 去滾動 */
+    background: rgba(0, 0, 0, 0.4) !important; /* 增加閱讀對比度 */
   }
 
-  /* 4. 書籤（Tabs）：固定在文字區的頂部 */
+  /* 4. 書籤 (Tabs)：固定在文字區頂部 */
   .post-tabs {
-    flex: 0 0 auto !important; /* 高度隨內容，不縮放 */
+    flex: 0 0 auto !important;
     position: sticky !important;
     top: 0;
-    z-index: 20;
-    padding: 15px 15px 5px 15px !important;
-    margin-bottom: 0 !important;
-    background: rgba(0, 0, 0, 0.3); /* 給書籤一點背景色 */
-    overflow-x: auto !important; /* 如果書籤太多可以橫向滑動 */
-    white-space: nowrap;
+    z-index: 10;
+    padding: 15px !important;
+    background: rgba(30, 30, 30, 0.8) !important; /* 深色背景確保書籤清晰 */
+    margin: 0 !important;
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 10px !important;
   }
 
-  /* 5. 內文列表：真正執行「下滑」的區塊 */
+  /* 5. 內文列表：真正下滑的區域 */
   .post-tab-content {
     flex: 1 !important;
-    overflow-y: auto !important; /* 🌟 只有這裡可以滾動 */
-    padding: 20px !important;
-    -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更順暢 */
+    overflow-y: auto !important;        /* 🌟 只有這裡會出現滾動條 */
+    padding: 20px 25px !important;
+    display: none;                      /* 預設隱藏，由 JS 切換 active */
+    -webkit-overflow-scrolling: touch;
   }
 
-  /* 修正手機版星星列表的邊距 */
-  .post-tab-content ul {
-    margin-top: 0 !important;
+  .post-tab-content.active {
+    display: block !important;          /* 顯示當前書籤內容 */
   }
 
-  /* 手機版按鈕微調：縮小一點避免擋住圖片 */
+  /* 修正毛玻璃背景在手機版全滿 */
+  .post-layout::before {
+    border-radius: 0 !important;
+    inset: 0 !important;
+  }
+  
+  /* 縮小手機版箭頭，避免太擠 */
   .gallery-btn {
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 1.5rem !important;
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 1.2rem !important;
   }
 }
