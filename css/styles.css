@@ -1,5 +1,5 @@
 /* ================================================= */
-/* 🎨 1. Body & 全域基礎設定                          */
+/* 🎨 1. Body & 全局基礎設定                          */
 /* ================================================= */
 body {
   margin: 0;
@@ -16,8 +16,17 @@ body {
   min-height: 100vh;
 }
 
+/* 基礎 About 區塊 */
+.post {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
 /* ================================================= */
-/* 🧭 2. 導覽列與玻璃質感選單 (核心修復)              */
+/* 🧭 2. 導覽列與全域玻璃質感選單                     */
 /* ================================================= */
 .navbar {
   position: fixed;
@@ -46,6 +55,7 @@ body {
   position: relative;
 }
 
+/* 導覽列底線動畫 */
 .nav a::after {
   content: ''; position: absolute; left: 0; bottom: 0;
   width: 0%; height: 2px; background: #4f46e5; transition: width 0.3s;
@@ -53,7 +63,7 @@ body {
 .nav a:hover::after { width: 100%; }
 .nav a:hover { color: #4f46e5; transform: scale(1.05); }
 
-/* 下拉選單基礎 (玻璃質感) */
+/* 下拉選單基礎樣式 (玻璃質感) */
 .dropdown-menu, .sub-menu {
   background: rgba(255, 255, 255, 0.85) !important; 
   backdrop-filter: blur(12px) !important;
@@ -64,13 +74,10 @@ body {
   min-width: 180px;
   z-index: 10001;
   display: none; 
+  list-style: none;
+  padding: 5px 0;
 }
 
-.dropdown:hover > .dropdown-menu { display: block !important; }
-.dropdown-sub { position: relative; }
-.dropdown-sub:hover > .sub-menu { display: block !important; }
-
-/* 選單選項與微動畫 */
 .dropdown-menu a, .sub-menu a {
   padding: 10px 16px !important;
   color: #222 !important;
@@ -79,180 +86,28 @@ body {
   background: transparent !important;
   text-decoration: none;
 }
+
+/* 🌟 選項 Hover 微動畫：變色 + 向右滑動 */
 .dropdown-menu a:hover, .sub-menu a:hover {
   background: rgba(79, 70, 229, 0.1) !important;
   color: #4f46e5 !important;
   padding-left: 20px !important;
 }
 
-/* ================================================= */
-/* 🗺️ 3. 首頁、地圖與 Hero 區域                       */
-/* ================================================= */
-#home-map, #map {
-  position: fixed !important;
-  top: 0; left: 0; width: 100vw !important; height: 100vh !important;
-  z-index: 1; filter: brightness(0.85); background-color: #222;
-}
-
-#map { top: 70px; height: calc(100vh - 70px); }
-
-.hero-floating-map {
-  position: absolute; top: 100px; left: 30px; z-index: 1000;
-  width: 300px; padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.25); 
-  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 20px;
-  pointer-events: none;
-}
-
-.hero-floating {
-  position: fixed !important; top: 50% !important; left: 50% !important;
-  transform: translate(-50%, -50%) !important; z-index: 9999 !important;
-  width: 480px; max-width: 90%; padding: 2.5rem; text-align: center;
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(147, 51, 234, 0.2)) !important;
-  backdrop-filter: blur(5px) !important; border-radius: 24px; color: white;
+/* 💻 2.1 電腦版選單邏輯 (min-width: 993px) */
+@media screen and (min-width: 993px) {
+  .dropdown:hover > .dropdown-menu {
+    display: block !important;
+    position: absolute;
+    top: 100%; left: 0;
+  }
+  .dropdown-sub:hover > .sub-menu {
+    display: block !important;
+    position: absolute;
+    top: 0; left: 100%;
+    margin-left: 2px;
+  }
 }
 
 /* ================================================= */
-/* 🖼️ 4. Post 內頁：佈局與幻燈片                       */
-/* ================================================= */
-.post-layout {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
-  max-width: 1200px; margin: 6rem auto; padding: 2rem;
-  position: relative; height: 80vh; align-items: center; overflow: hidden;
-}
-
-.post-layout::before {
-  content: ''; position: absolute; inset: 0;
-  background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);
-  border-radius: 16px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); z-index: 0;
-}
-
-.post-gallery, .post-text { position: relative; z-index: 1; height: 100%; }
-
-.gallery-frame {
-  width: 100%; aspect-ratio: 4 / 3; position: relative; overflow: hidden;
-  border-radius: 16px; background-size: cover; background-position: center;
-}
-
-.post-gallery img#gallery-img {
-  width: 100%; height: 100%; object-fit: contain; position: relative; z-index: 2;
-  backdrop-filter: blur(5px) brightness(0.75);
-}
-
-.gallery-btn {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2); color: white; border-radius: 50%;
-  width: 50px; height: 50px; font-size: 2rem; cursor: pointer; z-index: 3;
-  transition: all 0.3s; display: flex; align-items: center; justify-content: center;
-}
-.gallery-btn:hover { background: rgba(255, 255, 255, 0.9); color: #4f46e5; }
-
-/* 文字區塊捲動 */
-.post-text {
-  padding: 1rem 2.5rem 2.5rem 2.5rem; color: white;
-  overflow-y: auto; scrollbar-width: thin;
-}
-
-.post-tabs {
-  display: flex; gap: 0.5rem; margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); padding-bottom: 0.5rem;
-}
-
-.post-tabs .tab.active {
-  background: rgba(255, 255, 255, 0.2); color: white;
-  border-bottom: 2px solid white;
-}
-
-/* 星星列表 */
-.post-tab-content li::before {
-  content: '★'; position: absolute; left: 0; color: #fffb00;
-  text-shadow: 0 0 8px rgba(255, 251, 0, 0.6);
-}
-
-/* ================================================= */
-/* 📱 5. 響應式整合區 (Tablet & Mobile)              */
-/* ================================================= */
-
-/* --- 平板/手機通用導覽邏輯 (992px以下) --- */
-@media screen and (max-width: 992px) {
-  .dropdown-menu, .sub-menu {
-    position: relative !important; width: 100% !important;
-    top: 0 !important; left: 0 !important; transform: none !important;
-    display: none; box-shadow: none !important;
-  }
-
-  .nav > li > .dropdown-menu {
-    position: absolute !important; top: 100% !important; left: 50% !important;
-    transform: translateX(-50%) !important; width: 90vw !important;
-    max-width: 320px !important; display: none; background: white !important;
-  }
-
-  .menu-open { display: block !important; }
-
-  .sub-menu {
-    background: rgba(241, 245, 249, 0.1) !important;
-    border-left: 4px solid #4f46e5 !important; margin: 5px 0 !important;
-  }
-  
-  /* 封面卡片在手機版的位置修正 */
-  .cover-overlay {
-    bottom: auto !important; top: 60% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 85% !important;
-  }
-}
-
-/* --- 手機版專屬內容排版 (768px以下) --- */
-@media (max-width: 768px) {
-  /* 🌟 全新手機版 Post 排版：固定相簿 + 固定書籤 + 內容滾動 */
-  .post-layout {
-    grid-template-columns: 1fr !important;
-    height: 92vh !important; /* 鎖定視窗高度 */
-    margin: 4.5rem 0.8rem 0 0.8rem !important;
-    padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    overflow: hidden !important; /* 禁止整頁大滾動 */
-  }
-
-  .post-gallery {
-    flex: 0 0 38% !important; /* 相簿固定佔 38% 高度 */
-    width: 100% !important;
-    z-index: 5 !important;
-  }
-
-  .post-text {
-    flex: 1 !important; /* 文字區佔據剩餘空間 */
-    display: flex !important;
-    flex-direction: column !important;
-    padding: 1.2rem !important;
-    overflow: hidden !important; /* 禁止區塊本身滾動，讓給內部 content */
-  }
-
-  .post-tabs {
-    flex: 0 0 auto !important; /* 書籤欄固定不縮放 */
-    overflow-x: auto !important;
-    white-space: nowrap;
-    margin-bottom: 1rem !important;
-  }
-
-  .post-tab-content {
-    flex: 1 !important;
-    overflow-y: auto !important; /* 🌟 只有這裡可以滾動 */
-    padding-right: 5px;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* 關閉手機動畫確保流暢 */
-  .animate-entry {
-    animation: none !important; opacity: 1 !important; transform: none !important;
-  }
-}
-
-/* 進場動畫定義 */
-@keyframes slideInFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-entry { opacity: 0; animation: slideInFade 0.8s ease-out forwards; }
+/* 🗺
