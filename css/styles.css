@@ -634,8 +634,8 @@ body {
 /* ================= Post Layout (單一毛玻璃背景版) ================= */
 
 .post-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr; 
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important; 
   gap: 3rem;
   max-width: 1200px;
   margin: 6rem auto;
@@ -685,9 +685,14 @@ body {
 
 /* 幻燈片容器的細節調整 */
 .post-gallery {
+    width: 100% !important;
+    height: 100% !important;
     display: flex;
     justify-content: center;
     align-items: center; 
+    flex-shrink: 0; /* 禁止收縮 */
+    flex-grow: 0;   /* 禁止過度成長 */
+    overflow: hidden;
 }
 
 /* gallery-frame 和 ::before 保持原本的邏輯，用於圖片本身的模糊延伸 */
@@ -762,10 +767,13 @@ body {
 .post-text {
   display: flex !important;           /* 新增：變更為彈性佈局 */
   flex-direction: column !important;  /* 新增：讓標籤在上，內容在下 */
+  width: 100% !important; /* 填滿 grid 給它的 50% */
   height: 100%;                       /* 保持高度 */
   padding: 1rem 2.5rem 2.5rem 2.5rem; 
   color: white;
   overflow: hidden !important;        /* 修改：容器本身不准捲動 */
+  min-width: 0; /* 🌟 重要：防止被內部長內容強制撐開 */
+  box-sizing: border-box;
 }
 
 
