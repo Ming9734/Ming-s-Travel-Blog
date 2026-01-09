@@ -745,28 +745,14 @@ body {
 
 /* 📝 文字區塊設計 */
 .post-text {
-  /* 背景已經設定為 transparent */
+  display: flex !important;           /* 新增：變更為彈性佈局 */
+  flex-direction: column !important;  /* 新增：讓標籤在上，內容在下 */
+  height: 100%;                       /* 保持高度 */
   padding: 1rem 2.5rem 2.5rem 2.5rem; 
-  color: white; /* 確保文字顏色為白色 */
-  /* ✨ 優化：設置最大高度並允許垂直滾動 ✨ */
-  height: 100%;           /* 🌟 填滿固定的 80vh */
-  max-height: none;       /* 🌟 取消原本的 70vh 限制 */
-  overflow-y: auto;       /* 🌟 滾輪出現在這裡，不會撐開容器 */
-
-  /* 優化：美化滾動條樣式 (僅適用於 Webkit 瀏覽器，如 Chrome/Safari) */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+  color: white;
+  overflow: hidden !important;        /* 修改：容器本身不准捲動 */
 }
 
-/* Webkit 滾動條樣式 */
-.post-text::-webkit-scrollbar {
-  width: 8px;
-}
-
-.post-text::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
-}
 
 /* 📝 Tab 書籤設計 */
 .post-tabs {
@@ -822,6 +808,22 @@ body {
   overflow-wrap: break-word;
 }
 
+#post-tab-contents {
+  flex: 1 !important;            /* 新增：佔滿剩餘高度 */
+  overflow-y: auto !important;   /* 新增：讓文字在這裡捲動 */
+  overflow-x: hidden;
+  padding-right: 15px;           /* 新增：給滾輪留位置，防止切到字 */
+  padding-bottom: 2rem;          /* 新增：解決底部被擋住，留出緩衝 */
+}
+/* Webkit 滾動條樣式 - 改為針對內容區 */
+#post-tab-contents::-webkit-scrollbar {
+  width: 6px; /* 稍微細一點更精緻 */
+}
+
+#post-tab-contents::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4); /* 半透明白 */
+  border-radius: 10px;
+}
 /* 1. 隱藏預設的圓點並移除邊距 */
 .post-tab-content ul {
   list-style: none; /* 隱藏原本的黑點 */
