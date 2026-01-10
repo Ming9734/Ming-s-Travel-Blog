@@ -1,0 +1,38 @@
+{
+  "id": "diocletian-s-palace",
+  "title": "Diocletian's Palace",
+  "subtitle": "Split, Croatia",
+  "country": "Croatia",
+  "city": "Split",
+  "cover": "images/post/diocletian-s-palace/cover.jpg",
+  "images": [
+    "images/post/diocletian-s-palace/1.jpg",
+    "images/post/diocletian-s-palace/2.jpg",
+    "images/post/diocletian-s-palace/3.jpg",
+    "images/post/diocletian-s-palace/4.jpg",
+    "images/post/diocletian-s-palace/5.jpg",
+    "images/post/diocletian-s-palace/6.jpg",
+    "images/post/diocletian-s-palace/7.jpg",
+    "images/post/diocletian-s-palace/8.jpg",
+    "images/post/diocletian-s-palace/9.jpg",
+    "images/post/diocletian-s-palace/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>The largest and best-preserved surviving palace complex of the Roman world</li><li>Built as the retirement residence of Emperor Diocletian after his voluntary abdication</li><li>A unique fusion of imperial palace and military fortress, with fortified walls, temples, imperial quarters, and defensive structures</li><li>Still inhabited today, where ancient Roman remains and later urban life coexist within the same walls</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Built between the late 3rd and early 4th centuries AD, Diocletian’s Palace stands as one of the most remarkable survivals of Roman imperial architecture. Though often described as the retirement palace of Emperor Diocletian, it is more accurately understood as a fortified, multifunctional complex—part imperial residence, part ceremonial centre, and part military stronghold. Its massive stone walls, rectangular plan, corner towers, and heavily defended gates reflect an empire entering an age of insecurity, when even emperors required fortifications to protect their authority.</p><p>The palace was constructed near Diocletian’s birthplace in Dalmatia, overlooking the Adriatic Sea. Architecturally, it combines the layout of a Roman castrum (military camp) with the luxury of an imperial villa. Within its walls were the emperor’s private apartments, temples dedicated to Jupiter and other deities, an imperial mausoleum, service quarters, and military facilities. Because of its immense scale and extraordinary state of preservation, Diocletian’s Palace is widely regarded as the largest and best-preserved Roman palace in existence and has been inscribed on the UNESCO World Heritage List.</p><p>Diocletian himself rose from humble origins, beginning his career as a soldier before being proclaimed emperor during one of the most turbulent periods in Roman history. When he assumed power, the Roman Empire was weakened by decades of civil war, political instability, foreign invasions, economic crisis, and plague. After securing control, Diocletian initiated sweeping reforms: he centralised imperial authority, diminished the political power of the Senate, reorganised provincial administration, reformed taxation and law, and strengthened frontier defences against Persian and Germanic threats.</p><p>His most ambitious political innovation was the Tetrarchy, a system of rule by four emperors designed to address the empire’s vast size and chronic succession crises. While the system functioned effectively during Diocletian’s reign, it depended heavily on his personal authority and collapsed soon after his abdication. Nevertheless, many of his reforms laid the institutional foundations for the later survival and transformation of the Roman state.</p><p>In an unprecedented decision, Diocletian voluntarily abdicated at the height of his power. Rejecting the fate of most Roman emperors, he withdrew from public life and returned to Dalmatia, where Diocletian’s Palace became his residence in retirement. According to historical accounts, he devoted himself to a quiet rural life, a striking contrast to the absolute authority he once wielded.</p><p>Over the centuries following the fall of the Western Roman Empire, the palace took on a new role. It became a refuge for local populations fleeing invasions, and gradually evolved into a dense urban settlement. Medieval houses, churches, streets, and markets were built directly into the Roman structure, transforming the imperial complex into the historical core of what is now the city of Split.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Visiting Split, it is impossible to ignore the presence of Diocletian’s Palace. In fact, it would be more accurate to say that Split exists within the palace. The ancient walls define the old town, and modern residences, cafés, and shops are seamlessly embedded into Roman halls, corridors, and foundations. Unlike archaeological sites that are clearly separated from daily life, this is a place where history is continuously inhabited.</p><p>Walking through the narrow streets of the old town, Roman columns appear unexpectedly at street corners, while medieval facades rise from imperial masonry. A casual stroll may lead you through what was once an emperor’s ceremonial courtyard, now filled with music, conversation, and everyday movement. The experience is less like visiting a ruin and more like wandering through a living organism shaped by two thousand years of adaptation.</p><p>This constant overlap of past and present creates a powerful sense of temporal dislocation. One moment you are sitting in a modern café; the next, you realise you are standing inside the core of Roman imperial power. The palace does not feel frozen in time—it feels alive, layered, and continuously reinterpreted. For visitors, this fusion of ancient stone and modern life offers a rare and deeply immersive encounter with history, where the boundaries between antiquity and the present seem to dissolve.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Irony and Legacy</h2><p>After Diocletian’s retirement, the Roman Empire soon descended again into political chaos. Historical tradition recounts that emissaries were sent to ask the former emperor to return and restore order. Diocletian reportedly refused, replying that if they could see the cabbages he had planted with his own hands, they would never ask him to abandon the peace and happiness of retirement for the insatiable greed of power.</p><p>An even deeper irony lies in his burial. Diocletian was responsible for the last and most severe persecution of Christians in Roman history. Yet in the 7th century, his mausoleum was converted into the Cathedral of St. Domnius, dedicated to a Christian martyr believed to have suffered during those persecutions. The emperor’s tomb thus became a Christian sanctuary—one of the most striking reversals of meaning in the architectural history of Europe.</p>"
+    }
+  ]
+}
