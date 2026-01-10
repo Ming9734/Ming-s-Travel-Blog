@@ -118,5 +118,17 @@
   "image": "images/posts/valle-dei-templi.jpg",
   "icon": "images/markers/IT.png",
   "preview": "images/post/valle-dei-templi/cover.jpg"
+  },
+  {
+  "id": "diocletian-s-palace",
+  "title": "Diocletian's Palace",
+  "country": "Croatia",
+  "city": "Split",
+  "lat": 43.50818205334597,  
+  "lng": 16.440130134264212,
+  "summary": "A UNESCO World Heritage palace where Roman imperial authority and military engineering merge, forming a living urban landscape that has endured for seventeen centuries.",
+  "image": "images/posts/diocletian-s-palace.jpg",
+  "icon": "images/markers/HR.png",
+  "preview": "images/post/diocletian-s-palace/cover.jpg"
   }
 ]
