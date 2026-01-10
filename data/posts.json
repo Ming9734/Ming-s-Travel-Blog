@@ -130,5 +130,17 @@
   "image": "images/posts/diocletian-s-palace.jpg",
   "icon": "images/markers/HR.png",
   "preview": "images/post/diocletian-s-palace/cover.jpg"
+  },
+  {
+  "id": "lake-bled",
+  "title": "Lake Bled",
+  "country": "Slovenia",
+  "city": "Bled",
+  "lat": 46.3629934650414,   
+  "lng": 14.090025048020923,
+  "summary": "A postcard-perfect Alpine lake shaped by glaciers and legend, where a solitary island, medieval traditions, and mountain scenery come together in one of Slovenia’s most enduring landscapes.",
+  "image": "images/posts/lake-bled.jpg",
+  "icon": "images/markers/SI.png",
+  "preview": "images/post/lake-bled/cover.jpg"
   }
 ]
