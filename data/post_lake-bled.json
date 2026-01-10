@@ -1,0 +1,39 @@
+
+{
+  "id": "lake-bled",
+  "title": "Lake Bled",
+  "subtitle": "Bled, Slovenia",
+  "country": "Slovenia",
+  "city": "Bled",
+  "cover": "images/post/lake-bled/cover.jpg",
+  "images": [
+    "images/post/lake-bled/1.jpg",
+    "images/post/lake-bled/2.jpg",
+    "images/post/lake-bled/3.jpg",
+    "images/post/lake-bled/4.jpg",
+    "images/post/lake-bled/5.jpg",
+    "images/post/lake-bled/6.jpg",
+    "images/post/lake-bled/7.jpg",
+    "images/post/lake-bled/8.jpg",
+    "images/post/lake-bled/9.jpg",
+    "images/post/lake-bled/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>An Alpine glacial lake set at the edge of the Julian Alps</li><li>Home to Slovenia’s only natural island, rising from the centre of the lake</li><li>Long celebrated for its scenic beauty and natural thermal springs, making it a renowned spa and resort destination, and even a venue for high-level international gathering</li><li>According to local legend, the lake was formed when fairies summoned a flood to drive away encroaching shepherds</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Lake Bled is set at the foothills of the Julian Alps and was formed approximately 14,000 years ago as a result of glacial erosion during the last Ice Age. The lake is distinguished by its exceptionally clear, blue-green waters and by Bled Island, the only natural island in Slovenia, which rises gently from its centre. Surrounded by alpine forests and mountain scenery, Lake Bled has long been valued not only for its natural beauty but also for its mild climate and thermal springs.</p><p>From the 19th century onward, these natural springs transformed Lake Bled into a renowned spa and resort destination, attracting the Austro-Hungarian aristocracy and European elites seeking health, leisure, and scenic retreat. In the 20th century, the lake’s tranquil yet prestigious setting gave it a new role on the international stage, when it became a favoured location for diplomatic gatherings. Most notably, Yugoslav president Josip Broz Tito used nearby residences to host visiting heads of state, reinforcing Lake Bled’s image as a place where nature, power, and diplomacy quietly intersect.</p><p>From the 19th century onward, these natural springs transformed Lake Bled into a renowned spa and resort destination, attracting the Austro-Hungarian aristocracy and European elites seeking health, leisure, and scenic retreat. In the 20th century, the lake’s tranquil yet prestigious setting gave it a new role on the international stage, when it became a favoured location for diplomatic gatherings. Most notably, Yugoslav president Josip Broz Tito used nearby residences to host visiting heads of state, reinforcing Lake Bled’s image as a place where nature, power, and diplomacy quietly intersect.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Lake Bled is often regarded as Slovenia’s most iconic destination. I arrived with measured expectations, aware that highly celebrated places can sometimes feel overtaken by tourism. Yet the moment I stood by the lakeshore, any hesitation disappeared. The still, reflective water, the snow-dusted peaks in the distance, the medieval castle perched high on a cliff, and the small island with its solitary church together form a landscape that feels almost dreamlike.</p><p>Lake Bled is often regarded as Slovenia’s most iconic destination. I arrived with measured expectations, aware that highly celebrated places can sometimes feel overtaken by tourism. Yet the moment I stood by the lakeshore, any hesitation disappeared. The still, reflective water, the snow-dusted peaks in the distance, the medieval castle perched high on a cliff, and the small island with its solitary church together form a landscape that feels almost dreamlike.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Legends of the Lake and Island</h2><p>According to local legend, the area surrounding Lake Bled was once a lush green valley rather than a lake. At its centre stood a small rocky hill, which served as the dwelling place of fairies. On moonlit nights, these fairies were said to gather on the hill to dance, and the surrounding meadows were kept pristine as sacred ground. Shepherds from nearby villages, however, often brought their flocks into the valley to graze. Fearing that the grass would be completely destroyed, the fairies warned the shepherds to keep their sheep away, promising dire consequences if they refused.</p><p>According to local legend, the area surrounding Lake Bled was once a lush green valley rather than a lake. At its centre stood a small rocky hill, which served as the dwelling place of fairies. On moonlit nights, these fairies were said to gather on the hill to dance, and the surrounding meadows were kept pristine as sacred ground. Shepherds from nearby villages, however, often brought their flocks into the valley to graze. Fearing that the grass would be completely destroyed, the fairies warned the shepherds to keep their sheep away, promising dire consequences if they refused</p><h2>Traditions of Bled Island</h2><p>Bled Island is crowned by the 17th-century Church of the Assumption of Mary, a site deeply embedded in local customs. One enduring tradition holds that a groom must carry his bride up the church’s 99 stone steps in silence to ensure a lasting and happy marriage. Inside the church hangs the famous wishing bell, linked to the legend of a grieving widow whose original bell sank into the lake during a violent storm while being transported to the island. After she spent the rest of her life in a convent in Rome, the Pope, moved by her story, commissioned a new bell for the church. To this day, it is believed that ringing the bell three times with sincere intent may grant one’s wishes.</p>"
+    }
+  ]
+}
