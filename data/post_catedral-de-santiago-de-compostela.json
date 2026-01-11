@@ -1,0 +1,39 @@
+
+
+{
+  "id": "catedral-de-santiago-de-compostela",
+  "title": "Catedral de Santiago de Compostela",
+  "subtitle": "Santiago de Compostela, Spain",
+  "country": "Spain",
+  "city": "Santiago de Compostela",
+  "cover": "images/post/catedral-de-santiago-de-compostela/cover.jpg",
+  "images": [
+    "images/post/catedral-de-santiago-de-compostela/1.jpg",
+    "images/post/catedral-de-santiago-de-compostela/2.jpg",
+    "images/post/catedral-de-santiago-de-compostela/3.jpg",
+    "images/post/catedral-de-santiago-de-compostela/4.jpg",
+    "images/post/catedral-de-santiago-de-compostela/5.jpg",
+    "images/post/catedral-de-santiago-de-compostela/6.jpg",
+    "images/post/catedral-de-santiago-de-compostela/7.jpg",
+    "images/post/catedral-de-santiago-de-compostela/8.jpg",
+    "images/post/catedral-de-santiago-de-compostela/9.jpg",
+    "images/post/catedral-de-santiago-de-compostela/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>One of the three great Catholic pilgrimage destinations since the Middle Ages</li><li>Traditionally believed to house the tomb of Saint James the Greater, one of the Twelve Apostles</li><li>The shared final destination of all routes of the Camino de Santiago pilgrimage</li><li>Predominantly Romanesque in structure, yet enriched with Gothic, Renaissance, and Baroque elements, forming a uniquely layered architectural ensemble</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Santiago de Compostela Cathedral rises above what is believed to be the tomb of Saint James, one of the Twelve Apostles of Jesus. Since the Middle Ages, it has been revered as one of the three great Catholic pilgrimage destinations, alongside Rome and Jerusalem. Over time, this devotion gave birth to the Camino de Santiago, a vast network of pilgrimage routes stretching across Europe, all converging at this cathedral—the shared destination and spiritual culmination of every path.</p><p>According to tradition, in AD 813 a hermit named Pelayo witnessed mysterious lights shining above the forest of Monte Libredón. Following these signs, local clergy uncovered a stone tomb believed to contain the remains of Saint James and two of his disciples. The discovery quickly transformed the site into a major centre of pilgrimage. King Alfonso II of Asturias ordered a church to be built and named the place Campus Stellae—the “Field of Stars”—a name that later evolved into Compostela.</p><p>The early sanctuary did not survive unscathed. In 997, during a campaign led by the Muslim general Almanzor, the church was destroyed by fire. Remarkably, the tomb of Saint James and its relics were left untouched, allowing the pilgrimage tradition to endure despite the devastation. This survival proved pivotal, ensuring the site’s continued spiritual importance.</p><p>The cathedral seen today was begun in 1075 under King Alfonso VI and Bishop Diego Peláez. Construction continued for more than a century, and the building was consecrated in 1211. At its core, the structure is Romanesque, but successive generations added Gothic, Renaissance, and Baroque elements, resulting in a layered architectural composition that reflects centuries of religious devotion, artistic change, and political power.</p><p>Recognised for its exceptional cultural and spiritual significance, Santiago de Compostela Cathedral was inscribed as a UNESCO World Heritage Site and remains the only building ever featured on Spanish euro coins.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Having walked the final 115 kilometres of the Camino Francés myself, seeing the cathedral’s towers appear in the distance was an intensely emotional moment. By the time I reached the main square and stood before the façade, that anticipation had transformed into a profound sense of fulfilment. Memories of the journey—its people, landscapes, hardships, and quiet moments—came rushing back all at once.</p><p>As more pilgrims continued to arrive, the square filled with a gentle yet celebratory atmosphere. Simply sitting there, watching others complete their journeys, brought a calm and contentment I had rarely experienced elsewhere.</p><p>During my stay, I entered the cathedral three times: to admire the radiant main altar, the monumental organ, and the tomb of Saint James; to attend the pilgrim’s mass; and, by great fortune, to witness the Botafumeiro ceremony in person. The experience was deeply moving. Completing the Camino and standing within this cathedral remains one of the most unforgettable journeys of my life.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Legends and Symbols</h2><p>One enduring legend recounts that after Saint James was martyred in Jerusalem, his disciples carried his body by sea back to the Iberian Peninsula. During the voyage, their boat was caught in a violent storm and capsized. Miraculously, the saint’s body washed ashore unharmed, covered in scallop shells. From this tale emerged the scallop shell as the enduring symbol of Saint James, the Camino, and the cathedral itself.</p><p>Another defining feature of the cathedral is the Botafumeiro, a monumental incense burner weighing over 50 kilograms. Suspended from the crossing of the nave, it is swung during major feast days and special pilgrim masses by a team of attendants. While visually spectacular, the tradition is believed to have originated as a practical response to medieval pilgrims arriving after long journeys, using incense to cleanse the air within the packed church.</p>"}
+  ]
+}
