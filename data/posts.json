@@ -142,5 +142,17 @@
   "image": "images/posts/lake-bled.jpg",
   "icon": "images/markers/SI.png",
   "preview": "images/post/lake-bled/cover.jpg"
+  },
+  {
+  "id": "catedral-de-santiago-de-compostela",
+  "title": "Catedral de Santiago de Compostela",
+  "country": "Spain",
+  "city": "Santiago de Compostela",
+  "lat": 42.880686221137246,   
+  "lng": -8.544408869562265,
+  "summary": "A UNESCO World Heritage cathedral built over the tomb of Saint James, standing for over a millennium as the spiritual heart and final destination of the Camino de Santiago.",
+  "image": "images/posts/catedral-de-santiago-de-compostela.jpg",
+  "icon": "images/markers/ES.png",
+  "preview": "images/post/catedral-de-santiago-de-compostela/cover.jpg"
   }
 ]
