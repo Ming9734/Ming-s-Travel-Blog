@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="map-preview-card">
                             <img src="${p.preview}">
                             <div class="preview-content">
-                                <span class="badge">${p.city} , ${p.country}</span>
                                 <h3>${p.title}</h3>
+                                <span class="badge">${p.city} , ${p.country}</span>
                                 <p>${p.summary}</p>
                                 <span class="click-hint">Click to read more</span>
                             </div>
