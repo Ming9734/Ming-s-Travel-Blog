@@ -310,46 +310,43 @@ body {
   text-transform: uppercase;
 }
 
-/* 🌟 新增：標籤列容器，確保 Badge 與 UNESCO 並排 */
-.badge-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 12px; /* 增加一點點間距 */
+/* 1. 地點標籤的容器：確保它佔據整行空間 */
+.location-wrapper {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px; /* 與下方 UNESCO 標籤的距離 */
 }
 
-/* UNESCO 通用風格：提升亮度與對比 */
+/* 2. UNESCO 標籤：設定為 table 讓它根據內容長度撐開，但前後強制換行 */
 .unesco-badge {
-    display: inline-block;
-    margin-top: 8px;      /* 🌟 關鍵：與上方城市標籤拉開距離 */
-    margin-bottom: 12px;   /* 與下方標題拉開距離 */
+    display: table;       /* 🌟 關鍵：強制獨佔一行，但背景寬度隨文字長度 */
+    margin-bottom: 12px;  /* 與下方標題的距離 */
     font-size: 0.7rem;
-    padding: 4px 12px;
+    padding: 5px 12px;
     border-radius: 6px;
     font-weight: 800;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
     color: #ffffff;
-    border: 1.5px solid rgba(255, 255, 255, 0.8); /* 更亮的邊框 */
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
-/* 🌿 自然遺產：鮮豔翠綠 */
+/* 🌿 自然遺產：極明亮綠 */
 .unesco-natural {
     background: linear-gradient(135deg, #2ecc71, #27ae60);
-    box-shadow: 0 0 15px rgba(46, 204, 113, 0.6); /* 強化發光 */
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
 }
 
-/* 🏛️ 文化遺產：明亮金橘 */
+/* 🏛️ 文化遺產：鮮豔金橘 */
 .unesco-cultural {
     background: linear-gradient(135deg, #f39c12, #e67e22);
-    box-shadow: 0 0 15px rgba(241, 196, 15, 0.6); /* 強化發光 */
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.8);
 }
 
-/* 🎨 複合遺產：明亮霓虹紫 */
+/* 🎨 複合遺產：亮紫色 */
 .unesco-mixed {
     background: linear-gradient(135deg, #a29bfe, #6c5ce7);
-    box-shadow: 0 0 15px rgba(162, 155, 254, 0.6); /* 強化發光 */
+    box-shadow: 0 0 15px rgba(162, 155, 254, 0.8);
 }
 
 
