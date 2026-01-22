@@ -317,40 +317,43 @@ body {
     margin-bottom: 0px; /* 🌟 讓城市跟 UNESCO 靠更近 */
 }
 
-/* 2. UNESCO 標籤通用樣式 */
+/* 2. UNESCO 標籤通用樣式：亮面金屬感 */
 .unesco-badge {
     display: table;
-    margin-top: 0px;
+    margin-bottom: 0px;
     margin-bottom: 8px;
     font-size: 0.65rem;
-    padding: 4px 12px;
+    padding: 3px 12px;
     border-radius: 4px;
-    font-weight: 700;
-    letter-spacing: 0.8px;
+    font-weight: 800;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    color: white;
     
-    /* 🌟 高級感核心：柔和的邊框與陰影，不再是發光效果 */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    /* 文字顏色：深色在亮色背景上讀取更清晰 */
+    color: rgba(0, 0, 0, 0.75);
+    
+    /* 金屬光澤核心：細白邊框 + 硬質陰影 */
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* 🌿 自然遺產：森林綠漸層 (穩定且充滿顏色) */
+/* 🌿 自然遺產：亮翡翠金屬 (Emerald Gold) */
 .unesco-natural {
-    background: linear-gradient(135deg, #2d5a27 0%, #1e3c1a 100%);
-    border-left: 4px solid #4ade80; /* 亮色邊條點綴 */
+    background: linear-gradient(145deg, #a8e6cf 0%, #34d399 50%, #10b981 100%);
+    border-bottom: 2px solid #059669; /* 底部深色線增加厚度感 */
 }
 
-/* 🏛️ 文化遺產：古銅金漸層 (高級且飽滿) */
+/* 🏛️ 文化遺產：拋光亮金 (Polished Gold) */
 .unesco-cultural {
-    background: linear-gradient(135deg, #8b6b23 0%, #5e4918 100%);
-    border-left: 4px solid #facc15; /* 亮色邊條點綴 */
+    background: linear-gradient(145deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%);
+    border-bottom: 2px solid #b45309;
 }
 
-/* 🎨 複合遺產：深紫色漸層 (神祕且深邃) */
+/* 🎨 複合遺產：亮銀紫金 (Ametrine) */
 .unesco-mixed {
-    background: linear-gradient(135deg, #5b21b6 0%, #441787 100%);
-    border-left: 4px solid #a78bfa; /* 亮色邊條點綴 */
+    background: linear-gradient(145deg, #e9d5ff 0%, #a855f7 50%, #7e22ce 100%);
+    border-bottom: 2px solid #6b21a8;
 }
 
 .preview-content h3 {
