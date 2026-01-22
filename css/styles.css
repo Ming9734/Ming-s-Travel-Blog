@@ -310,43 +310,47 @@ body {
   text-transform: uppercase;
 }
 
-/* 1. 地點標籤的容器：確保它佔據整行空間 */
+/* 1. 地點標籤容器 (縮窄間距) */
 .location-wrapper {
     display: block;
     width: 100%;
-    margin-bottom: 8px; /* 與下方 UNESCO 標籤的距離 */
+    margin-bottom: 2px; /* 🌟 讓城市跟 UNESCO 靠更近 */
 }
 
-/* 2. UNESCO 標籤：設定為 table 讓它根據內容長度撐開，但前後強制換行 */
+/* 2. UNESCO 標籤通用樣式：強調「質感」而非「亮度」 */
 .unesco-badge {
-    display: table;       /* 🌟 關鍵：強制獨佔一行，但背景寬度隨文字長度 */
-    margin-bottom: 12px;  /* 與下方標題的距離 */
-    font-size: 0.7rem;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-weight: 800;
-    color: #ffffff;
-    border: 1.5px solid rgba(255, 255, 255, 0.9);
+    display: table;
+    margin-bottom: 10px;
+    font-size: 0.65rem;    /* 字稍微縮小一點點更精緻 */
+    padding: 3px 10px 3px 8px; /* 左邊內距稍小，因為有粗邊框 */
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
     text-transform: uppercase;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    color: rgba(255, 255, 255, 0.9); /* 柔和的白色 */
+    
+    /* 核心高級感：深色半透明背景 + 左側粗邊框 */
+    background: rgba(0, 0, 0, 0.3); 
+    border: none;
+    border-left: 4px solid; /* 🌟 左側加一條實色邊框，像高級書籤 */
+    
+    /* 移除強烈的 box-shadow，改用極細微的陰影 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
-/* 🌿 自然遺產：極明亮綠 */
+/* 🌿 自然遺產：森林深綠 (霧面感) */
 .unesco-natural {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
-    box-shadow: 0 0 15px rgba(46, 204, 113, 0.8);
+    border-left-color: #27ae60;
 }
 
-/* 🏛️ 文化遺產：鮮豔金橘 */
+/* 🏛️ 文化遺產：古銅金 (金屬質感) */
 .unesco-cultural {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
-    box-shadow: 0 0 15px rgba(243, 156, 18, 0.8);
+    border-left-color: #d4af37; /* 經典金色 */
 }
 
-/* 🎨 複合遺產：亮紫色 */
+/* 🎨 複合遺產：皇家紫 (深沉感) */
 .unesco-mixed {
-    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
-    box-shadow: 0 0 15px rgba(162, 155, 254, 0.8);
+    border-left-color: #8e44ad;
 }
 
 
