@@ -154,5 +154,17 @@
   "image": "images/posts/catedral-de-santiago-de-compostela.jpg",
   "icon": "images/markers/ES.png",
   "preview": "images/post/catedral-de-santiago-de-compostela/cover.jpg"
+  },
+  {
+  "id": "schweriner-schloss",
+  "title": "Schweriner Schloss",
+  "country": "Germany",
+  "city": "Schwerin",
+  "lat": 53.62469808176588, 
+  "lng": 11.418242399463578,
+  "summary": "A UNESCO World Heritage palace rising from Lake Schwerin, expressing dynastic authority and 19th-century historicist architecture shaped by the ambitions of a small European state.",
+  "image": "images/posts/catedral-de-santiago-de-compostela.jpg",
+  "icon": "images/markers/ES.png",
+  "preview": "images/post/catedral-de-santiago-de-compostela/cover.jpg"
   }
 ]
