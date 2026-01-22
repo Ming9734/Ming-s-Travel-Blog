@@ -314,45 +314,44 @@ body {
 .location-wrapper {
     display: block;
     width: 100%;
-    margin-bottom: 2px; /* 🌟 讓城市跟 UNESCO 靠更近 */
+    margin-bottom: 0px; /* 🌟 讓城市跟 UNESCO 靠更近 */
 }
 
+/* 2. UNESCO 標籤通用樣式 */
 .unesco-badge {
     display: table;
     margin-top: 0px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     font-size: 0.65rem;
-    padding: 3px 10px 3px 10px;
+    padding: 4px 12px;
     border-radius: 4px;
     font-weight: 700;
     letter-spacing: 0.8px;
     text-transform: uppercase;
     color: white;
     
-    /* 🌟 改良點：不再用全黑，改用半透明背景 + 毛玻璃效果 */
-    backdrop-filter: blur(4px);
+    /* 🌟 高級感核心：柔和的邊框與陰影，不再是發光效果 */
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-/* 🌿 自然遺產：深森林綠底 */
+/* 🌿 自然遺產：森林綠漸層 (穩定且充滿顏色) */
 .unesco-natural {
-    background: rgba(39, 174, 96, 0.25); /* 帶點綠的透明底 */
-    border-left: 4px solid #2ecc71;
+    background: linear-gradient(135deg, #2d5a27 0%, #1e3c1a 100%);
+    border-left: 4px solid #4ade80; /* 亮色邊條點綴 */
 }
 
-/* 🏛️ 文化遺產：古銅金底 */
+/* 🏛️ 文化遺產：古銅金漸層 (高級且飽滿) */
 .unesco-cultural {
-    background: rgba(212, 175, 55, 0.2); /* 帶點金的透明底 */
-    border-left: 4px solid #d4af37;
+    background: linear-gradient(135deg, #8b6b23 0%, #5e4918 100%);
+    border-left: 4px solid #facc15; /* 亮色邊條點綴 */
 }
 
-/* 🎨 複合遺產：優雅紫底 */
+/* 🎨 複合遺產：深紫色漸層 (神祕且深邃) */
 .unesco-mixed {
-    background: rgba(142, 68, 173, 0.25); /* 帶點紫的透明底 */
-    border-left: 4px solid #a29bfe;
+    background: linear-gradient(135deg, #5b21b6 0%, #441787 100%);
+    border-left: 4px solid #a78bfa; /* 亮色邊條點綴 */
 }
-
 
 .preview-content h3 {
   margin: 0 0 6px 0;
