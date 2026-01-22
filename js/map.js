@@ -48,15 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     marker.setIcon(bigIcon);
 
                     // --- 🌟 新增：UNESCO 判斷邏輯 ---
+                    // 在 marker.on('mouseover', () => { ... }) 內
                     let unescoTag = '';
                     if (p.unescoType) {
-                        const labels = {
+                        const typeNames = {
                             'natural': 'UNESCO Natural Heritage',
                             'cultural': 'UNESCO Cultural Heritage',
                             'mixed': 'UNESCO Mixed Heritage'
                         };
-                        // 根據類型產生對應的 class (unesco-natural, unesco-cultural 等)
-                        unescoTag = `<span class="unesco-badge unesco-${p.unescoType}">${labels[p.unescoType]}</span>`;
+                        unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
                     }
                     // ----------------------------
                     
@@ -65,9 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <img src="${p.preview}">
                             <div class="preview-content">
                                 <h3>${p.title}</h3>
-                                <div class="badge-row">
-                                <span class="badge">${p.city} , ${p.country}</span>
-                                ${unescoTag}</div>
+                                <div class="location-wrapper">
+                                    <span class="badge">${p.city} , ${p.country}</span>
+                                </div>
+                                ${unescoTag}
                                 <p>${p.summary}</p>
                                 <span class="click-hint">Click to read more</span>
                             </div>
