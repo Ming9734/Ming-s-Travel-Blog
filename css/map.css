@@ -66,34 +66,45 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 @media (max-width: 1024px) {
     #info-box {
-        /* 核心修正 1：改用 fixed 並強制置中 */
         position: fixed !important;
-        /* 核心修正 2：確保它在螢幕最前方，無視地圖層級 */
-        z-index: 99999 !important; 
-        
         bottom: 20px !important;
-        left: 50% !important;
-        top: auto !important; /* 確保徹底覆蓋 JS 的 top */
-        
-        /* 核心修正 3：利用 translate 抵銷 Leaflet 的容器偏移 */
-        transform: translate(-50%, 0) !important;
-        
+        left: 5% !important;
         width: 90% !important;
-        max-width: 450px !important;
         height: 120px !important;
-        display: none;
+        z-index: 99999 !important;
+        pointer-events: auto !important; /* 確保可以點擊跳轉 */
+        top: auto !important;
     }
-    
-    /* 核心修正 4：確保點擊可以穿過地圖容器，直接點到卡片 */
+
+    /* 🌟 確保圖左文右的 Flex 佈局 */
     .map-preview-card {
-        pointer-events: auto !important;
         display: flex !important;
         flex-direction: row !important;
-        background: white !important;
-        border-radius: 12px !important;
-        box-shadow: 0 4px 25px rgba(0,0,0,0.3) !important;
-        height: 100% !important;
         width: 100% !important;
-        overflow: hidden !important;
+        height: 100% !important;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .card-img-side {
+        width: 120px !important;
+        height: 100% !important;
+        flex-shrink: 0 !important;
+    }
+
+    .card-img-side img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    .preview-content {
+        flex: 1 !important;
+        padding: 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        overflow: hidden;
     }
 }
