@@ -123,11 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    // --- 🌟 手機版事件：修正座標干擾與 Pin 恢復 ---
+                    // --- 🌟 手機版事件：徹底脫離地圖容器 ---
                     marker.on('click', (e) => {
                         L.DomEvent.stopPropagation(e); 
                         
-                        // 恢復所有 Pin
                         clusterGroup.eachLayer(m => {
                             if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
                         });
@@ -135,12 +134,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         marker.setIcon(bigIcon);
                         renderCard(p);
                         
-                        // 關鍵修正：清空 JS 設定的座標，讓 CSS 決定位置（置底）
+                        // 🌟 關鍵修正：點擊時將盒子移到 body，解決左上角與點不到的問題
+                        document.body.appendChild(infoBox); 
+                        
                         infoBox.style.display = 'block';
                         infoBox.style.opacity = '1';
-                        // 🌟 額外補強：確保 inline style 不會蓋過 CSS 的 !important
                         infoBox.style.setProperty('top', 'auto', 'important');
-                        infoBox.style.removeProperty('left'); 
+                        infoBox.style.removeProperty('left');
                     });
                 }
 
