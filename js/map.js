@@ -145,13 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
                             opacity: 1 !important;
                             position: fixed !important;
                             bottom: 20px !important;
-                            left: 5% !important;
-                            width: 90% !important;
-                            height: 125px !important;
+                            left: 50% !important; /* 改為 50% */
+                            transform: translateX(-50%) !important; /* 配合 50% 達成完美置中 */
+                            width: 92% !important; /* 給一點邊距 */
+                            max-width: 400px !important;
+                            height: 120px !important;
                             top: auto !important;
                             z-index: 999999 !important;
                             pointer-events: auto !important;
-                         `;
+                            background: transparent !important; /* 讓背景透明，顯示內層卡片樣式 */
+                        `;
                     });
                 }
 
