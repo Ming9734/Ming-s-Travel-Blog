@@ -140,20 +140,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
                         // 2. 🌟 關鍵：直接寫死 cssText。這會覆蓋掉電腦版留下的 top/left。
                         // 我們直接在這裡把「位置」跟「寬度」全部寫死。
+                        // 請更新 JS 中手機版的 style.cssText
                         infoBox.style.cssText = `
                             display: block !important;
                             position: fixed !important;
-                            bottom: 50px !important; /* 再次上提，確保不被遮擋 */
-                            left: 4% !important;   /* 距離左邊 4% */
-                            right: 4% !important;  /* 距離右邊 4% */
-                            width: 92% !important; /* 左右各 4%，寬度自然是 92% */
-                            margin: 0 auto !important;
+                            bottom: 50px !important;
+                            left: 0px !important;
+                            width: 100vw !important;         /* 關鍵：強制等於手機螢幕寬度 */
                             height: 125px !important;
                             top: auto !important;
                             z-index: 999999 !important;
                             pointer-events: auto !important;
                             background: transparent !important;
-                            transform: none !important; /* 強制關閉任何位移 */
+                            margin: 0 !important;
+                            padding: 0 15px !important;      /* 左右留空隙，看起來才像浮動卡片 */
+                            box-sizing: border-box !important;
+                            transform: none !important;
                         `;
                     });
                 }
