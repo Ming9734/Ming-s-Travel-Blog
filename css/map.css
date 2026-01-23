@@ -65,40 +65,63 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 
 @media (max-width: 1024px) {
-    /* 確保容器內部是橫向的 */
+    /* 1. 確保卡片本身是 Flex 容器 */
     .map-preview-card {
-        display: flex !important;
-        flex-direction: row !important; /* 🌟 確保橫排 */
-        align-items: stretch !important;
-        background: white !important;
-        border-radius: 15px !important;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+        display: flex !important; /* 強制橫向排列 */
+        flex-direction: row !important;
         width: 100% !important;
         height: 100% !important;
+        background: white !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
         overflow: hidden !important;
+        padding: 0 !important; /* 移除可能的內邊距 */
     }
 
-    /* 圖片側邊：強制佔據固定寬度 */
+    /* 2. 圖片側邊容器 */
     .card-img-side {
-        width: 110px !important;
-        height: 100% !important;
-        flex-shrink: 0 !important;
+        width: 110px !important; /* 圖片固定寬度 */
+        height: 120px !important; /* 配合外層高度 */
+        flex-shrink: 0 !important; /* 禁止被擠壓 */
     }
 
     .card-img-side img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        display: block !important;
     }
 
-    /* 文字內容側邊 */
+    /* 3. 文字內容側邊 */
     .preview-content {
-        flex: 1 !important;
-        padding: 12px !important;
+        flex: 1 !important; /* 佔據所有剩餘寬度 */
+        padding: 10px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        text-align: left !important;
-        min-width: 0; /* 防止文字撐開容器 */
+        overflow: hidden !important; /* 防止文字溢出 */
+        min-width: 0 !important; /* Flex 佈局下防止寬度崩潰 */
     }
+
+    /* 4. 微調文字大小以適應橫排 */
+    .preview-content h3 {
+        font-size: 0.95rem !important;
+        margin: 0 0 4px 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .preview-content p {
+        font-size: 0.8rem !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important; /* 最多兩行文字 */
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+
+    /* 隱藏不必要的提示 */
+    .click-hint { display: none !important; }
 }
