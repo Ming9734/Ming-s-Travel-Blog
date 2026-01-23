@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 } else {
                     
-                    // --- 手機版事件 ---
+                    // --- 🌟 手機版事件：直接用核心權限寫死樣式 ---
                     marker.on('click', (e) => {
                         L.DomEvent.stopPropagation(e); 
         
@@ -133,13 +133,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
         
                         marker.setIcon(bigIcon);
-                        renderCard(p);
+                        renderCard(p); 
         
-                        // 🌟 這是唯一要做的事：移出地圖
+                        // 1. 確保脫離地圖容器
                         document.body.appendChild(infoBox); 
         
-                        infoBox.style.display = 'block';
-                         infoBox.style.opacity = '1';
+                        // 2. 🌟 關鍵：直接寫死 cssText。這會覆蓋掉電腦版留下的 top/left。
+                        // 我們直接在這裡把「位置」跟「寬度」全部寫死。
+                        infoBox.style.cssText = `
+                            display: block !important;
+                            opacity: 1 !important;
+                            position: fixed !important;
+                            bottom: 20px !important;
+                            left: 5% !important;
+                            width: 90% !important;
+                            height: 125px !important;
+                            top: auto !important;
+                            z-index: 999999 !important;
+                            pointer-events: auto !important;
+                         `;
                     });
                 }
 
