@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
 
-    // 判斷是否為觸控裝置
-    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // 判斷是否為觸控裝置或窄螢幕（手機/平板模式）
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024;
 
     // 1. 初始化地圖
     const map = L.map('map').setView([48.8566, 2.3522], 5);
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     infoBox.style.display = 'none';
     mapContainer.appendChild(infoBox);
 
-    // --- 🌟 封裝渲染內容的函式，確保電腦手機內容一致 ---
+    // --- 封裝渲染內容的函式 ---
     function renderCard(p) {
         let unescoTag = '';
         if (p.unescoType) {
@@ -53,6 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
+
+        // 🌟 核心修正：手機版點擊卡片任何地方都能通往網頁
+        if (isTouch) {
+            infoBox.onclick = (e) => {
+                window.location.href = `post.html?id=${p.id}`;
+            };
+        }
     }
 
     // 5. 抓取資料
@@ -73,12 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const marker = L.marker([p.lat, p.lng], { icon: baseIcon });
+                
+                // 🌟 核心修正：將原始圖示存入 marker 物件中，防止恢復時變死圖
+                marker.options.originalIcon = baseIcon;
 
-                // --- 🌟 電腦版事件 (非觸控) ---
+                // --- 電腦版事件 (非觸控) ---
                 if (!isTouch) {
                     marker.on('mouseover', () => {
                         marker.setIcon(bigIcon);
-                        renderCard(p); // 調用封裝函式
+                        renderCard(p); 
                         infoBox.style.display = 'block';
                         infoBox.style.opacity = '1';
                     });
@@ -118,16 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    // --- 🌟 手機版事件 (觸控) ---
+                    // --- 手機版事件 (觸控) ---
                     marker.on('click', (e) => {
-                        L.DomEvent.stopPropagation(e); // 防止地圖也觸發點擊
+                        L.DomEvent.stopPropagation(e); 
                         
-                        // 清除地圖上其他可能放大的圖示 (這步能確保只有當前點擊的 Pin 會變大)
+                        // 🌟 修正：恢復所有標記為原本圖示，確保一次只有一個 Pin 變大
                         clusterGroup.eachLayer(m => {
-                            // 檢查該 marker 是否有原本存好的 baseIcon 屬性，或者重新建立
-                            // 這裡最保險的做法是在 marker 建立時就把 baseIcon 存在 marker 物件裡
                             if (m.options.originalIcon) {
-                            m.setIcon(m.options.originalIcon);
+                                m.setIcon(m.options.originalIcon);
                             }
                         });
                         
@@ -136,11 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         infoBox.style.display = 'block';
                         infoBox.style.opacity = '1';
                         
-                        // 手機版卡片位置：如果你 CSS 沒改固定底部，這裡會抓點擊點
-                        // 但強烈建議搭配下方媒體查詢，讓手機版固定底部
-                        const pos = e.containerPoint;
-                        infoBox.style.left = '50%'; 
-                        infoBox.style.transform = 'translateX(-50%)';
+                        // 手機版位置由 CSS 控制 (!important)，JS 這裡重置一下
+                        infoBox.style.left = '';
+                        infoBox.style.top = '';
                     });
                 }
 
@@ -149,14 +155,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             map.addLayer(clusterGroup);
 
-            // 點擊地圖其他地方，隱藏手機版卡片
+            // 🌟 修正：點擊地圖空白處，隱藏卡片並恢復所有 Pin
             map.on('click', () => {
                 infoBox.style.display = 'none';
-                clusterGroup.eachLayer(m => m.setIcon(L.icon({
-                    iconUrl: 'images/markers/default.png', // 這裡建議統一恢復
-                    iconSize: [32, 32],
-                    iconAnchor: [16, 32]
-                })));
+                clusterGroup.eachLayer(m => {
+                    if (m.options.originalIcon) {
+                        m.setIcon(m.options.originalIcon);
+                    }
+                });
             });
 
             if (posts.length > 0) {
