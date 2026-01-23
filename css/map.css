@@ -66,32 +66,37 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 @media (max-width: 1024px) {
     #info-box {
+        /* 核心：用 inset 徹底蓋掉 JS 算出的 top/left */
         position: fixed !important;
-        bottom: 20px !important; /* 距離底部 */
-        left: 50% !important;     /* 置中定位 */
-        transform: translateX(-50%) !important; /* 修正置中偏移 */
-        top: auto !important;     /* 徹底無視頂部 */
+        inset: auto 0 20px 0 !important; /* 上:自動, 右:0, 下:20px, 左:0 */
         
+        /* 置中與寬度 */
+        margin: 0 auto !important;
         width: 90% !important;
         max-width: 450px !important;
-        height: 120px !important; /* 固定高度讓並排好看 */
-        z-index: 99999 !important;
+        height: 125px !important;
+        
+        /* 權限 */
+        z-index: 999999 !important; 
+        display: none; 
         pointer-events: auto !important;
     }
 
+    /* 圖左文右：強制 Flex 佈局 */
     .map-preview-card {
-        display: flex !important;   /* 🌟 核心：開啟彈性佈局 */
-        flex-direction: row !important; /* 🌟 核心：橫向排列 */
+        display: flex !important;
+        flex-direction: row !important; /* 🌟 確保橫向 */
         background: white !important;
-        border-radius: 15px !important;
-        overflow: hidden !important;
+        border-radius: 12px !important;
         height: 100% !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+        overflow: hidden !important;
     }
 
     .card-img-side {
-        width: 110px !important;     /* 圖片佔據固定寬度 */
-        flex-shrink: 0 !important;   /* 確保圖片不被文字擠壓 */
+        width: 110px !important; /* 🌟 圖片固定寬度 */
+        height: 100% !important;
+        flex-shrink: 0 !important;
     }
 
     .card-img-side img {
@@ -101,11 +106,15 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
     }
 
     .preview-content {
-        flex: 1 !important;          /* 文字佔滿剩餘空間 */
-        padding: 12px !important;
+        flex: 1 !important;
+        padding: 10px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         text-align: left !important;
+        overflow: hidden !important;
     }
+
+    .preview-content h3 { font-size: 1rem !important; margin-bottom: 4px !important; }
+    .preview-content p { font-size: 0.8rem !important; line-height: 1.3 !important; }
 }
