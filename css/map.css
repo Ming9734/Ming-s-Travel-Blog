@@ -63,8 +63,20 @@
 header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 .dropdown-menu, .sub-menu { z-index: 2200; }
 
-/* Responsive */
-@media (max-width:900px) {
-  .marker-info { width: 200px; transform: translate(-50%,-120%); }
-  #map-container { height: 55vh; min-height: 360px; }
+
+@media (max-width: 1024px) {
+    #info-box {
+        position: fixed !important; /* 強制覆蓋 JS 的 absolute */
+        bottom: 20px !important;
+        top: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 90%;
+        max-width: 350px;
+        z-index: 2500;
+    }
+    
+    .map-preview-card {
+        box-shadow: 0 -5px 20px rgba(0,0,0,0.2); /* 底部卡片加強陰影 */
+    }
 }
