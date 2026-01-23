@@ -65,23 +65,22 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 
 @media (max-width: 1024px) {
-    /* 確保內層卡片真正橫向排列 */
+    /* 確保卡片內部的 Flex 佈局 */
     .map-preview-card {
         display: flex !important;
-        flex-direction: row !important; /* 強制橫排 */
-        flex-wrap: nowrap !important;  /* 絕對禁止換行 */
-        width: 100% !important;        /* 填滿 JS 給的 100vw */
+        flex-direction: row !important;
+        width: 100% !important;
         height: 100% !important;
-        background: white !important;
-        border-radius: 12px !important;
+        margin: 0 !important;
+        padding: 0 !important;
         overflow: hidden !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
     }
 
-    /* 圖片佔 35% */
+    /* 圖片：佔據固定的 110px，不准變動 */
     .card-img-side {
-        width: 35% !important;
-        min-width: 100px !important;   /* 防止圖片縮到不見 */
+        width: 110px !important;
+        min-width: 110px !important;
+        max-width: 110px !important;
         height: 100% !important;
         flex-shrink: 0 !important;
     }
@@ -92,30 +91,31 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
         object-fit: cover !important;
     }
 
-    /* 文字佔 65% */
+    /* 文字：填滿剩餘空間 */
     .preview-content {
-        width: 65% !important;
         flex: 1 !important;
-        padding: 10px 15px !important;
+        padding: 12px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         text-align: left !important;
-        min-width: 0 !important;      /* 讓文字能被 ellipsis 截斷，不撐開容器 */
+        min-width: 0 !important;
+        background: white !important;
     }
 
-    /* 防止長標題撐開寬度 */
     .preview-content h3 {
-        font-size: 1rem !important;
-        margin: 0 0 4px 0 !important;
+        font-size: 1.1rem !important;
+        margin: 0 0 5px 0 !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
     }
 
     .preview-content p {
-        font-size: 0.8rem !important;
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
         margin: 0 !important;
+        /* 限制文字兩行，其餘省略 */
         display: -webkit-box !important;
         -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
