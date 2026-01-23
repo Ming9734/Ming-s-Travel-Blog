@@ -180,5 +180,17 @@
     "icon": "images/markers/DE.png",
     "preview": "images/post/schweriner-schloss/cover.jpg",
     "unescoType": "cultural"
-  }
+  },
+  {
+    "id": "giant-s-causeway",
+    "title": "Giant's Causeway",
+    "country": "Northern Ireland (UK)",
+    "city": "Bushmills",
+    "lat": 55.240800585015464,  
+    "lng": -6.511583696101168,
+    "summary": "A UNESCO World Heritage landscape where volcanic basalt columns rise from the coast, telling both the story of the Earth’s past and Celtic legend.",
+    "image": "images/posts/giant-s-causeway.jpg",
+    "icon": "images/markers/NI.png",
+    "preview": "images/post/giant-s-causeway/cover.jpg",
+    "unescoType": "natural"
 ]
