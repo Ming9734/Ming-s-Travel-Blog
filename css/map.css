@@ -64,19 +64,75 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 .dropdown-menu, .sub-menu { z-index: 2200; }
 
 
-@media (max-width: 1024px) {
+@media (max-width: 992px) {
+    /* 1. 卡片固定在螢幕底部 */
     #info-box {
-        position: fixed !important; /* 強制覆蓋 JS 的 absolute */
-        bottom: 20px !important;
+        position: fixed !important;
+        bottom: 15px !important;
         top: auto !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 90%;
-        max-width: 350px;
-        z-index: 2500;
+        width: 95%;
+        max-width: 500px; /* 平板上可寬一點 */
+        z-index: 3000;
+        display: block;
     }
-    
+
+    /* 2. 核心：將卡片設為 flex 左右排列 */
     .map-preview-card {
-        box-shadow: 0 -5px 20px rgba(0,0,0,0.2); /* 底部卡片加強陰影 */
+        display: flex !important; /* 開啟彈性佈局 */
+        flex-direction: row !important; /* 確保是左右排列 */
+        align-items: center;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        overflow: hidden;
+        height: 140px; /* 固定高度，讓卡片更扁 */
+    }
+
+    /* 3. 左側圖片：縮小並固定寬度 */
+    .map-preview-card img {
+        width: 100px !important; /* 圖片寬度 */
+        height: 100% !important;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 0 !important; /* 移除原本底部的間距 */
+        margin-right: 12px; /* 與右側文字的間距 */
+    }
+
+    /* 4. 右側文字區域 */
+    .preview-content {
+        flex: 1; /* 佔滿剩餘空間 */
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    /* 5. 縮減文字大小以適應小空間 */
+    .preview-content h3 {
+        font-size: 1rem !important;
+        margin: 0 0 4px 0 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; /* 標題太長顯示省略號 */
+    }
+
+    .preview-content p {
+        font-size: 0.8rem !important;
+        margin: 0 0 6px 0 !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* 限制摘要只顯示兩行 */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* 讓 UNESCO 和 Location 標籤在手機上更精簡 */
+    .location-wrapper, .unesco-badge {
+        margin-bottom: 2px !important;
+        transform: scale(0.9); /* 稍微縮小標籤 */
+        transform-origin: left;
     }
 }
