@@ -138,8 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 關鍵修正：清空 JS 設定的座標，讓 CSS 決定位置（置底）
                         infoBox.style.display = 'block';
                         infoBox.style.opacity = '1';
-                        infoBox.style.left = '';  
-                        infoBox.style.top = 'auto'; 
+                        // 這兩行非常重要！確保 CSS 的 bottom: 20px 能生效
+                        infoBox.style.removeProperty('top');
+                        infoBox.style.removeProperty('left'); 
                     });
                 }
 
