@@ -65,36 +65,22 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 
 @media (max-width: 1024px) {
-    #info-box {
-        /* 核心：用 inset 徹底蓋掉 JS 算出的 top/left */
-        position: fixed !important;
-        inset: auto 0 20px 0 !important; /* 上:自動, 右:0, 下:20px, 左:0 */
-        
-        /* 置中與寬度 */
-        margin: 0 auto !important;
-        width: 90% !important;
-        max-width: 450px !important;
-        height: 125px !important;
-        
-        /* 權限 */
-        z-index: 999999 !important; 
-        display: none; 
-        pointer-events: auto !important;
-    }
-
-    /* 圖左文右：強制 Flex 佈局 */
+    /* 確保容器內部是橫向的 */
     .map-preview-card {
         display: flex !important;
-        flex-direction: row !important; /* 🌟 確保橫向 */
+        flex-direction: row !important; /* 🌟 確保橫排 */
+        align-items: stretch !important;
         background: white !important;
-        border-radius: 12px !important;
-        height: 100% !important;
+        border-radius: 15px !important;
         box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+        width: 100% !important;
+        height: 100% !important;
         overflow: hidden !important;
     }
 
+    /* 圖片側邊：強制佔據固定寬度 */
     .card-img-side {
-        width: 110px !important; /* 🌟 圖片固定寬度 */
+        width: 110px !important;
         height: 100% !important;
         flex-shrink: 0 !important;
     }
@@ -105,16 +91,14 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
         object-fit: cover !important;
     }
 
+    /* 文字內容側邊 */
     .preview-content {
         flex: 1 !important;
-        padding: 10px !important;
+        padding: 12px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         text-align: left !important;
-        overflow: hidden !important;
+        min-width: 0; /* 防止文字撐開容器 */
     }
-
-    .preview-content h3 { font-size: 1rem !important; margin-bottom: 4px !important; }
-    .preview-content p { font-size: 0.8rem !important; line-height: 1.3 !important; }
 }
