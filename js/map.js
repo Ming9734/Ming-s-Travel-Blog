@@ -123,42 +123,44 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    
-                    // --- 🌟 手機版事件：直接用核心權限寫死樣式 ---
-                    marker.on('click', (e) => {
-                        L.DomEvent.stopPropagation(e); 
+    // --- 🌟 手機版終極外科手術 ---
+    marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e); 
         
-                        clusterGroup.eachLayer(m => {
-                            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
-                        });
+        clusterGroup.eachLayer(m => {
+            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
+        });
         
-                        marker.setIcon(bigIcon);
-                        renderCard(p); 
+        marker.setIcon(bigIcon);
+        renderCard(p); 
         
-                        // 1. 確保脫離地圖容器
-                        document.body.appendChild(infoBox); 
+        // 1. 搬移到 body
+        document.body.appendChild(infoBox); 
         
-                        // 2. 🌟 關鍵：直接寫死 cssText。這會覆蓋掉電腦版留下的 top/left。
-                        // 我們直接在這裡把「位置」跟「寬度」全部寫死。
-                        // 請更新 JS 中手機版的 style.cssText
-                        infoBox.style.cssText = `
-                            display: block !important;
-                            position: fixed !important;
-                            bottom: 50px !important;
-                            left: 0px !important;
-                            width: 100vw !important;         /* 關鍵：強制等於手機螢幕寬度 */
-                            height: 125px !important;
-                            top: auto !important;
-                            z-index: 999999 !important;
-                            pointer-events: auto !important;
-                            background: transparent !important;
-                            margin: 0 !important;
-                            padding: 0 15px !important;      /* 左右留空隙，看起來才像浮動卡片 */
-                            box-sizing: border-box !important;
-                            transform: none !important;
-                        `;
-                    });
-                }
+        // 2. 🌟 關鍵：移除所有舊的 class，防止 .marker-info 的樣式干擾
+        infoBox.className = ''; 
+        
+        // 3. 重新強制寫入樣式
+        infoBox.style.cssText = `
+            display: flex !important;
+            position: fixed !important;
+            bottom: 40px !important;
+            left: 5% !important;
+            width: 90% !important;
+            height: 125px !important;
+            background: white !important;
+            border-radius: 15px !important;
+            z-index: 9999999 !important;
+            overflow: hidden !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
+            top: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            pointer-events: auto !important;
+        `;
+    });
+}
 
                 clusterGroup.addLayer(marker);
             });
