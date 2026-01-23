@@ -66,49 +66,34 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 @media (max-width: 1024px) {
     #info-box {
-        /* 設定位置：不要從上面算，要從下面算 */
-        position: fixed !important; 
-        bottom: 20px !important;   /* 距離底部 20px */
-        left: 5% !important;        /* 距離左邊 5% */
-        right: 5% !important;       /* 距離右邊 5% */
+        /* 核心修正 1：改用 fixed 並強制置中 */
+        position: fixed !important;
+        /* 核心修正 2：確保它在螢幕最前方，無視地圖層級 */
+        z-index: 99999 !important; 
         
-        /* 歸零設定：強制把電腦版或地圖預設的 top 與 left 廢除 */
-        top: auto !important;
-        margin: 0 auto !important;
-
-        /* 確保寬度適合手機 */
+        bottom: 20px !important;
+        left: 50% !important;
+        top: auto !important; /* 確保徹底覆蓋 JS 的 top */
+        
+        /* 核心修正 3：利用 translate 抵銷 Leaflet 的容器偏移 */
+        transform: translate(-50%, 0) !important;
+        
         width: 90% !important;
+        max-width: 450px !important;
         height: 120px !important;
-        z-index: 9999 !important;
+        display: none;
     }
-
+    
+    /* 核心修正 4：確保點擊可以穿過地圖容器，直接點到卡片 */
     .map-preview-card {
-        display: flex !important; /* 開啟左右排列 */
+        pointer-events: auto !important;
+        display: flex !important;
         flex-direction: row !important;
         background: white !important;
         border-radius: 12px !important;
+        box-shadow: 0 4px 25px rgba(0,0,0,0.3) !important;
         height: 100% !important;
         width: 100% !important;
         overflow: hidden !important;
-    }
-
-    .card-img-side {
-        width: 110px !important; /* 固定圖片寬度 */
-        height: 100% !important;
-        flex-shrink: 0 !important; /* 防止被右邊文字擠扁 */
-    }
-
-    .card-img-side img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-    }
-
-    .preview-content {
-        flex: 1 !important;
-        padding: 10px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
     }
 }
