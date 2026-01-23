@@ -66,30 +66,31 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 手機版終極排版修正 (貼在 map.css 最底部) --- */
 @media screen and (max-width: 1024px) {
-    /* 1. 外殼：接收 JS 的定位，並找回原本的圓角陰影 */
+    /* 強力修正外殼 */
     #info-box {
-        background: transparent !important; 
+        background: none !important; /* 移除外層背景，交給內層 card */
         border-radius: 20px !important;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4) !important;
         overflow: hidden !important;
+        height: 160px !important; /* 🌟 增加高度 */
     }
 
-    /* 2. 容器：強制橫向並排 */
+    /* 內層卡片：注入你的藍紫漸層 */
     .map-preview-card {
         display: flex !important;
         flex-direction: row !important;
-        flex-wrap: nowrap !important;
         width: 100% !important;
         height: 100% !important;
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important; /* 🌟 直接寫死深色漸層，確保不是慘白 */
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
 
-    /* 3. 圖片區：固定寬度防止縮成一團 */
+    /* 圖片區：配合高度增加寬度 */
     .card-img-side {
-        width: 115px !important;
-        min-width: 115px !important;
+        width: 130px !important;
+        min-width: 130px !important;
         height: 100% !important;
         flex-shrink: 0 !important;
     }
@@ -100,40 +101,35 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
         object-fit: cover !important;
     }
 
-    /* 4. 文字區：找回你的藍紫漸層與毛玻璃感 */
+    /* 文字內容區 */
     .preview-content {
         flex: 1 !important;
-        padding: 12px 15px !important;
+        padding: 15px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
+        background: transparent !important;
+        color: #ffffff !important; /* 🌟 強制文字白色 */
         min-width: 0 !important;
-        background: linear-gradient(
-            135deg, 
-            rgba(79, 70, 229, 0.5) 0%, 
-            rgba(147, 51, 234, 0.5) 100%
-        ) !important; 
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
     }
 
-    /* 5. 內容樣式微調 */
+    /* 確保標題可見 */
     .preview-content h3 {
-        margin: 0 0 4px 0 !important;
-        font-size: 1.05rem !important;
-        color: #ffffff !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
+        margin: 0 0 8px 0 !important;
+        font-size: 1.2rem !important;
+        color: #ffffff !important; /* 🌟 強制白色 */
+        font-weight: 700 !important;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
     }
 
+    /* 確保內文可見 */
     .preview-content p {
         margin: 0 !important;
-        font-size: 0.85rem !important;
-        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 0.95rem !important;
+        color: rgba(255, 255, 255, 0.9) !important; /* 🌟 強制淺白 */
+        line-height: 1.5 !important;
         display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
+        -webkit-line-clamp: 3 !important; /* 高度增加了，內容可以顯示多一行 */
         -webkit-box-orient: vertical !important;
         overflow: hidden !important;
     }
