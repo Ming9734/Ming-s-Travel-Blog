@@ -65,32 +65,37 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 
 @media (max-width: 1024px) {
+    /* 強制置底 */
     #info-box {
         position: fixed !important;
         bottom: 20px !important;
-        top: auto !important;
         left: 50% !important;
+        top: auto !important; /* 確保不被 JS 的 top 干擾 */
         transform: translateX(-50%) !important;
         width: 90% !important;
-        max-width: 450px !important;
-        height: 120px !important; /* 固定高度 */
-        z-index: 9999 !important;
+        max-width: 400px !important;
+        height: 120px !important;
+        z-index: 10000 !important; /* 必須高於地圖 */
+        pointer-events: auto !important; /* 確保可以點擊 */
+        display: none;
     }
 
+    /* 圖左文右佈局 */
     .map-preview-card {
-        display: flex !important; /* 開啟左右排列 */
-        flex-direction: row !important;
+        display: flex !important;
+        flex-direction: row !important; /* 🌟 核心：左右排列 */
         background: white !important;
         border-radius: 12px !important;
         height: 100% !important;
         width: 100% !important;
         overflow: hidden !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
     }
 
     .card-img-side {
-        width: 110px !important; /* 固定圖片寬度 */
+        width: 110px !important; /* 圖片寬度 */
+        flex-shrink: 0 !important;
         height: 100% !important;
-        flex-shrink: 0 !important; /* 防止被右邊文字擠扁 */
     }
 
     .card-img-side img {
@@ -105,5 +110,9 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
+        text-align: left !important;
     }
+
+    .preview-content h3 { font-size: 1rem !important; margin: 0 !important; }
+    .preview-content p { font-size: 0.75rem !important; margin: 4px 0 !important; }
 }
