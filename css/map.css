@@ -64,77 +64,46 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 .dropdown-menu, .sub-menu { z-index: 2200; }
 
 
-@media (max-width: 1024px) { /* 建議提升至 1024px 涵蓋平板 */
-    /* 1. 卡片固定在螢幕底部 */
+@media (max-width: 1024px) {
     #info-box {
         position: fixed !important;
-        bottom: 15px !important;
+        bottom: 20px !important;
         top: auto !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        width: 92%;
-        max-width: 450px; 
-        z-index: 4000 !important; /* 🌟 確保最高優先級 */
-        display: none; /* 🌟 預設隱藏，由 JS 控制顯示 */
+        width: 90% !important;
+        max-width: 450px !important;
+        height: 120px !important; /* 固定高度 */
+        z-index: 9999 !important;
     }
 
-    /* 2. 核心：將卡片設為 flex 左右排列 */
     .map-preview-card {
-        display: flex !important; 
-        flex-direction: row !important; 
-        align-items: center;
-        padding: 8px; /* 🌟 稍微縮減間距 */
-        background: white; /* 🌟 手機版實色背景讀取更清楚 */
-        box-shadow: 0 4px 25px rgba(0,0,0,0.25); /* 🌟 加強陰影提升層次感 */
-        border-radius: 12px;
-        overflow: hidden;
-        height: 120px; /* 🌟 稍微縮減高度，減少地圖遮擋 */
-    }
-
-    /* 3. 左側圖片：縮小並固定寬度 */
-    .map-preview-card img {
-        width: 100px !important; 
+        display: flex !important; /* 開啟左右排列 */
+        flex-direction: row !important;
+        background: white !important;
+        border-radius: 12px !important;
         height: 100% !important;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-bottom: 0 !important; 
-        margin-right: 12px; 
+        width: 100% !important;
+        overflow: hidden !important;
     }
 
-    /* 4. 右側文字區域 */
+    .card-img-side {
+        width: 110px !important; /* 固定圖片寬度 */
+        height: 100% !important;
+        flex-shrink: 0 !important; /* 防止被右邊文字擠扁 */
+    }
+
+    .card-img-side img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
     .preview-content {
-        flex: 1; 
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        overflow: hidden;
-        padding-right: 5px;
-    }
-
-    /* 5. 縮減文字大小以適應小空間 */
-    .preview-content h3 {
-        font-size: 0.95rem !important; /* 🌟 再縮小一點點 */
-        margin: 0 0 2px 0 !important; 
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; 
-    }
-
-    .preview-content p {
-        font-size: 0.75rem !important; /* 🌟 摘要縮小 */
-        margin: 0 0 4px 0 !important; 
-        display: -webkit-box;
-        -webkit-line-clamp: 2; 
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        line-height: 1.3;
-    }
-
-    /* 調整標籤比例 */
-    .location-wrapper, .unesco-badge {
-        margin-bottom: 2px !important;
-        transform: scale(0.85); /* 🌟 稍微再縮小一點標籤 */
-        transform-origin: left;
+        flex: 1 !important;
+        padding: 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
     }
 }
