@@ -67,30 +67,31 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 @media (max-width: 1024px) {
     #info-box {
         position: fixed !important;
-        bottom: 20px !important;
-        left: 5% !important;
+        bottom: 20px !important; /* 距離底部 */
+        left: 50% !important;     /* 置中定位 */
+        transform: translateX(-50%) !important; /* 修正置中偏移 */
+        top: auto !important;     /* 徹底無視頂部 */
+        
         width: 90% !important;
-        height: 120px !important;
+        max-width: 450px !important;
+        height: 120px !important; /* 固定高度讓並排好看 */
         z-index: 99999 !important;
-        pointer-events: auto !important; /* 確保可以點擊跳轉 */
-        top: auto !important;
+        pointer-events: auto !important;
     }
 
-    /* 🌟 確保圖左文右的 Flex 佈局 */
     .map-preview-card {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
+        display: flex !important;   /* 🌟 核心：開啟彈性佈局 */
+        flex-direction: row !important; /* 🌟 核心：橫向排列 */
+        background: white !important;
+        border-radius: 15px !important;
+        overflow: hidden !important;
         height: 100% !important;
-        background: white;
-        border-radius: 12px;
-        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
     }
 
     .card-img-side {
-        width: 120px !important;
-        height: 100% !important;
-        flex-shrink: 0 !important;
+        width: 110px !important;     /* 圖片佔據固定寬度 */
+        flex-shrink: 0 !important;   /* 確保圖片不被文字擠壓 */
     }
 
     .card-img-side img {
@@ -100,11 +101,11 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
     }
 
     .preview-content {
-        flex: 1 !important;
-        padding: 10px !important;
+        flex: 1 !important;          /* 文字佔滿剩餘空間 */
+        padding: 12px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        overflow: hidden;
+        text-align: left !important;
     }
 }
