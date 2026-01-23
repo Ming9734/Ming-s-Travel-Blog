@@ -193,5 +193,18 @@
     "icon": "images/markers/NIR.png",
     "preview": "images/post/giant-s-causeway/cover.jpg",
     "unescoType": "natural"
+  },
+  {
+    "id": "st-mary-s-basilica",
+    "title": "St. Mary's Basilica",
+    "country": "Poland",
+    "city": "Kraków",
+    "lat": 50.06164104351536, 
+    "lng": 19.93936884209965,
+    "summary": "A UNESCO World Heritage Gothic basilica rising over Kraków’s medieval heart, where twin towers and the world’s largest Gothic altarpiece reflect Poland’s faith and turbulent history.",
+    "image": "images/posts/st-mary-s-basilica.jpg",
+    "icon": "images/markers/PL.png",
+    "preview": "images/post/st-mary-s-basilica/cover.jpg",
+    "unescoType": "cultural"
   }
 ]
