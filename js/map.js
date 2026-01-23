@@ -1,32 +1,34 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
 
+    // 判斷是否為觸控裝置或窄螢幕
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024;
 
     // 1. 初始化地圖
     const map = L.map('map').setView([48.8566, 2.3522], 5);
 
+    // 2. 載入底圖
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
+    // 3. 標記群組
     const clusterGroup = L.markerClusterGroup({
         spiderfyOnMaxZoom: true,
         showCoverageOnHover: false,
         maxClusterRadius: 40
     });
 
-    // --- 🌟 重要修正：把 infoBox 放到 body 而不是 mapContainer 內 ---
-    let infoBox = document.getElementById('info-box');
-    if (!infoBox) {
-        infoBox = document.createElement('div');
-        infoBox.id = 'info-box';
-        document.body.appendChild(infoBox); // 移到 body 確保 fixed 定位有效
-    }
+    // 4. 建立預覽盒子
+    const infoBox = document.createElement('div');
+    infoBox.id = 'info-box';
     infoBox.style.display = 'none';
+    mapContainer.appendChild(infoBox);
 
+    // --- 🌟 封裝渲染函式：修正手機跳轉與結構 ---
     function renderCard(p) {
         let unescoTag = '';
         if (p.unescoType) {
@@ -38,9 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
             unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
         }
         
-        // 🌟 結構修正：加入 card-img-side 容器
+        // 核心修正：外層增加 onclick 確保手機點擊即跳轉
+        // 結構修正：加入 card-img-side 容器確保「圖左文右」
         infoBox.innerHTML = `
-            <div class="map-preview-card" style="cursor: pointer;">
+            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'">
                 <div class="card-img-side">
                     <img src="${p.preview}">
                 </div>
@@ -55,13 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
-
-        // 🌟 跳轉修正：直接綁定事件給 infoBox
-        infoBox.onclick = () => {
-            window.location.href = `post.html?id=${p.id}`;
-        };
     }
 
+    // 5. 抓取資料
     fetch('data/posts.json')
         .then(r => r.json())
         .then(posts => {
@@ -71,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     iconSize: [32, 32],
                     iconAnchor: [16, 32]
                 });
+
                 const bigIcon = L.icon({
                     iconUrl: p.icon || 'images/markers/default.png',
                     iconSize: [48, 48],
@@ -81,46 +81,88 @@ document.addEventListener('DOMContentLoaded', () => {
                 marker.options.originalIcon = baseIcon;
 
                 if (!isTouch) {
+                    // --- 電腦版事件 ---
                     marker.on('mouseover', () => {
                         marker.setIcon(bigIcon);
                         renderCard(p); 
                         infoBox.style.display = 'block';
+                        infoBox.style.opacity = '1';
                     });
+
                     marker.on('mousemove', (e) => {
                         const pos = e.containerPoint;
-                        // 電腦版位置計算
-                        const mapRect = mapContainer.getBoundingClientRect();
-                        infoBox.style.left = (mapRect.left + pos.x + 20) + 'px';
-                        infoBox.style.top = (mapRect.top + pos.y + 20) + 'px';
+                        const padding = 20;
+                        const edgeBuffer = 15;
+                        const cardWidth = infoBox.offsetWidth;
+                        const cardHeight = infoBox.offsetHeight;
+                        const containerWidth = mapContainer.clientWidth;
+                        const containerHeight = mapContainer.clientHeight;
+
+                        let leftPos = pos.x + padding;
+                        if (leftPos + cardWidth + edgeBuffer > containerWidth) {
+                            leftPos = pos.x - cardWidth - padding;
+                        }
+                        leftPos = Math.max(edgeBuffer, leftPos);
+
+                        let topPos = pos.y + padding;
+                        if (topPos + cardHeight + edgeBuffer > containerHeight) {
+                            topPos = pos.y - cardHeight - padding;
+                        }
+                        topPos = Math.max(edgeBuffer, topPos);
+
+                        infoBox.style.left = leftPos + 'px';
+                        infoBox.style.top = topPos + 'px';
                     });
+
                     marker.on('mouseout', () => {
                         marker.setIcon(baseIcon);
                         infoBox.style.display = 'none';
                     });
-                    marker.on('click', () => { window.location.href = `post.html?id=${p.id}`; });
+
+                    marker.on('click', () => {
+                        window.location.href = `post.html?id=${p.id}`;
+                    });
+
                 } else {
+                    // --- 🌟 手機版事件：修正座標干擾與 Pin 恢復 ---
                     marker.on('click', (e) => {
                         L.DomEvent.stopPropagation(e); 
+                        
+                        // 恢復所有 Pin
                         clusterGroup.eachLayer(m => {
                             if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
                         });
+                        
                         marker.setIcon(bigIcon);
                         renderCard(p);
+                        
+                        // 關鍵修正：清空 JS 設定的座標，讓 CSS 決定位置（置底）
                         infoBox.style.display = 'block';
-                        // 手機版清空 style，交給 CSS
-                        infoBox.style.left = '';
-                        infoBox.style.top = '';
+                        infoBox.style.opacity = '1';
+                        infoBox.style.left = '';  
+                        infoBox.style.top = 'auto'; 
                     });
                 }
+
                 clusterGroup.addLayer(marker);
             });
+
             map.addLayer(clusterGroup);
+
+            // 點擊空白處關閉卡片並恢復 Pin
             map.on('click', () => {
                 infoBox.style.display = 'none';
                 clusterGroup.eachLayer(m => {
                     if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
                 });
             });
-            if (posts.length > 0) map.fitBounds(clusterGroup.getBounds().pad(0.1));
+
+            if (posts.length > 0) {
+                map.fitBounds(clusterGroup.getBounds().pad(0.1));
+            }
+
+            setTimeout(() => { map.invalidateSize(); }, 400);
         });
+
+    window.addEventListener('resize', () => { map.invalidateSize(); });
 });
