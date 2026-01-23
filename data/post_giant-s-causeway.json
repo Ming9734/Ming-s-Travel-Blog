@@ -1,0 +1,39 @@
+
+{
+  "id": "giant-s-causeway",
+  "title": "Giant's Causeway",
+  "subtitle": "Bushmills, Northern Ireland (UK)",
+  "country": "Northern Ireland (UK)",
+  "city": "Bushmills",
+  "cover": "images/post/giant-s-causeway/cover.jpg",
+  "images": [
+    "images/post/giant-s-causeway/1.jpg",
+    "images/post/giant-s-causeway/2.jpg",
+    "images/post/giant-s-causeway/3.jpg",
+    "images/post/giant-s-causeway/4.jpg",
+    "images/post/giant-s-causeway/5.jpg",
+    "images/post/giant-s-causeway/6.jpg",
+    "images/post/giant-s-causeway/7.jpg",
+    "images/post/giant-s-causeway/8.jpg",
+    "images/post/giant-s-causeway/9.jpg",
+    "images/post/giant-s-causeway/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>Formed by volcanic activity 50–60 million years ago</li><li>Over 40,000 near-perfect hexagonal basalt columns</li><li>A key scientific window into Earth’s deep geological history</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>The Giant’s Causeway is Northern Ireland’s most celebrated natural landmark, composed of more than 40,000 interlocking hexagonal basalt columns that form a striking stone pathway along the edge of the North Atlantic. This extraordinary landscape was created by intense volcanic activity some 50 to 60 million years ago, when molten basalt erupted through chalk bedrock and spread across the surface, forming a vast lava lake approximately 90 metres deep.</p><p>As the lava slowly cooled, it contracted and fractured into near-perfect polygonal patterns that extended downward, forming the distinctive vertical columns seen today. Recognised for both its dramatic beauty and its scientific importance in understanding the Earth’s geological past, the Giant’s Causeway was inscribed as a UNESCO World Heritage Site in 1986, standing as a powerful record of how natural forces can shape landscapes of global significance.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>The Giant’s Causeway was the place I most eagerly anticipated during my journey through Northern Ireland. Located a considerable distance from Belfast, the long approach only heightened my expectations. Walking from the visitor centre toward the coast, a journey of about twenty minutes, I found myself growing increasingly uneasy as the famous stones remained out of sight.</p><p>When the causeway finally appeared, my first reaction was one of quiet disappointment. It seemed smaller than I had imagined, shaped as much by photographs and its grand name as by reality. Yet as I lingered, the scene began to unfold in a different way. The deep blue sea, the uneven basalt columns rising from the shore, and the sound of the waves created a landscape that was subtle rather than overwhelming, but no less beautiful.</p><p>With time to wander along the surrounding paths, the experience became less about a single viewpoint and more about the rhythm of walking, looking, and listening. Compared to other basalt formations I had seen, the ability to step onto the stones themselves and touch the ancient rock face made the visit especially rewarding, offering a quiet, personal encounter with the Earth’s distant past.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Celtic Legend of the Giants</h2><p>According to ancient Celtic legend, the causeway was built by the Irish giant Finn McCool to challenge his Scottish rival, Fionn Mac Cumhaill. When Finn reached Scotland, he discovered that his enemy was far larger than expected and fled back to Ireland in fear.</p><p>Pursued by the Scottish giant, Finn hid in a cradle and pretended to be a baby. Finn’s wife convinced the visitor that the child was Finn’s son. Terrified by the thought that a father capable of producing such a “baby” must be unimaginably powerful, the Scottish giant fled back across the sea, tearing up the causeway behind him to prevent pursuit.</p><p>Across the water on the Scottish island of Staffa, similar basalt columns rise from the coast, a natural echo that seems to lend the legend a remarkable sense of physical presence.</p>"
+    }
+  ]
+}
