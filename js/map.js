@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
 
-    // 判斷是否為觸控裝置或窄螢幕（手機/平板模式）
+    // 判斷是否為觸控裝置或窄螢幕
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024;
 
     // 1. 初始化地圖
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     infoBox.style.display = 'none';
     mapContainer.appendChild(infoBox);
 
-    // --- 封裝渲染內容的函式 ---
+    // --- 🌟 封裝渲染函式：修正手機跳轉與結構 ---
     function renderCard(p) {
         let unescoTag = '';
         if (p.unescoType) {
@@ -39,9 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
             unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
         }
         
+        // 核心修正：外層增加 onclick 確保手機點擊即跳轉
+        // 結構修正：加入 card-img-side 容器確保「圖左文右」
         infoBox.innerHTML = `
-            <div class="map-preview-card">
-                <img src="${p.preview}">
+            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'">
+                <div class="card-img-side">
+                    <img src="${p.preview}">
+                </div>
                 <div class="preview-content">
                     <h3>${p.title}</h3>
                     <div class="location-wrapper">
@@ -53,13 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `;
-
-        // 🌟 核心修正：手機版點擊卡片任何地方都能通往網頁
-        if (isTouch) {
-            infoBox.onclick = (e) => {
-                window.location.href = `post.html?id=${p.id}`;
-            };
-        }
     }
 
     // 5. 抓取資料
@@ -80,12 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const marker = L.marker([p.lat, p.lng], { icon: baseIcon });
-                
-                // 🌟 核心修正：將原始圖示存入 marker 物件中，防止恢復時變死圖
                 marker.options.originalIcon = baseIcon;
 
-                // --- 電腦版事件 (非觸控) ---
                 if (!isTouch) {
+                    // --- 電腦版事件 ---
                     marker.on('mouseover', () => {
                         marker.setIcon(bigIcon);
                         renderCard(p); 
@@ -128,25 +123,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    // --- 手機版事件 (觸控) ---
+                    // --- 🌟 手機版事件：修正座標干擾與 Pin 恢復 ---
                     marker.on('click', (e) => {
                         L.DomEvent.stopPropagation(e); 
                         
-                        // 🌟 修正：恢復所有標記為原本圖示，確保一次只有一個 Pin 變大
+                        // 恢復所有 Pin
                         clusterGroup.eachLayer(m => {
-                            if (m.options.originalIcon) {
-                                m.setIcon(m.options.originalIcon);
-                            }
+                            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
                         });
                         
                         marker.setIcon(bigIcon);
                         renderCard(p);
+                        
+                        // 關鍵修正：清空 JS 設定的座標，讓 CSS 決定位置（置底）
                         infoBox.style.display = 'block';
                         infoBox.style.opacity = '1';
-                        
-                        // 手機版位置由 CSS 控制 (!important)，JS 這裡重置一下
-                        infoBox.style.left = '';
-                        infoBox.style.top = '';
+                        infoBox.style.left = '';  
+                        infoBox.style.top = 'auto'; 
                     });
                 }
 
@@ -155,13 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             map.addLayer(clusterGroup);
 
-            // 🌟 修正：點擊地圖空白處，隱藏卡片並恢復所有 Pin
+            // 點擊空白處關閉卡片並恢復 Pin
             map.on('click', () => {
                 infoBox.style.display = 'none';
                 clusterGroup.eachLayer(m => {
-                    if (m.options.originalIcon) {
-                        m.setIcon(m.options.originalIcon);
-                    }
+                    if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
                 });
             });
 
@@ -169,12 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 map.fitBounds(clusterGroup.getBounds().pad(0.1));
             }
 
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 400);
+            setTimeout(() => { map.invalidateSize(); }, 400);
         });
 
-    window.addEventListener('resize', () => {
-        map.invalidateSize();
-    });
+    window.addEventListener('resize', () => { map.invalidateSize(); });
 });
