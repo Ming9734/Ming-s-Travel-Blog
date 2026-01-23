@@ -123,7 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         L.DomEvent.stopPropagation(e); // 防止地圖也觸發點擊
                         
                         // 清除地圖上其他可能放大的圖示 (這步能確保只有當前點擊的 Pin 會變大)
-                        clusterGroup.eachLayer(m => m.setIcon(baseIcon));
+                        clusterGroup.eachLayer(m => {
+                            // 檢查該 marker 是否有原本存好的 baseIcon 屬性，或者重新建立
+                            // 這裡最保險的做法是在 marker 建立時就把 baseIcon 存在 marker 物件裡
+                            if (m.options.originalIcon) {
+                            m.setIcon(m.options.originalIcon);
+                            }
+                        });
                         
                         marker.setIcon(bigIcon);
                         renderCard(p);
