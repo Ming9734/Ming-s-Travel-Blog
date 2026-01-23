@@ -64,23 +64,32 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 .dropdown-menu, .sub-menu { z-index: 2200; }
 
 
-@media (max-width: 1024px) {
-    /* 確保卡片內部的 Flex 佈局 */
-    .map-preview-card {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
-        height: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
+/* --- 手機版終極排版修正 (貼在 map.css 最底部) --- */
+@media screen and (max-width: 1024px) {
+    /* 1. 外殼：接收 JS 的定位，並找回原本的圓角陰影 */
+    #info-box {
+        background: transparent !important; 
+        border-radius: 20px !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
         overflow: hidden !important;
     }
 
-    /* 圖片：佔據固定的 110px，不准變動 */
+    /* 2. 容器：強制橫向並排 */
+    .map-preview-card {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        margin: 0 !important;
+    }
+
+    /* 3. 圖片區：固定寬度防止縮成一團 */
     .card-img-side {
-        width: 110px !important;
-        min-width: 110px !important;
-        max-width: 110px !important;
+        width: 115px !important;
+        min-width: 115px !important;
         height: 100% !important;
         flex-shrink: 0 !important;
     }
@@ -91,31 +100,38 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
         object-fit: cover !important;
     }
 
-    /* 文字：填滿剩餘空間 */
+    /* 4. 文字區：找回你的藍紫漸層與毛玻璃感 */
     .preview-content {
         flex: 1 !important;
-        padding: 12px !important;
+        padding: 12px 15px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        text-align: left !important;
         min-width: 0 !important;
-        background: white !important;
+        background: linear-gradient(
+            135deg, 
+            rgba(79, 70, 229, 0.5) 0%, 
+            rgba(147, 51, 234, 0.5) 100%
+        ) !important; 
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
     }
 
+    /* 5. 內容樣式微調 */
     .preview-content h3 {
-        font-size: 1.1rem !important;
-        margin: 0 0 5px 0 !important;
+        margin: 0 0 4px 0 !important;
+        font-size: 1.05rem !important;
+        color: #ffffff !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
     }
 
     .preview-content p {
-        font-size: 0.85rem !important;
-        line-height: 1.4 !important;
         margin: 0 !important;
-        /* 限制文字兩行，其餘省略 */
+        font-size: 0.85rem !important;
+        color: rgba(255, 255, 255, 0.9) !important;
         display: -webkit-box !important;
         -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
