@@ -64,55 +64,33 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 .dropdown-menu, .sub-menu { z-index: 2200; }
 
 
-/* 電腦版樣式修正 (避免遮擋滑鼠) */
-@media (min-width: 1025px) {
-    #info-box {
-        position: fixed; /* 改用 fixed 跟隨視窗座標 */
-        z-index: 10000;
-        pointer-events: none; /* 滑鼠穿透，不干擾點擊 Pin */
-    }
-    .map-preview-card {
-        width: 280px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        overflow: hidden;
-    }
-    .map-preview-card img { width: 100%; height: 150px; object-fit: cover; }
-    .preview-content { padding: 12px; }
-}
-
-/* 🌟 手機版樣式修正：強制置底 + 圖左文右 */
 @media (max-width: 1024px) {
     #info-box {
         position: fixed !important;
         bottom: 20px !important;
+        top: auto !important;
         left: 50% !important;
-        top: auto !important; /* 強制解除 JS 座標 */
         transform: translateX(-50%) !important;
-        width: 92% !important;
-        max-width: 480px !important;
+        width: 90% !important;
+        max-width: 450px !important;
         height: 120px !important; /* 固定高度 */
-        z-index: 10001 !important;
-        display: none;
+        z-index: 9999 !important;
     }
 
     .map-preview-card {
-        display: flex !important; /* 🌟 開啟左右排列 */
+        display: flex !important; /* 開啟左右排列 */
         flex-direction: row !important;
         background: white !important;
+        border-radius: 12px !important;
         height: 100% !important;
         width: 100% !important;
-        border-radius: 15px !important;
-        box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
         overflow: hidden !important;
-        cursor: pointer;
     }
 
     .card-img-side {
-        width: 110px !important; /* 🌟 圖片固定寬度 */
+        width: 110px !important; /* 固定圖片寬度 */
         height: 100% !important;
-        flex-shrink: 0 !important;
+        flex-shrink: 0 !important; /* 防止被右邊文字擠扁 */
     }
 
     .card-img-side img {
@@ -127,17 +105,5 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        text-align: left !important;
-        overflow: hidden;
-    }
-
-    .preview-content h3 { font-size: 1rem !important; margin: 0 !important; }
-    .preview-content p { 
-        font-size: 0.75rem !important; 
-        line-height: 1.3;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
 }
