@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
 
+    // 判斷是否為觸控裝置
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
     // 1. 初始化地圖
     const map = L.map('map').setView([48.8566, 2.3522], 5);
 
@@ -24,6 +27,34 @@ document.addEventListener('DOMContentLoaded', () => {
     infoBox.style.display = 'none';
     mapContainer.appendChild(infoBox);
 
+    // --- 🌟 封裝渲染內容的函式，確保電腦手機內容一致 ---
+    function renderCard(p) {
+        let unescoTag = '';
+        if (p.unescoType) {
+            const typeNames = {
+                'natural': 'UNESCO Natural Heritage',
+                'cultural': 'UNESCO Cultural Heritage',
+                'mixed': 'UNESCO Mixed Heritage'
+            };
+            unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
+        }
+        
+        infoBox.innerHTML = `
+            <div class="map-preview-card">
+                <img src="${p.preview}">
+                <div class="preview-content">
+                    <h3>${p.title}</h3>
+                    <div class="location-wrapper">
+                        <span class="badge">${p.city} , ${p.country}</span>
+                    </div>
+                    ${unescoTag}
+                    <p>${p.summary}</p>
+                    <span class="click-hint">Click to read more</span>
+                </div>
+            </div>
+        `;
+    }
+
     // 5. 抓取資料
     fetch('data/posts.json')
         .then(r => r.json())
@@ -43,110 +74,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const marker = L.marker([p.lat, p.lng], { icon: baseIcon });
 
-                // 懸停事件
-                marker.on('mouseover', () => {
-                    marker.setIcon(bigIcon);
+                // --- 🌟 電腦版事件 (非觸控) ---
+                if (!isTouch) {
+                    marker.on('mouseover', () => {
+                        marker.setIcon(bigIcon);
+                        renderCard(p); // 調用封裝函式
+                        infoBox.style.display = 'block';
+                        infoBox.style.opacity = '1';
+                    });
 
-                    // --- 🌟 新增：UNESCO 判斷邏輯 ---
-                    // 在 marker.on('mouseover', () => { ... }) 內
-                    let unescoTag = '';
-                    if (p.unescoType) {
-                        const typeNames = {
-                            'natural': 'UNESCO Natural Heritage',
-                            'cultural': 'UNESCO Cultural Heritage',
-                            'mixed': 'UNESCO Mixed Heritage'
-                        };
-                        unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
-                    }
-                    // ----------------------------
-                    
-                    infoBox.innerHTML = `
-                        <div class="map-preview-card">
-                            <img src="${p.preview}">
-                            <div class="preview-content">
-                                <h3>${p.title}</h3>
-                                <div class="location-wrapper">
-                                    <span class="badge">${p.city} , ${p.country}</span>
-                                </div>
-                                ${unescoTag}
-                                <p>${p.summary}</p>
-                                <span class="click-hint">Click to read more</span>
-                            </div>
-                        </div>
-                    `;
-                    infoBox.style.display = 'block';
-                    infoBox.style.opacity = '1';
-                });
+                    marker.on('mousemove', (e) => {
+                        const pos = e.containerPoint;
+                        const padding = 20;
+                        const edgeBuffer = 15;
+                        const cardWidth = infoBox.offsetWidth;
+                        const cardHeight = infoBox.offsetHeight;
+                        const containerWidth = mapContainer.clientWidth;
+                        const containerHeight = mapContainer.clientHeight;
 
-                // 跟隨滑鼠
-                // 跟隨滑鼠並防止溢出
-marker.on('mousemove', (e) => {
-    const pos = e.containerPoint; // 獲取相對於地圖容器的座標
-    
-    const padding = 20;          // 滑鼠與卡片之間的間距
-    const edgeBuffer = 15;       // 距離地圖邊緣的最小緩衝（不貼死邊緣）
-    
-    // 獲取卡片本身的寬高
-    const cardWidth = infoBox.offsetWidth;
-    const cardHeight = infoBox.offsetHeight;
-    
-    // 獲取地圖容器的寬高
-    const containerWidth = mapContainer.clientWidth;
-    const containerHeight = mapContainer.clientHeight;
+                        let leftPos = pos.x + padding;
+                        if (leftPos + cardWidth + edgeBuffer > containerWidth) {
+                            leftPos = pos.x - cardWidth - padding;
+                        }
+                        leftPos = Math.max(edgeBuffer, leftPos);
 
-    // --- X 軸邏輯 ---
-    let leftPos = pos.x + padding;
-    // 如果「目前位置 + 卡片寬度 + 緩衝」超過容器寬度
-    if (leftPos + cardWidth + edgeBuffer > containerWidth) {
-        // 則改為顯示在滑鼠左側
-        leftPos = pos.x - cardWidth - padding;
-    }
-    // 確保不會超出左邊界
-    leftPos = Math.max(edgeBuffer, leftPos);
+                        let topPos = pos.y + padding;
+                        if (topPos + cardHeight + edgeBuffer > containerHeight) {
+                            topPos = pos.y - cardHeight - padding;
+                        }
+                        topPos = Math.max(edgeBuffer, topPos);
 
-    // --- Y 軸邏輯 ---
-    let topPos = pos.y + padding;
-    // 如果「目前位置 + 卡片高度 + 緩衝」超過容器高度
-    if (topPos + cardHeight + edgeBuffer > containerHeight) {
-        // 則改為顯示在滑鼠上方
-        topPos = pos.y - cardHeight - padding;
-    }
-    // 確保不會超出頂部邊界 (例如被導覽列擋住)
-    topPos = Math.max(edgeBuffer, topPos);
+                        infoBox.style.left = leftPos + 'px';
+                        infoBox.style.top = topPos + 'px';
+                    });
 
-    // 套用位置
-    infoBox.style.left = leftPos + 'px';
-    infoBox.style.top = topPos + 'px';
-});
+                    marker.on('mouseout', () => {
+                        marker.setIcon(baseIcon);
+                        infoBox.style.display = 'none';
+                    });
 
-                // 移出事件
-                marker.on('mouseout', () => {
-                    marker.setIcon(baseIcon);
-                    infoBox.style.display = 'none';
-                });
+                    marker.on('click', () => {
+                        window.location.href = `post.html?id=${p.id}`;
+                    });
 
-                // 點擊事件
-                marker.on('click', () => {
-                    window.location.href = `post.html?id=${p.id}`;
-                });
+                } else {
+                    // --- 🌟 手機版事件 (觸控) ---
+                    marker.on('click', (e) => {
+                        L.DomEvent.stopPropagation(e); // 防止地圖也觸發點擊
+                        
+                        // 清除地圖上其他可能放大的圖示 (這步能確保只有當前點擊的 Pin 會變大)
+                        clusterGroup.eachLayer(m => m.setIcon(baseIcon));
+                        
+                        marker.setIcon(bigIcon);
+                        renderCard(p);
+                        infoBox.style.display = 'block';
+                        infoBox.style.opacity = '1';
+                        
+                        // 手機版卡片位置：如果你 CSS 沒改固定底部，這裡會抓點擊點
+                        // 但強烈建議搭配下方媒體查詢，讓手機版固定底部
+                        const pos = e.containerPoint;
+                        infoBox.style.left = '50%'; 
+                        infoBox.style.transform = 'translateX(-50%)';
+                    });
+                }
 
                 clusterGroup.addLayer(marker);
             });
 
             map.addLayer(clusterGroup);
 
-            // 自動縮放以包含所有點
+            // 點擊地圖其他地方，隱藏手機版卡片
+            map.on('click', () => {
+                infoBox.style.display = 'none';
+                clusterGroup.eachLayer(m => m.setIcon(L.icon({
+                    iconUrl: 'images/markers/default.png', // 這裡建議統一恢復
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32]
+                })));
+            });
+
             if (posts.length > 0) {
                 map.fitBounds(clusterGroup.getBounds().pad(0.1));
             }
 
-            // 🌟 核心修正：強制地圖刷新大小，解決「不會動」或「灰色區塊」
             setTimeout(() => {
                 map.invalidateSize();
             }, 400);
         });
 
-    // 視窗縮放時也要刷新
     window.addEventListener('resize', () => {
         map.invalidateSize();
     });
