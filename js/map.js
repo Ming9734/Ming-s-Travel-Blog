@@ -142,18 +142,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         // 我們直接在這裡把「位置」跟「寬度」全部寫死。
                         infoBox.style.cssText = `
                             display: block !important;
-                            opacity: 1 !important;
                             position: fixed !important;
-                            bottom: 20px !important;
-                            left: 50% !important; /* 改為 50% */
-                            transform: translateX(-50%) !important; /* 配合 50% 達成完美置中 */
-                            width: 92% !important; /* 給一點邊距 */
-                            max-width: 400px !important;
-                            height: 120px !important;
+                            bottom: 50px !important; /* 再次上提，確保不被遮擋 */
+                            left: 4% !important;   /* 距離左邊 4% */
+                            right: 4% !important;  /* 距離右邊 4% */
+                            width: 92% !important; /* 左右各 4%，寬度自然是 92% */
+                            margin: 0 auto !important;
+                            height: 125px !important;
                             top: auto !important;
                             z-index: 999999 !important;
                             pointer-events: auto !important;
-                            background: transparent !important; /* 讓背景透明，顯示內層卡片樣式 */
+                            background: transparent !important;
+                            transform: none !important; /* 強制關閉任何位移 */
                         `;
                     });
                 }
