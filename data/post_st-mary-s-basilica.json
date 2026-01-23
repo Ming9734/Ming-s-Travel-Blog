@@ -1,0 +1,38 @@
+{
+  "id": "st-mary-s-basilica",
+  "title": "St. Mary's Basilica",
+  "subtitle": "Kraków, Poland",
+  "country": "Poland",
+  "city": "Kraków",
+  "cover": "images/post/st-mary-s-basilica/cover.jpg",
+  "images": [
+    "images/post/st-mary-s-basilica/1.jpg",
+    "images/post/st-mary-s-basilica/2.jpg",
+    "images/post/st-mary-s-basilica/3.jpg",
+    "images/post/st-mary-s-basilica/4.jpg",
+    "images/post/st-mary-s-basilica/5.jpg",
+    "images/post/st-mary-s-basilica/6.jpg",
+    "images/post/st-mary-s-basilica/7.jpg",
+    "images/post/st-mary-s-basilica/8.jpg",
+    "images/post/st-mary-s-basilica/9.jpg",
+    "images/post/st-mary-s-basilica/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>A late 13th-century Gothic basilica built on the foundations of an earlier Romanesque church</li><li>An iconic asymmetrical twin-tower façade</li><li>The most important church for the citizens of Poland’s former royal capital</li><li>Home to the world’s largest Gothic altarpiece, a national treasure of Poland</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>St. Mary’s Basilica stands as one of Kraków’s most important religious and civic landmarks, second only to Wawel Cathedral within the historic heart of Poland’s former royal capital. Rising from the foundations of a late 13th-century Romanesque church, the present Gothic structure was largely completed around 1320, yet its appearance today reflects centuries of restoration, artistic enrichment, and national memory layered upon its medieval core. The basilica embodies not only the spiritual life of the city, but also the turbulent historical trajectory of Poland itself, shaped by periods of prosperity, foreign domination, and cultural survival.</p><p>Dominating the Main Market Square, the basilica has long served as both a place of worship and a symbolic anchor of Kraków’s urban identity. Its asymmetrical twin towers recall the city’s former role as a fortified royal center and gateway between Eastern and Western Europe. The crown that caps the northern tower explicitly commemorates Kraków’s status as the historic royal capital of Poland, transforming the skyline into a visual statement of political memory and civic pride.</p><p>Within, a cohesive ensemble of medieval stained glass, richly painted interiors, and the monumental Gothic high altar forms one of the most significant artistic treasures in Central Europe. The high altar—St. Mary’s Altar, the largest Gothic altarpiece in the world—stands not only as a masterpiece of late medieval sculpture and devotion, but also as a symbol of cultural resilience, having been removed and hidden during the Second World War and later painstakingly recovered and restored, returning to its place as a national treasure of Poland.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Approaching St. Mary’s Basilica, the soaring towers and the echo of the hourly trumpet call create a powerful presence within Kraków’s Old Town. The crown atop the northern tower, now understood as a marker of the city’s former royal status, quietly reinforces the basilica’s role as both a sacred space and a monument of national memory.</p><p>Inside, the contrast between the basilica’s external form and its interior richness is striking. The deep blue, star-studded ceiling draws the eye upward toward the suspended figure of Christ above the nave, while the medieval stained glass and vividly coloured walls surround the visitor in a luminous, almost theatrical atmosphere. Standing before the monumental St. Mary’s Altar, one is not only confronted with a masterwork of Gothic art, but also with a powerful reminder of survival and recovery—an artwork that endured wartime displacement and returned to its place as the spiritual and artistic heart of the basilica, making the experience both visually overwhelming and quietly moving.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>Legends, Towers, and the Hejnał</h2><p>The basilica’s most recognisable feature is its pair of uneven towers: the northern tower rises to 82 metres, while the southern reaches 69 metres. The taller northern tower historically functioned as a watchtower, offering a clear view of the surrounding plains to warn of approaching enemies.</p><p>According to a popular legend, two highly skilled brothers were commissioned to build the towers— the younger responsible for the northern tower, the elder for the southern. As construction progressed, the younger realised that his brother’s tower would be completed first and would stand taller than his own. Consumed by jealousy, he murdered his brother and hastily capped the southern tower with a dome. His own tower ultimately rose higher, but overwhelmed by guilt, he climbed to the top of his creation, confessed his crime, and leapt to his death, leaving the towers forever unequal as a silent reminder of his sin.</p><p>Another enduring tradition is the Hejnał Mariacki, the trumpet call sounded every hour from the northern tower. The melody famously ends abruptly, commemorating a medieval trumpeter who, according to legend, was struck in the throat by a Tatar arrow while sounding the alarm during an invasion, his final broken note preserved in ritual to this day.</p>"
+    }
+  ]
+}
