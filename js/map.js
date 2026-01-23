@@ -123,24 +123,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    // --- 🌟 手機版事件：徹底脫離地圖容器 ---
+                    
+                    // --- 🌟 手機版事件：徹底摧毀座標干擾 ---
                     marker.on('click', (e) => {
                         L.DomEvent.stopPropagation(e); 
-                        
+        
                         clusterGroup.eachLayer(m => {
-                            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
+                        if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
                         });
-                        
+        
                         marker.setIcon(bigIcon);
                         renderCard(p);
-                        
-                        // 🌟 關鍵修正：點擊時將盒子移到 body，解決左上角與點不到的問題
+        
+                        // 確保脫離地圖容器
                         document.body.appendChild(infoBox); 
-                        
+        
                         infoBox.style.display = 'block';
                         infoBox.style.opacity = '1';
-                        infoBox.style.setProperty('top', 'auto', 'important');
-                        infoBox.style.removeProperty('left');
+
+                        // 🌟 最終手段：直接用空字串「抹除」JS 寫進去的 top 和 left
+                        // 這樣瀏覽器才會回頭去看 CSS 裡的 bottom: 20px
+                        infoBox.style.top = "";
+                        infoBox.style.left = "";
+                        infoBox.style.transform = ""; // 抹除電腦版的偏移
+        
+                        // 再次確保 position 是 fixed
+                        infoBox.style.position = "fixed";
                     });
                 }
 
