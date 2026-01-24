@@ -159,11 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <div class="preview-content" style="flex:1; padding:15px; display:flex; flex-direction:column; justify-content:center; color:white; min-width:0;">
+                    <h3 style="margin:5px 0; font-size:1.1rem; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</h3>
                     <div class="badge-container" style="margin-bottom:5px;">
                         <span class="badge" style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:6px; font-size:0.65rem; color:white;">${locationText}</span>
                     </div>
                     ${unescoTag}
-                    <h3 style="margin:5px 0; font-size:1.1rem; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</h3>
+                    
                     <p style="margin:0; font-size:0.85rem; opacity:0.9; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
                     <span style="font-size:0.7rem; opacity:0.6; margin-top:5px; color:white;">Click to read more</span>
                 </div>
@@ -177,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bottom: 30px !important;
             left: 5% !important;
             width: 90% !important;
-            height: 160px !important;
+            height: 190px !important;
             z-index: 9999999 !important;
             visibility: visible !important;
             opacity: 1 !important;
