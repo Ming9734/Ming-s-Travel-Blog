@@ -129,45 +129,65 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 手機版終極修正補丁 --- */
 @media screen and (max-width: 1024px) {
-    /* 🌟 UNESCO 標籤分色 */
+    /* 1. 解決毛玻璃不見：強制所有內層容器背景透明 */
+    .mobile-active .map-preview-card,
+    .mobile-active .preview-content {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* 2. 解決圖片無法填滿：強制圖片容器與圖片高度撐滿 100% */
+    .mobile-active .card-img-side {
+        flex: 0 0 33.33% !important;
+        height: 100% !important; /* 🌟 確保容器跟著外層長高 */
+        display: block !important;
+    }
+    .mobile-active .card-img-side img {
+        width: 100% !important;
+        height: 100% !important; /* 🌟 確保圖片填滿容器 */
+        object-fit: cover !important;
+    }
+
+    /* 3. 解決標題上方空白太多：微調 padding 與對齊 */
+    .mobile-active .preview-content {
+        flex: 1 !important;
+        padding: 12px 15px !important; /* 🌟 縮小頂部 Padding (從 18px 降到 12px) */
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important; /* 靠上對齊 */
+        min-width: 0 !important;
+    }
+
+    /* 移除標籤容器可能的默認邊距 */
+    .mobile-active .badge-container {
+        margin-top: 0 !important;
+        margin-bottom: 4px !important;
+    }
+
+    .mobile-active .preview-content h3 {
+        margin: 2px 0 5px 0 !important; /* 🌟 極大化減少標題上下邊距 */
+        font-size: 1.1rem !important;
+        line-height: 1.2 !important;
+    }
+
+    .mobile-active .preview-content p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        margin-top: 2px !important;
+        -webkit-line-clamp: 3 !important;
+    }
+
+    /* UNESCO 標籤樣式保持 */
     .mobile-active .unesco-badge {
-        padding: 3px 10px !important;
-        border-radius: 5px !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
         font-size: 0.65rem !important;
-        font-weight: bold !important;
-        color: white !important;
+        margin-bottom: 5px !important;
         display: inline-block !important;
-        margin-bottom: 8px !important;
     }
     .mobile-active .unesco-natural { background: #27ae60 !important; }
     .mobile-active .unesco-cultural { background: #e67e22 !important; }
     .mobile-active .unesco-mixed { background: #8e44ad !important; }
-
-    /* 🌟 讓毛玻璃透出來的關鍵：強制內層透明 */
-    .mobile-active .map-preview-card {
-        background: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        height: 100% !important;
-    }
-
-    /* 🌟 解決文字堆疊：增加行高與內邊距 */
-    .mobile-active .preview-content {
-        padding: 18px 15px !important; 
-        justify-content: flex-start !important; /* 靠上對齊，防止文字垂直擠壓 */
-    }
-
-    .mobile-active .preview-content h3 {
-        font-size: 1.2rem !important;
-        margin: 5px 0 8px 0 !important;
-        line-height: 1.3 !important;
-    }
-
-    .mobile-active .preview-content p {
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important; /* 增加行距，防止文字堆疊 */
-        margin-bottom: 10px !important;
-        color: rgba(255, 255, 255, 0.95) !important;
-        -webkit-line-clamp: 3 !important; /* 允許顯示到 3 行 */
-    }
 }
