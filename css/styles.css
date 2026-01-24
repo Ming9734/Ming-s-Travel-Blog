@@ -1134,3 +1134,105 @@ body {
   }
 }
 
+@media screen and (max-width: 1024px) {
+    /* 1. 外部大容器 */
+    .marker-info.mobile-active {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 25px !important;
+        left: 5% !important;
+        width: 90% !important;
+        height: 185px !important;
+        z-index: 9999999 !important;
+        border-radius: 20px !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+        overflow: hidden !important;
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.3) 0%, rgba(147, 51, 234, 0.3) 100%) !important;
+        backdrop-filter: blur(12px) saturate(150%) !important;
+        -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+        cursor: pointer !important;
+        pointer-events: auto !important;
+    }
+
+    /* 2. 內部 Flex 佈局 */
+    .mobile-card-wrapper {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /* 讓點擊穿透到最外層觸發跳轉 */
+    }
+
+    .mobile-card-img {
+        flex: 0 0 33.33%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .mobile-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mobile-card-content {
+        flex: 1;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-width: 0;
+    }
+
+    .mobile-card-content h3 {
+        margin: 0 0 8px 0;
+        font-size: 1.15rem;
+        color: #ffffff;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* 3. 標籤列：解決間距不同與長度問題 */
+    .mobile-tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+        min-height: 24px; /* 確保沒有 UNESCO 時高度也不會塌陷 */
+    }
+
+    .loc-badge {
+        background: white;
+        color: #4f46e5;
+        font-size: 0.65rem;
+        padding: 2px 10px;
+        border-radius: 20px;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .unesco-badge-mobile {
+        color: rgba(0, 0, 0, 0.75);
+        padding: 3px 12px;
+        border-radius: 4px;
+        font-size: 0.65rem;
+        font-weight: 800;
+        display: table; /* 關鍵：自適應長度 */
+        margin: 0;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-card-content p {
+        margin: 0;
+        padding-top: 2px;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.95);
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
