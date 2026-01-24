@@ -131,62 +131,67 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 /* --- 保留你原本所有的電腦版 CSS (.marker-info 系列) 不要動 --- */
 
 /* --- 手機版專用 (只在 info-box 沒有類別時啟動) --- */
+/* --- 📱 手機版專屬樣式：使用獨立 Class 確保不干擾電腦版 --- */
 @media screen and (max-width: 1024px) {
-    /* 確保手機版時，info-box 本身不要有背景與位移 */
-    #info-box:not(.marker-info) {
-        transform: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-    }
-
-    .map-preview-card {
+    #info-box.mobile-active {
         display: flex !important;
-        width: 100% !important;
-        height: 160px !important;
+        position: fixed !important;
+        bottom: 20px !important;
+        left: 5% !important;
+        width: 90% !important;
+        height: 150px !important;
+        top: auto !important;
+        transform: none !important;
         background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
         border-radius: 20px !important;
-        overflow: hidden !important;
+        z-index: 999999 !important;
+        padding: 0 !important;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
     }
 
-    .card-img-side {
-        width: 120px !important;
-        min-width: 120px !important;
-        height: 160px !important;
+    /* 確保圖片與文字水平並排 */
+    #info-box.mobile-active .map-preview-card {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        height: 100% !important;
     }
 
-    .card-img-side img {
+    #info-box.mobile-active .card-img-side {
+        width: 120px !important;
+        height: 100% !important;
+        flex-shrink: 0 !important;
+    }
+
+    #info-box.mobile-active .card-img-side img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
     }
 
-    /* 🌟 文字區強制撐開 🌟 */
-    .preview-content {
+    /* 🌟 文字區塊：強制顯色 🌟 */
+    #info-box.mobile-active .preview-content {
         flex: 1 !important;
+        padding: 15px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        padding: 0 15px !important;
-        color: #ffffff !important;
-        min-width: 0 !important; /* 關鍵：防止寬度被文字撐爆 */
+        color: white !important;
+        overflow: hidden !important;
     }
 
-    .preview-content h3 {
-        color: #ffffff !important;
-        font-size: 1.1rem !important;
+    #info-box.mobile-active h3 {
+        color: white !important;
         margin: 0 0 5px 0 !important;
-        display: block !important;
+        font-size: 1.1rem !important;
     }
 
-    .preview-content p {
+    #info-box.mobile-active p {
         color: rgba(255,255,255,0.9) !important;
         font-size: 0.85rem !important;
         margin: 0 !important;
-        line-height: 1.4 !important;
         display: -webkit-box !important;
-        -webkit-line-clamp: 3 !important;
+        -webkit-line-clamp: 2 !important;
         -webkit-box-orient: vertical !important;
         overflow: hidden !important;
     }
