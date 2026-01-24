@@ -127,61 +127,36 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
     font-size: 0.7rem;
 }
 
-/* --- 2. 手機版專屬修正 (@media) --- */
-/* --- 保留你原本所有的電腦版 CSS (.marker-info 系列) 不要動 --- */
-
-/* --- 手機版專用 (只在 info-box 沒有類別時啟動) --- */
-/* --- 📱 手機版專屬樣式：使用獨立 Class 確保不干擾電腦版 --- */
 @media screen and (max-width: 1024px) {
-    /* 使用 ID 配合 Class，權限最高 */
-    #info-box.mobile-active {
-        display: flex !important;
+    /* 直接鎖定 ID，強制讓它顯示漸層背景 */
+    #info-box {
         background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
+        display: flex !important;
         border-radius: 20px !important;
         overflow: hidden !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
     }
 
-    /* 確保內部的 card 撐滿 */
-    .mobile-active .map-preview-card {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: transparent !important; /* 讓背景透出 info-box 的漸層 */
-    }
-
-    .mobile-active .card-img-side {
-        width: 120px !important;
-        flex-shrink: 0 !important;
-    }
-
-    .mobile-active .card-img-side img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-    }
-
-    /* 🌟 文字區塊：這就是你消失的白色底/文字區 🌟 */
-    .mobile-active .preview-content {
+    /* 強制內部的文字區塊撐開並顯示顏色 */
+    #info-box .preview-content {
         flex: 1 !important;
-        padding: 15px !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
-        color: white !important; /* 確保文字是白的 */
-        background: transparent !important;
+        padding: 15px !important;
+        color: white !important; /* 文字白色 */
+        background: rgba(255, 255, 255, 0.1) !important; /* 微透明底色，確保區塊存在 */
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
-    .mobile-active h3 {
+    #info-box .preview-content h3 {
         color: white !important;
+        display: block !important;
         margin: 0 0 5px 0 !important;
-        font-size: 1.1rem !important;
     }
 
-    .mobile-active p {
-        color: rgba(255,255,255,0.9) !important;
-        font-size: 0.85rem !important;
-        margin: 0 !important;
+    #info-box .preview-content p {
+        color: rgba(255, 255, 255, 0.9) !important;
+        display: block !important;
     }
 }
