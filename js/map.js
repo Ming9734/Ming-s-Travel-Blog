@@ -144,20 +144,15 @@ document.addEventListener('DOMContentLoaded', () => {
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
-            bottom: 40px !important;
+            bottom: 30px !important;
             left: 5% !important;
             width: 90% !important;
-            height: 125px !important;
-            background: white !important;
-            border-radius: 15px !important;
+            height: 160px !important; /* 🌟 這裡要與 CSS 的高度一致 */
             z-index: 9999999 !important;
-            overflow: hidden !important;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
             top: auto !important;
             transform: none !important;
-            margin: 0 !important;
-            padding: 0 !important;
             pointer-events: auto !important;
+            background: transparent !important; 
         `;
     });
 }
