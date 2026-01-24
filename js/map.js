@@ -170,13 +170,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div style="flex:0 0 33.33% !important; height:100% !important; overflow:hidden;">
                                     <img src="${imgSrc}" style="width:100% !important; height:100% !important; object-fit:cover !important; display:block !important;">
                                 </div>
+                                
                                 <div style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; min-width:0 !important;">
-                                    <h3 style="margin:0 0 4px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">${title}</h3>    
-                                    <div style="margin-bottom: 4px;">
-                                        <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.7rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">${locationText}</span>
+                                    <h3 style="margin:0 !important; padding-bottom: 8px !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">
+                                         ${title}
+                                    </h3>
+                                    <div style="display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 8px !important; margin-bottom: 8px !important;">
+                                        <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.65rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; white-space: nowrap;">
+                                            ${locationText}
+                                        </span>
+                                        ${unescoTag}
                                     </div>
-                                    ${unescoTag}
-                                    <p style="margin:0 0 8px 0 !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
+                                    <p style="margin:0 !important; padding-top: 4px !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;">
+                                        ${summary}
+                                    </p>
                                     <div style="font-size:0.75rem; color:#9400D3; font-weight:800; display:flex; align-items:center; margin-top:auto; margin-left:auto;">
                                         Click to read more <span style="margin-left:4px;">➜</span>
                                     </div>
