@@ -128,24 +128,66 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 }
 
 /* --- 2. 手機版專屬修正 (@media) --- */
+/* --- 保留你原本所有的電腦版 CSS (.marker-info 系列) 不要動 --- */
+
+/* --- 手機版專用 (只在 info-box 沒有類別時啟動) --- */
 @media screen and (max-width: 1024px) {
-    #info-box {
-        /* JS 會處理 fixed, bottom, left 等位置，CSS 負責細節 */
-        height: 160px !important;
-        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4) !important;
+    /* 確保手機版時，info-box 本身不要有背景與位移 */
+    #info-box:not(.marker-info) {
+        transform: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
     }
 
     .map-preview-card {
-        width: 100% !important; /* 手機版撐滿螢幕寬度 */
-        height: 100% !important;
+        display: flex !important;
+        width: 100% !important;
+        height: 160px !important;
+        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
         border-radius: 20px !important;
+        overflow: hidden !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
     }
 
     .card-img-side {
-        width: 130px !important;
+        width: 120px !important;
+        min-width: 120px !important;
+        height: 160px !important;
+    }
+
+    .card-img-side img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* 🌟 文字區強制撐開 🌟 */
+    .preview-content {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        padding: 0 15px !important;
+        color: #ffffff !important;
+        min-width: 0 !important; /* 關鍵：防止寬度被文字撐爆 */
+    }
+
+    .preview-content h3 {
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        margin: 0 0 5px 0 !important;
+        display: block !important;
     }
 
     .preview-content p {
-        -webkit-line-clamp: 3 !important; /* 手機版高一點，多顯示一行 */
+        color: rgba(255,255,255,0.9) !important;
+        font-size: 0.85rem !important;
+        margin: 0 !important;
+        line-height: 1.4 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
     }
 }
