@@ -173,7 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <div style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; min-width:0 !important;">
-                    
+                <h3 style="margin:0 0 4px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">
+                        ${title}
+                </h3>    
                     <div style="margin-bottom: 4px;">
                         <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.7rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
                             ${locationText}
@@ -181,10 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
 
                     ${unescoTag}
-
-                    <h3 style="margin:0 0 4px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">
-                        ${title}
-                    </h3>
 
                     <p style="margin:0 0 8px 0 !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
                         ${summary}
