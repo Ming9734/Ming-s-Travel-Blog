@@ -124,21 +124,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 📱 手機版：穩定渲染與毛玻璃恢復 ---
+    // --- 📱 手機版：穩定渲染 ---
     marker.on('click', (e) => {
         if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
 
-        // 1. 確保容器掛載到 body 並重置狀態
+        // 1. 確保容器掛載到 body (這步你做得對，能避開地圖剪裁)
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
-        infoBox.className = 'marker-info mobile-active'; // 觸發你的 CSS @media 邏輯
+        infoBox.className = 'marker-info mobile-active'; 
 
-        // 2. 執行渲染函式 (產出 HTML 結構)
+        // 2. 執行渲染函式
         renderCard(p); 
 
-        // 3. 🌟 強制注入毛玻璃與基礎佈局 🌟
-        // 背景使用 rgba(..., 0.1) 讓 CSS 的漸層與毛玻璃能同時生效
+        // 3. 🌟 只負責「位置」與「顯示」，其餘交給 CSS
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
@@ -150,19 +149,8 @@ document.addEventListener('DOMContentLoaded', () => {
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
-            
-            /* 毛玻璃核心 */
-            background: rgba(255, 255, 255, 0.1) !important; 
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            
-            border-radius: 20px !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            overflow: hidden !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
         `;
 
-        // 4. 更新標籤狀態
         clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
         marker.setIcon(bigIcon);
     });
