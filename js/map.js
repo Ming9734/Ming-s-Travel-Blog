@@ -124,11 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 📱 手機版：資料對接 + 1/3 比例強制定製 ---
     marker.on('click', (e) => {
         if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
-        
+
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
         infoBox.className = 'marker-info mobile-active'; 
@@ -138,7 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgSrc = p.preview || "";
         const locationText = `${p.city || ''} , ${p.country || ''}`;
         
-        // UNESCO 處理：移除寫死的橘色，改用 Class 讓 CSS 控制顏色
+        // UNESCO 顏色直接在 JS 判斷並寫死顏色，確保 100% 讀取
+        let unescoColor = '#f39c12'; // 預設橘色
+        if (p.unescoType === 'natural') unescoColor = '#27ae60';
+        if (p.unescoType === 'mixed') unescoColor = '#8e44ad';
+
         let unescoTag = '';
         if (p.unescoType) {
             const typeNames = {
@@ -146,46 +149,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 'cultural': 'UNESCO Cultural Heritage',
                 'mixed': 'UNESCO Mixed Heritage'
             };
-            unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
+            unescoTag = `<div class="unesco-badge" style="background:${unescoColor} !important; color:white; padding:2px 8px; border-radius:4px; font-size:0.65rem; display:inline-block; margin: 0 0 5px 0; font-weight:bold;">${typeNames[p.unescoType]}</div>`;
         }
 
-        // 🌟 核心修正：直接在 HTML 字串設定 flex 比例
+        // 🌟 核心修正：將所有「填滿」、「透明」、「比例」樣式直接寫在 HTML 標籤上
         infoBox.innerHTML = `
             <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'" 
-                 style="display:flex; width:100%; height:100%; background:transparent; border:none;">
+                 style="display:flex !important; width:100% !important; height:100% !important; background:transparent !important; border:none !important; box-shadow:none !important; padding:0 !important; margin:0 !important;">
                 
-                <div class="card-img-side" style="flex:0 0 33.33%; height:160px; overflow:hidden;">
-                    <img src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;">
+                <div class="card-img-side" style="flex:0 0 33.33% !important; height:100% !important; margin:0 !important; padding:0 !important; overflow:hidden;">
+                    <img src="${imgSrc}" style="width:100% !important; height:100% !important; object-fit:cover !important; display:block !important;">
                 </div>
 
-                <div class="preview-content" style="flex:1; padding:15px; display:flex; flex-direction:column; justify-content:center; color:white; min-width:0;">
-                    <h3 style="margin:5px 0; font-size:1.1rem; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</h3>
-                    <div class="badge-container" style="margin-bottom:5px;">
-                        <span class="badge" style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:6px; font-size:0.65rem; color:white;">${locationText}</span>
+                <div class="preview-content" style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; color:white !important; background:transparent !important; min-width:0 !important;">
+                    <div style="margin: 0 0 4px 0 !important;">
+                        <span style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px; font-size:0.65rem;">${locationText}</span>
                     </div>
                     ${unescoTag}
-                    
-                    <p style="margin:0; font-size:0.85rem; opacity:0.9; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
-                    <span style="font-size:0.7rem; opacity:0.6; margin-top:5px; color:white;">Click to read more</span>
+                    <h3 style="margin:0 0 4px 0 !important; font-size:1.1rem !important; color:white !important; line-height:1.2 !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</h3>
+                    <p style="margin:0 !important; font-size:0.85rem !important; opacity:0.9 !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
                 </div>
             </div>
         `;
 
-        // 🎨 樣式：漸層改為 0.7 透明度，確保毛玻璃通透
+        // 🌟 外殼：調整 Alpha 讓毛玻璃變明顯
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
-            bottom: 30px !important;
+            bottom: 25px !important;
             left: 5% !important;
             width: 90% !important;
-            height: 190px !important;
+            height: 180px !important; 
             z-index: 9999999 !important;
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
+            
+            /* 毛玻璃漸層：背景必須非常透明 (0.6) */
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.6) 0%, rgba(147, 51, 234, 0.6) 100%) !important;
             backdrop-filter: blur(20px) saturate(180%) !important;
             -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            
             border-radius: 20px !important;
             border: 1px solid rgba(255, 255, 255, 0.3) !important;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
