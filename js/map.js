@@ -124,42 +124,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    // --- 📱 手機版終極外科手術 (修正衝突版) ---
-                    marker.on('click', (e) => {
-                        // 1. 徹底阻斷事件傳遞，防止觸發地圖的 map.on('click')
-                        if (e.originalEvent) e.originalEvent.stopPropagation();
-                        L.DomEvent.stopPropagation(e); 
-                        
-                        // 2. 清除其他 Marker 的縮放狀態
-                        clusterGroup.eachLayer(m => {
-                            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
-                        });
-                        
-                        // 3. 設定當前 Marker 狀態
-                        marker.setIcon(bigIcon);
-                        renderCard(p); 
-                        
-                        // 4. 搬移至 body 並設定 Class
-                        document.body.appendChild(infoBox); 
-                        infoBox.className = 'marker-info mobile-active'; 
-                        
-                        // 5. 強制寫入樣式 (移除 background: transparent)
-                        infoBox.style.cssText = `
-                            display: flex !important;
-                            position: fixed !important;
-                            bottom: 30px !important;
-                            left: 5% !important;
-                            width: 90% !important;
-                            height: 160px !important;
-                            z-index: 9999999 !important;
-                            top: auto !important;
-                            transform: none !important;
-                            pointer-events: auto !important;
-                            visibility: visible !important;
-                            opacity: 1 !important;
-                        `;
-                    });
-                }
+    // --- 📱 手機版終極外科手術 ---
+    marker.on('click', (e) => {
+        if (e.originalEvent) e.originalEvent.stopPropagation();
+        L.DomEvent.stopPropagation(e); 
+        
+        renderCard(p); // 確保這裡面生成的 HTML 包含 .preview-content
+        
+        document.body.appendChild(infoBox); 
+        // 🌟 確保 ID 和 Class 同時存在
+        infoBox.id = 'info-box';
+        infoBox.className = 'marker-info mobile-active'; 
+        
+        infoBox.style.cssText = `
+            display: flex !important;
+            position: fixed !important;
+            bottom: 30px !important;
+            left: 5% !important;
+            width: 90% !important;
+            height: 160px !important;
+            z-index: 9999999 !important;
+            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            border-radius: 20px !important;
+        `;
+    });
+}
 
                 clusterGroup.addLayer(marker);
             });
