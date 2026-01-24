@@ -124,31 +124,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 📱 手機版：暴力注入與強制撐開 ---
     marker.on('click', (e) => {
         if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
         
-        // 1. 先搬移
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
         infoBox.className = 'marker-info mobile-active'; 
 
-        // 2. 🌟 暴力注入 HTML (直接在這裡寫，確保內容一定有進去)
-        // 請確保 p.img, p.title, p.summary 這些變數名稱與你的資料結構一致
+        // 🌟 重新建構完整的 HTML (包含勳章)
+        // 檢查 p.imgUrl 或 p.image，確保變數名正確
+        const imgSrc = p.img || p.imgUrl || p.image || ''; 
+        
         infoBox.innerHTML = `
-            <div class="map-preview-card" style="display:flex !important; width:100% !important; height:100% !important;">
-                <div class="card-img-side" style="flex:0 0 120px !important; height:160px !important; overflow:hidden !important;">
-                    <img src="${p.img}" style="width:100% !important; height:100% !important; object-fit:cover !important;">
+            <div class="map-preview-card">
+                <div class="card-img-side">
+                    <img src="${imgSrc}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
                 </div>
-                <div class="preview-content" style="flex:1 !important; padding:15px !important; display:flex !important; flex-direction:column !important; justify-content:center !important; min-width:0 !important;">
-                    <h3 style="color:white !important; margin:0 0 5px 0 !important; font-size:1.1rem !important; display:block !important;">${p.title}</h3>
-                    <p style="color:rgba(255,255,255,0.9) !important; margin:0 !important; font-size:0.85rem !important; display:block !important; line-height:1.4 !important;">${p.summary || ''}</p>
+                <div class="preview-content">
+                    <div class="badge-container">
+                        ${p.unesco ? `<span class="badge unesco-badge">UNESCO</span>` : ''}
+                        <span class="badge location-badge">${p.location || 'Location'}</span>
+                    </div>
+                    <h3>${p.title}</h3>
+                    <p>${p.summary || ''}</p>
                 </div>
             </div>
         `;
 
-        // 3. 強制刷上外殼樣式 (包含毛玻璃)
+        // 🌟 樣式修正：確保毛玻璃效果的背景是「半透明」的
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
@@ -160,17 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.85) 0%, rgba(147, 51, 234, 0.85) 100%) !important;
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
+            /* 這裡必須是 rgba 半透明，毛玻璃才會生效 */
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.75) 0%, rgba(147, 51, 234, 0.75) 100%) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
             border-radius: 20px !important;
-            border: 1px solid rgba(255,255,255,0.3) !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
         `;
-        
-        // 4. 恢復 Marker 圖示邏輯
-        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
-        marker.setIcon(bigIcon);
     });
 }
 
