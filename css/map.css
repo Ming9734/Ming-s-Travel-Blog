@@ -129,19 +129,45 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 手機版終極修正補丁 --- */
 @media screen and (max-width: 1024px) {
-    /* UNESCO 標籤通用樣式 */
+    /* 🌟 UNESCO 標籤分色 */
     .mobile-active .unesco-badge {
-        padding: 2px 8px !important;
+        padding: 3px 10px !important;
         border-radius: 5px !important;
         font-size: 0.65rem !important;
         font-weight: bold !important;
         color: white !important;
         display: inline-block !important;
-        margin-bottom: 5px !important;
+        margin-bottom: 8px !important;
+    }
+    .mobile-active .unesco-natural { background: #27ae60 !important; }
+    .mobile-active .unesco-cultural { background: #e67e22 !important; }
+    .mobile-active .unesco-mixed { background: #8e44ad !important; }
+
+    /* 🌟 讓毛玻璃透出來的關鍵：強制內層透明 */
+    .mobile-active .map-preview-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 100% !important;
     }
 
-    /* 依照類別分色 (復刻電腦版風格) */
-    .mobile-active .unesco-natural { background: #27ae60 !important; }  /* 綠色 */
-    .mobile-active .unesco-cultural { background: #e67e22 !important; } /* 橘色 */
-    .mobile-active .unesco-mixed { background: #8e44ad !important; }    /* 紫色 */
+    /* 🌟 解決文字堆疊：增加行高與內邊距 */
+    .mobile-active .preview-content {
+        padding: 18px 15px !important; 
+        justify-content: flex-start !important; /* 靠上對齊，防止文字垂直擠壓 */
+    }
+
+    .mobile-active .preview-content h3 {
+        font-size: 1.2rem !important;
+        margin: 5px 0 8px 0 !important;
+        line-height: 1.3 !important;
+    }
+
+    .mobile-active .preview-content p {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important; /* 增加行距，防止文字堆疊 */
+        margin-bottom: 10px !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        -webkit-line-clamp: 3 !important; /* 允許顯示到 3 行 */
+    }
 }
