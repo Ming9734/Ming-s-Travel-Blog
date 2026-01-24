@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 3. 🛡️ 資料防錯處理 (確保抓到 posts.json 的內容)
         const title = p.title || "無標題";
         const summary = p.summary || p.description || "";
-        const imgSrc = p.img || p.image || p.imgUrl || ""; // 多重備份抓取圖片路徑
+        const image = p.img || p.image || p.imgUrl || ""; // 多重備份抓取圖片路徑
         const location = p.location || "景點位置";
         const hasUnesco = !!p.unesco; // 判斷有無 UNESCO
 
