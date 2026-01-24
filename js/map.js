@@ -124,79 +124,77 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    // --- 📱 手機版：對齊 JSON 欄位與 renderCard 邏輯 ---
-                    marker.on('click', (e) => {
-                        // 1. 徹底阻斷地圖點擊事件，防止秒開秒關
-                        if (e.originalEvent) e.originalEvent.stopPropagation();
-                        L.DomEvent.stopPropagation(e); 
-                        
-                        // 2. 搬移容器
-                        document.body.appendChild(infoBox); 
-                        infoBox.id = 'info-box';
-                        infoBox.className = 'marker-info mobile-active'; 
+    // --- 📱 手機版：資料對接 + 1/3 比例強制定製 ---
+    marker.on('click', (e) => {
+        if (e.originalEvent) e.originalEvent.stopPropagation();
+        L.DomEvent.stopPropagation(e); 
+        
+        document.body.appendChild(infoBox); 
+        infoBox.id = 'info-box';
+        infoBox.className = 'marker-info mobile-active'; 
 
-                        // 3. 🛡️ 資料對接 (嚴格參考你的 renderCard 變數名)
-                        const title = p.title || "Untitled";
-                        const summary = p.summary || "";
-                        const imgSrc = p.preview || ""; // 你的 JSON 使用的是 p.preview
-                        const locationText = `${p.city || ''} , ${p.country || ''}`;
-                        
-                        // UNESCO 處理邏輯 (對照你的渲染函式)
-                        let unescoTag = '';
-                        if (p.unescoType) {
-                            const typeNames = {
-                                'natural': 'UNESCO Natural Heritage',
-                                'cultural': 'UNESCO Cultural Heritage',
-                                'mixed': 'UNESCO Mixed Heritage'
-                            };
-                            unescoTag = `<div class="unesco-badge unesco-${p.unescoType}" style="background:#f39c12; color:white; padding:2px 8px; border-radius:6px; font-size:0.65rem; display:inline-block; margin-bottom:5px;">${typeNames[p.unescoType]}</div>`;
-                        }
+        const title = p.title || "Untitled";
+        const summary = p.summary || "";
+        const imgSrc = p.preview || "";
+        const locationText = `${p.city || ''} , ${p.country || ''}`;
+        
+        // UNESCO 處理：移除寫死的橘色，改用 Class 讓 CSS 控制顏色
+        let unescoTag = '';
+        if (p.unescoType) {
+            const typeNames = {
+                'natural': 'UNESCO Natural Heritage',
+                'cultural': 'UNESCO Cultural Heritage',
+                'mixed': 'UNESCO Mixed Heritage'
+            };
+            unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
+        }
 
-                        // 4. 注入 HTML (加入跳轉功能 onclick)
-                        infoBox.innerHTML = `
-                            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'" style="display:flex; width:100%; height:100%;">
-                                <div class="card-img-side" style="flex:0 0 120px; height:160px;">
-                                    <img src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;">
-                                </div>
-                                <div class="preview-content" style="flex:1; padding:15px; display:flex; flex-direction:column; justify-content:center; color:white;">
-                                    <div class="badge-container" style="margin-bottom:5px;">
-                                        <span class="badge" style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:6px; font-size:0.65rem;">${locationText}</span>
-                                    </div>
-                                    ${unescoTag}
-                                    <h3 style="margin:5px 0; font-size:1.1rem; color:white;">${title}</h3>
-                                    <p style="margin:0; font-size:0.85rem; opacity:0.9; line-height:1.4;">${summary}</p>
-                                    <span style="font-size:0.7rem; opacity:0.6; margin-top:5px;">Click to read more</span>
-                                </div>
-                            </div>
-                        `;
+        // 🌟 核心修正：直接在 HTML 字串設定 flex 比例
+        infoBox.innerHTML = `
+            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'" 
+                 style="display:flex; width:100%; height:100%; background:transparent; border:none;">
+                
+                <div class="card-img-side" style="flex:0 0 33.33%; height:160px; overflow:hidden;">
+                    <img src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;">
+                </div>
 
-                        // 5. 🎨 樣式與毛玻璃 (強制寫入透明度背景)
-                        infoBox.style.cssText = `
-                            display: flex !important;
-                            position: fixed !important;
-                            bottom: 30px !important;
-                            left: 5% !important;
-                            width: 90% !important;
-                            height: 160px !important;
-                            z-index: 9999999 !important;
-                            visibility: visible !important;
-                            opacity: 1 !important;
-                            pointer-events: auto !important;
-                            /* 背景必須是半透明的 rgba，毛玻璃才會生效 */
-                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.75) 0%, rgba(147, 51, 234, 0.75) 100%) !important;
-                            backdrop-filter: blur(15px) saturate(160%) !important;
-                            -webkit-backdrop-filter: blur(15px) saturate(160%) !important;
-                            border-radius: 20px !important;
-                            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-                            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
-                            overflow: hidden !important;
-                        `;
+                <div class="preview-content" style="flex:1; padding:15px; display:flex; flex-direction:column; justify-content:center; color:white; min-width:0;">
+                    <div class="badge-container" style="margin-bottom:5px;">
+                        <span class="badge" style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:6px; font-size:0.65rem; color:white;">${locationText}</span>
+                    </div>
+                    ${unescoTag}
+                    <h3 style="margin:5px 0; font-size:1.1rem; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</h3>
+                    <p style="margin:0; font-size:0.85rem; opacity:0.9; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
+                    <span style="font-size:0.7rem; opacity:0.6; margin-top:5px; color:white;">Click to read more</span>
+                </div>
+            </div>
+        `;
 
-                        // 6. 更新標記狀態
-                        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
-                        marker.setIcon(bigIcon);
-                    });
-                }
+        // 🎨 樣式：漸層改為 0.7 透明度，確保毛玻璃通透
+        infoBox.style.cssText = `
+            display: flex !important;
+            position: fixed !important;
+            bottom: 30px !important;
+            left: 5% !important;
+            width: 90% !important;
+            height: 160px !important;
+            z-index: 9999999 !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+            overflow: hidden !important;
+        `;
+
+        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
+        marker.setIcon(bigIcon);
+    });
+}
                 clusterGroup.addLayer(marker);
             });
 
