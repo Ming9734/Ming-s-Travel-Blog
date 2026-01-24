@@ -129,38 +129,55 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
-    /* 🌟 強制文字區塊撐開 */
-#info-box.mobile-active .map-preview-card {
-    display: flex !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: transparent !important;
-}
+    /* 確保容器具備毛玻璃底色 */
+    #info-box.mobile-active {
+        overflow: hidden !important;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
+    }
 
-#info-box.mobile-active .card-img-side {
-    flex: 0 0 120px !important; /* 固定圖片寬度 */
-    height: 100% !important;
-}
+    /* 圖片區塊：防止在手機上變形 */
+    #info-box.mobile-active .card-img-side {
+        width: 130px !important;
+        flex-shrink: 0 !important; /* 🌟 防止圖片被擠壓 */
+        height: 160px !important;
+    }
 
-#info-box.mobile-active .preview-content {
-    flex: 1 !important; /* 強制文字佔滿剩餘空間 */
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    padding: 15px !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    color: white !important;
-}
+    #info-box.mobile-active .card-img-side img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
 
-#info-box.mobile-active h3 {
-    color: white !important;
-    margin: 0 0 5px 0 !important;
-    font-size: 1.1rem !important;
-}
+    /* 文字區塊：強制出現 */
+    #info-box.mobile-active .preview-content {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        padding: 15px !important;
+        background: transparent !important; /* 確保不擋住背景毛玻璃 */
+        min-width: 0 !important; /* 防止文字溢出 */
+    }
 
-#info-box.mobile-active p {
-    color: rgba(255,255,255,0.9) !important;
-    margin: 0 !important;
-    font-size: 0.85rem !important;
+    /* 確保所有文字標籤都是白色的 */
+    #info-box.mobile-active .preview-content h3, 
+    #info-box.mobile-active .preview-content p,
+    #info-box.mobile-active .preview-content div {
+        color: white !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: block !important;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+    }
+
+    #info-box.mobile-active .preview-content h3 {
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 6px !important;
+    }
+
+    #info-box.mobile-active .preview-content p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+    }
 }
