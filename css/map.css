@@ -127,85 +127,96 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
     font-size: 0.7rem;
 }
 
-/* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
+/* --- 手機版終極修正補丁 --- */
 @media screen and (max-width: 1024px) {
-    /* 🌟 核心補丁：強制讓手機版內的卡片結構顯示出來 */
-    #info-box.mobile-active .map-preview-card,
-    #info-box.mobile-active .preview-content,
-    #info-box.mobile-active .card-img-side {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
-    /* 1. 修正毛玻璃背景與漸層 (更清透) */
+    /* 1. 外殼容器：負責漸層色與毛玻璃 */
     #info-box.mobile-active {
-        background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
-        backdrop-filter: blur(15px) !important;
-        -webkit-backdrop-filter: blur(15px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.85) 0%, rgba(147, 51, 234, 0.85) 100%) !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
     }
 
-    /* 2. 移除卡片內層背景，避免顏色疊加變太深 */
+    /* 2. 強制內容顯現：解決「除了圖片都消失」的問題 */
+    .mobile-active .map-preview-card,
+    .mobile-active .preview-content,
+    .mobile-active .preview-content * {
+        display: block !important; /* 解除電腦版可能的 display: none */
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: white !important; /* 強制文字變白 */
+    }
+
+    /* 3. 佈局重整：圖左 (1/3) 文右 (2/3) */
     .mobile-active .map-preview-card {
-        background: transparent !important;
         display: flex !important;
         flex-direction: row !important;
         width: 100% !important;
         height: 100% !important;
-        box-shadow: none !important;
+        background: transparent !important;
     }
 
-    /* 3. 圖片比例 1/3 */
     .mobile-active .card-img-side {
-        flex: 0 0 33.33% !important;
-        width: 33.33% !important;
+        flex: 0 0 33.33% !important; /* 圖片佔 1/3 */
+        max-width: 33.33% !important;
         height: 100% !important;
     }
 
-    /* 4. 復刻 UNESCO 顏色 (這是你最在意的部分) */
+    .mobile-active .card-img-side img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+
+    /* 4. 文字區域細節：允許生長以填滿剩餘的 2/3 空間 */
+    .mobile-active .preview-content {
+        flex: 1 !important; /* 🌟 拿走剩下的所有空間 */
+        padding: 15px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .mobile-active .preview-content h3 {
+        font-size: 1.1rem !important;
+        margin: 0 0 5px 0 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 5. 標籤與摘要 */
+    .mobile-active .location-wrapper {
+        margin-bottom: 5px !important;
+    }
+
+    .mobile-active .badge {
+        background: rgba(255, 255, 255, 0.2) !important;
+        padding: 2px 6px !important;
+        border-radius: 4px !important;
+        font-size: 0.7rem !important;
+    }
+
     .mobile-active .unesco-badge {
-        padding: 3px 10px !important;
-        border-radius: 6px !important;
+        margin: 4px 0 !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
         font-size: 0.65rem !important;
         font-weight: bold !important;
-        color: white !important;
-        display: inline-block !important;
-        margin-bottom: 5px !important;
-        opacity: 1 !important;
+        width: fit-content !important;
     }
     .mobile-active .unesco-natural { background: #27ae60 !important; }
     .mobile-active .unesco-cultural { background: #e67e22 !important; }
     .mobile-active .unesco-mixed { background: #8e44ad !important; }
 
-    /* 5. 修正文字顯示與順序 */
-    .mobile-active .preview-content {
-        flex: 1 !important;
-        padding: 12px 18px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: flex-start !important; /* 改為靠上，與電腦版一致 */
-    }
-
-    .mobile-active .preview-content h3 {
-        color: white !important;
-        font-size: 1.15rem !important;
-        margin: 0 0 8px 0 !important; /* 增加標題下方間距 */
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
-    }
-
-    /* 地點標籤與摘要 */
-    .mobile-active .location-wrapper { margin-bottom: 5px !important; }
-    .mobile-active .badge {
-        background: rgba(255, 255, 255, 0.2) !important;
-        color: white !important;
-        padding: 2px 8px !important;
-        border-radius: 4px !important;
-    }
-
     .mobile-active .preview-content p {
-        color: rgba(255, 255, 255, 0.95) !important;
         font-size: 0.85rem !important;
-        line-height: 1.5 !important;
-        margin-top: 5px !important;
+        line-height: 1.4 !important;
+        margin-top: 4px !important;
+        /* 限制兩行 */
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 }
