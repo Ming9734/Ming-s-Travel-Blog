@@ -127,36 +127,69 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
     font-size: 0.7rem;
 }
 
+/* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
-    /* 直接鎖定 ID，強制讓它顯示漸層背景 */
-    #info-box {
-        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
+    /* 1. 強制讓最外層容器顯示 */
+    #info-box.mobile-active {
         display: flex !important;
+        background: #4f46e5 !important; /* 保底色 */
+        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important; /* 🌟 強制 1.0 不透明 */
         border-radius: 20px !important;
         overflow: hidden !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
     }
 
-    /* 強制內部的文字區塊撐開並顯示顏色 */
-    #info-box .preview-content {
+    /* 2. 確保卡片內部寬度 */
+    #info-box.mobile-active .map-preview-card {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: transparent !important; /* 讓最外層的漸層透出來 */
+        border: none !important;
+    }
+
+    /* 3. 圖片區塊 */
+    #info-box.mobile-active .card-img-side {
+        width: 120px !important;
+        min-width: 120px !important;
+        height: 160px !important;
+    }
+
+    /* 4. 🌟 文字區塊：強制取消原本的 0.3 透明度 🌟 */
+    #info-box.mobile-active .preview-content {
         flex: 1 !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         padding: 15px !important;
-        color: white !important; /* 文字白色 */
-        background: rgba(255, 255, 255, 0.1) !important; /* 微透明底色，確保區塊存在 */
+        background: transparent !important; /* 取消 0.3 的漸層，改用最外層的 1.0 漸層 */
+        backdrop-filter: none !important; /* 手機版關閉模糊以提升效能與清晰度 */
         visibility: visible !important;
         opacity: 1 !important;
     }
 
-    #info-box .preview-content h3 {
+    /* 5. 文字顏色強制白色 */
+    #info-box.mobile-active h3,
+    #info-box.mobile-active .preview-content h3 {
         color: white !important;
         display: block !important;
         margin: 0 0 5px 0 !important;
+        font-size: 1.1rem !important;
+        text-shadow: none !important;
     }
 
-    #info-box .preview-content p {
+    #info-box.mobile-active p,
+    #info-box.mobile-active .preview-content p {
         color: rgba(255, 255, 255, 0.9) !important;
         display: block !important;
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+        -webkit-line-clamp: 3 !important; /* 手機版多給一行字 */
+    }
+
+    #info-box.mobile-active .badge {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
     }
 }
