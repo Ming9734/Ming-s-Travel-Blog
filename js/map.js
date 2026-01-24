@@ -2,32 +2,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');
     if (!mapContainer) return;
 
-    // 判斷是否為觸控裝置或窄螢幕
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024;
 
-    // 1. 初始化地圖
     const map = L.map('map').setView([48.8566, 2.3522], 5);
 
-    // 2. 載入底圖
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // 3. 標記群組
     const clusterGroup = L.markerClusterGroup({
         spiderfyOnMaxZoom: true,
         showCoverageOnHover: false,
         maxClusterRadius: 40
     });
 
-    // 4. 建立預覽盒子
     const infoBox = document.createElement('div');
     infoBox.id = 'info-box';
     infoBox.style.display = 'none';
     mapContainer.appendChild(infoBox);
 
-    // --- 🌟 封裝渲染函式：修正手機跳轉與結構 ---
+    // --- 🌟 統一渲染函式：電腦與手機共用同一套 Class 結構 ---
     function renderCard(p) {
         let unescoTag = '';
         if (p.unescoType) {
@@ -39,8 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>`;
         }
         
-        // 核心修正：外層增加 onclick 確保手機點擊即跳轉
-        // 結構修正：加入 card-img-side 容器確保「圖左文右」
+        // 統一使用 map-preview-card 結構，這樣 CSS 才抓得到
         infoBox.innerHTML = `
             <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'">
                 <div class="card-img-side">
@@ -59,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // 5. 抓取資料
     fetch('data/posts.json')
         .then(r => r.json())
         .then(posts => {
@@ -80,34 +73,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 marker.options.originalIcon = baseIcon;
 
                 if (!isTouch) {
-                    // --- 電腦版事件 ---
+                    // --- 電腦版：保留原本 hover 邏輯 ---
                     marker.on('mouseover', () => {
                         marker.setIcon(bigIcon);
                         renderCard(p); 
+                        infoBox.className = 'marker-info'; // 套用電腦版預設樣式
                         infoBox.style.display = 'block';
-                        infoBox.style.opacity = '1';
                     });
 
                     marker.on('mousemove', (e) => {
                         const pos = e.containerPoint;
                         const padding = 20;
-                        const edgeBuffer = 15;
                         const cardWidth = infoBox.offsetWidth;
                         const cardHeight = infoBox.offsetHeight;
                         const containerWidth = mapContainer.clientWidth;
                         const containerHeight = mapContainer.clientHeight;
 
                         let leftPos = pos.x + padding;
-                        if (leftPos + cardWidth + edgeBuffer > containerWidth) {
-                            leftPos = pos.x - cardWidth - padding;
-                        }
-                        leftPos = Math.max(edgeBuffer, leftPos);
-
+                        if (leftPos + cardWidth > containerWidth) leftPos = pos.x - cardWidth - padding;
+                        
                         let topPos = pos.y + padding;
-                        if (topPos + cardHeight + edgeBuffer > containerHeight) {
-                            topPos = pos.y - cardHeight - padding;
-                        }
-                        topPos = Math.max(edgeBuffer, topPos);
+                        if (topPos + cardHeight > containerHeight) topPos = pos.y - cardHeight - padding;
 
                         infoBox.style.left = leftPos + 'px';
                         infoBox.style.top = topPos + 'px';
@@ -123,46 +109,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 🌟 手機版終極外科手術 ---
-    marker.on('click', (e) => {
-        L.DomEvent.stopPropagation(e); 
-        
-        clusterGroup.eachLayer(m => {
-            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
-        });
-        
-        marker.setIcon(bigIcon);
-        renderCard(p); 
-        
-        // 1. 搬移到 body
-        document.body.appendChild(infoBox); 
-        
-        // 2. 🌟 關鍵：移除所有舊的 class，防止 .marker-info 的樣式干擾
-        infoBox.className = ''; 
-        
-        // 3. 重新強制寫入樣式
-        infoBox.style.cssText = `
-            display: flex !important;
-            position: fixed !important;
-            bottom: 30px !important;
-            left: 5% !important;
-            width: 90% !important;
-            height: 160px !important; /* 🌟 這裡要與 CSS 的高度一致 */
-            z-index: 9999999 !important;
-            top: auto !important;
-            transform: none !important;
-            pointer-events: auto !important;
-            background: transparent !important; 
-        `;
-    });
-}
-
+                    // --- 手機版：強力定位手術 ---
+                    marker.on('click', (e) => {
+                        L.DomEvent.stopPropagation(e); 
+                        
+                        clusterGroup.eachLayer(m => {
+                            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
+                        });
+                        
+                        marker.setIcon(bigIcon);
+                        renderCard(p); 
+                        
+                        document.body.appendChild(infoBox); // 移出地圖，防止裁切
+                        infoBox.className = ''; // 移除電腦版樣式，完全由手機媒體查詢控制
+                        
+                        infoBox.style.cssText = `
+                            display: flex !important;
+                            position: fixed !important;
+                            bottom: 30px !important;
+                            left: 5% !important;
+                            width: 90% !important;
+                            height: 160px !important;
+                            z-index: 9999999 !important;
+                            top: auto !important;
+                            transform: none !important;
+                            background: transparent !important;
+                            pointer-events: auto !important;
+                        `;
+                    });
+                }
                 clusterGroup.addLayer(marker);
             });
 
             map.addLayer(clusterGroup);
 
-            // 點擊空白處關閉卡片並恢復 Pin
             map.on('click', () => {
                 infoBox.style.display = 'none';
                 clusterGroup.eachLayer(m => {
@@ -173,9 +153,5 @@ document.addEventListener('DOMContentLoaded', () => {
             if (posts.length > 0) {
                 map.fitBounds(clusterGroup.getBounds().pad(0.1));
             }
-
-            setTimeout(() => { map.invalidateSize(); }, 400);
         });
-
-    window.addEventListener('resize', () => { map.invalidateSize(); });
 });
