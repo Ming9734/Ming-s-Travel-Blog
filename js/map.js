@@ -137,19 +137,28 @@ document.addEventListener('DOMContentLoaded', () => {
         infoBox.className = 'marker-info mobile-active'; 
         
         infoBox.style.cssText = `
-            display: flex !important;
-            position: fixed !important;
-            bottom: 30px !important;
-            left: 5% !important;
-            width: 90% !important;
-            height: 160px !important;
-            z-index: 9999999 !important;
-            background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
-            border-radius: 20px !important;
-        `;
+    display: flex !important;
+    position: fixed !important;
+    bottom: 30px !important;
+    left: 5% !important;
+    width: 90% !important;
+    height: 160px !important;
+    z-index: 9999999 !important;
+    top: auto !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    
+    /* 🌟 改回半透明背景，讓毛玻璃生效 */
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.85) 0%, rgba(147, 51, 234, 0.85) 100%) !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    
+    /* 🌟 核心：開啟毛玻璃效果 */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+`;
     });
 }
 
