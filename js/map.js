@@ -124,41 +124,53 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 📱 手機版終極外科手術 ---
+    // --- 📱 手機版：暴力注入與強制撐開 ---
     marker.on('click', (e) => {
         if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
         
-        renderCard(p); // 確保這裡面生成的 HTML 包含 .preview-content
-        
+        // 1. 先搬移
         document.body.appendChild(infoBox); 
-        // 🌟 確保 ID 和 Class 同時存在
         infoBox.id = 'info-box';
         infoBox.className = 'marker-info mobile-active'; 
-        
+
+        // 2. 🌟 暴力注入 HTML (直接在這裡寫，確保內容一定有進去)
+        // 請確保 p.img, p.title, p.summary 這些變數名稱與你的資料結構一致
+        infoBox.innerHTML = `
+            <div class="map-preview-card" style="display:flex !important; width:100% !important; height:100% !important;">
+                <div class="card-img-side" style="flex:0 0 120px !important; height:160px !important; overflow:hidden !important;">
+                    <img src="${p.img}" style="width:100% !important; height:100% !important; object-fit:cover !important;">
+                </div>
+                <div class="preview-content" style="flex:1 !important; padding:15px !important; display:flex !important; flex-direction:column !important; justify-content:center !important; min-width:0 !important;">
+                    <h3 style="color:white !important; margin:0 0 5px 0 !important; font-size:1.1rem !important; display:block !important;">${p.title}</h3>
+                    <p style="color:rgba(255,255,255,0.9) !important; margin:0 !important; font-size:0.85rem !important; display:block !important; line-height:1.4 !important;">${p.summary || ''}</p>
+                </div>
+            </div>
+        `;
+
+        // 3. 強制刷上外殼樣式 (包含毛玻璃)
         infoBox.style.cssText = `
-    display: flex !important;
-    position: fixed !important;
-    bottom: 30px !important;
-    left: 5% !important;
-    width: 90% !important;
-    height: 160px !important;
-    z-index: 9999999 !important;
-    top: auto !important;
-    transform: none !important;
-    pointer-events: auto !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    
-    /* 🌟 改回半透明背景，讓毛玻璃生效 */
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.85) 0%, rgba(147, 51, 234, 0.85) 100%) !important;
-    border-radius: 20px !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    
-    /* 🌟 核心：開啟毛玻璃效果 */
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-`;
+            display: flex !important;
+            position: fixed !important;
+            bottom: 30px !important;
+            left: 5% !important;
+            width: 90% !important;
+            height: 160px !important;
+            z-index: 9999999 !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.85) 0%, rgba(147, 51, 234, 0.85) 100%) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+        `;
+        
+        // 4. 恢復 Marker 圖示邏輯
+        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
+        marker.setIcon(bigIcon);
     });
 }
 
