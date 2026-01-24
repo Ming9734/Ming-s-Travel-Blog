@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         let unescoTag = '';
                         if (p.unescoType) {
                             unescoTag = `
-                                <div style="${unescoStyle} color: rgba(0, 0, 0, 0.75); padding: 3px 12px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: table !important; width: auto !important; margin: 4px 0 8px 0; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5); text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);">
+                                <div style="${unescoStyle} color: rgba(0, 0, 0, 0.75); padding: 3px 12px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: inline-block !important; margin: 4px 0 8px 0; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5); text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);">
                                     ${typeNames[p.unescoType]}
                                 </div>`;
                         }
@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             border: 1px solid rgba(255, 255, 255, 0.3) !important;
                             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
                             overflow: hidden !important;
-                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.45) 0%, rgba(147, 51, 234, 0.45) 100%) !important;
+                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.3) 0%, rgba(147, 51, 234, 0.3) 100%) !important;
                             backdrop-filter: blur(12px) saturate(150%) !important;
                             -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
                             cursor: pointer !important;
