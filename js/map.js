@@ -124,44 +124,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
+    // 手機版：點擊標記
     marker.on('click', (e) => {
-        if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
         
+        // 🌟 關鍵：直接叫工廠開工，內容會自動填入 infoBox
+        renderCard(p); 
+
+        // 顯示並移動盒子
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
         infoBox.className = 'marker-info mobile-active'; 
 
-        // 🛡️ 資料準備
-        const title = p.title || "Untitled";
-        const summary = p.summary || "";
-        const imgSrc = p.preview || "";
-        const locationText = `${p.city || ''} , ${p.country || ''}`;
-        
-        // 🌟 依照你要求調整順序：Title -> Badge -> Summary
-        let unescoTag = '';
-        if (p.unescoType) {
-            unescoTag = `<div class="unesco-badge unesco-${p.unescoType}">UNESCO ${p.unescoType.toUpperCase()}</div>`;
-        }
-
-        infoBox.innerHTML = `
-            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'">
-                <div class="card-img-side">
-                    <img src="${imgSrc}" alt="${title}">
-                </div>
-                <div class="preview-content">
-                    <h3>${title}</h3>
-                    <div class="badge-container">
-                        <span class="badge">${locationText}</span>
-                        ${unescoTag}
-                    </div>
-                    <p>${summary}</p>
-                    <span class="click-hint">Click to read more</span>
-                </div>
-            </div>
-        `;
-
-        // 🌟 樣式回歸：背景透明度設為 0.3 以啟動毛玻璃，其餘交給 CSS
+        // 只給必要的「定位」與「毛玻璃」樣式，顏色讓 CSS 決定
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
@@ -169,20 +144,17 @@ document.addEventListener('DOMContentLoaded', () => {
             left: 5% !important;
             width: 90% !important;
             height: 160px !important;
-            z-index: 9999999 !important;
+            z-index: 9999;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.9) 0%, rgba(147, 51, 234, 0.9) 100%) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            overflow: hidden;
             visibility: visible !important;
             opacity: 1 !important;
-            pointer-events: auto !important;
-            background: transparent !important; /* 讓卡片的漸層秀出來 */
-            backdrop-filter: blur(15px) !important;
-            -webkit-backdrop-filter: blur(15px) !important;
         `;
-        
-        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
-        marker.setIcon(bigIcon);
     });
 }
-
                 clusterGroup.addLayer(marker);
             });
 
