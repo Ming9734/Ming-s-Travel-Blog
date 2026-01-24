@@ -129,55 +129,41 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
-    /* 確保容器具備毛玻璃底色 */
-    #info-box.mobile-active {
-        overflow: hidden !important;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.4) !important;
-    }
-
-    /* 圖片區塊：防止在手機上變形 */
-    #info-box.mobile-active .card-img-side {
-        width: 130px !important;
-        flex-shrink: 0 !important; /* 🌟 防止圖片被擠壓 */
-        height: 160px !important;
-    }
-
-    #info-box.mobile-active .card-img-side img {
+    /* 1. 確保卡片內容強行撐開 */
+    .mobile-active .map-preview-card {
+        display: flex !important;
         width: 100% !important;
         height: 100% !important;
-        object-fit: cover !important;
+        background: transparent !important;
     }
 
-    /* 文字區塊：強制出現 */
-    #info-box.mobile-active .preview-content {
+    /* 2. 文字容器：防止縮小到 0 */
+    .mobile-active .preview-content {
         flex: 1 !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         padding: 15px !important;
-        background: transparent !important; /* 確保不擋住背景毛玻璃 */
-        min-width: 0 !important; /* 防止文字溢出 */
-    }
-
-    /* 確保所有文字標籤都是白色的 */
-    #info-box.mobile-active .preview-content h3, 
-    #info-box.mobile-active .preview-content p,
-    #info-box.mobile-active .preview-content div {
         color: white !important;
         visibility: visible !important;
         opacity: 1 !important;
+        overflow: hidden !important;
+    }
+
+    /* 3. 強制文字標籤顯示 */
+    .mobile-active .preview-content h3,
+    .mobile-active .preview-content p {
+        color: white !important;
         display: block !important;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin: 0 0 5px 0 !important;
     }
 
-    #info-box.mobile-active .preview-content h3 {
-        font-size: 1.15rem !important;
-        font-weight: 700 !important;
-        margin-bottom: 6px !important;
-    }
-
-    #info-box.mobile-active .preview-content p {
-        font-size: 0.9rem !important;
-        line-height: 1.4 !important;
+    /* 4. 勳章區塊 */
+    .mobile-active .badge-container {
+        display: flex !important;
+        gap: 6px !important;
+        margin-bottom: 4px !important;
     }
 }
