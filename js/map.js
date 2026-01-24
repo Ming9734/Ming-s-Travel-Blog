@@ -124,35 +124,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
+    // --- 📱 手機版：資料對接與樣式修復版 ---
     marker.on('click', (e) => {
+        // 1. 徹底阻斷地圖點擊事件
         if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
         
+        // 2. 搬移容器並確保 ID 正確
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
         infoBox.className = 'marker-info mobile-active'; 
 
-        // 🌟 重新建構完整的 HTML (包含勳章)
-        // 檢查 p.imgUrl 或 p.image，確保變數名正確
-        const imgSrc = p.img || p.imgUrl || p.image || ''; 
-        
+        // 3. 🛡️ 資料防錯處理 (確保抓到 posts.json 的內容)
+        const title = p.title || "無標題";
+        const summary = p.summary || p.description || "";
+        const imgSrc = p.img || p.image || p.imgUrl || ""; // 多重備份抓取圖片路徑
+        const location = p.location || "景點位置";
+        const hasUnesco = !!p.unesco; // 判斷有無 UNESCO
+
+        // 4. 注入 HTML
         infoBox.innerHTML = `
             <div class="map-preview-card">
                 <div class="card-img-side">
-                    <img src="${imgSrc}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+                    <img src="${imgSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/150?text=Image+Error'">
                 </div>
                 <div class="preview-content">
                     <div class="badge-container">
-                        ${p.unesco ? `<span class="badge unesco-badge">UNESCO</span>` : ''}
-                        <span class="badge location-badge">${p.location || 'Location'}</span>
+                        ${hasUnesco ? `<span class="badge unesco-badge">UNESCO</span>` : ''}
+                        <span class="badge location-badge">${location}</span>
                     </div>
-                    <h3>${p.title}</h3>
-                    <p>${p.summary || ''}</p>
+                    <h3>${title}</h3>
+                    <p>${summary}</p>
                 </div>
             </div>
         `;
 
-        // 🌟 樣式修正：確保毛玻璃效果的背景是「半透明」的
+        // 5. 🎨 樣式與毛玻璃 (強制寫入以覆蓋 CSS 衝突)
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
@@ -164,13 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
-            /* 這裡必須是 rgba 半透明，毛玻璃才會生效 */
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.75) 0%, rgba(147, 51, 234, 0.75) 100%) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            /* 毛玻璃核心：背景必須有透明度 */
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
             border-radius: 20px !important;
-            border: 1px solid rgba(255,255,255,0.4) !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
         `;
     });
 }
