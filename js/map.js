@@ -137,63 +137,84 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgSrc = p.preview || "";
         const locationText = `${p.city || ''} , ${p.country || ''}`;
         
-        // UNESCO 顏色直接在 JS 判斷並寫死顏色，確保 100% 讀取
-        let unescoColor = '#f39c12'; // 預設橘色
-        if (p.unescoType === 'natural') unescoColor = '#27ae60';
-        if (p.unescoType === 'mixed') unescoColor = '#8e44ad';
+        // --- 🌟 完美復刻電腦版 UNESCO 金屬漸層 ---
+        let unescoStyle = '';
+        const typeNames = {
+            'natural': 'UNESCO Natural Heritage',
+            'cultural': 'UNESCO Cultural Heritage',
+            'mixed': 'UNESCO Mixed Heritage'
+        };
+
+        if (p.unescoType === 'natural') {
+            // 🌿 自然遺產：Emerald Gold
+            unescoStyle = 'background: linear-gradient(145deg, #a8e6cf 0%, #34d399 50%, #10b981 100%); border-bottom: 2px solid #059669;';
+        } else if (p.unescoType === 'cultural') {
+            // 🏛️ 文化遺產：Polished Gold
+            unescoStyle = 'background: linear-gradient(145deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%); border-bottom: 2px solid #b45309;';
+        } else if (p.unescoType === 'mixed') {
+            // 🎨 複合遺產：Ametrine
+            unescoStyle = 'background: linear-gradient(145deg, #e9d5ff 0%, #a855f7 50%, #7e22ce 100%); border-bottom: 2px solid #6b21a8;';
+        }
 
         let unescoTag = '';
         if (p.unescoType) {
-            const typeNames = {
-                'natural': 'UNESCO Natural Heritage',
-                'cultural': 'UNESCO Cultural Heritage',
-                'mixed': 'UNESCO Mixed Heritage'
-            };
-            unescoTag = `<div class="unesco-badge" style="background:${unescoColor} !important; color:white; padding:2px 8px; border-radius:4px; font-size:0.65rem; display:inline-block; margin: 0 0 5px 0; font-weight:bold;">${typeNames[p.unescoType]}</div>`;
+            unescoTag = `
+                <div style="${unescoStyle} color: rgba(0, 0, 0, 0.75); padding: 3px 12px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: table; margin: 4px 0 8px 0; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5); text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);">
+                    ${typeNames[p.unescoType]}
+                </div>`;
         }
 
-        // 🌟 核心修正：將所有「填滿」、「透明」、「比例」樣式直接寫在 HTML 標籤上
         infoBox.innerHTML = `
-            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'" 
-                 style="display:flex !important; width:100% !important; height:100% !important; background:transparent !important; border:none !important; box-shadow:none !important; padding:0 !important; margin:0 !important;">
+            <div onclick="window.location.href='post.html?id=${p.id}'" 
+                 style="display:flex !important; width:100% !important; height:100% !important; background:transparent !important;">
                 
-                <div class="card-img-side" style="flex:0 0 33.33% !important; height:100% !important; margin:0 !important; padding:0 !important; overflow:hidden;">
+                <div style="flex:0 0 33.33% !important; height:100% !important; overflow:hidden;">
                     <img src="${imgSrc}" style="width:100% !important; height:100% !important; object-fit:cover !important; display:block !important;">
                 </div>
 
-                <div class="preview-content" style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; color:white !important; background:transparent !important; min-width:0 !important;">
-                    <div style="margin: 0 0 4px 0 !important;">
-                        <span style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:4px; font-size:0.65rem;">${locationText}</span>
+                <div style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; min-width:0 !important;">
+                    
+                    <div style="margin-bottom: 4px;">
+                        <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.7rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
+                            ${locationText}
+                        </span>
                     </div>
+
                     ${unescoTag}
-                    <h3 style="margin:0 0 4px 0 !important; font-size:1.1rem !important; color:white !important; line-height:1.2 !important; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</h3>
-                    <p style="margin:0 !important; font-size:0.85rem !important; opacity:0.9 !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
+
+                    <h3 style="margin:0 0 4px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">
+                        ${title}
+                    </h3>
+
+                    <p style="margin:0 0 8px 0 !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
+                        ${summary}
+                    </p>
+
+                    <div style="font-size:0.75rem; color:#E6E6FA; font-weight:600; display:flex; align-items:center; margin-top:auto;">
+                        Click to read more <span style="margin-left:4px;">➜</span>
+                    </div>
                 </div>
             </div>
         `;
 
-        // 🌟 外殼：調整 Alpha 讓毛玻璃變明顯
+        // --- 🌟 調整透明度至 0.45 以對齊電腦版的清透感 ---
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
             bottom: 25px !important;
             left: 5% !important;
             width: 90% !important;
-            height: 180px !important; 
+            height: 185px !important; 
             z-index: 9999999 !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
-            
-            /* 毛玻璃漸層：背景必須非常透明 (0.6) */
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.6) 0%, rgba(147, 51, 234, 0.6) 100%) !important;
-            backdrop-filter: blur(20px) saturate(180%) !important;
-            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-            
             border-radius: 20px !important;
             border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
             overflow: hidden !important;
+            
+            /* 調整為 0.45 透明度，既透地圖又能看到藍紫漸層 */
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.45) 0%, rgba(147, 51, 234, 0.45) 100%) !important;
+            backdrop-filter: blur(12px) saturate(150%) !important;
+            -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
         `;
 
         clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
