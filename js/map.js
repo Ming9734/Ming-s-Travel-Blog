@@ -124,20 +124,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 📱 手機版：穩定渲染 ---
+    // --- 📱 手機版：穩定渲染邏輯 ---
     marker.on('click', (e) => {
+        // 阻止地圖點擊事件干擾
         if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
 
-        // 1. 確保容器掛載到 body (這步你做得對，能避開地圖剪裁)
+        // 1. 執行渲染函式 (確保內容填入)
+        renderCard(p); 
+
+        // 2. 搬移至 body 並標記類別
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
         infoBox.className = 'marker-info mobile-active'; 
 
-        // 2. 執行渲染函式
-        renderCard(p); 
-
-        // 3. 🌟 只負責「位置」與「顯示」，其餘交給 CSS
+        // 3. 強制注入基礎定位與毛玻璃啟動
+        // 注意：背景色設為 transparent，讓 CSS 的漸層出來
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
@@ -149,8 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
             visibility: visible !important;
             opacity: 1 !important;
             pointer-events: auto !important;
+            background: transparent !important; 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            overflow: hidden;
         `;
 
+        // 恢復其他標記大小
         clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
         marker.setIcon(bigIcon);
     });
