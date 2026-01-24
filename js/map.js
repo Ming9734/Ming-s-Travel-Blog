@@ -124,19 +124,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // 手機版：點擊標記
+    // --- 📱 手機版：穩定渲染與毛玻璃恢復 ---
     marker.on('click', (e) => {
+        if (e.originalEvent) e.originalEvent.stopPropagation();
         L.DomEvent.stopPropagation(e); 
-        
-        // 🌟 關鍵：直接叫工廠開工，內容會自動填入 infoBox
-        renderCard(p); 
 
-        // 顯示並移動盒子
+        // 1. 確保容器掛載到 body 並重置狀態
         document.body.appendChild(infoBox); 
         infoBox.id = 'info-box';
-        infoBox.className = 'marker-info mobile-active'; 
+        infoBox.className = 'marker-info mobile-active'; // 觸發你的 CSS @media 邏輯
 
-        // 只給必要的「定位」與「毛玻璃」樣式，顏色讓 CSS 決定
+        // 2. 執行渲染函式 (產出 HTML 結構)
+        renderCard(p); 
+
+        // 3. 🌟 強制注入毛玻璃與基礎佈局 🌟
+        // 背景使用 rgba(..., 0.1) 讓 CSS 的漸層與毛玻璃能同時生效
         infoBox.style.cssText = `
             display: flex !important;
             position: fixed !important;
@@ -144,15 +146,25 @@ document.addEventListener('DOMContentLoaded', () => {
             left: 5% !important;
             width: 90% !important;
             height: 160px !important;
-            z-index: 9999;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.9) 0%, rgba(147, 51, 234, 0.9) 100%) !important;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 20px;
-            overflow: hidden;
+            z-index: 9999999 !important;
             visibility: visible !important;
             opacity: 1 !important;
+            pointer-events: auto !important;
+            
+            /* 毛玻璃核心 */
+            background: rgba(255, 255, 255, 0.1) !important; 
+            backdrop-filter: blur(20px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+            
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            overflow: hidden !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
         `;
+
+        // 4. 更新標籤狀態
+        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
+        marker.setIcon(bigIcon);
     });
 }
                 clusterGroup.addLayer(marker);
