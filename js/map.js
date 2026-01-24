@@ -153,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             top: auto !important;
             transform: none !important;
             pointer-events: auto !important;
-            background: transparent !important; 
         `;
     });
 }
