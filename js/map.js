@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(infoBox); 
         
         // 2. 🌟 關鍵：移除所有舊的 class，防止 .marker-info 的樣式干擾
-        infoBox.className = ''; 
+        infoBox.className = 'mobile-active'; 
         
         // 3. 重新強制寫入樣式
         infoBox.style.cssText = `
