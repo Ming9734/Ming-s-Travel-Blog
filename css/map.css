@@ -129,41 +129,43 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
-    /* 1. 確保卡片內容強行撐開 */
+    /* 1. 確保卡片容器是橫向排列 */
     .mobile-active .map-preview-card {
         display: flex !important;
+        flex-direction: row !important;
         width: 100% !important;
         height: 100% !important;
-        background: transparent !important;
     }
 
-    /* 2. 文字容器：防止縮小到 0 */
-    .mobile-active .preview-content {
-        flex: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        padding: 15px !important;
-        color: white !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+    /* 2. 🌟 圖片寬度修正：強制佔比，不允許縮小 🌟 */
+    .mobile-active .card-img-side {
+        width: 140px !important;       /* 增加一點寬度到 140px */
+        flex: 0 0 140px !important;    /* 關鍵：flex-shrink 設為 0 */
+        height: 100% !important;
         overflow: hidden !important;
     }
 
-    /* 3. 強制文字標籤顯示 */
-    .mobile-active .preview-content h3,
-    .mobile-active .preview-content p {
-        color: white !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        margin: 0 0 5px 0 !important;
+    .mobile-active .card-img-side img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important; /* 確保圖片不變形 */
     }
 
-    /* 4. 勳章區塊 */
+    /* 3. 文字內容微調 */
+    .mobile-active .preview-content {
+        flex: 1 !important;
+        min-width: 0 !important;       /* 防止文字撐破容器 */
+        padding: 15px 18px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+
+    /* 4. 勳章微調 */
     .mobile-active .badge-container {
         display: flex !important;
-        gap: 6px !important;
-        margin-bottom: 4px !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
+        margin-bottom: 6px !important;
     }
 }
