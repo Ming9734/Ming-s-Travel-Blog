@@ -124,109 +124,96 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    marker.on('click', (e) => {
-        if (e.originalEvent) e.originalEvent.stopPropagation();
-        L.DomEvent.stopPropagation(e); 
+                    marker.on('click', (e) => {
+                        // 阻止事件冒泡到地圖
+                        if (e.originalEvent) e.originalEvent.stopPropagation();
+                        L.DomEvent.stopPropagation(e); 
 
-        document.body.appendChild(infoBox); 
-        infoBox.id = 'info-box';
-        infoBox.className = 'marker-info mobile-active'; 
+                        document.body.appendChild(infoBox); 
+                        infoBox.id = 'info-box';
+                        infoBox.className = 'marker-info mobile-active';
+                        
+                        // 🌟 重要：確保手機版點開時是顯示狀態
+                        infoBox.style.display = 'flex';
 
-        const title = p.title || "Untitled";
-        const summary = p.summary || "";
-        const imgSrc = p.preview || "";
-        const locationText = `${p.city || ''} , ${p.country || ''}`;
-        
-        // --- 🌟 完美復刻電腦版 UNESCO 金屬漸層 ---
-        let unescoStyle = '';
-        const typeNames = {
-            'natural': 'UNESCO Natural Heritage',
-            'cultural': 'UNESCO Cultural Heritage',
-            'mixed': 'UNESCO Mixed Heritage'
-        };
+                        const title = p.title || "Untitled";
+                        const summary = p.summary || "";
+                        const imgSrc = p.preview || "";
+                        const locationText = `${p.city || ''} , ${p.country || ''}`;
+                        
+                        // --- UNESCO 金屬漸層 ---
+                        let unescoStyle = '';
+                        const typeNames = {
+                            'natural': 'UNESCO Natural Heritage',
+                            'cultural': 'UNESCO Cultural Heritage',
+                            'mixed': 'UNESCO Mixed Heritage'
+                        };
 
-        if (p.unescoType === 'natural') {
-            // 🌿 自然遺產：Emerald Gold
-            unescoStyle = 'background: linear-gradient(145deg, #a8e6cf 0%, #34d399 50%, #10b981 100%); border-bottom: 2px solid #059669;';
-        } else if (p.unescoType === 'cultural') {
-            // 🏛️ 文化遺產：Polished Gold
-            unescoStyle = 'background: linear-gradient(145deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%); border-bottom: 2px solid #b45309;';
-        } else if (p.unescoType === 'mixed') {
-            // 🎨 複合遺產：Ametrine
-            unescoStyle = 'background: linear-gradient(145deg, #e9d5ff 0%, #a855f7 50%, #7e22ce 100%); border-bottom: 2px solid #6b21a8;';
-        }
+                        if (p.unescoType === 'natural') {
+                            unescoStyle = 'background: linear-gradient(145deg, #a8e6cf 0%, #34d399 50%, #10b981 100%); border-bottom: 2px solid #059669;';
+                        } else if (p.unescoType === 'cultural') {
+                            unescoStyle = 'background: linear-gradient(145deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%); border-bottom: 2px solid #b45309;';
+                        } else if (p.unescoType === 'mixed') {
+                            unescoStyle = 'background: linear-gradient(145deg, #e9d5ff 0%, #a855f7 50%, #7e22ce 100%); border-bottom: 2px solid #6b21a8;';
+                        }
 
-        let unescoTag = '';
-        if (p.unescoType) {
-            unescoTag = `
-                <div style="${unescoStyle} color: rgba(0, 0, 0, 0.75); padding: 3px 12px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: table; width: auto !important; margin: 4px 0 8px 0; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5); text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);">
-                    ${typeNames[p.unescoType]}
-                </div>`;
-        }
+                        let unescoTag = '';
+                        if (p.unescoType) {
+                            unescoTag = `
+                                <div style="${unescoStyle} color: rgba(0, 0, 0, 0.75); padding: 3px 12px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: table !important; width: auto !important; margin: 4px 0 8px 0; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5); text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);">
+                                    ${typeNames[p.unescoType]}
+                                </div>`;
+                        }
 
-        infoBox.innerHTML = `
-            <div onclick="window.location.href='post.html?id=${p.id}'" 
-                 style="display:flex !important; width:100% !important; height:100% !important; background:transparent !important;">
+                        infoBox.innerHTML = `
+                            <div style="display:flex !important; width:100% !important; height:100% !important; background:transparent !important; pointer-events: none;">
+                                <div style="flex:0 0 33.33% !important; height:100% !important; overflow:hidden;">
+                                    <img src="${imgSrc}" style="width:100% !important; height:100% !important; object-fit:cover !important; display:block !important;">
+                                </div>
+                                <div style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; min-width:0 !important;">
+                                    <h3 style="margin:0 0 4px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">${title}</h3>    
+                                    <div style="margin-bottom: 4px;">
+                                        <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.7rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">${locationText}</span>
+                                    </div>
+                                    ${unescoTag}
+                                    <p style="margin:0 0 8px 0 !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">${summary}</p>
+                                    <div style="font-size:0.75rem; color:#9400D3; font-weight:800; display:flex; align-items:center; margin-top:auto; margin-left:auto;">
+                                        Click to read more <span style="margin-left:4px;">➜</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        infoBox.style.cssText = `
+                            display: flex !important;
+                            position: fixed !important;
+                            bottom: 25px !important;
+                            left: 5% !important;
+                            width: 90% !important;
+                            height: 185px !important; 
+                            z-index: 9999999 !important;
+                            border-radius: 20px !important;
+                            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+                            overflow: hidden !important;
+                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.45) 0%, rgba(147, 51, 234, 0.45) 100%) !important;
+                            backdrop-filter: blur(12px) saturate(150%) !important;
+                            -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+                            cursor: pointer !important;
+                            pointer-events: auto !important;
+                        `;
+
+                        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
+                        marker.setIcon(bigIcon);
+
+                        // 🌟 最終跳轉修正：先移除舊監聽再增加新監聽，並阻止冒泡
+                        infoBox.onclick = (event) => {
+                            event.stopPropagation(); // 阻止點擊盒子時觸發地圖的關閉邏輯
+                            window.location.href = `post.html?id=${p.id}`;
+                        };
+                    });
+                }
                 
-                <div style="flex:0 0 33.33% !important; height:100% !important; overflow:hidden;">
-                    <img src="${imgSrc}" style="width:100% !important; height:100% !important; object-fit:cover !important; display:block !important;">
-                </div>
-
-                <div style="flex:1 !important; padding:12px 15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; min-width:0 !important;">
-                <h3 style="margin:0 0 4px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">
-                        ${title}
-                </h3>    
-                    <div style="margin-bottom: 4px;">
-                        <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.7rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">
-                            ${locationText}
-                        </span>
-                    </div>
-
-                    ${unescoTag}
-
-                    <p style="margin:0 0 8px 0 !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
-                        ${summary}
-                    </p>
-
-                    <div style="font-size:0.75rem; color:#9400D3; font-weight:800; display:flex; align-items:center; margin-top:auto; margin-left:auto;">
-                        Click to read more <span style="margin-left:4px;">➜</span>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // --- 🌟 調整透明度至 0.45 以對齊電腦版的清透感 ---
-        infoBox.style.cssText = `
-            display: flex !important;
-            position: fixed !important;
-            bottom: 25px !important;
-            left: 5% !important;
-            width: 90% !important;
-            height: 185px !important; 
-            z-index: 9999999 !important;
-            border-radius: 20px !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
-            overflow: hidden !important;
-            
-            /* 調整為 0.45 透明度，既透地圖又能看到藍紫漸層 */
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.45) 0%, rgba(147, 51, 234, 0.45) 100%) !important;
-            backdrop-filter: blur(12px) saturate(150%) !important;
-            -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-        `;
-
-        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
-        marker.setIcon(bigIcon);
-
-        // 🌟 核心修正：直接幫 infoBox 綁定點擊跳轉事件
-        infoBox.onclick = () => {
-            window.location.href = `post.html?id=${p.id}`;
-        };
-        
-        // 為了讓使用者知道這可以點擊，增加手型游標
-        infoBox.style.cursor = 'pointer';
-    });
-}
                 clusterGroup.addLayer(marker);
             });
 
