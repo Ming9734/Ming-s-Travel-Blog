@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${summary}
                     </p>
 
-                    <div style="font-size:0.75rem; color:#E6E6FA; font-weight:600; display:flex; align-items:center; margin-top:auto;">
+                    <div style="font-size:0.75rem; color:#9400D3; font-weight:800; display:flex; align-items:center; margin-top:auto; margin-left:auto;">
                         Click to read more <span style="margin-left:4px;">➜</span>
                     </div>
                 </div>
