@@ -124,106 +124,57 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-                    marker.on('click', (e) => {
-                        // 阻止事件冒泡到地圖
-                        if (e.originalEvent) e.originalEvent.stopPropagation();
-                        L.DomEvent.stopPropagation(e); 
+    marker.on('click', (e) => {
+        // 1. 阻止地圖關閉事件
+        if (e.originalEvent) e.originalEvent.stopPropagation();
+        L.DomEvent.stopPropagation(e); 
 
-                        document.body.appendChild(infoBox); 
-                        infoBox.id = 'info-box';
-                        infoBox.className = 'marker-info mobile-active';
-                        
-                        // 🌟 重要：確保手機版點開時是顯示狀態
-                        infoBox.style.display = 'flex';
+        // 2. 設定容器類別 (觸發 CSS 中的 @media 樣式)
+        infoBox.className = 'marker-info mobile-active';
+        infoBox.style.display = 'flex';
 
-                        const title = p.title || "Untitled";
-                        const summary = p.summary || "";
-                        const imgSrc = p.preview || "";
-                        const locationText = `${p.city || ''} , ${p.country || ''}`;
-                        
-                        // --- UNESCO 金屬漸層 ---
-                        let unescoStyle = '';
-                        const typeNames = {
-                            'natural': 'UNESCO Natural Heritage',
-                            'cultural': 'UNESCO Cultural Heritage',
-                            'mixed': 'UNESCO Mixed Heritage'
-                        };
+        // 3. 準備 UNESCO 標籤
+        const typeNames = {
+            'natural': 'UNESCO Natural Heritage',
+            'cultural': 'UNESCO Cultural Heritage',
+            'mixed': 'UNESCO Mixed Heritage'
+        };
+        
+        let unescoHtml = p.unescoType 
+            ? `<div class="unesco-badge-mobile unesco-${p.unescoType}">${typeNames[p.unescoType]}</div>` 
+            : '';
 
-                        if (p.unescoType === 'natural') {
-                            unescoStyle = 'background: linear-gradient(145deg, #a8e6cf 0%, #34d399 50%, #10b981 100%); border-bottom: 2px solid #059669;';
-                        } else if (p.unescoType === 'cultural') {
-                            unescoStyle = 'background: linear-gradient(145deg, #fef3c7 0%, #fbbf24 50%, #d97706 100%); border-bottom: 2px solid #b45309;';
-                        } else if (p.unescoType === 'mixed') {
-                            unescoStyle = 'background: linear-gradient(145deg, #e9d5ff 0%, #a855f7 50%, #7e22ce 100%); border-bottom: 2px solid #6b21a8;';
-                        }
+        // 4. 填充內容
+        infoBox.innerHTML = `
+            <div class="mobile-card-wrapper">
+                <div class="mobile-card-img">
+                    <img src="${p.preview || ''}">
+                </div>
+                <div class="mobile-card-content">
+                    <h3>${p.title || 'Untitled'}</h3>
+                    <div class="mobile-tag-row">
+                        <span class="loc-badge">${p.city || ''} , ${p.country || ''}</span>
+                        ${unescoHtml}
+                    </div>
+                    <p>${p.summary || ''}</p>
+                    <div style="font-size:0.75rem; color:#9400D3; font-weight:800; margin-top:auto; margin-left:auto;">
+                        Click to read more ➜
+                    </div>
+                </div>
+            </div>
+        `;
 
-                        let unescoTag = '';
-                        if (p.unescoType) {
-                            unescoTag = `
-                                <div style="${unescoStyle} color: rgba(0, 0, 0, 0.75); padding: 3px 12px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; display: table !important; align-self: flex-start !important; width: auto !important; margin: 0; border: 1px solid rgba(255, 255, 255, 0.9); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.5); text-shadow: 0 0.5px 0 rgba(255, 255, 255, 0.5);">
-                                    ${typeNames[p.unescoType]}
-                                </div>`;
-                        }
+        // 5. 點擊卡片跳轉
+        infoBox.onclick = (event) => {
+            event.stopPropagation();
+            window.location.href = `post.html?id=${p.id}`;
+        };
 
-                        infoBox.innerHTML = `
-                            <div style="display:flex !important; width:100% !important; height:100% !important; background:transparent !important; pointer-events: none;">
-                                <div style="flex:0 0 33.33% !important; height:100% !important; overflow:hidden;">
-                                    <img src="${imgSrc}" style="width:100% !important; height:100% !important; object-fit:cover !important; display:block !important;">
-                                </div>
-                                
-                                <div style="flex:1 !important; padding:15px !important; display:flex !important; flex-direction:column !important; justify-content:flex-start !important; min-width:0 !important;">
-                    
-                                    <h3 style="margin:0 0 8px 0 !important; font-size:1.15rem !important; color:#ffffff !important; font-weight:700 !important; text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important; line-height:1.2;">
-                                        ${title}
-                                    </h3>
-
-                                    <div style="display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 8px !important; margin-bottom: 10px !important; min-height: 24px !important;">
-                                        <span style="display:inline-block; background:white; color:#4f46e5; font-size:0.65rem; padding:2px 10px; border-radius:20px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; white-space: nowrap;">
-                                            ${locationText}
-                                        </span>
-                                        ${unescoTag}
-                                    </div>
-
-                                    <p style="margin:0 !important; padding-top: 2px !important; font-size:0.85rem !important; color:rgba(255,255,255,0.95) !important; line-height:1.4 !important; display:-webkit-box !important; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; text-shadow: 0 1px 2px rgba(0,0,0,0.2) !important;">
-                                        ${summary}
-                                    </p>
-
-                                    <div style="font-size:0.75rem; color:#9400D3; font-weight:800; display:flex; align-items:center; margin-top:auto; margin-left:auto;">
-                                        Click to read more <span style="margin-left:4px;">➜</span>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                        infoBox.style.cssText = `
-                            display: flex !important;
-                            position: fixed !important;
-                            bottom: 25px !important;
-                            left: 5% !important;
-                            width: 90% !important;
-                            height: 185px !important; 
-                            z-index: 9999999 !important;
-                            border-radius: 20px !important;
-                            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-                            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
-                            overflow: hidden !important;
-                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.3) 0%, rgba(147, 51, 234, 0.3) 100%) !important;
-                            backdrop-filter: blur(12px) saturate(150%) !important;
-                            -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
-                            cursor: pointer !important;
-                            pointer-events: auto !important;
-                        `;
-
-                        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
-                        marker.setIcon(bigIcon);
-
-                        // 🌟 最終跳轉修正：先移除舊監聽再增加新監聽，並阻止冒泡
-                        infoBox.onclick = (event) => {
-                            event.stopPropagation(); // 阻止點擊盒子時觸發地圖的關閉邏輯
-                            window.location.href = `post.html?id=${p.id}`;
-                        };
-                    });
-                }
+        // 6. 標記變大效果
+        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
+        marker.setIcon(bigIcon);
+    });
+}
                 
                 clusterGroup.addLayer(marker);
             });
