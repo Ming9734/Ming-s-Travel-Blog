@@ -129,6 +129,14 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
+    /* 🌟 核心補丁：強制讓手機版內的卡片結構顯示出來 */
+    #info-box.mobile-active .map-preview-card,
+    #info-box.mobile-active .preview-content,
+    #info-box.mobile-active .card-img-side {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
     /* 1. 修正毛玻璃背景與漸層 (更清透) */
     #info-box.mobile-active {
         background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
