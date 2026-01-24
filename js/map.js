@@ -217,6 +217,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
         marker.setIcon(bigIcon);
+
+        // 🌟 核心修正：直接幫 infoBox 綁定點擊跳轉事件
+        infoBox.onclick = () => {
+            window.location.href = `post.html?id=${p.id}`;
+        };
+        
+        // 為了讓使用者知道這可以點擊，增加手型游標
+        infoBox.style.cursor = 'pointer';
     });
 }
                 clusterGroup.addLayer(marker);
