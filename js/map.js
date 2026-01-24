@@ -124,50 +124,60 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 🌟 手機版終極外科手術 ---
-    marker.on('click', (e) => {
-        L.DomEvent.stopPropagation(e); 
-        
-        clusterGroup.eachLayer(m => {
-            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
-        });
-        
-        marker.setIcon(bigIcon);
-        renderCard(p); 
-        
-        // 1. 搬移到 body
-        document.body.appendChild(infoBox); 
-        
-        // 2. 🌟 關鍵：移除所有舊的 class，防止 .marker-info 的樣式干擾
-        infoBox.className = 'marker-info mobile-active'; 
-        
-        // 3. 重新強制寫入樣式
-        infoBox.style.cssText = `
-            display: flex !important;
-            position: fixed !important;
-            bottom: 30px !important;
-            left: 5% !important;
-            width: 90% !important;
-            height: 160px !important; /* 🌟 這裡要與 CSS 的高度一致 */
-            z-index: 9999999 !important;
-            top: auto !important;
-            transform: none !important;
-            pointer-events: auto !important;
-        `;
-    });
-}
+                    // --- 📱 手機版終極外科手術 (修正衝突版) ---
+                    marker.on('click', (e) => {
+                        // 1. 徹底阻斷事件傳遞，防止觸發地圖的 map.on('click')
+                        if (e.originalEvent) e.originalEvent.stopPropagation();
+                        L.DomEvent.stopPropagation(e); 
+                        
+                        // 2. 清除其他 Marker 的縮放狀態
+                        clusterGroup.eachLayer(m => {
+                            if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
+                        });
+                        
+                        // 3. 設定當前 Marker 狀態
+                        marker.setIcon(bigIcon);
+                        renderCard(p); 
+                        
+                        // 4. 搬移至 body 並設定 Class
+                        document.body.appendChild(infoBox); 
+                        infoBox.className = 'marker-info mobile-active'; 
+                        
+                        // 5. 強制寫入樣式 (移除 background: transparent)
+                        infoBox.style.cssText = `
+                            display: flex !important;
+                            position: fixed !important;
+                            bottom: 30px !important;
+                            left: 5% !important;
+                            width: 90% !important;
+                            height: 160px !important;
+                            z-index: 9999999 !important;
+                            top: auto !important;
+                            transform: none !important;
+                            pointer-events: auto !important;
+                            visibility: visible !important;
+                            opacity: 1 !important;
+                        `;
+                    });
+                }
 
                 clusterGroup.addLayer(marker);
             });
 
             map.addLayer(clusterGroup);
 
-            // 點擊空白處關閉卡片並恢復 Pin
-            map.on('click', () => {
-                infoBox.style.display = 'none';
-                clusterGroup.eachLayer(m => {
-                    if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
-                });
+            // --- 🛠️ 地圖點擊關閉邏輯 (修正版) ---
+            map.on('click', (e) => {
+                // 檢查點擊的目標
+                // 如果是手機版且 infoBox 正在顯示，我們需要確保不是因為點到 Marker 而誤觸關閉
+                if (infoBox.style.display !== 'none') {
+                    infoBox.style.display = 'none';
+                    
+                    // 恢復所有 Pin 的大小
+                    clusterGroup.eachLayer(m => {
+                        if (m.options.originalIcon) m.setIcon(m.options.originalIcon);
+                    });
+                }
             });
 
             if (posts.length > 0) {
