@@ -129,67 +129,37 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
-    /* 1. 強制讓最外層容器顯示 */
+    /* 1. 強制讓 infoBox 具備卡片的樣子，而不只是當容器 */
     #info-box.mobile-active {
         display: flex !important;
-        background: #4f46e5 !important; /* 保底色 */
-        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important; /* 🌟 強制 1.0 不透明 */
+        flex-direction: row !important; /* 圖左文右 */
+        background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%) !important;
         border-radius: 20px !important;
-        overflow: hidden !important;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+        padding: 0 !important; /* 確保內部元件貼齊邊緣 */
+        overflow: hidden !important;
     }
 
-    /* 2. 確保卡片內部寬度 */
+    /* 2. 萬一 .map-preview-card 消失或寬度為 0，強制撐開它 */
     #info-box.mobile-active .map-preview-card {
-        display: flex !important;
-        flex-direction: row !important;
-        width: 100% !important;
-        height: 100% !important;
-        background: transparent !important; /* 讓最外層的漸層透出來 */
-        border: none !important;
+        display: contents !important; /* 讓子元素（圖片和文字區）直接參與 infoBox 的 flex 佈局 */
     }
 
-    /* 3. 圖片區塊 */
-    #info-box.mobile-active .card-img-side {
-        width: 120px !important;
-        min-width: 120px !important;
-        height: 160px !important;
-    }
-
-    /* 4. 🌟 文字區塊：強制取消原本的 0.3 透明度 🌟 */
+    /* 3. 強制文字區塊可見 */
     #info-box.mobile-active .preview-content {
-        flex: 1 !important;
         display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        padding: 15px !important;
-        background: transparent !important; /* 取消 0.3 的漸層，改用最外層的 1.0 漸層 */
-        backdrop-filter: none !important; /* 手機版關閉模糊以提升效能與清晰度 */
         visibility: visible !important;
         opacity: 1 !important;
-    }
-
-    /* 5. 文字顏色強制白色 */
-    #info-box.mobile-active h3,
-    #info-box.mobile-active .preview-content h3 {
+        flex: 1 !important;
+        padding: 15px !important;
         color: white !important;
-        display: block !important;
-        margin: 0 0 5px 0 !important;
-        font-size: 1.1rem !important;
-        text-shadow: none !important;
+        background: transparent !important;
     }
 
-    #info-box.mobile-active p,
-    #info-box.mobile-active .preview-content p {
-        color: rgba(255, 255, 255, 0.9) !important;
-        display: block !important;
-        font-size: 0.85rem !important;
-        line-height: 1.4 !important;
-        -webkit-line-clamp: 3 !important; /* 手機版多給一行字 */
-    }
-
-    #info-box.mobile-active .badge {
-        background: rgba(255, 255, 255, 0.2) !important;
-        color: white !important;
+    /* 4. 強制圖片比例 */
+    #info-box.mobile-active .card-img-side {
+        width: 35% !important; /* 給圖片固定比例 */
+        min-width: 100px !important;
+        height: 160px !important;
     }
 }
