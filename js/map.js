@@ -171,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         `;
 
                         // 5. 🎨 樣式與毛玻璃 (強制寫入透明度背景)
+                        // 在 marker.on('click') 裡面修改
                         infoBox.style.cssText = `
                             display: flex !important;
                             position: fixed !important;
@@ -182,13 +183,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             visibility: visible !important;
                             opacity: 1 !important;
                             pointer-events: auto !important;
-                            /* 背景必須是半透明的 rgba，毛玻璃才會生效 */
-                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.75) 0%, rgba(147, 51, 234, 0.75) 100%) !important;
-                            backdrop-filter: blur(15px) saturate(160%) !important;
-                            -webkit-backdrop-filter: blur(15px) saturate(160%) !important;
+
+                            /* 🎨 這裡套用與電腦版完全一致的顏色與毛玻璃設定 */
+                            background: rgba(255, 255, 255, 0.1) !important; /* 電腦版通常使用極淺白或深色的半透明層 */
+                            backdrop-filter: blur(15px) !important;
+                            -webkit-backdrop-filter: blur(15px) !important;
+    
+                            /* 如果你的電腦版是紫色漸層，請改用下面這行 (顏色與電腦版 CSS 同步) */
+                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.3) 0%, rgba(147, 51, 234, 0.3) 100%) !important;
+
                             border-radius: 20px !important;
-                            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-                            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+                            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+                            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
                             overflow: hidden !important;
                         `;
 
