@@ -129,50 +129,75 @@ header, .dropdown-menu, .sub-menu { z-index: 2200; position: relative; }
 
 /* --- 📱 手機版終極排版修正 (絕對顯示版) --- */
 @media screen and (max-width: 1024px) {
-    /* 1. 圖片佔比強制定為 1/3 */
+    /* 1. 修正毛玻璃背景與漸層 (更清透) */
+    #info-box.mobile-active {
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+
+    /* 2. 移除卡片內層背景，避免顏色疊加變太深 */
+    .mobile-active .map-preview-card {
+        background: transparent !important;
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        height: 100% !important;
+        box-shadow: none !important;
+    }
+
+    /* 3. 圖片比例 1/3 */
     .mobile-active .card-img-side {
         flex: 0 0 33.33% !important;
         width: 33.33% !important;
         height: 100% !important;
     }
 
-    /* 2. 確保卡片繼承電腦版的漸層顏色 */
-    .mobile-active .map-preview-card {
-        background: linear-gradient(135deg, rgba(79, 70, 229, 0.85) 0%, rgba(147, 51, 234, 0.85) 100%) !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        display: flex !important;
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    /* 3. 調整 UNESCO Badge 顏色 (電腦版風格) */
+    /* 4. 復刻 UNESCO 顏色 (這是你最在意的部分) */
     .mobile-active .unesco-badge {
-        padding: 2px 8px !important;
-        border-radius: 4px !important;
+        padding: 3px 10px !important;
+        border-radius: 6px !important;
         font-size: 0.65rem !important;
         font-weight: bold !important;
         color: white !important;
+        display: inline-block !important;
+        margin-bottom: 5px !important;
+        opacity: 1 !important;
     }
     .mobile-active .unesco-natural { background: #27ae60 !important; }
     .mobile-active .unesco-cultural { background: #e67e22 !important; }
     .mobile-active .unesco-mixed { background: #8e44ad !important; }
 
-    /* 4. 文字內容細節調整 */
-    .mobile-active .preview-content h3 {
-        font-size: 1.1rem !important;
-        margin-bottom: 5px !important;
-    }
-
-    .mobile-active .badge-container {
+    /* 5. 修正文字顯示與順序 */
+    .mobile-active .preview-content {
+        flex: 1 !important;
+        padding: 12px 18px !important;
         display: flex !important;
-        gap: 6px !important;
-        margin-bottom: 8px !important;
-        align-items: center;
+        flex-direction: column !important;
+        justify-content: flex-start !important; /* 改為靠上，與電腦版一致 */
     }
 
-    .mobile-active .click-hint {
-        font-size: 0.7rem !important;
-        opacity: 0.7;
-        margin-top: auto;
+    .mobile-active .preview-content h3 {
+        color: white !important;
+        font-size: 1.15rem !important;
+        margin: 0 0 8px 0 !important; /* 增加標題下方間距 */
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    }
+
+    /* 地點標籤與摘要 */
+    .mobile-active .location-wrapper { margin-bottom: 5px !important; }
+    .mobile-active .badge {
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        padding: 2px 8px !important;
+        border-radius: 4px !important;
+    }
+
+    .mobile-active .preview-content p {
+        color: rgba(255, 255, 255, 0.95) !important;
+        font-size: 0.85rem !important;
+        line-height: 1.5 !important;
+        margin-top: 5px !important;
     }
 }
