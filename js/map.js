@@ -124,63 +124,79 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                 } else {
-    // --- 📱 手機版：資料對接與樣式修復版 ---
-    marker.on('click', (e) => {
-        // 1. 徹底阻斷地圖點擊事件
-        if (e.originalEvent) e.originalEvent.stopPropagation();
-        L.DomEvent.stopPropagation(e); 
-        
-        // 2. 搬移容器並確保 ID 正確
-        document.body.appendChild(infoBox); 
-        infoBox.id = 'info-box';
-        infoBox.className = 'marker-info mobile-active'; 
+                    // --- 📱 手機版：對齊 JSON 欄位與 renderCard 邏輯 ---
+                    marker.on('click', (e) => {
+                        // 1. 徹底阻斷地圖點擊事件，防止秒開秒關
+                        if (e.originalEvent) e.originalEvent.stopPropagation();
+                        L.DomEvent.stopPropagation(e); 
+                        
+                        // 2. 搬移容器
+                        document.body.appendChild(infoBox); 
+                        infoBox.id = 'info-box';
+                        infoBox.className = 'marker-info mobile-active'; 
 
-        // 3. 🛡️ 資料防錯處理 (確保抓到 posts.json 的內容)
-        const title = p.title || "無標題";
-        const summary = p.summary || p.description || "";
-        const image = p.img || p.image || p.imgUrl || ""; // 多重備份抓取圖片路徑
-        const location = p.location || "景點位置";
-        const hasUnesco = !!p.unesco; // 判斷有無 UNESCO
+                        // 3. 🛡️ 資料對接 (嚴格參考你的 renderCard 變數名)
+                        const title = p.title || "Untitled";
+                        const summary = p.summary || "";
+                        const imgSrc = p.preview || ""; // 你的 JSON 使用的是 p.preview
+                        const locationText = `${p.city || ''} , ${p.country || ''}`;
+                        
+                        // UNESCO 處理邏輯 (對照你的渲染函式)
+                        let unescoTag = '';
+                        if (p.unescoType) {
+                            const typeNames = {
+                                'natural': 'UNESCO Natural Heritage',
+                                'cultural': 'UNESCO Cultural Heritage',
+                                'mixed': 'UNESCO Mixed Heritage'
+                            };
+                            unescoTag = `<div class="unesco-badge unesco-${p.unescoType}" style="background:#f39c12; color:white; padding:2px 8px; border-radius:6px; font-size:0.65rem; display:inline-block; margin-bottom:5px;">${typeNames[p.unescoType]}</div>`;
+                        }
 
-        // 4. 注入 HTML
-        infoBox.innerHTML = `
-            <div class="map-preview-card">
-                <div class="card-img-side">
-                    <img src="${imgSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/150?text=Image+Error'">
-                </div>
-                <div class="preview-content">
-                    <div class="badge-container">
-                        ${hasUnesco ? `<span class="badge unesco-badge">UNESCO</span>` : ''}
-                        <span class="badge location-badge">${location}</span>
-                    </div>
-                    <h3>${title}</h3>
-                    <p>${summary}</p>
-                </div>
-            </div>
-        `;
+                        // 4. 注入 HTML (加入跳轉功能 onclick)
+                        infoBox.innerHTML = `
+                            <div class="map-preview-card" onclick="window.location.href='post.html?id=${p.id}'" style="display:flex; width:100%; height:100%;">
+                                <div class="card-img-side" style="flex:0 0 120px; height:160px;">
+                                    <img src="${imgSrc}" style="width:100%; height:100%; object-fit:cover;">
+                                </div>
+                                <div class="preview-content" style="flex:1; padding:15px; display:flex; flex-direction:column; justify-content:center; color:white;">
+                                    <div class="badge-container" style="margin-bottom:5px;">
+                                        <span class="badge" style="background:rgba(255,255,255,0.2); padding:2px 8px; border-radius:6px; font-size:0.65rem;">${locationText}</span>
+                                    </div>
+                                    ${unescoTag}
+                                    <h3 style="margin:5px 0; font-size:1.1rem; color:white;">${title}</h3>
+                                    <p style="margin:0; font-size:0.85rem; opacity:0.9; line-height:1.4;">${summary}</p>
+                                    <span style="font-size:0.7rem; opacity:0.6; margin-top:5px;">Click to read more</span>
+                                </div>
+                            </div>
+                        `;
 
-        // 5. 🎨 樣式與毛玻璃 (強制寫入以覆蓋 CSS 衝突)
-        infoBox.style.cssText = `
-            display: flex !important;
-            position: fixed !important;
-            bottom: 30px !important;
-            left: 5% !important;
-            width: 90% !important;
-            height: 160px !important;
-            z-index: 9999999 !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
-            /* 毛玻璃核心：背景必須有透明度 */
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.7) 0%, rgba(147, 51, 234, 0.7) 100%) !important;
-            backdrop-filter: blur(20px) !important;
-            -webkit-backdrop-filter: blur(20px) !important;
-            border-radius: 20px !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
-        `;
-    });
-}
+                        // 5. 🎨 樣式與毛玻璃 (強制寫入透明度背景)
+                        infoBox.style.cssText = `
+                            display: flex !important;
+                            position: fixed !important;
+                            bottom: 30px !important;
+                            left: 5% !important;
+                            width: 90% !important;
+                            height: 160px !important;
+                            z-index: 9999999 !important;
+                            visibility: visible !important;
+                            opacity: 1 !important;
+                            pointer-events: auto !important;
+                            /* 背景必須是半透明的 rgba，毛玻璃才會生效 */
+                            background: linear-gradient(135deg, rgba(79, 70, 229, 0.75) 0%, rgba(147, 51, 234, 0.75) 100%) !important;
+                            backdrop-filter: blur(15px) saturate(160%) !important;
+                            -webkit-backdrop-filter: blur(15px) saturate(160%) !important;
+                            border-radius: 20px !important;
+                            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+                            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+                            overflow: hidden !important;
+                        `;
+
+                        // 6. 更新標記狀態
+                        clusterGroup.eachLayer(m => { if (m.options.originalIcon) m.setIcon(m.options.originalIcon); });
+                        marker.setIcon(bigIcon);
+                    });
+                }
 
                 clusterGroup.addLayer(marker);
             });
