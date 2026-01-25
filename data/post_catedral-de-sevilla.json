@@ -1,0 +1,40 @@
+
+
+{
+  "id": "catedral-de-sevilla",
+  "title": "Catedral de Sevilla",
+  "subtitle": "Seville, Spain",
+  "country": "Spain",
+  "city": "Seville",
+  "cover": "images/post/catedral-de-sevilla/cover.jpg",
+  "images": [
+    "images/post/catedral-de-sevilla/1.jpg",
+    "images/post/catedral-de-sevilla/2.jpg",
+    "images/post/catedral-de-sevilla/3.jpg",
+    "images/post/catedral-de-sevilla/4.jpg",
+    "images/post/catedral-de-sevilla/5.jpg",
+    "images/post/catedral-de-sevilla/6.jpg",
+    "images/post/catedral-de-sevilla/7.jpg",
+    "images/post/catedral-de-sevilla/8.jpg",
+    "images/post/catedral-de-sevilla/9.jpg",
+    "images/post/catedral-de-sevilla/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>The world’s largest Gothic cathedral and third-largest church</li><li>Royal and ecclesiastical tombs, including Christopher Columbus and his son</li><li>A cathedral built on the site of a former Great Mosque</li><li>A century-long construction symbolising Spain’s wealth and the Age of Exploration</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>A UNESCO World Heritage monument and the world’s largest Gothic cathedral, Seville Cathedral stands as both a triumph of Christian ambition and a symbol of the city’s layered history. Constructed between 1401 and 1506 on the site of a former Almohad Great Mosque, the cathedral reflects Seville’s transformation from a major Islamic centre into one of the most powerful cities of Christian Spain. At the time of its completion, it was the largest church in the world—a bold declaration by its builders, who famously sought to create a structure “so beautiful and so grand that those who see it will think we were mad.”</p><p>For centuries, Seville held immense political, religious, and economic significance, particularly during Spain’s Golden Age, when the city became the gateway between Europe and the newly discovered Americas. This prominence is reflected in the cathedral’s role as a royal and national mausoleum. Within its vast interior rest the tombs of Spanish monarchs such as Ferdinand III of Castile, Alfonso X of Castile, and Peter of Castile, as well as powerful cardinals who shaped the religious and political life of the kingdom. Most famously, it also houses the monumental tomb of Christopher Columbus and his son, anchoring the cathedral not only in Spanish history but in the global story of exploration and empire.</p><p>Towering over the historic heart of Seville, the cathedral is more than a place of worship; it is a symbol of the city’s shifting fortunes, from Moorish stronghold to Christian capital and, ultimately, to the centre of a global maritime empire. Its immense scale, royal tombs, and enduring landmarks embody both the spiritual authority and worldly ambition that once placed Seville at the centre of the known world.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Visiting Seville Cathedral is an overwhelming experience, impossible to leave without being awed by its monumental scale and the ingenuity of the builders who, centuries ago, created such a breathtaking architectural marvel. The cathedral’s interior, bathed in a subdued, golden light, heightens its sense of mystery and solemnity, making the treasures within each chapel—altars, relics, and artworks—appear all the more radiant.</p><p>Encountering the tomb of Christopher Columbus evokes a complex mix of emotions. While his legacy may be viewed with both praise and criticism, for Spain he represents an immense historical heritage. Yet the man himself did not enjoy the respect he would receive posthumously, unable even to decide where he would rest. His remains, moved multiple times and ultimately incomplete, serve as a poignant reminder of both the passage of history and the enduring significance of the cathedral as a repository of memory, power, and human ambition.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>The Journey of Columbus’ Tomb</h2><p>The tomb of Christopher Columbus is among the cathedral’s most compelling features, not only for its grandeur but for the extraordinary journey of the remains it contains. Although Columbus was born in Italy, his legacy is inseparable from Spain, as his voyages were financed by the Catholic Monarchs, Ferdinand and Isabella. After Isabella’s death, however, Columbus fell out of favour with the Spanish crown and reportedly declared in his will that he never wished to be buried on Spanish soil.</p><p>Despite this, his son arranged for his burial in Seville. Over the following centuries, Columbus’ remains travelled across the Atlantic and back again, moving from Seville to Santo Domingo, then to Havana, and finally returning to Seville after Cuban independence. Today, his sarcophagus is carried aloft by four sculpted kings representing the historic kingdoms of Spain, symbolically ensuring that his body does not rest directly on Spanish ground—an echo of his final wish.</p><p>The story remains controversial. A tomb bearing Columbus’ name was later discovered in Santo Domingo, prompting debates over which site holds his true remains. DNA analysis conducted in Seville confirmed that most of the remains there are indeed Columbus’, though only around 80 percent of the original body was recovered, leaving the mystery partially unresolved.</p><h2>Echoes of the Great Mosque</h2><p>While the cathedral proclaims Christian triumph through its Gothic vastness, its most recognisable landmarks speak of Seville’s Islamic past. The Giralda, once a minaret, retains its original form and internal ramps, which were designed so that riders could ascend on horseback. Nearby, the Patio de los Naranjos preserves the spatial logic of the former mosque’s courtyard, offering a quiet, shaded counterpoint to the monumental interior of the cathedral itself. Together, these surviving elements serve as tangible reminders that the cathedral is not merely a single historical creation, but the result of centuries of cultural and religious transformation.</p>"
+    }
+  ]
+}
