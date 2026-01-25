@@ -206,5 +206,18 @@
     "icon": "images/markers/PL.png",
     "preview": "images/post/st-mary-s-basilica/cover.jpg",
     "unescoType": "cultural"
+  },
+  {
+    "id": "catedral-de-sevilla",
+    "title": "Catedral de Sevilla",
+    "country": "Spain",
+    "city": "Seville",
+    "lat": 37.385824644872244,  
+    "lng": -5.993138986838817,
+    "summary": "A UNESCO World Heritage Gothic cathedral in Seville, built over a former mosque, housing royal tombs and Columbus’ sarcophagus, and standing as a symbol of Spain’s maritime and imperial power.",
+    "image": "images/posts/catedral-de-sevilla.jpg",
+    "icon": "images/markers/ES.png",
+    "preview": "images/post/catedral-de-sevilla/cover.jpg",
+    "unescoType": "cultural"
   }
 ]
