@@ -219,5 +219,18 @@
     "icon": "images/markers/ES.png",
     "preview": "images/post/catedral-de-sevilla/cover.jpg",
     "unescoType": "cultural"
+  },
+  {
+    "id": "aachener-dom",
+    "title": "Aachener Dom",
+    "country": "Germany",
+    "city": "Aachen",
+    "lat": 50.774719743312176,  
+    "lng": 6.083920099839088,
+    "summary": "A UNESCO World Heritage chapel centred on Charlemagne’s Palatine Chapel, his burial site and Holy Roman coronation ground, embodying centuries of European history, imperial power, and medieval Christian faith.",
+    "image": "images/posts/aachener-dom.jpg",
+    "icon": "images/markers/DE.png",
+    "preview": "images/post/aachener-dom/cover.jpg",
+    "unescoType": "cultural"
   }
 ]
