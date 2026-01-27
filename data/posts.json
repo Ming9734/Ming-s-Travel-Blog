@@ -232,5 +232,18 @@
     "icon": "images/markers/DE.png",
     "preview": "images/post/aachener-dom/cover.jpg",
     "unescoType": "cultural"
+  },
+  {
+    "id": "wieliczka-salt-mine",
+    "title": "Wieliczka Salt Mine",
+    "country": "Poland",
+    "city": "Wieliczka",
+    "lat": 49.98348814602003,  
+    "lng": 20.055166341362565,
+    "summary": "A UNESCO World Heritage salt-carved underground city of tunnels and chapels, reflecting centuries of mining innovation and the royal wealth that shaped Poland’s historical power across Europe.",
+    "image": "images/posts/wieliczka-salt-mine.jpg",
+    "icon": "images/markers/PL.png",
+    "preview": "images/post/wieliczka-salt-mine/cover.jpg",
+    "unescoType": "cultural"
   }
 ]
