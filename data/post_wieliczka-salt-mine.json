@@ -1,0 +1,39 @@
+
+{
+  "id": "wieliczka-salt-mine",
+  "title": "Wieliczka Salt Mine",
+  "subtitle": "Wieliczka, Poland",
+  "country": "Poland",
+  "city": "Wieliczka",
+  "cover": "images/post/wieliczka-salt-mine/cover.jpg",
+  "images": [
+    "images/post/wieliczka-salt-mine/1.jpg",
+    "images/post/wieliczka-salt-mine/2.jpg",
+    "images/post/wieliczka-salt-mine/3.jpg",
+    "images/post/wieliczka-salt-mine/4.jpg",
+    "images/post/wieliczka-salt-mine/5.jpg",
+    "images/post/wieliczka-salt-mine/6.jpg",
+    "images/post/wieliczka-salt-mine/7.jpg",
+    "images/post/wieliczka-salt-mine/8.jpg",
+    "images/post/wieliczka-salt-mine/9.jpg",
+    "images/post/wieliczka-salt-mine/10.jpg"
+  ],
+  "texts": [
+    {
+      "label": "Highlights",
+      "content": "<ul><li>A UNESCO World Heritage Site</li><li>One of the world’s longest continuously operated salt mines, spanning over seven centuries</li><li>Home to the world’s deepest chapel, 101 metres below ground</li><li>A medieval source of immense royal wealth and one of the largest and most productive salt mines of its time</li><li>A major testing ground for new mining technologies and engineering methods</li></ul>"
+    },
+    {
+      "label": "Overview",
+      "content": "<p>Wieliczka Salt Mine is a monumental record of over seven centuries of continuous extraction, stretching to a depth of 327 metres and extending through nearly 287 kilometres of underground passages. Officially developed from 1248 until its closure in 1996, it stands among the longest-operating salt mines in the world and was inscribed as a UNESCO World Heritage Site in 1978 for both its cultural significance and its contribution to the evolution of mining technology.</p><p>In the ancient and medieval worlds, salt was an essential yet scarce commodity, often treated as a form of “white gold” and tightly controlled by ruling authorities. Wieliczka’s rich deposits were known as early as Roman and Slavic times, when local communities evaporated naturally briny springs to obtain precious salt. The decisive turning point came in 1248, when the Polish king ordered the formal development of underground mining operations and placed the enterprise under royal monopoly. From that moment, the mine became directly bound to the power of the Polish state, as expanding shafts and rising production generated a steady flow of wealth into the royal treasury. Medieval accounts even suggest that the mine may have contributed a significant share of national income, underscoring its importance as an economic pillar of the kingdom.</p><p>As demand for salt drove rapid expansion, Wieliczka grew into one of the largest and most productive salt mines in medieval Europe. Its extraordinary depth and increasingly complex tunnel network transformed the site into a testing ground for new mining techniques. Challenges of ventilation, structural support, and deep extraction encouraged continual innovation, allowing Wieliczka to play a formative role in the broader development of European mining engineering.</p><p>Over time, the mine evolved beyond an industrial site into a vast underground city. Miners carved out halls, chambers, chapels, and interconnected passageways, shaping a subterranean world that blended labour, faith, and artistry. This unique fusion of economic power, technological progress, and human creativity defines Wieliczka not merely as a source of wealth, but as a lasting monument to the relationship between natural resources and state formation in European history.</p>"
+    },
+    {
+      "label": "Visitor Experience",
+      "content": "<p>Visiting the Wieliczka Salt Mine is a journey into a hidden world beneath the ground. The descent itself sets the tone, as visitors spend around fifteen minutes walking down a long wooden staircase to reach the first levels of the mine, passing through dozens of subterranean floors before the true scale of the underground city begins to reveal itself.</p><p>Unlike the narrow passages typical of many mines, Wieliczka opens into vast chambers and broad corridors, some resembling underground squares, halls, and cathedrals. The presence of large chapels, sculpted salt reliefs, and distinctive mining architecture creates an atmosphere that feels closer to a buried city than a place of industrial labour. At unexpected moments, still salt lakes appear in the darkness, their reflective surfaces adding a sense of quiet drama and an almost cinematic quality to the experience.</p><p>The journey concludes with a ride in a traditional mining lift back to the surface, offering a final, vivid reminder of the working world that once thrived in these depths. More than a tour of a historical site, a visit to Wieliczka feels like stepping into a layered narrative of human ambition, natural wonder, and centuries of cultural memory, all preserved in salt far below the modern world.</p>"
+    },
+    {
+      "label": "Additional Notes",
+      "content": "<h2>The Legend of Princess Kinga</h2><p>One of the mine’s most enduring stories is tied to Princess Kinga of Hungary. According to legend, before her marriage to the Polish prince Bolesław V in the 13th century, she asked her father for a dowry of salt to bring prosperity to her new homeland. As salt could not be physically transported, she threw her ring into a Hungarian salt mine. When miners later began digging at Wieliczka, they not only uncovered vast deposits of salt, but also the very ring she had cast away. Through this tale, Kinga became the symbolic protector of the mine and its workers, and she remains a figure of reverence within its depths.</p><h2>St. Kinga’s Chapel</h2>The most celebrated space within the mine is St. Kinga’s Chapel, the deepest underground chapel in the world, located 101 metres below the surface. Begun in the mid-17th century and completed in its present form by the late 18th century, the chapel is entirely shaped from salt. Its altars, sculptures, reliefs, and even its chandeliers are carved from or made of crystalline salt, creating a luminous and otherworldly interior that stands as a unique union of faith, craftsmanship, and natural material.</p>"
+    }
+  ]
+}
