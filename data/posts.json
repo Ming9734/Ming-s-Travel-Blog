@@ -245,5 +245,18 @@
     "icon": "images/markers/PL.png",
     "preview": "images/post/wieliczka-salt-mine/cover.jpg",
     "unescoType": "cultural"
+  },
+  {
+    "id": "matthias-church",
+    "title": "Matthias Church",
+    "country": "Hungary",
+    "city": "Budapest",
+    "lat": 47.501953643311474, 
+    "lng": 19.034118784335007,
+    "summary": "A UNESCO World Heritage medieval church of royal coronations and political symbolism, bearing witness to Hungary’s rise, occupation, and enduring quest for national identity.",
+    "image": "images/posts/matthias-church.jpg",
+    "icon": "images/markers/HU.png",
+    "preview": "images/post/matthias-church/cover.jpg",
+    "unescoType": "cultural"
   }
 ]
